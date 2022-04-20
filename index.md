@@ -1,10 +1,4 @@
 ## Grunt's personal blog
+## I upload personal stuff, maybe portolio or CTFs writeup someday
 
-# Android pentesting
-### Burp Suite configuration
- - https://blog.ropnop.com/configuring-burp-suite-with-android-nougat/
- - https://gist.github.com/pwlin/8a0d01e6428b7a96e2eb?permalink_comment_id=3254437#gistcomment-3254437
- - https://gist.github.com/pwlin/8a0d01e6428b7a96e2eb?permalink_comment_id=3499340#gistcomment-3499340
-En el WIFI poner IP de la maquina que corre burp + puerto
-Por dios como me costó hacer esto y poder hacer andar correctamente en un telefono de prueba, utilicé un olivelite XiaoMi REDMI 8A DUAL
-ROM: CRdroid (Android 12) + nikGapps + magisk
+[Help: Android setup pentesting](index.md)
