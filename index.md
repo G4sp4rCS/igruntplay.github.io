@@ -1,37 +1,10 @@
-## Welcome to GitHub Pages
+## Grunt's personal blog
 
-You can use the [editor on GitHub](https://github.com/igruntplay/igruntplay.github.io/edit/main/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/igruntplay/igruntplay.github.io/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+# Android pentesting
+### Burp Suite configuration
+ - https://blog.ropnop.com/configuring-burp-suite-with-android-nougat/
+ - https://gist.github.com/pwlin/8a0d01e6428b7a96e2eb?permalink_comment_id=3254437#gistcomment-3254437
+ - https://gist.github.com/pwlin/8a0d01e6428b7a96e2eb?permalink_comment_id=3499340#gistcomment-3499340
+En el WIFI poner IP de la maquina que corre burp + puerto
+Por dios como me costó hacer esto y poder hacer andar correctamente en un telefono de prueba, utilicé un olivelite XiaoMi REDMI 8A DUAL
+ROM: CRdroid (Android 12) + nikGapps + magisk
