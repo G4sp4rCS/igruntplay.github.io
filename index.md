@@ -4,3 +4,5 @@
 [Help: Android setup pentesting](android-pentesting.md)
 
 [XXE](https://www.4armed.com/blog/exploiting-xxe-with-excel/)
+
+[CORS: PoC HTML+JS](corsPOC.md)
