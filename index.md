@@ -2,3 +2,5 @@
 ## I upload personal stuff, maybe portolio or CTFs writeup someday
 
 [Help: Android setup pentesting](android-pentesting.md)
+
+[XXE](https://www.4armed.com/blog/exploiting-xxe-with-excel/)
