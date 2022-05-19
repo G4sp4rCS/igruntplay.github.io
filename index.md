@@ -6,3 +6,5 @@
 [XXE](https://www.4armed.com/blog/exploiting-xxe-with-excel/)
 
 [CORS: PoC HTML+JS](corsPOC.md)
+
+[BurpSuite-regex](BurpSuite-regex.md)
