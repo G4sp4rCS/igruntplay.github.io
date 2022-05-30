@@ -10,3 +10,5 @@
 [BurpSuite-regex](BurpSuite-regex.md)
 
 [Bug Bounty resources](bug-bounty-resources.md)
+
+[XSS Payloads](xss.md)
