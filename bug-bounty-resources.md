@@ -15,3 +15,17 @@
 ## Magic Checklist
 [Bug bounty ToDo list by soyelmago](https://github.com/alanbriangh/Magic-CheckList-for-Web-Applications)  
 [Workflows compilation](https://pentester.land/cheatsheets/2019/03/25/compilation-of-recon-workflows.html)
+
+## Subdomain live checker
+```
+# toma como parametro el archivo con las urls
+# ejemplo: python3 list_websites.py subfinder_starlink.txt
+import sys
+import subprocess
+
+with open(sys.argv[1]) as fp:
+    for line in fp:
+        print("voy a probar:" + line.strip())
+        subprocess.call(["curl", "-i", "--connect-timeout", "5", line.strip()])
+        sys.stdout.flush()
+```
