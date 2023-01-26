@@ -12,3 +12,5 @@
 [Bug Bounty resources](bug-bounty-resources.md)
 
 [XSS Payloads](xss.md)
+
+[Privilege Escalation Tricks](privilege-escalation-linux-assistance.md)
