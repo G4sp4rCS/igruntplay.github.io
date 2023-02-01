@@ -1,6 +1,8 @@
 ## Grunt's personal blog
 ## I upload personal stuff, maybe portolio or CTFs writeup someday
 
+[eJpt](ejpt.md)
+
 [Help: Android setup pentesting](android-pentesting.md)
 
 [XXE](https://www.4armed.com/blog/exploiting-xxe-with-excel/)
