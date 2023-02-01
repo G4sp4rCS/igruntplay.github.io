@@ -6,7 +6,8 @@ add route static ejpt:
 
 - MySQL 
 
-```#Connecting database to site
+```
+#Connecting database to site
 mysql -u USERNAME -p PASSWORD -h HOST DB
 
 #Selecting Database
@@ -16,10 +17,12 @@ use <db_name>
 show tables;
 
 #select the tables
-select * from <table_name>```
+select * from <table_name>
+```
 
 
 - John the ripper
 ```john --wordlist=/path/to/wordlist --users=users.txt hashfile```
 
+- Enum4Linux
 ```enum4linux -a IP```
