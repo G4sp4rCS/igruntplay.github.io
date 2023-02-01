@@ -22,3 +22,4 @@ select * from <table_name>```
 - John the ripper
 ```john --wordlist=/path/to/wordlist --users=users.txt hashfile```
 
+```enum4linux -a IP```
