@@ -1,6 +1,8 @@
 ## Grunt's personal blog
 ## I upload personal stuff, maybe portolio or CTFs writeup someday
 
+[OSCP Preparation](OSCP.md)
+
 [eJpt](ejpt.md)
 
 [Help: Android setup pentesting](android-pentesting.md)
