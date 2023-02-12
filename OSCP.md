@@ -4,3 +4,6 @@
 ```
 
 #### el -x sh me dió la enumeración correcta
+
+Sí encuentro el puerto 53 es conveniente seguir la siguiente guía de enumeración
+https://book.hacktricks.xyz/network-services-pentesting/pentesting-dns
