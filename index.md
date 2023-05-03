@@ -18,3 +18,8 @@
 [XSS Payloads](xss.md)
 
 [Privilege Escalation Tricks](privilege-escalation-linux-assistance.md)
+
+[Algebra I (Functional Programming & Discrete Math)](algebrataller.md)
+
+[Calculus II](calculusII.md)
+
