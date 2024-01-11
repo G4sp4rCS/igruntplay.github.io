@@ -11,6 +11,7 @@
 - Project Discovery Chaos - [https://chaos.projectdiscovery.io/#/](https://chaos.projectdiscovery.io/#/)  
 - AMASS - [https://github.com/OWASP/Amass](https://github.com/OWASP/Amass) 
 - LazyRecon - [https://github.com/nahamsec/lazyrecon](https://github.com/nahamsec/lazyrecon)
+- HTTPX - [fast and multi-purpose HTTP toolkit that allows running multiple](https://github.com/projectdiscovery/httpx)
 
 ## Magic Checklist
 [Bug bounty ToDo list by soyelmago](https://github.com/alanbriangh/Magic-CheckList-for-Web-Applications)  
