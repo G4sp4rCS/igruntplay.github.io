@@ -1,4 +1,3 @@
-[Algebra I (Functional Programming & Discrete Math)](./university.md)
 
 [Calculus II](calculusII.md)
 
@@ -6,4 +5,4 @@
 
 [Latex CheatSheet for DC-UBA's templates](latexsheet.pdf)
 
-[Ejercicios resueltos de algoritmos 3 / TDA](TDA-Algoritmos%203/algo3.md)
+[Ejercicios resueltos de algoritmos 3 / TDA](algo3.md)
