@@ -12,3 +12,4 @@
 ## Practica 2 Divide & Conquer
 - [Ejercicio 1](https://apuntes.grunt.ar/s/pRo374Czr)
 - [Ejercicio 2](https://apuntes.grunt.ar/s/eWrLVh8TI)
+- [Ejercicio 5](https://apuntes.grunt.ar/s/rWvUtaC_m)
