@@ -8,6 +8,8 @@
 - [Ejercicio 7](https://apuntes.grunt.ar/s/_dc3GGvn0#)
 - [Ejercicio 8](https://apuntes.grunt.ar/s/JT-Rf3Brj#)
 - [Ejercicio 9](https://apuntes.grunt.ar/s/VVtIiAfJL)
+- [Ejercicio 13 INCOMPLETO](https://apuntes.grunt.ar/s/OuWK2K8bG)
+- [Ejercicio 14](https://apuntes.grunt.ar/s/yhJGLpZHD)
 
 ## Practica 2 Divide & Conquer
 - [Ejercicio 1](https://apuntes.grunt.ar/s/pRo374Czr)
