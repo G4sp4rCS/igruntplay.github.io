@@ -1,5 +1,7 @@
 # Ejercicios de algoritmos 3
 
+### [Notas en manuscrito](https://ubauba-my.sharepoint.com/:o:/g/personal/grunt_uba_ar/EirE3mC3H3RMiK1_PMl1yJIBi-QdTe8cVBuaEXD-hqQK5g)
+
 ## Practica 1 - Backtracking - Programación Dinamica - Greedy
 - [Ejercicio 2](https://apuntes.grunt.ar/s/CJiHM9CgC#)
 - [Ejercicio 3](https://apuntes.grunt.ar/s/wt58xmRWQ#)
@@ -11,6 +13,7 @@
 - [Ejercicio 13 INCOMPLETO](https://apuntes.grunt.ar/s/OuWK2K8bG)
 - [Ejercicio 13 Hecho por Federico Lebron](https://apuntes.grunt.ar/s/pUJqqO0ZX)
 - [Ejercicio 14](https://apuntes.grunt.ar/s/yhJGLpZHD)
+- [Ejercicoi 16](https://apuntes.grunt.ar/s/pj1xfEfJN#)
 
 ## Practica 2 Divide & Conquer
 - [Ejercicio 1](https://apuntes.grunt.ar/s/pRo374Czr)
