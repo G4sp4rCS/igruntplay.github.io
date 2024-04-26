@@ -13,7 +13,7 @@
 - [Ejercicio 13 INCOMPLETO](https://apuntes.grunt.ar/s/OuWK2K8bG)
 - [Ejercicio 13 Hecho por Federico Lebron](https://apuntes.grunt.ar/s/pUJqqO0ZX)
 - [Ejercicio 14](https://apuntes.grunt.ar/s/yhJGLpZHD)
-- [Ejercicoi 16](https://apuntes.grunt.ar/s/pj1xfEfJN#)
+- [Ejercicio 16](https://apuntes.grunt.ar/s/pj1xfEfJN#)
 
 ## Practica 2 Divide & Conquer
 - [Ejercicio 1](https://apuntes.grunt.ar/s/pRo374Czr)
