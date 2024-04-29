@@ -1,6 +1,13 @@
-# Ejercicios de algoritmos 3
+# Ejercicios de algoritmos 3 & Apuntes de teoría
 
 ### [Notas en manuscrito](https://ubauba-my.sharepoint.com/:o:/g/personal/grunt_uba_ar/EirE3mC3H3RMiK1_PMl1yJIBi-QdTe8cVBuaEXD-hqQK5g)
+
+## Apuntes & Resumenes teoricos
+- [Backtracking](https://apuntes.grunt.ar/s/vySeP9PDw#)
+- [Programación dinamica + notas del cormen](https://apuntes.grunt.ar/s/ADNWBtt_P#)
+- [Dividir & Conquistar](https://apuntes.grunt.ar/s/kJ34KBx6h)
+- [Greedy: INCOMPLETO](https://apuntes.grunt.ar/s/anCf0TG7G#)
+- [Teoría de Grafos 1](https://apuntes.grunt.ar/s/vWkar1geI#)
 
 ## Practica 1 - Backtracking - Programación Dinamica - Greedy
 - [Ejercicio 2](https://apuntes.grunt.ar/s/CJiHM9CgC#)
