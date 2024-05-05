@@ -8,6 +8,7 @@
 - [Dividir & Conquistar](https://apuntes.grunt.ar/s/kJ34KBx6h)
 - [Greedy: INCOMPLETO](https://apuntes.grunt.ar/s/anCf0TG7G#)
 - [Teoría de Grafos 1](https://apuntes.grunt.ar/s/vWkar1geI#)
+- [Teoría de grafos 2 (arboles) INCOMPLETO](https://apuntes.grunt.ar/s/VQLN8Xnvn)
 
 ## Practica 1 - Backtracking - Programación Dinamica - Greedy
 - [Ejercicio 2](https://apuntes.grunt.ar/s/CJiHM9CgC#)
