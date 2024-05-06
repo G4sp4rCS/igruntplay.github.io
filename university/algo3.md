@@ -30,3 +30,6 @@
 - [Ejercicio 6](https://apuntes.grunt.ar/s/Zp0fPg-Mr)
 - [Ejercicio 7](https://apuntes.grunt.ar/s/MK64JOlC5#)
 - [Ejercicio 8](https://apuntes.grunt.ar/s/HcvdXSKCj#)
+
+## Practica 3 Intro a grafos
+- [Ejercicio 2](https://apuntes.grunt.ar/s/zCemuB0K4#)
