@@ -34,4 +34,4 @@
 ## Practica 3 Intro a grafos
 - [Ejercicio 2](https://apuntes.grunt.ar/s/zCemuB0K4#)
 - [Ejercicio 4](https://apuntes.grunt.ar/s/_IXUDMiWL)
-- [Ejercicio 9]()
+- [Ejercicio 9](https://apuntes.grunt.ar/s/dM7DwKZCI)
