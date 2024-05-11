@@ -35,6 +35,7 @@
 - [Ejercicio 2](https://apuntes.grunt.ar/s/zCemuB0K4#)
 - [Ejercicio 4](https://apuntes.grunt.ar/s/_IXUDMiWL)
 - [Ejercicio 9](https://apuntes.grunt.ar/s/dM7DwKZCI)
+- [Ejercicio 9 hecho por Federico Lebron (está impecable la resolución)](https://apuntes.grunt.ar/s/QE-9CQHxF)
 
 ## Practica 4 arboles y grafos
 - [Ejercicio 1](https://apuntes.grunt.ar/s/bW3WMi_nF)
