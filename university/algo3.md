@@ -2,6 +2,8 @@
 
 ### [Notas en manuscrito](https://ubauba-my.sharepoint.com/:o:/g/personal/grunt_uba_ar/EirE3mC3H3RMiK1_PMl1yJIBi-QdTe8cVBuaEXD-hqQK5g)
 
+#### [LaTeX OCR](simpletex.cn/ai/latex_ocr)
+
 ## Apuntes & Resumenes teoricos
 - [Backtracking](https://apuntes.grunt.ar/s/vySeP9PDw#)
 - [Programación dinamica + notas del cormen](https://apuntes.grunt.ar/s/ADNWBtt_P#)
