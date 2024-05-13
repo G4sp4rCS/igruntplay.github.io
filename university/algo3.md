@@ -42,4 +42,5 @@
 ## Practica 4 arboles y grafos
 - [Ejercicio 1](https://apuntes.grunt.ar/s/bW3WMi_nF)
 - [Ejercicio 2](https://apuntes.grunt.ar/s/8R6Ra-NzC)
+- [Ejercicio 5](https://apuntes.grunt.ar/s/8TrF2W84Y#)
 - [Ejercicio 8](https://apuntes.grunt.ar/s/yMvdmwbdl#)
