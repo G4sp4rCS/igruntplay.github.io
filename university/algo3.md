@@ -46,3 +46,5 @@
 - [Ejercicio 5](https://apuntes.grunt.ar/s/8TrF2W84Y#)
 - [Ejercicio 8](https://apuntes.grunt.ar/s/yMvdmwbdl#)
 - [Ejercicio 10](https://apuntes.grunt.ar/s/c5SKdGIcH)
+- [Ejercicio 11 Incompleto](https://apuntes.grunt.ar/s/5feV7pOvE)
+- [Ejercicio 13](https://apuntes.grunt.ar/s/jJ-9KAL5t)
