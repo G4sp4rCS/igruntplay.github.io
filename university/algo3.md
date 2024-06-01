@@ -51,3 +51,6 @@
 - [Ejercicio 13](https://apuntes.grunt.ar/s/jJ-9KAL5t)
 - [Ejercicio 14](https://apuntes.grunt.ar/s/lUrj7x_O9#)
 - [Ejercicio 16](https://apuntes.grunt.ar/s/WeWMojX1M)
+
+## Practica 5 Recorrido minimo
+- [Ejercicio 1](https://apuntes.grunt.ar/s/-0W3gQFeT)
