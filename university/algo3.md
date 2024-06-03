@@ -9,9 +9,10 @@
 - [Programación dinamica + notas del cormen](https://apuntes.grunt.ar/s/ADNWBtt_P#)
 - [Dividir & Conquistar](https://apuntes.grunt.ar/s/kJ34KBx6h)
 - [Greedy: INCOMPLETO](https://apuntes.grunt.ar/s/anCf0TG7G#)
-- [Teoría de Grafos 1](https://apuntes.grunt.ar/s/vWkar1geI#)
-- [Teoría de grafos 2 (arboles) INCOMPLETO](https://apuntes.grunt.ar/s/VQLN8Xnvn)
+- [Teoría de Grafos](https://apuntes.grunt.ar/s/vWkar1geI#)
+- [Teoría de Arboles](https://apuntes.grunt.ar/s/VQLN8Xnvn)
 - [P⊆AGM⇒P MiniMax](https://apuntes.grunt.ar/s/izCxjTg1_#)
+- [Teoría de camino minimo](https://apuntes.grunt.ar/s/jt3EmL_e5)
 
 ## Practica 1 - Backtracking - Programación Dinamica - Greedy
 - [Ejercicio 2](https://apuntes.grunt.ar/s/CJiHM9CgC#)
@@ -54,3 +55,4 @@
 
 ## Practica 5 Recorrido minimo
 - [Ejercicio 1](https://apuntes.grunt.ar/s/-0W3gQFeT)
+- [Ejercicio 3](https://apuntes.grunt.ar/s/cSOQVYe5d)
