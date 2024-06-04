@@ -55,4 +55,5 @@
 
 ## Practica 5 Recorrido minimo
 - [Ejercicio 1](https://apuntes.grunt.ar/s/-0W3gQFeT)
+- [Ejercicio 2](https://apuntes.grunt.ar/s/emVrNrv15)
 - [Ejercicio 3](https://apuntes.grunt.ar/s/cSOQVYe5d)
