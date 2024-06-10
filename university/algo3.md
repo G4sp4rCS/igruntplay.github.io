@@ -57,3 +57,5 @@
 - [Ejercicio 1](https://apuntes.grunt.ar/s/-0W3gQFeT)
 - [Ejercicio 2](https://apuntes.grunt.ar/s/emVrNrv15)
 - [Ejercicio 3](https://apuntes.grunt.ar/s/cSOQVYe5d)
+- [Ejercicio 7](https://apuntes.grunt.ar/s/bnF4u0PZd#)
+- [Ejercicio 8](https://apuntes.grunt.ar/s/UL752bK8L#)
