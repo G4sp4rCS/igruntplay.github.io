@@ -59,3 +59,6 @@
 - [Ejercicio 3](https://apuntes.grunt.ar/s/cSOQVYe5d)
 - [Ejercicio 7](https://apuntes.grunt.ar/s/bnF4u0PZd#)
 - [Ejercicio 8](https://apuntes.grunt.ar/s/UL752bK8L#)
+
+## Practica 6 flujos
+- [Ejercicio 1](https://apuntes.grunt.ar/s/sOc652-hP)
