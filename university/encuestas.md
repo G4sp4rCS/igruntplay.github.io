@@ -5,7 +5,7 @@
 
 ##### Pero hay veces que uno no fue nunca a clases y aprobó de todas formas, etc.
 
-- podes cambiarle el value="0" por inner message "1" o algo asi para que te agarre el peor puntaje
+- podes cambiarle el `value="0"` por inner message `"1"` o algo asi para que te agarre el peor puntaje
 
 ```javascript
 
