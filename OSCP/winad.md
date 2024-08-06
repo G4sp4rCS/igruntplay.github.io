@@ -25,6 +25,7 @@
 
 ### Pot-Compromise AD enumeration
 - [Bloudhound](https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/bloodhound)
+    - `sudo bloodhound-python -d DOMAIN.local -u $USERNAME -p $PASSWORD -ns $IP -c all`
 - Plumhound
 - Ldapdomaindump
     - `sudo ldapdomaindump ldaps://$IP -u 'DOMAIN\username' -p $PASSWORD`
