@@ -27,5 +27,6 @@
 - Bloudhound
 - Plumhound
 - Ldapdomaindump
+    - `sudo ldapdomaindump ldaps://$IP -u 'DOMAIN\username' -p $PASSWORD`
 - PingCastle
 - etc
