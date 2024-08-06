@@ -1,7 +1,7 @@
 ## Grunt's personal blog
 ## I upload personal stuff, maybe portolio or CTFs writeup someday
 
-[OSCP Preparation](OSCP.md)
+[OSCP Preparation](./OSCP/OSCP.md)
 
 [eJpt](ejpt.md)
 
