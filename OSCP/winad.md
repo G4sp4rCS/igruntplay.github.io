@@ -22,3 +22,10 @@
     - Jenkins
     - Etc
 5. enumerate all
+
+### Pot-Compromise AD enumeration
+- Bloudhound
+- Plumhound
+- Ldapdomaindump
+- PingCastle
+- etc
