@@ -10,3 +10,14 @@
     - [This guide is a little bit better than the other one](https://viperone.gitbook.io/pentest-everything/everything/everything-active-directory/adversary-in-the-middle/smb-relay)
 - [Pass the hash](https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/over-pass-the-hash-pass-the-key)
 - [IPv6 AD Attack (mitm)](https://stridergearhead.medium.com/ipv6-attack-ad-attack-ea50476dccee)
+- others that i didn't take notes
+
+### Initial internal pentest attack strategy
+1. mitm6 or responder
+2. run scans to generate traffic
+3. if scans are taking too long, look for websites in scope `(http_version)`
+4. Look for default credentials on web logins
+    - Printers
+    - Jenkins
+    - Etc
+5. enumerate all
