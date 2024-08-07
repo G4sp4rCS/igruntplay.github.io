@@ -31,3 +31,7 @@
     - `sudo ldapdomaindump ldaps://$IP -u 'DOMAIN\username' -p $PASSWORD`
 - PingCastle
 - etc
+
+### Post compromise attacks
+- [kali impacket - secrets dump](https://www.kali.org/tools/impacket/)
+    - `secretsdump.py DC.LOCAL/USER:'PASSWORD'@$IP` 
