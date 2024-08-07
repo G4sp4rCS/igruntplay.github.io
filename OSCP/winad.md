@@ -74,3 +74,11 @@
     - What happens if our DA access is lost?
     - Creating a DA account can be useful (remember we have to delete it)
     - creating a golden ticket can be useful too
+
+#### NTDS.dit
+- What is it?
+    - A DB used to store AD data.
+        - User info.
+        - Group info.
+        - Security descriptors
+        - Password hashes
