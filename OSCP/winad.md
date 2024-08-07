@@ -82,3 +82,7 @@
         - Group info.
         - Security descriptors
         - Password hashes
+- Golden Ticket attack
+    - When we compromise the krbtgt (kerberos target) account, we own the domain
+    - We can request access to any resource or system on the domain
+    - Golden tickets = complete access to every machine
