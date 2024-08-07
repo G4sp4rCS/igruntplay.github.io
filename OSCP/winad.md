@@ -55,3 +55,12 @@
     $lnk.HotKey = "Ctrl+Alt+T"
     $lnk.Save()
 ``` 
+
+### Post compromise attack strategy
+- 1st
+    - kerberoasting
+    - secretsdump
+    - pass the hash
+- 2nd: big deep
+    - enum bloodhound
+    - old vulns
