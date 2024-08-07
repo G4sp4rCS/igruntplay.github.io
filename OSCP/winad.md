@@ -29,6 +29,7 @@
 - Plumhound
 - Ldapdomaindump
     - `sudo ldapdomaindump ldaps://$IP -u 'DOMAIN\username' -p $PASSWORD`
+    - Caso hipotetico de uso: LLMNR => conseguimos un hash => lo crackeamos => probamos la contraseña en otras maquinas => encontramos nuevo login => secrets dump those logins => local admin hashes => re-spray network with local accs
 - PingCastle
 - etc
 
