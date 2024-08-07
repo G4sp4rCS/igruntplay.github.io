@@ -39,3 +39,4 @@
 - [Kerberoasting](https://book.hacktricks.xyz/v/es/windows-hardening/active-directory-methodology/kerberoast)
     - [más material](https://tools.thehacker.recipes/impacket/examples/getuserspns.py)
     - Cuando comprometemos una cuenta, un ataque para empezar es este.
+- Token impersonation attack
