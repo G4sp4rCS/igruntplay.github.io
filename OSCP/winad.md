@@ -64,3 +64,13 @@
 - 2nd: big deep
     - enum bloodhound
     - old vulns
+
+### Now we own the domain what's next?
+- Provide as much value to the client as possible
+    - Put your blinders on and do it again
+    - Dump the NTDS.dit and crack passwords
+    - Enumarate shares for sensitive information
+- Persistence can be important
+    - What happens if our DA access is lost?
+    - Creating a DA account can be useful (remember we have to delete it)
+    - creating a golden ticket can be useful too
