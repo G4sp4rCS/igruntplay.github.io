@@ -23,7 +23,7 @@
     - Etc
 5. enumerate all
 
-### Pot-Compromise AD enumeration
+### Post-Compromise AD enumeration
 - [Bloudhound](https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/bloodhound)
     - `sudo bloodhound-python -d DOMAIN.local -u $USERNAME -p $PASSWORD -ns $IP -c all`
 - Plumhound
@@ -36,3 +36,5 @@
 ### Post compromise attacks
 - [kali impacket - secrets dump](https://www.kali.org/tools/impacket/)
     - `secretsdump.py DC.LOCAL/USER:'PASSWORD'@$IP` 
+- [Kerberoasting](https://book.hacktricks.xyz/v/es/windows-hardening/active-directory-methodology/kerberoast)
+    - [más material](https://tools.thehacker.recipes/impacket/examples/getuserspns.py)
