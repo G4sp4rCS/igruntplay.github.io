@@ -1,5 +1,7 @@
 # Windows Active directory
 
+[**internal pentesting "all the things" notes**](https://swisskyrepo.github.io/InternalAllTheThings/)
+
 ## Quick notes
 
 ### Attack Vectors
