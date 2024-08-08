@@ -34,6 +34,7 @@
     - Caso hipotetico de uso: LLMNR => conseguimos un hash => lo crackeamos => probamos la contraseña en otras maquinas => encontramos nuevo login => secrets dump those logins => local admin hashes => re-spray network with local accs
 - PingCastle
 - etc
+- [SeatBelt Tool](https://github.com/GhostPack/Seatbelt)
 
 ### Post compromise attacks
 - [kali impacket - secrets dump](https://www.kali.org/tools/impacket/)
