@@ -95,3 +95,8 @@
     - When we compromise the krbtgt (kerberos target) account, we own the domain
     - We can request access to any resource or system on the domain
     - Golden tickets = complete access to every machine
+
+### Lateral movement notes
+- Tools:
+    - Psexec => internal tool
+    - WinRM
