@@ -25,6 +25,12 @@
     - Etc
 5. enumerate all
 
+### Enumerations commands
+- `net user /domain`
+- `net user $USER /domain`
+- `net group /domain`
+
+
 ### Post-Compromise AD enumeration
 - [Bloudhound](https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/bloodhound)
     - `sudo bloodhound-python -d DOMAIN.local -u $USERNAME -p $PASSWORD -ns $IP -c all`
