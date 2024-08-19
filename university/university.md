@@ -7,4 +7,6 @@
 
 - [Ejercicios resueltos de algoritmos 3 / TDA](algo3.md)
 
+- [Paradigmas de Programación](plp.md)
+
 - [Script encuestas respuestas automaticas siu guaraní](encuestas.md)
