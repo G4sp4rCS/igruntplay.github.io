@@ -8,3 +8,7 @@
 ## Practicas
 
 ### Practica 0
+- [Ejercicio 2](https://apuntes.grunt.ar/s/IXTsN4vB-)
+- [Ejercicio 3](https://apuntes.grunt.ar/s/apUJG0ik0)
+- [Ejercicio 4](https://apuntes.grunt.ar/s/JO73KQ_MJ)
+- [Ejercicio 5](https://apuntes.grunt.ar/s/YCbHcSUjx)
