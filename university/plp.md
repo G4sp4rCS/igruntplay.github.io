@@ -12,3 +12,6 @@
 - [Ejercicio 3](https://apuntes.grunt.ar/s/apUJG0ik0)
 - [Ejercicio 4](https://apuntes.grunt.ar/s/JO73KQ_MJ)
 - [Ejercicio 5](https://apuntes.grunt.ar/s/YCbHcSUjx)
+
+### Practica 1
+- [Ejercicio 1](https://apuntes.grunt.ar/s/jMSHeyVCP)
