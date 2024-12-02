@@ -3,7 +3,7 @@
 ## List
 - [**Windows Active Directory**](./winad.md)
 - [**Shell Management**](./shellMGT.md)
-
+- [**General enumeration**](./enum.md)
 
 ### En una maquina que pwnee que tenía la vuln shellshock, fue clave la enumeración para poder explotar la misma
 ```
