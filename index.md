@@ -3,6 +3,8 @@
 
 [OSCP Preparation](./OSCP/OSCP.md)
 
+[Windows Hacking](./WindowsHacking/windowsHackingIndex.md)
+
 [eJpt](ejpt.md)
 
 [Help: Android setup pentesting](android-pentesting.md)
