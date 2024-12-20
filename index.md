@@ -24,3 +24,5 @@
 [Subdomain enumeration on CTFs // certification test](subdomain-enumeration.md)
 
 [University stuff](./university/university.md)
+
+[Gaming settings](./gaming/wow-settings.md)
