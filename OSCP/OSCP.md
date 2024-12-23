@@ -4,6 +4,7 @@
 - [**Windows Active Directory**](./winad.md)
 - [**Shell Management**](./shellMGT.md)
 - [**General enumeration**](./enum.md)
+- [**Engagement Structure**](https://academy.hackthebox.com/module/39/section/384)
 - [**File transfers**](./fileTransfer.md)
 
 ### En una maquina que pwnee que tenía la vuln shellshock, fue clave la enumeración para poder explotar la misma
