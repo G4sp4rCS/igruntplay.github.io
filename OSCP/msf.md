@@ -14,3 +14,5 @@
 - Veil Framework: Genera payloads ofuscados.
 - Obfuscator.io: Ofusca binarios.
 - Shellter: Inyecta payloads dinámicos en ejecutables legítimos.
+
+### Más información en el sitio de [HTB Academy](https://academy.hackthebox.com/module/39/section/416)
