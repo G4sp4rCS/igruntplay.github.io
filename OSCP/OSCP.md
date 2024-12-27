@@ -6,6 +6,7 @@
 - [**General enumeration**](./enum.md)
 - [**Engagement Structure**](https://academy.hackthebox.com/module/39/section/384)
 - [**File transfers**](./fileTransfer.md)
+- [**Metasploit tricks**](./msf.md)
 
 ### En una maquina que pwnee que tenía la vuln shellshock, fue clave la enumeración para poder explotar la misma
 ```
