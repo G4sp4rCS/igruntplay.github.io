@@ -36,7 +36,9 @@ svchost.exe                    804 BrokerInfrastructure, DcomLaunch, Power,
                                    SystemEventsBroker
 fontdrvhost.exe                812 N/A
 ```
-- or
+
+or
+
 ```
 PS C:\Windows\system32> Get-Process lsass
 
