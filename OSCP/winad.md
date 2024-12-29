@@ -83,7 +83,7 @@
 - hklm\system
 - hklm\security
 - We can create backups of these hives using the reg.exe utility.
-#
+
 #### Using reg.exe save to copy registry hives.
  ```
  C:\WINDOWS\system32> reg.exe save hklm\sam C:\sam.save
