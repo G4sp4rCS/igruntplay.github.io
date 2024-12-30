@@ -1,46 +1,8 @@
 # CS2 AUTOEXEC
 
+[settings.gg](https://settings.gg/player/129724492)
+
 ```
-// CFG Version
-cfgver "1"
-
-// --- Key Binds ---
-// Movement
-bind "w" "+forward" // Move forward
-bind "a" "+moveleft" // Strafe left
-bind "s" "+back" // Move backward
-bind "d" "+moveright" // Strafe right
-bind "SPACE" "+jump" // Jump
-bind "CTRL" "+duck" // Crouch
-bind "SHIFT" "+speed" // Walk
-
-// Inventory Slots
-bind "1" "slot1" // Primary weapon
-bind "2" "slot2" // Secondary weapon
-bind "3" "slot3" // Knife
-bind "4" "slot4" // Grenades
-bind "5" "slot5" // Bomb
-bind "q" "lastinv" // Switch to last used weapon
-
-// Other Gameplay
-bind "e" "+use" // Use (e.g., open doors)
-bind "r" "+reload" // Reload weapon
-bind "f" "+lookatweapon" // Inspect weapon
-bind "g" "drop" // Drop weapon
-bind "TAB" "+showscores" // Show scoreboard
-bind "MWHEELUP" "+jump" // Jump (mouse wheel up)
-bind "MWHEELDOWN" "+jump" // Jump (mouse wheel down)
-
-// Communication
-bind "y" "messagemode" // All chat
-bind "u" "messagemode2" // Team chat
-bind "v" "+voicerecord" // Voice chat
-
-// Radio Commands
-bind "z" "radio" // Radio menu
-bind "x" "radio1" // Radio 1 menu
-bind "c" "radio2" // Radio 2 menu
-
 // --- CROSSHAIR COMMANDS ---
 cl_crosshairstyle 4
 cl_crosshairsize 1
@@ -115,7 +77,6 @@ cl_interp_ratio "1" // Interpolation ratio
 // --- End of Config ---
 
 echo "############## CFG LOADED ##############"
-_________ ___________________  ___.             ________                    __   
 
 echo "_________ ___________________  ___.             ________                    __   "
 echo "\_   ___ \\_   _____/  _____/  \_ |__ ___.__.  /  _____/______ __ __  _____/  |_ "
