@@ -25,4 +25,4 @@
 
 [University stuff](./university/university.md)
 
-[Gaming settings](./gaming/wow-settings.md)
+[Gaming settings](./gaming/gaming.md)
