@@ -1,5 +1,7 @@
 # Pass the hash
 
+#### [Pass the ticket](./passTheTicket.md)
+
 - [more info](https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/over-pass-the-hash-pass-the-key)
 
 ## Español:
