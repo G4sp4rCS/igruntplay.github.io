@@ -8,6 +8,7 @@
 - [**File transfers**](./fileTransfer.md)
 - [**Metasploit tricks**](./msf.md)
 - [**Pivoting**](./pivoting.md)
+- [**Reporting**](./)
 
 
 ## Extras
