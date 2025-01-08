@@ -7,6 +7,7 @@
 - [**Engagement Structure**](https://academy.hackthebox.com/module/39/section/384)
 - [**File transfers**](./fileTransfer.md)
 - [**Metasploit tricks**](./msf.md)
+- [**Pivoting**](./pivoting.md)
 
 
 ## Extras
