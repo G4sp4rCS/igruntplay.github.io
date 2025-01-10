@@ -5,6 +5,8 @@
 
 [Windows Hacking](./WindowsHacking/windowsHackingIndex.md)
 
+[DNS Spoofing](./dnsSpoofing.md)
+
 [eJpt](ejpt.md)
 
 [Help: Android setup pentesting](android-pentesting.md)
