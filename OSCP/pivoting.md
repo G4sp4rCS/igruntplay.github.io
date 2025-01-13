@@ -3,6 +3,7 @@
 
 - [SSH port forwarding + proxychains](./sshPortForwardingProxychains.md)
 - [Reverse port forwarding SSH](./reversePortForwardingSSH.md)
+    - [Chisel Alternative](./chisel.md)
 - [Ligolo](./ligolo.md)
 
 - Ping sweep linux: `for i in {1..254} ;do (ping -c 1 172.16.5.$i | grep "bytes from" &) ;done`
