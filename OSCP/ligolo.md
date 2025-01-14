@@ -16,6 +16,7 @@ ligolo-ng » session
 ? Specify a session : 1 - ubuntu@WEB01 - 10.129.115.194:42414 - 00a21e69-4e53-4dec-9139-fb12ae570838
 ```
 - Y ahora iniciamos el tunnel
+    - También podemos usar `autoroute`
 ```
 [Agent : ubuntu@WEB01] » tunnel_start --tun pivot
 [Agent : ubuntu@WEB01] » INFO[0334] Starting tunnel to ubuntu@WEB01 (00a21e69-4e53-4dec-9139-fb12ae570838) 
