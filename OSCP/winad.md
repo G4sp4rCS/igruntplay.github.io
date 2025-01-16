@@ -2,7 +2,7 @@
 
 [**internal pentesting "all the things" notes**](https://swisskyrepo.github.io/InternalAllTheThings/)
 
-## Quick notes
+### [Tools](./adTools.md)
 
 ### Attack Vectors
 - [LLMNR POISONING](https://stridergearhead.medium.com/llmnr-poisoning-an-ad-attack-1265f5365332)
@@ -15,6 +15,8 @@
 - [Passback attacks](https://www.mindpointgroup.com/blog/how-to-hack-through-a-pass-back-attack)
 - [Attacking LSASS](./lsass.md)
 - others that i didn't take notes yet
+
+## Quick notes
 
 ### Initial internal pentest attack strategy
 1. mitm6 or responder
