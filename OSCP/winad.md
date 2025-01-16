@@ -5,7 +5,7 @@
 ### [Tools](./adTools.md)
 
 ### Attack Vectors
-- [LLMNR POISONING](https://stridergearhead.medium.com/llmnr-poisoning-an-ad-attack-1265f5365332)
+- [LLMNR POISONING](./llmnr.md)
     - This is a quick view
     - [Attack tool "Responder"](https://www.kali.org/tools/responder/)
 - [SMB Relay Attacks](https://medium.com/@aniswersighni/active-directory-attacks-smb-relay-attacks-ea7d8cf9a8f8)
