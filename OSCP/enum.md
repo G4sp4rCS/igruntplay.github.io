@@ -19,6 +19,21 @@
     - `root@kali:~# ./kerbrute_linux_amd64 userenum -d lab.ropnop.com usernames.txt`
     - `kerbrute userenum -d INLANEFREIGHT.LOCAL --dc 172.16.5.5 jsmith.txt -o valid_ad_users`
 
+## Detailed User Enumeration
+- [LinkedIn to username](https://github.com/initstring/linkedin2username)
+- Any script that combines the firstname and lastname
+    - firstname.lastname
+    - firstnamelastname
+    - lastname.firstname
+    - lastnamefirstname
+    - lastname
+    - firstname
+    - initialFirstName.lastname
+    - etc
+    - [Script One](https://github.com/yuyudhn/osintname)
+    - [Script two](https://github.com/haicenhacks/username-generator)
+
+
 ### Cloud services
 - [Buckets gray hat warfare](https://buckets.grayhatwarfare.com/)
 
