@@ -37,5 +37,7 @@ bloodhound-python -d $domain -u $username -p $password -gc $domain -c all -ns $i
 
 ## Sharphound
 - C# Data Collector for BloodHound
+- `Import-Module .\SharpHound.ps1`
+- `C:\Tools\SharpHound.exe -c All -d INLANEFREIGHT.LOCAL --zipfilename loot.zip`
 - `Invoke-Bloodhound -CollectionMethod All -Domain inlanefreight.local -ZipFileName loot.zip`
 ![](https://bloodhound.readthedocs.io/en/latest/_images/SharpHoundCheatSheet.png)
