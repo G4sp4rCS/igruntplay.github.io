@@ -22,6 +22,8 @@
 - [BloodHound](./bloodhound.md)
 - [AD ACL Enumeration](./aclAdEnum.md)
 - [Enumerating AD DNS RECORDS TOOL](https://github.com/dirkjanm/adidnsdump)
+    - `adidnsdump -u DOMAIN\\user ldap://DC-IP`
+        - flag `-r` resuelve registros desconocidos
 
 ## Detailed User Enumeration
 - [LinkedIn to username](https://github.com/initstring/linkedin2username)
