@@ -30,6 +30,7 @@
 5. enumerate all
 
 ### Enumerations commands
+- [ENUMERATION HERE](./enum.md)
 - `net user /domain`
 - `net user $USER /domain`
 - `net group /domain`
