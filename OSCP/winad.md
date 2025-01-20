@@ -16,6 +16,7 @@
 - [Passback attacks](https://www.mindpointgroup.com/blog/how-to-hack-through-a-pass-back-attack)
 - [Attacking LSASS](./lsass.md)
 - [DCsync Attack](./dcsync.md)
+- [Group Policy Preferences Passwords](./gpp.md)
 - others that i didn't take notes yet
 
 ## Quick notes
