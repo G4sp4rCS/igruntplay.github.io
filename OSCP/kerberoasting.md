@@ -2,7 +2,7 @@
 
 - Este ataque sirve para obtener credenciales de cuentas de servicios que están configurados con la autenticación Kerberos.
 - En AD comunmente las cuentas de servicios tienen privilegios muy elevados.
-
+- [Más info](https://book.hacktricks.xyz/v/es/windows-hardening/active-directory-methodology/kerberoast)
 ## Como funciona
 
 1. Solicitud TGS

