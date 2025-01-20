@@ -15,6 +15,7 @@
 - [IPv6 AD Attack (mitm)](https://stridergearhead.medium.com/ipv6-attack-ad-attack-ea50476dccee)
 - [Passback attacks](https://www.mindpointgroup.com/blog/how-to-hack-through-a-pass-back-attack)
 - [Attacking LSASS](./lsass.md)
+- [DCsync Attack](./dcsync.md)
 - others that i didn't take notes yet
 
 ## Quick notes
