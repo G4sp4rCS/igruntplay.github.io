@@ -21,6 +21,7 @@
     - `kerbrute userenum -d inlanefreight.local --dc 172.16.5.5 /opt/jsmith.txt`
 - [BloodHound](./bloodhound.md)
 - [AD ACL Enumeration](./aclAdEnum.md)
+- [Enumerating AD DNS RECORDS TOOL](https://github.com/dirkjanm/adidnsdump)
 
 ## Detailed User Enumeration
 - [LinkedIn to username](https://github.com/initstring/linkedin2username)
