@@ -7,6 +7,7 @@
     - running secretsdump as local:
         - `impacket-secrestsdump -sam sam.save -security security.save -system system.save LOCAL`
 - [Kerberoasting](./kerberoasting.md)
+- [ASREPRoasting](./ASREPRoasting.md)
     - [más material](https://tools.thehacker.recipes/impacket/examples/getuserspns.py)
     - Cuando comprometemos una cuenta, un ataque para empezar es este.
 - Token impersonation attack

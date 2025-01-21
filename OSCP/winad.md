@@ -19,6 +19,10 @@
 - [Group Policy Preferences Passwords](./gpp.md)
 - others that i didn't take notes yet
 
+### [More Post compromise attacks](./postCompromiseAttacks.md)
+
+
+
 ## Quick notes
 
 ### Initial internal pentest attack strategy
@@ -50,7 +54,6 @@
 - Trevor Spray tool
 - [SeatBelt Tool](https://github.com/GhostPack/Seatbelt)
 
-### [Post compromise attacks](./postCompromiseAttacks.md)
 
 ### Now we own the domain what's next?
 - Provide as much value to the client as possible
