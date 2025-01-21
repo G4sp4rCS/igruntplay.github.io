@@ -31,6 +31,7 @@
 ### Post compromise attack strategy
 - 1st
     - [kerberoasting](./kerberoasting.md)
+    - [ASREPRoasting](./ASREPRoasting.md)
     - secretsdump
     - pass the hash
 - 2nd: big deep
