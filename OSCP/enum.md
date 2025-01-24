@@ -19,6 +19,7 @@
     - `root@kali:~# ./kerbrute_linux_amd64 userenum -d lab.ropnop.com usernames.txt`
     - `kerbrute userenum -d INLANEFREIGHT.LOCAL --dc 172.16.5.5 jsmith.txt -o valid_ad_users`
     - `kerbrute userenum -d inlanefreight.local --dc 172.16.5.5 /opt/jsmith.txt`
+    - `kerbrute passwordspray -d inlanefreight.local --dc 172.16.7.3 users2.txt Welcome1`
 - [BloodHound](./bloodhound.md)
 - [AD ACL Enumeration](./aclAdEnum.md)
 - [Enumerating AD DNS RECORDS TOOL](https://github.com/dirkjanm/adidnsdump)

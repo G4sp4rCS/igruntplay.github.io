@@ -61,3 +61,8 @@ ligolo-ng » session
 INFO[0423] Route created.                               
 [Agent : ubuntu@WEB01] »  
 ```
+
+## Agregar listeners
+#### Un proxy listener lo que hace es redirigir puertos de la maquina pivote hacia nuestra maquina atacante.
+- `listener_list`: Para listar los listeners activos
+- `listener_add --addr 0.0.0.0:1234 --to 127.0.0.1:4444`: Maquina pivote 1234 => Maquina kali escucha 4444
