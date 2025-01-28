@@ -50,3 +50,6 @@
 
 #### vhost enum
 - `ffuf -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-5000.txt:FUZZ -u http://domain:port/ -H 'Host: FUZZ.domain' -fs 986`
+
+#### http POST fuzzing
+- `ffuf -w /ust/share/seclists/Discovery/Web-Content/burp-parameter-names.txt:FUZZ -u http://domain:PORT/something.php -X POST -d 'FUZZ=key' -H 'Content-Type: application/x-www-form-urlencoded' -fs xxx`
