@@ -28,3 +28,7 @@
     - Manipulación del contenido de la página del lado del cliente.
     - Ejecución de acciones no autorizadas por el navegador (se podría utilizar BeeF como PoC).
     - Distribución de malware, kinda botnet, etc.
+
+## Automatización
+- [XSS STRIKE](https://github.com/s0md3v/XSStrike)
+- [Payloads + fuzzing](./../xss.md)
