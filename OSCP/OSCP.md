@@ -9,7 +9,8 @@
 - [**Metasploit tricks**](./msf.md)
 - [**Pivoting**](./pivoting.md)
 - [**Cross-Site Scripting**](./xss.md)
-- [**Local File Inclusion & Path Traversal](./LFI.md)
+- [**Local File Inclusion & Path Traversal**](./LFI.md)
+- [**Arbitrary File Upload**](./arbitraryFileUpload.md)
 - [**Reporting**](./reporting.md)
 
 
