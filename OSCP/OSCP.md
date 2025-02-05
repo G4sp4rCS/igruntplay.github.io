@@ -11,6 +11,7 @@
 - [**Cross-Site Scripting**](./xss.md)
 - [**Local File Inclusion & Path Traversal**](./LFI.md)
 - [**Arbitrary File Upload**](./arbitraryFileUpload.md)
+- [**Command Injection**](./commandInjection.md)
 - [**Reporting**](./reporting.md)
 
 
