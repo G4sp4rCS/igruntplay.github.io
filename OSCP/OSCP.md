@@ -9,6 +9,7 @@
 - [**Metasploit tricks**](./msf.md)
 - [**Pivoting**](./pivoting.md)
 - [**Cross-Site Scripting**](./xss.md)
+- [**SQL Injection**](./sqli.md)
 - [**Local File Inclusion & Path Traversal**](./LFI.md)
 - [**Arbitrary File Upload**](./arbitraryFileUpload.md)
 - [**Command Injection**](./commandInjection.md)
