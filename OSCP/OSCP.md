@@ -13,6 +13,7 @@
 - [**Local File Inclusion & Path Traversal**](./LFI.md)
 - [**Arbitrary File Upload**](./arbitraryFileUpload.md)
 - [**Command Injection**](./commandInjection.md)
+- [**Other web attacks**](./otherWebAttacks.md)
 - [**Reporting**](./reporting.md)
 
 
