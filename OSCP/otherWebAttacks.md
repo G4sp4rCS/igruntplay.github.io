@@ -54,3 +54,31 @@ for i in {1..10}; do
         done
 done
 ```
+
+## XXE (XML External Entity)
+- XXE es una vulnerabilidad de seguridad que se produce cuando una aplicación web expone un punto de entrada que permite la inclusión de archivos XML externas.
+- Por ejemplo, si una aplicación web permite la inclusión de archivos XML externas, un atacante podría incluir archivos XML maliciosos en una solicitud POST o GET.
+
+### Identificando XXE
+- Para identificar XXE, se pueden seguir los siguientes pasos:
+    - Identificar puntos de entrada que permiten la inclusión de archivos XML externas.
+    - Verificar si la aplicación web permite la inclusión de archivos XML externas.
+    - Verificar si la aplicación web permite la inclusión de archivos XML externas en las solicitudes POST o GET.
+
+### Payloads con SYSTEM
+- Para explotar XXE, se pueden utilizar diferentes payloads con SYSTEM.
+- Un payload con SYSTEM es un payload que contiene una directiva de sistema que se ejecutará en el servidor.
+- Por ejemplo, si una aplicación web permite la inclusión de archivos XML externas, un atacante podría utilizar un payload con SYSTEM para ejecutar código en el servidor.
+- Payloads:
+    - `<?xml version="1.0" encoding="ISO-8859-1"?><!DOCTYPE foo [<!ELEMENT foo ANY><!ENTITY xxe SYSTEM "file:///etc/passwd" >]><foo>&xxe;</foo>`
+    - `<?xml version="1.0" encoding="ISO-8859-1"?><!DOCTYPE foo [<!ELEMENT foo ANY><!ENTITY xxe SYSTEM "file:///c:/boot.ini" >]><foo>&xxe;</foo>`
+
+### Payloads con DTD
+- Para explotar XXE, se pueden utilizar diferentes payloads con DTD.
+- Un payload con DTD es un payload que contiene una declaración de tipo de documento (DTD) que se utilizará para validar el documento XML.
+- Por ejemplo, si una aplicación web permite la inclusión de archivos XML externas, un atacante podría utilizar un payload con DTD para ejecutar código en el servidor.
+- Payloads:
+    - `<?xml version="1.0" encoding="ISO-8859-1"?><!DOCTYPE foo [<!ELEMENT foo ANY><!ENTITY xxe SYSTEM "file:///etc/passwd" >]><foo>&xxe;</foo>`
+    - `<?xml version="1.0" encoding="ISO-8859-1"?><!DOCTYPE foo [<!ELEMENT foo ANY><!ENTITY xxe SYSTEM "file:///c:/boot.ini" >]><foo>&xxe;</foo>`
+
+### Identificando XXE
