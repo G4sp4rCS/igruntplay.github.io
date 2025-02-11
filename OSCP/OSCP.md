@@ -14,6 +14,7 @@
 - [**Arbitrary File Upload**](./arbitraryFileUpload.md)
 - [**Command Injection**](./commandInjection.md)
 - [**Other web attacks**](./otherWebAttacks.md)
+- [**Privilege Escalation**](./privEsc.md)
 - [**Reporting**](./reporting.md)
 
 
