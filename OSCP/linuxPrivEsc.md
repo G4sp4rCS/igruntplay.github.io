@@ -34,3 +34,22 @@ PATH ABUSE!!
 ### Setgid permissions
 - Definición: Setgid permissions permite a un proceso ejecutar comandos como el grupo que lo ejecuta.
 - `find / -uid 0 -perm -6000 -type f 2>/dev/null`
+
+## Capabilities
+- Definición: Capabilities permiten a un proceso ejecutar comandos como el usuario que lo ejecuta.
+- Generalmente se usan para ejecutar ciertos comandos como root.
+- setcap definición: setea capabilities para un programa.
+    - ejemplo: podemos usar `cap_net_bind_service` para poder ejecutar el comando `nc -l -p 80` como root.
+    - `sudo setcap cap_net_bind_service=+ep /usr/bin/vim.basic`
+- `find /usr/bin /usr/sbin /usr/local/bin /usr/local/sbin -type f -exec getcap {} \;`: este comando hace un chequeo de los binarios que tienen capabilities.
+
+| Capacidad              | Descripción                                                                                              |
+|------------------------|----------------------------------------------------------------------------------------------------------|
+| `cap_sys_admin`        | Permite realizar acciones con privilegios administrativos, como modificar archivos del sistema o cambiar configuraciones del sistema. |
+| `cap_sys_chroot`       | Permite cambiar el directorio raíz para el proceso actual, permitiéndole acceder a archivos y directorios que de otro modo serían inaccesibles. |
+| `cap_sys_ptrace`       | Permite adjuntar y depurar otros procesos, potencialmente permitiendo acceder a información sensible o modificar el comportamiento de otros procesos. |
+| `cap_sys_nice`         | Permite aumentar o disminuir la prioridad de los procesos, potencialmente permitiendo acceder a recursos que de otro modo estarían restringidos. |
+| `cap_sys_time`         | Permite modificar el reloj del sistema, potencialmente permitiendo manipular marcas de tiempo o causar que otros procesos se comporten de manera inesperada. |
+| `cap_sys_resource`     | Permite modificar los límites de recursos del sistema, como el número máximo de descriptores de archivos abiertos o la cantidad máxima de memoria que se puede asignar. |
+| `cap_sys_module`       | Permite cargar y descargar módulos del kernel, potencialmente permitiendo modificar el comportamiento del sistema operativo o acceder a información sensible. |
+| `cap_net_bind_service` | Permite enlazar a puertos de red, potencialmente permitiendo acceder a información sensible o realizar acciones no autorizadas. |
