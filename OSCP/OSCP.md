@@ -15,6 +15,7 @@
 - [**Command Injection**](./commandInjection.md)
 - [**Other web attacks**](./otherWebAttacks.md)
 - [**Privilege Escalation**](./privEsc.md)
+- [**Windows Privilege Escalation**](./winPrivEsc.md)
 - [**Reporting**](./reporting.md)
 
 
