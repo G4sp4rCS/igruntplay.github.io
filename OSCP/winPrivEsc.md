@@ -93,3 +93,22 @@ Opening : 'lsass.dmp' file for minidump...
 - Se pueden elevar los privilegios ejecutando un proceso hijo con privilegios eleveados heredando los privilegios de un proceso padre.
 - Podemos utilizar el [siguiente script](https://github.com/decoder-it/psgetsystem)
     - `[MyProcess]::CreateProcessFromParent(<system_pid>,<command_to_execute>,"")`
+
+## SeTakeOwnerPrivilege
+- Este privilegio permite la habilidad de tomar ownership de cualquier objeto.
+    - NTFS, Registry, File, Process, Thread, Semaphore, Mutex, Desktop, Window Station, Message Queue, Job, and Section.
+- Este privilegio asigna permisos WRITE_OWNER para el objeto especificado.
+- Se puede intentar habilitar este privilegio usando [el siguieunte script](https://raw.githubusercontent.com/fashionproof/EnableAllTokenPrivs/master/EnableAllTokenPrivs.ps1)
+```powershell
+PS C:\htb> Import-Module .\Enable-Privilege.ps1
+PS C:\htb> .\EnableAllTokenPrivs.ps1
+PS C:\htb> whoami /priv
+
+PRIVILEGES INFORMATION
+----------------------
+Privilege Name                Description                              State
+============================= ======================================== =======
+SeTakeOwnershipPrivilege      Take ownership of files or other objects Enabled
+SeChangeNotifyPrivilege       Bypass traverse checking                 Enabled
+SeIncreaseWorkingSetPrivilege Increase a process working set           Enabled
+```
