@@ -112,3 +112,14 @@ SeTakeOwnershipPrivilege      Take ownership of files or other objects Enabled
 SeChangeNotifyPrivilege       Bypass traverse checking                 Enabled
 SeIncreaseWorkingSetPrivilege Increase a process working set           Enabled
 ```
+- Después tenemos que elegir un archivo objetivo para la operación de tomar ownership.
+    - Ejemplo: `cmd /c dir /q 'C:\Department Shares\Private\IT'`
+        - Explicación del comando:
+            - `cmd` es el comando que se va a ejecutar.
+            - `/c` es la opción que indica que se va a ejecutar el comando.
+            - `dir` es el comando que se va a ejecutar.
+            - `/q` es la opción que indica que se va a mostrar el resultado de la operación.
+            - `'C:\Department Shares\Private\IT'` es el objetivo de la operación de tomar ownership.
+    - `takeown /f 'C:\Department Shares\Private\IT\cred.txt'
+    - `icacls 'C:\Department Shares\Private\IT\cred.txt' /grant htb-student:F`
+    - Ahora con esto podemos tomar ownership de un archivo.
