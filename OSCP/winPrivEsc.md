@@ -16,6 +16,7 @@
 
 - [Payload all the things Windows PrivEsc](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Windows%20-%20Privilege%20Escalation.md)
 - [More Binaries](https://github.com/r3motecontrol/Ghostpack-CompiledBinaries)
+- [Lista de privilegios interesantes](https://github.com/gtworek/Priv2Admin)
 
 ## SeImpersonate and SeAssignPrimaryToken
 ### SeImpersonate example - Juicy Potato
