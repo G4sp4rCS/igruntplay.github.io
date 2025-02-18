@@ -1,6 +1,7 @@
 # Windows Privilege Escalation
 
 ## Useful tools
+
 | Tool                              | Description                                                                                                                                                                                                 |
 |-----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Seatbelt                          | C# project for performing a wide variety of local privilege escalation checks                                                                                                                               |
