@@ -155,6 +155,7 @@ c:\inetpub\wwwwroot\web.config
 - Este privilegio permite la habilidad de leer cualquier archivo del sistema y realizar copias de seguridad de esos archivos.
 - `Get-SeBackupPrivilege`
 - Se puede intentar habilitar este privilegio usando [el siguieunte script](https://raw.githubusercontent.com/fashionproof/EnableAllTokenPrivs/master/EnableAllTokenPrivs.ps1)
+
 ```powershell
 PS C:\htb> Set-SeBackupPrivilege
 PS C:\htb> Get-SeBackupPrivilege
