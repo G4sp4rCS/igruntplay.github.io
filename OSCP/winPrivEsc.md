@@ -230,3 +230,8 @@ C:\htb> sc start SecurityService
 - `sc stop WindscribeService`
 - `sc start WindscribeService`
 - `net localgroup administrators`
+
+## Enumerar servicios ejecutandose
+- `get-process`: Enumera los procesos que se estan ejecutando.
+    - `get-process -Id <pid>`: Enumera el proceso con el id especificado.
+- `get-service`: Enumera los servicios que se estan ejecutando.
