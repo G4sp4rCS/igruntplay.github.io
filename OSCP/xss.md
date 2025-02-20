@@ -32,3 +32,50 @@
 ## Automatización
 - [XSS STRIKE](https://github.com/s0md3v/XSStrike)
 - [Payloads + fuzzing](./../xss.md)
+
+## Un payload interesante
+![](https://pbs.twimg.com/media/GkNmgp8bUAEKpBc?format=jpg&name=4096x4096)
+- `((_)=>m=>_[m]|| (confirm(m),_[m]=1))({})`
+- este payload está basado en una **función autoejecutable (IIFE)** y una **técnica de memoización** (ver programación dinamica) para evitar ejecuciones repetidas.
+
+## **El Payload**
+```js
+((_)=>m=>_[m]|| (confirm(m), _[m]=1))({})
+```
+
+## **Explicación paso a paso**
+
+### 1. **Función autoejecutable (IIFE)**
+El código comienza con una **Immediately Invoked Function Expression (IIFE)**, es decir, una función que se ejecuta inmediatamente:
+```js
+((_) => m => _[m] || (confirm(m), _[m] = 1))({})
+```
+- La función externa `(_) => ...` recibe un objeto `{}` como argumento.
+- Este objeto se usa como almacenamiento temporal para guardar valores.
+
+### 2. **Función interna con `m` como parámetro**
+```js
+m => _[m] || (confirm(m), _[m] = 1)
+```
+- Cuando se llama con un valor `m`, la función intenta acceder a `_ [m]`.
+- Si `_ [m]` es `undefined`, se ejecuta `confirm(m)` y luego se asigna `_ [m] = 1`.
+- Si `_ [m]` ya existe, la función simplemente devuelve su valor, evitando que `confirm(m)` se ejecute nuevamente.
+
+### 3. **Uso del operador OR (`||`) y la coma (` , `)**
+```js
+_[m] || (confirm(m), _[m] = 1)
+```
+- **`||` (Operador OR)**: Si `_ [m]` es `undefined`, evalúa la segunda parte `(confirm(m), _[m] = 1)`.
+- **Operador `,` (coma)**: Permite ejecutar `confirm(m)` antes de asignar `_ [m] = 1`.
+
+### 4. **Ejecución del código**
+El resultado es que `confirm(m)` solo se ejecutará la primera vez que se pase un valor `m`. Para valores repetidos, el código devolverá `_ [m]` sin ejecutar `confirm(m)` nuevamente.
+
+## **Uso en ataques XSS**
+Este payload puede inyectarse en sitios vulnerables para ejecutar código arbitrario en el navegador de la víctima.
+
+**Ejemplo de inyección XSS:**
+```html
+<input onfocus="((_)=>m=>_[m]|| (confirm(m), _[m]=1))({})('XSS')" autofocus>
+```
+- Cuando el usuario hace foco en el `input`, se ejecuta `confirm('XSS')`.
