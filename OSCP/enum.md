@@ -26,6 +26,14 @@
     - `adidnsdump -u DOMAIN\\user ldap://DC-IP`
         - flag `-r` resuelve registros desconocidos
 
+#### AD: Get installed programs via powershell & registry keys
+
+```powershell
+PS C:\htb> $INSTALLED = Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* |  Select-Object DisplayName, DisplayVersion, InstallLocation
+PS C:\htb> $INSTALLED += Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion, InstallLocation
+PS C:\htb> $INSTALLED | ?{ $_.DisplayName -ne $null } | sort-object -Property DisplayName -Unique | Format-Table -AutoSize
+```
+
 ## Detailed User Enumeration
 - [LinkedIn to username](https://github.com/initstring/linkedin2username)
 - Any script that combines the firstname and lastname
