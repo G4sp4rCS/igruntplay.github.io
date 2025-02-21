@@ -17,7 +17,7 @@
 - [**Privilege Escalation**](./privEsc.md)
 - [**Windows Privilege Escalation**](./winPrivEsc.md)
 - [**Reporting**](./reporting.md)
-
+- [**Cookie Extraction**](./cookieExtraction.md)
 
 ## Extras
 
