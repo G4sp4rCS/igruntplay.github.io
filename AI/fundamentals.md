@@ -49,3 +49,50 @@
     3. **Homocedasticidad**: La varianza de los errores de la regresión es constante.
     4. **Normalidad**: Los errores de la regresión siguen una distribución normal.
     5. **Multicolinealidad**: Las variables independientes no están altamente correlacionadas.
+
+## Regresión Logística
+- La **regresión logística** es un algoritmo de clasificación que se utiliza para predecir la probabilidad de una variable dependiente categórica.
+- La regresión logística es un algoritmo de clasificación binaria, que predice si una observación pertenece a una clase o a otra.
+- Es parte del aprendizaje supervisado y se utiliza para problemas de clasificación binaria.
+- Clasificación en machine learning es un proceso de asignar una etiqueta a una observación. Como la regresión que predice un valor continuo, la clasificación predice una etiqueta.
+- Ejemplos:
+    - Clasificar si un correo electrónico es spam o no.
+    - Clasificar si un tumor es benigno o maligno.
+    - Clasificar si un cliente comprará o no un producto.
+
+### Cómo funciona?
+- La regresión logistica utiliza la función logística para modelar la probabilidad de una variable dependiente categórica.
+- La función logística es una función sigmoidea que toma cualquier valor real y lo mapea en un valor entre 0 y 1.
+- La ecuación de la regresión logística es:
+    - $p = \frac{1}{1 + e^{-(b_0 + b_1 \times x_1 + b_2 \times x_2 + \dots + b_n \times x_n)}}$
+    - donde:
+        - $p$ es la **probabilidad de la variable dependiente**
+        - $x_1, x_2, \dots, x_n$ son las **variables independientes**
+        - $b_0$ es la **intersección de la línea**
+        - $b_1, b_2, \dots, b_n$ son los **coeficientes de regresión**
+- Esta función toma cualquier valor real y lo mapea en un valor entre 0 y 1.
+- Se utiliza mucho para modelar la probabilidad de una observación que pertenece a una clase o a otra.
+
+#### Ejemplo: Detección de spam
+- Digamos que estamos construyendo un filtro de spam utilizando la regresión logística.
+- El algoritmo analizaria varios correos electrónicos y aprendería a clasificarlos como spam o no spam.
+    - Tendria que analizar las palabras clave, la frecuencia de las palabras, la dirección de correo electrónico, etc.
+    - El email tendría que tener un puntaje de probabilidad de spam por debajo de un cierto umbral para ser clasificado como no spam.
+- Un aspecto importante de la regresión lineal es la **función de decisión**.
+    - La función de decisión es una función que toma un puntaje de probabilidad y lo convierte en una etiqueta.
+    - Si el puntaje de probabilidad es mayor que un cierto umbral, la observación se clasifica en una clase.
+    - Si el puntaje de probabilidad es menor que un cierto umbral, la observación se clasifica en la otra clase.
+    - Hay una recta que divide las dos clases.
+
+##### Umbral de decisión
+- El umbral de decisión es el valor que se utiliza para clasificar una observación en una clase o en otra.
+- Si el puntaje de probabilidad es mayor que el umbral de decisión, la observación se clasifica en una clase.
+- Si dado cierto punto de dato predicado la probabilidad es mayor que el umbral, se clasifica en una clase..
+- Si la probabilidad cae por debajo del umbral, se clasifica en la otra clase.
+- La ecuación para el umbral de probabilidad es:
+    - $p = \frac{1}{1 + e^{-z}}$
+    - donde:
+        - $p$ es la **probabilidad**
+        - $z$ es el **valor de la función lineal** (es decir, $z = b_0 + b_1 \times x_1 + b_2 \times x_2 + \dots + b_n \times x_n$)
+- Si $p$ es mayor que el umbral de decisión, la observación se clasifica en una clase.
+- Si $p$ es menor que el umbral de decisión, la observación se clasifica en la otra clase.
