@@ -5,6 +5,8 @@
 
 [Windows Hacking](./WindowsHacking/windowsHackingIndex.md)
 
+[AI for Red Teaming](./AI/AI.md)
+
 [DNS Spoofing](./dnsSpoofing.md)
 
 [eJpt](ejpt.md)
