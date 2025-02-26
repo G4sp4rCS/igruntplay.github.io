@@ -18,6 +18,7 @@
 - [**Windows Privilege Escalation**](./winPrivEsc.md)
 - [**Reporting**](./reporting.md)
 - [**Cookie Extraction**](./cookieExtraction.md)
+- [**Buffer Overflow**](./bufferOverflow.md)
 
 ## Extras
 
