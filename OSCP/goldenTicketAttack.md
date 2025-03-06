@@ -58,3 +58,5 @@ Valid starting       Expires              Service principal
 03/06/2025 09:34:13  03/04/2035 09:34:13  krbtgt/PAINTERS.HTB@PAINTERS.HTB
 	renew until 03/04/2035 09:34:13
 ```
+
+- `sudo mousepad /etc/resolv.conf` y agregamos `nameserver IP-DC` para resolver el nombre del DC.
