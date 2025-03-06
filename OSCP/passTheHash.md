@@ -38,3 +38,10 @@
 `reg add HKLM\System\CurrentControlSet\Control\Lsa /t REG_DWORD /v DisableRestrictedAdmin /d 0x0 /f`
 - ![](https://academy.hackthebox.com/storage/modules/147/rdp_session-5.png)
 - Una vez de que la llave fue agregada al registro del sistema podemos intntar usar xfreerdp con la opción /pth
+
+## Activar RDP si está desactivado
+- `reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f`
+- `netsh advfirewall firewall set rule group="Remote Desktop" new enable=yes`
+- `sc config TermService start= auto`
+- `sc config TermService start= auto
+- `net start TermService`
