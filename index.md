@@ -5,6 +5,8 @@
 
 [Windows Hacking](./WindowsHacking/windowsHackingIndex.md)
 
+[Jobs interviews tips](./jobs/jobs.md)
+
 [AI for Red Teaming](./AI/AI.md)
 
 [DNS Spoofing](./dnsSpoofing.md)
