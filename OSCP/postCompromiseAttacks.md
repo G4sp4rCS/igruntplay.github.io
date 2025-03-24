@@ -31,7 +31,10 @@
     $lnk.Description = "Test"
     $lnk.HotKey = "Ctrl+Alt+T"
     $lnk.Save()
-``` 
+    ``` 
+
+    - `smbserver.py -smb2support "icon" .`
+
 
 ### Post compromise attack strategy
 - 1st
