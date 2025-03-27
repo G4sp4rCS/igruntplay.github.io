@@ -1,4 +1,4 @@
 # Privilege Escalation
 
 ## [Linux](./linuxPrivEsc.md)
-## [Windows](./winPrivEsc.)
+## [Windows](./winPrivEsc)
