@@ -96,3 +96,6 @@
         - $z$ es el **valor de la función lineal** (es decir, $z = b_0 + b_1 \times x_1 + b_2 \times x_2 + \dots + b_n \times x_n$)
 - Si $p$ es mayor que el umbral de decisión, la observación se clasifica en una clase.
 - Si $p$ es menor que el umbral de decisión, la observación se clasifica en la otra clase.
+
+
+- [Arboles de decisiones](./DecisionTrees.md)
