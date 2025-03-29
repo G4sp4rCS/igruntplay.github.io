@@ -99,3 +99,4 @@
 
 
 - [Arboles de decisiones](./DecisionTrees.md)
+- [Bayesiano ingenuo](./NaiveBayes.md)
