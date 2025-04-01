@@ -22,6 +22,9 @@
 
 ## Extras
 
+### Maquina centOS una privesc rara
+- https://seclists.org/fulldisclosure/2019/Apr/24
+
 
 ### En una maquina que pwnee que tenía la vuln shellshock, fue clave la enumeración para poder explotar la misma
 ```
