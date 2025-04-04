@@ -34,6 +34,8 @@ PS C:\htb> $INSTALLED += Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\W
 PS C:\htb> $INSTALLED | ?{ $_.DisplayName -ne $null } | sort-object -Property DisplayName -Unique | Format-Table -AutoSize
 ```
 
+## [SNMP enumeration](./snmpEnum.md)
+
 ## Detailed User Enumeration
 - [LinkedIn to username](https://github.com/initstring/linkedin2username)
 - Any script that combines the firstname and lastname
