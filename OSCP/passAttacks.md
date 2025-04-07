@@ -157,3 +157,7 @@ if __name__ == "__main__":
 
 ### About john the ripper
 - The truth is that I don't give much importance to john the ripper, it is a very versatile tool but **the power of hashcat is beyond comparison**.
+
+
+## bcrypt cracking commands
+- `hashcat -m 3200 -a 0 hash.txt rockyou.txt`
