@@ -22,6 +22,7 @@
     - `kerbrute passwordspray -d inlanefreight.local --dc 172.16.7.3 users2.txt Welcome1`
 - [BloodHound](./bloodhound.md)
 - [AD ACL Enumeration](./aclAdEnum.md)
+- [CA & CN Enumeration](./caEnum.md)
 - [Enumerating AD DNS RECORDS TOOL](https://github.com/dirkjanm/adidnsdump)
     - `adidnsdump -u DOMAIN\\user ldap://DC-IP`
         - flag `-r` resuelve registros desconocidos
