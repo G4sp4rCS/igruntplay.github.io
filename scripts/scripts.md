@@ -1,4 +1,4 @@
-# My own scripts
+# My own scripts & Exploits
 
 - [HTB STREAMIO SQLI exploit automated](https://github.com/G4sp4rCS/htb-streamio-manual-sqli-script)
 - [HTB INTELLIGENCE PDF FUZZER](https://github.com/G4sp4rCS/htb-intelligence-fuzzer)
