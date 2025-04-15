@@ -30,6 +30,9 @@
     - Esto genera una tautología que siempre es verdadera, entonces la va a tomar como verdadera y va a permitir el acceso.
 ![](https://academy.hackthebox.com/storage/modules/33/or_inject_diagram.png)
 
+
+## [SQLI manual](./manualSQLI.md)
+
 ## SQLMAP
 - SQLMAP es una herramienta de prueba de penetración de código abierto que automatiza el proceso de detección y explotación de vulnerabilidades de inyección SQL.
 
