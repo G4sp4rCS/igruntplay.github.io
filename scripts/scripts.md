@@ -1,5 +1,16 @@
 # My own scripts
 
+- [HTB STREAMIO SQLI exploit automated](https://github.com/G4sp4rCS/htb-streamio-manual-sqli-script)
+- [HTB INTELLIGENCE PDF FUZZER](https://github.com/G4sp4rCS/htb-intelligence-fuzzer)
+- [Self injection DLL](https://github.com/G4sp4rCS/SelfInjection)
+- [[WIP] Malware Development RevShell for Windows 11 24H2 - AV FULL BYPASS](https://github.com/G4sp4rCS/rev-shell-windows11-24h2-av-bypass)
+- [HTB Support Reverse engineer password script](https://github.com/G4sp4rCS/htb-support-reversing-password)
+- [CVE-2023-2255](https://github.com/G4sp4rCS/CVE-2023-2255)
+- [HTB Intentions LPE custom SUID binary](https://github.com/G4sp4rCS/htb-intentions-privilege-escalation)
+- [CVE-2023-40931-POC](https://github.com/G4sp4rCS/CVE-2023-40931-POC)
+- [SSRF CVE-2023-27163 + MalTrail RCE automated exploit](https://github.com/G4sp4rCS/htb-sau-automated)
+- [CVE-2023-32784 Password Combinator Fixer Exploit](https://github.com/G4sp4rCS/CVE-2023-32784-password-combinator-fixer)
+- [HTB Editorial SSRF enumerate exploit](https://github.com/G4sp4rCS/SSRF-attacker-htb-editorial)
 - [Werkzeug Console Ping Exploit](https://github.com/G4sp4rCS/Werkzeug-console-ping-exploit)
 - [KeePass Process Detector](https://github.com/G4sp4rCS/KeePass-Process-Detector)
 - [Season Password Generator](https://github.com/G4sp4rCS/Season-Password-Generator)
