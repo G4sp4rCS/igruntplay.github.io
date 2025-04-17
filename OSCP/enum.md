@@ -23,6 +23,7 @@
 - [BloodHound](./bloodhound.md)
 - [AD ACL Enumeration](./aclAdEnum.md)
 - [CA & CN Enumeration](./caEnum.md)
+- [AD User Enumeration with lookupsid.py](./lookupsid.md)
 - [Enumerating AD DNS RECORDS TOOL](https://github.com/dirkjanm/adidnsdump)
     - `adidnsdump -u DOMAIN\\user ldap://DC-IP`
         - flag `-r` resuelve registros desconocidos
