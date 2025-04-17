@@ -12,6 +12,10 @@
 ![alt text](./backupOperator.png)
 - En este ejemplo el usuario **melissa** es miembro de **Backup Operators**.
 
+### Mi propio metodo
+- [https://github.com/G4sp4rCS/backup-operator-to-domain-admin-POC](https://github.com/G4sp4rCS/backup-operator-to-domain-admin-POC)
+- Script automatizado compatible con evil-winrm y powershell.
+
 ### Metodo 1 con impacket
 - Abris un smbserver con impacket
     - `impacket-smbserver -smb2support "share" .`
