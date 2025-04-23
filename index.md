@@ -3,6 +3,8 @@
 
 [OSCP Preparation](./OSCP/OSCP.md)
 
+[Havoc C2 101](./HavocC2.md)
+
 [Windows Hacking](./WindowsHacking/windowsHackingIndex.md)
 
 [My own scripts & Exploits](./scripts/scripts.md)

