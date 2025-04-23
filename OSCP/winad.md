@@ -20,6 +20,7 @@
 - [Attacking LSASS](./lsass.md)
 - [DCsync Attack](./dcsync.md)
 - [Group Policy Preferences Passwords](./gpp.md)
+- [Run As Lateral Movement](./RunAs.md)
 - others that i didn't take notes yet
 
 ### [More Post compromise attacks](./postCompromiseAttacks.md)
