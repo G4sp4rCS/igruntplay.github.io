@@ -223,3 +223,49 @@ rm "$ENC_FILE" "$DEC_FILE"
 ``` 
 
 ----
+
+
+## Dictionary Attack con hydra
+- Comando basico: `hydra -l <user> -p <password> <ip> ssh/rdp/etc`
+    - Generalmente el protocolo ftp es más veloz que ssh, por lo que se recomienda utilizar ftp para hacer pruebas de fuerza bruta.
+
+### Hydra HTTP post form 
+- Abrí burp y agarrá la petición HTTP que quieras atacar.
+    - Revisá que el método sea POST y que tenga un body de incorrecto.
+- `hydra -l <user> -p <password> <ip> http-post-form "/path/to/login:username=^USER^&password=^PASS^:F=incorrect"`
+
+----
+
+## Mutating Wordlists
+- Hashcat permite mutar wordlists para generar nuevas contraseñas a partir de una lista base. Esto es útil para crear variaciones de contraseñas comunes.
+- Hay reglas predefinidas que se pueden usar para mutar las contraseñas. Estas reglas pueden incluir agregar números, cambiar letras por números, etc.
+- `hastcat -r rules/best64.rule -a 0 -m 0 hash.txt rockyou.txt`
+- `hashcat -r rules/best64.rule --stdout wordlist.txt`: Esto va a imprimir en pantalla todas las contraseñas generadas a partir de la wordlist.
+
+### Archivos .rule
+- Los archivos `.rule` son archivos de texto que contienen reglas para mutar contraseñas. Cada línea del archivo representa una regla.
+- Por ejemplo, una regla puede ser `s/abc/123/`, que reemplaza todas las ocurrencias de "abc" por "123" en las contraseñas.
+
+#### Tabla de reglas comunes
+
+| Regla       | Descripción                                                                 |
+|-------------|-----------------------------------------------------------------------------|
+| `$!`        | Agrega un carácter especial `!` al final de la contraseña.                 |
+| `$1`        | Agrega el número `1` al final de la contraseña.                            |
+| `^a`        | Agrega la letra `a` al inicio de la contraseña.                            |
+| `s/a/A/`    | Reemplaza todas las ocurrencias de `a` con `A`.                            |
+| `l`         | Convierte toda la contraseña a minúsculas.                                 |
+| `u`         | Convierte toda la contraseña a mayúsculas.                                 |
+| `c`         | Capitaliza la primera letra de la contraseña.                              |
+| `r`         | Invierte el orden de los caracteres en la contraseña.                      |
+| `d`         | Duplica la contraseña.                                                    |
+| `t0`        | Trunca la contraseña a 0 caracteres (la vacía).                            |
+| `p1`        | Inserta el número `1` después de cada carácter de la contraseña.           |
+| `o`         | Elimina todos los caracteres duplicados en la contraseña.                  |
+| `x`         | Elimina todos los caracteres no alfanuméricos de la contraseña.            |
+| `[3]`       | Elimina el carácter en la posición 3 (índice basado en 0).                 |
+| `D`         | Elimina todos los dígitos de la contraseña.                                |
+| `T0`        | Trunca la contraseña después de 0 caracteres (la vacía).                   |
+| `f`         | Duplica la contraseña y la invierte, concatenándola al final.              |
+
+Estas reglas pueden combinarse para crear mutaciones más complejas y personalizadas.
