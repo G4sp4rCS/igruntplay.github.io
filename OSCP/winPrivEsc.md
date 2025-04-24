@@ -437,3 +437,8 @@ C:\Users\security\Desktop>
 ## SeLoadDriverPrivilege
 - Este privilegio permite la habilidad de cargar drivers en el sistema.
 - Si aparece en `whoami /priv` como `Disabled` podemos utilizar [este .exe](https://github.com/G4sp4rCS/CPP-EnableSeLoadDriverPrivilege) para re-habilitarlo
+
+
+## Credential harvesting
+- `Get-ChildItem -Path C:\ -Recurse -Include *.txt,*.xml,*.ini,*.config,*.json,*.log | Select-String -Pattern 'password|user|login|credential'`
+- `Get-ChildItem -Path C:\xampp -Include *.txt,*.ini -File -Recurse -ErrorAction SilentlyContinue`
