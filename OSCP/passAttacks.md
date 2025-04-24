@@ -99,6 +99,10 @@ keephash.txt  passcodes.kdbx  req.txt
 - o con john: `john --wordlist=/usr/share/wordlists/rockyou.txt keephash.txt`
 
 
+### Buscar bases de datos de keepass
+- **Windows**: `Get-ChildItem -Path C:\ -Include *.kdbx -File -Recurse -ErrorAction SilentlyContinue`
+- **Linux**: `find / -type f -name "*.kdbx" 2>/dev/null`
+
 #### KEEPASS CVE-2023-32784
 - La vulnerabilidad CVE-2023-32784 es una falla en KeePass que permite recuperar la contraseña maestra de la memoria. Esta vulnerabilidad afecta a KeePass 2.x, y no requiere la ejecución de código en el sistema objetivo. La contraseña se puede recuperar desde un volcado de memoria del proceso, archivo de intercambio, archivo de hibernación, varios volcados de crash o un volcado de RAM del sistema completo.
 - Hay que instalar dotnet
