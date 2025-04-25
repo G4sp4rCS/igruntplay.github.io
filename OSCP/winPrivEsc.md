@@ -474,6 +474,13 @@ int main() {
 }
 ```
 
+----
+
+## DLL Hijacking
+- El concepto es reemplazar un DLL utilizado por un programa por otro DLL que contenga código malicioso para elevar privilegios.
+
+
+
 ## runas save creds
 - **Detección**: `cmdkey /list`
 
