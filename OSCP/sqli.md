@@ -22,6 +22,7 @@
 - Otra forma de detectar SQL Injection es mediante la inyección de comandos SQL en los campos de texto y observar si la aplicación devuelve resultados inesperados.
     - **"Error: near line 1: near "'": syntax error"** es un mensaje de error común que se obtiene cuando se inyecta un `'` en un campo de texto.
     - Ejemplo: `1' OR '1'='1`
+    - [Otros ejemplos](https://github.com/danielmiessler/SecLists/blob/master/Fuzzing/Databases/MySQL-SQLi-Login-Bypass.fuzzdb.txt?source=post_page-----7e777892e485---------------------------------------)
 
 ### Login Bypass SQL Injection
 - La inyección SQL se puede utilizar para eludir la autenticación de un sistema.
