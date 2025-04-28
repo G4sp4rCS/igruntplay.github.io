@@ -17,6 +17,7 @@
 - [**Privilege Escalation**](./privEsc.md)
 - [**Windows Privilege Escalation**](./winPrivEsc.md)
 - [**Reporting**](./reporting.md)
+- [** Documents, Office, LibreOffice, macros attacks**](./office.md)
 - [**Cookie Extraction**](./cookieExtraction.md)
 - [**Buffer Overflow**](./bufferOverflow.md)
 

