@@ -392,6 +392,13 @@ x86_64-w64-mingw32-gcc adduser.c -o adduser.exe
 x86_64-w64-mingw32-gcc rev.c -o rev.exe -lws2_32
 ```
 
+----
+
+```bash
+i686-w64-mingw32-gcc -m32 -shared -o gsm_codec.dll 45312.c -luser32
+```
+
+
 -----
 
 
