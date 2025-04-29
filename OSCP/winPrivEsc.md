@@ -382,22 +382,27 @@ int main ()
 }
 ```
 
+#### Compilando el binario
 ```bash
 x86_64-w64-mingw32-gcc adduser.c -o adduser.exe
 ``` 
 
+
+#### Compilando el binario para 32 bits
+```bash
 -----
 
 ```bash
 x86_64-w64-mingw32-gcc rev.c -o rev.exe -lws2_32
 ```
 
+#### Compilando el binario para 32 bits y DLL
+```bash
 ----
 
 ```bash
 i686-w64-mingw32-gcc -m32 -shared -o gsm_codec.dll 45312.c -luser32
 ```
-
 
 -----
 
