@@ -15,3 +15,18 @@
 ### Recon automatico de imap
 - `imapsync`: Herramienta para sincronizar cuentas de imap. Puede ser útil para hacer un dump de los mails.
 - [imap-recon tool](https://github.com/G4sp4rCS/imap-recon)
+
+
+
+### Enviar mails desde la terminal
+- `sendemail`: Herramienta para enviar mails desde la terminal. Puede ser útil para enviar mails de phishing o para hacer pruebas de seguridad.
+Ejemplo
+
+```bash
+sendemail -f 'jonas@localhost' \
+-t 'mailadmin@localhost' \
+-s 192.168.244.140:25 \
+-u 'a spreadsheet' \
+-m 'Please check this spreadsheet' \
+-a exploit.ods
+```

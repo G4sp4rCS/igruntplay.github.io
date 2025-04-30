@@ -27,6 +27,8 @@
 - [Enumerating AD DNS RECORDS TOOL](https://github.com/dirkjanm/adidnsdump)
     - `adidnsdump -u DOMAIN\\user ldap://DC-IP`
         - flag `-r` resuelve registros desconocidos
+- [LDAP Enumeration](./ldapEnum.md)
+
 
 #### AD: Get installed programs via powershell & registry keys
 
