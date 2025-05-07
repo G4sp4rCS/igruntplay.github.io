@@ -587,3 +587,9 @@ C:\Users\security\Desktop>
 - `Get-ChildItem -Path C:\xampp -Include *.txt,*.ini -File -Recurse -ErrorAction SilentlyContinue`
 - `Get-History`: Muestra el historial de comandos ejecutados en la sesión actual de PowerShell.
 - `(Get-PSReadlineOption).HistorySavePath`: Muestra la ruta del archivo donde se guarda el historial de comandos de PowerShell.
+
+-----
+
+## SeManageVolumePrivilege
+- Este privilegio permite la habilidad de crear y eliminar volúmenes en el sistema.
+- Podemos utilizar [el siguiente exploit](https://github.com/CsEnox/SeManageVolumeExploit/tree/main) para elevar privilegios.

