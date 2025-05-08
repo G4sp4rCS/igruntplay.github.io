@@ -11,7 +11,6 @@
 
 [Cloud Hacking](./CloudHacking/cloudHacking.md)
 
-
 [Jobs interviews tips](./jobs/jobs.md)
 
 [AI for Red Teaming](./AI/AI.md)
