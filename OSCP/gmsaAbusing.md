@@ -107,7 +107,7 @@ Calculating hashes for Current Value
 
 
 ```
-
+- siendo `007A95BE1BE6ED38DEB848A388655B05` el NT hash de la cuenta
 
 
 ## Referencias
