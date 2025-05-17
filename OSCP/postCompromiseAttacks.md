@@ -15,6 +15,7 @@
     - [mimikatz](./mimikatz.md)
     - [pypykatz](./pypykatz.md)
     - [Golden Ticket Attack](./goldenTicketAttack.md)
+        - [Silver ticket Attack](./silverTicketAttack.md)
         - [Extra sids Attack](./extraSidsAttack.md)
     - [AddKeyCredentialLink/Shadow Credentials Attack](./addKeyCredentialLink.md)
     - [Backup Operator to Domain Admin](./backupOperatorToDomainAdmin.md)
