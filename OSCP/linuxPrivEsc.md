@@ -199,6 +199,7 @@ Matching Defaults entries for jack on bitforge:
 
 User jack may run the following commands on bitforge:
     (root) NOPASSWD: /usr/bin/flask_password_changer
+
 ``` 
 
 -----
