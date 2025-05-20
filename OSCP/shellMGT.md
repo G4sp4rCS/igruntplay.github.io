@@ -5,3 +5,7 @@
 6. `export TERM=xterm-256color`
 7. `stty sane`
 8. `stty rows 40; stty cols 80`
+
+
+## alternativa
+- `rlwrap nc -lvnp $port`
