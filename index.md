@@ -11,6 +11,8 @@
 
 [Cloud Hacking](./CloudHacking/cloudHacking.md)
 
+[AppSec KPI & Metrics](./AppSecKPI/AppSecKPI.md)
+
 [Jobs interviews tips](./jobs/jobs.md)
 
 [AI for Red Teaming](./AI/AI.md)
