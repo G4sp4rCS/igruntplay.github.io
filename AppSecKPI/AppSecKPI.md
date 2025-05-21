@@ -1,4 +1,6 @@
 # AppSec KPIs & Metrics
+### [English Version](./AppSecKPI-EN.md)
+
 
 - En AppSec, muchas veces se invierte tiempo en implementar controles y procesos, pero no se mide adecuadamente su impacto. Sin métricas claras, es difícil demostrar valor, justificar decisiones o identificar oportunidades de mejora.
 - En este articulo quiero compartir algunas de las métricas clave que estuve explorando dentro del programa de Security Champions, basadas en experiencia real y aplicadas con datos concretos.
