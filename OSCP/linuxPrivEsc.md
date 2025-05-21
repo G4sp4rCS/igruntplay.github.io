@@ -259,3 +259,8 @@ tar czf /tmp/flask.tar.gz *
 - Ahora esperamosa que el cronjob corra como root.
 - `bash -p` y tenemos acceso a la shell como root.
 
+## passwd con permisos de escritura
+- Definición: El archivo `/etc/passwd` es un archivo de texto que contiene información sobre las cuentas de usuario en un sistema Linux. Cada línea del archivo representa una cuenta de usuario y contiene varios campos separados por dos puntos (:).
+- Si un atacante puede escribir en este archivo, puede crear cuentas de usuario adicionales o modificar cuentas existentes, lo que puede llevar a la escalación de privilegios. 
+- si podemos meter esta linea: `new-user:$1$ignite$3eTbJm98O9Hz.k1NTdNxe1:0:0:root:/root:/bin/bash` en el archivo `/etc/passwd` podemos obtener acceso root.
+- pass123 es la contraseña de la cuenta new-user.
