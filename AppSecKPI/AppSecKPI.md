@@ -50,6 +50,6 @@
 - Por eso es importante definir un proceso claro para la recolección y almacenamiento de datos, así de esta manera podemos asegurar que los KPIs sean precisos y útiles.
  - Generalmente en los programas de security champions y SSDLC se determina una politica de seguridad y se define un proceso claro para la recolección y almacenamiento de datos, así de esta manera podemos asegurar que los KPIs sean precisos y útiles.
 
- ## Ejemplo de implementación
+## Ejemplo de implementación
  - [Repositorio](https://github.com/G4sp4rCS/AppSec-KPI-metrics)
  - Hice una pequeña implementación en formato de script con fines demostrativos.
