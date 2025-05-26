@@ -419,6 +419,19 @@ x86_64-w64-mingw32-gcc rev.c -o rev.exe -lws2_32
 i686-w64-mingw32-gcc -m32 -shared -o gsm_codec.dll 45312.c -luser32
 ```
 
+#### Compilar la DLL (64-bit)
+
+```bash
+x86_64-w64-mingw32-g++ -shared -o malicious.dll dllmain.cpp -lws2_32 -static-libgcc -static-libstdc++
+```
+
+#### Para 32-bit (si es necesario)
+
+```bash
+i686-w64-mingw32-g++ -shared -o malicious32.dll dllmain.cpp -lws2_32 -static-libgcc -static-libstdc++
+```
+
+
 -----
 
 
@@ -654,3 +667,4 @@ Administrator
 charlotte
 The command completed successfully.
 ```
+
