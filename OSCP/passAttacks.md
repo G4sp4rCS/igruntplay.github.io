@@ -252,6 +252,9 @@ rm "$ENC_FILE" "$DEC_FILE"
 - `hastcat -r rules/best64.rule -a 0 -m 0 hash.txt rockyou.txt`
 - `hashcat -r rules/best64.rule --stdout wordlist.txt`: Esto va a imprimir en pantalla todas las contraseñas generadas a partir de la wordlist.
 
+## Mutación de rockyou
+- `PS J:\hashcat> .\hashcat.exe -m 0 .\amy-md5.txt .\rockyou.txt -r .\rules\rockyou-30000.rule`
+
 ### Archivos .rule
 - Los archivos `.rule` son archivos de texto que contienen reglas para mutar contraseñas. Cada línea del archivo representa una regla.
 - Por ejemplo, una regla puede ser `s/abc/123/`, que reemplaza todas las ocurrencias de "abc" por "123" en las contraseñas.
