@@ -11,3 +11,6 @@
 - `for sub in $(cat subdomains.txt); do dig $sub.inlanefreight.htb @10.129.221.34; done`
 ## Check DNS Server Version (if enabled)
 - `dig CHAOS VERSION.BIND @<DNS_Server>`
+
+## Check TXT Records
+- `dig -t txt offseclab.io`

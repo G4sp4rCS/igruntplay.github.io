@@ -15,6 +15,83 @@ Este apunte está diseñado para pentesters y red teamers que buscan identificar
 - **Resultado Esperado**: Lista de subdominios como `app.example.com` o `dev.example.com`.
 - **Valor**: Revela servicios expuestos (EC2, S3, etc.) vinculados a subdominios.
 
+#### Ejemplo de offsec:
+
+```bash
+❯ sudo nano /etc/resolv.conf
+❯ sudo systemctl restart NetworkManager
+❯ host www.offseclab.io 3.208.18.82
+Using domain server:
+Name: 3.208.18.82
+Address: 3.208.18.82#53
+Aliases: 
+
+www.offseclab.io has address 54.90.147.109
+
+❯ host -t ns offseclab.io
+offseclab.io name server ns-1536.awsdns-00.co.uk.
+offseclab.io name server ns-1024.awsdns-00.org.
+offseclab.io name server ns-512.awsdns-00.net.
+offseclab.io name server ns-0.awsdns-00.com.
+
+❯ dnsenum offseclab.io --threads 100
+dnsenum VERSION:1.3.1
+
+-----   offseclab.io   -----
+
+
+Host's addresses:
+__________________
+
+offseclab.io.                            60       IN    A        54.90.147.109
+
+
+Name Servers:
+______________
+
+
+
+Mail (MX) Servers:
+___________________
+
+
+
+Trying Zone Transfers and getting Bind Versions:
+_________________________________________________
+
+unresolvable name: ns-0.awsdns-00.com at /usr/bin/dnsenum line 892 thread 5.
+
+Trying Zone Transfer for offseclab.io on ns-0.awsdns-00.com ... 
+AXFR record query failed: no nameservers
+unresolvable name: ns-1024.awsdns-00.org at /usr/bin/dnsenum line 892 thread 6.
+
+Trying Zone Transfer for offseclab.io on ns-1024.awsdns-00.org ... 
+AXFR record query failed: no nameservers
+unresolvable name: ns-1536.awsdns-00.co.uk at /usr/bin/dnsenum line 892 thread 7.
+
+Trying Zone Transfer for offseclab.io on ns-1536.awsdns-00.co.uk ... 
+AXFR record query failed: no nameservers
+unresolvable name: ns-512.awsdns-00.net at /usr/bin/dnsenum line 892 thread 8.
+
+Trying Zone Transfer for offseclab.io on ns-512.awsdns-00.net ... 
+AXFR record query failed: no nameservers
+
+
+Brute forcing with /usr/share/dnsenum/dns.txt:
+_______________________________________________
+
+
+mail.offseclab.io.                       60       IN    A        54.90.147.109
+
+www.offseclab.io.                        60       IN    A        54.90.147.109
+
+``` 
+
+-----
+
+
+
+
 ### 1.2. Identificación de Buckets S3 Públicos
 - **Técnica**: Buscar buckets accesibles probando nombres predecibles.
 - **Comando Manual**:
@@ -29,6 +106,126 @@ Este apunte está diseñado para pentesters y red teamers que buscan identificar
   cloud_enum -k example-lab -qs --disable-azure --disable-gcp
   ```
 - **Valor**: Encuentra almacenamiento público con datos sensibles (ej., backups, configs).
+
+#### Ejemplo de offsec
+
+```bash
+
+kali@kali:~$ cloud_enum -k offseclab-assets-public-axevtewi --quickscan --disable-azure --disable-gcp
+
+...
+
+Keywords:    offseclab-assets-public-axevtewi
+Mutations:   NONE! (Using quickscan)
+Brute-list:  /usr/lib/cloud-enum/enum_tools/fuzz.txt
+
+[+] Mutated results: 1 items
+
+++++++++++++++++++++++++++
+      amazon checks
+++++++++++++++++++++++++++
+
+[+] Checking for S3 buckets
+  OPEN S3 BUCKET: http://offseclab-assets-public-axevtewi.s3.amazonaws.com/
+      FILES:
+      ->http://offseclab-assets-public-axevtewi.s3.amazonaws.com/offseclab-assets-public-axevtewi
+      ->http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/amethyst-expanded.png
+      ->http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/amethyst.png
+      ->http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/logo.svg
+      ->http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/pic02.jpg
+      ->http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/pic05.jpg
+      ->http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/pic13.jpg
+      ->http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/ruby-expanded.png
+      ->http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/ruby.jpg
+      ->http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/saphire-expanded.png
+      ->http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/saphire.jpg
+                            
+                            
+ Elapsed time: 00:00:00
+
+[+] Checking for AWS Apps
+[*] Brute-forcing a list of 1 possible DNS names
+                            
+ Elapsed time: 00:00:00
+
+
+[+] All done, happy hacking!
+
+
+```
+
+----
+
+Hay muchas formas en las que podríamos lograr esto. Usaremos un script de Bash para ejecutar un bucle en una sola línea que itera sobre algunas palabras clave y muestra la palabra clave, insertando un prefijo (offseclab-assets) y un sufijo (-axevtewi) alrededor de ella. Finalmente, usaremos el comando tee para mostrar el resultado en la consola, así como en el archivo /tmp/keyfile.txt. Como resultado, tendremos el archivo clave con los nombres de los buckets para validar si existen.
+
+```bash
+
+kali@kali:~$ for key in "public" "private" "dev" "prod" "development" "production"; do echo "offseclab-assets-$key-axevtewi"; done | tee /tmp/keyfile.txt
+offseclab-assets-public-axevtewi
+offseclab-assets-private-axevtewi
+offseclab-assets-dev-axevtewi
+offseclab-assets-prod-axevtewi
+offseclab-assets-development-axevtewi
+offseclab-assets-production-axevtewi
+
+```
+
+Ahora podemos volver a ejecutar `cloud_enum` con el archivo de claves que acabamos de crear:
+
+```bash
+
+kali@kali:~$ cloud_enum -kf /tmp/keyfile.txt -qs --disable-azure --disable-gcp
+
+...
+
+Keywords:    offseclab-assets-public-axevtewi, offseclab-assets-private-axevtewi, offseclab-assets-dev-axevtewi, offseclab-assets-prod-axevtewi, offseclab-assets-development-axevtewi, offseclab-assets-production-axevtewi
+Mutations:   NONE! (Using quickscan)
+Brute-list:  /usr/lib/cloud-enum/enum_tools/fuzz.txt
+
+[+] Mutated results: 6 items
+
+++++++++++++++++++++++++++
+      amazon checks
+++++++++++++++++++++++++++
+
+[+] Checking for S3 buckets
+  OPEN S3 BUCKET: http://offseclab-assets-public-axevtewi.s3.amazonaws.com/
+      FILES:
+      ->http://offseclab-assets-public-axevtewi.s3.amazonaws.com/offseclab-assets-public-axevtewi
+      ->http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/amethyst-expanded.png
+      ->http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/amethyst.png
+      ->http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/logo.svg
+      ->http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/pic02.jpg
+      ->http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/pic05.jpg
+      ->http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/pic13.jpg
+      ->http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/ruby-expanded.png
+      ->http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/ruby.jpg
+      ->http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/saphire-expanded.png
+      ->http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/saphire.jpg
+  Protected S3 Bucket: http://offseclab-assets-private-axevtewi.s3.amazonaws.com/
+                            
+ Elapsed time: 00:00:06
+
+[+] Checking for AWS Apps
+[*] Brute-forcing a list of 6 possible DNS names
+                            
+ Elapsed time: 00:00:00
+
+
+[+] All done, happy hacking!
+
+``` 
+
+
+----
+
+
+A partir del resultado, podemos confirmar que hay otro bucket, pero está protegido, lo que significa que no es públicamente legible.
+También podríamos intentar validar si existen otros buckets utilizando otra información que encontramos durante la fase de reconocimiento. Por ejemplo, podrían ser buckets que incluyan el nombre de los proyectos de offseclab como offseclab-assets-ruby-axevtewi o offseclab-ruby-axevtewi. Dejaremos esto como un ejercicio para el lector.
+
+
+
+
 
 ### 1.3. Análisis DNS y WHOIS
 - **Comando DNS**:
@@ -51,6 +248,32 @@ Este apunte está diseñado para pentesters y red teamers que buscan identificar
   ```bash
   aws configure --profile pentester
   ```
+
+----
+
+```bash
+kali@kali:~$ aws configure --profile attacker
+AWS Access Key ID []: AKIAQO...
+AWS Secret Access Key []: cOGzm...
+Default region name []: us-east-1
+Default output format []: json
+
+kali@kali:~$ aws --profile attacker sts get-caller-identity
+{
+    "UserId": "AIDAQOMAIGYU5VFQCHOI4",
+    "Account": "123456789012",
+    "Arn": "arn:aws:iam::123456789012:user/attacker"
+}
+
+```
+
+#### Comandos Útiles
+
+- `aws --profile attacker ec2 describe-images --owners amazon --executable-users all`: Lista imágenes de Amazon disponibles para todos los usuarios ejecutables.
+- `aws --profile attacker ec2 describe-images --executable-users all --filters "Name=description,Values=*<keyword>*"`: Filtra imágenes por palabras clave en la descripción.
+- `aws --profile attacker ec2 describe-images --executable-users all --filters "Name=name,Values=*<keyword>*"`: Filtra imágenes por palabras clave en el nombre.
+
+
   - Ingresa Access Key, Secret Key y región.
 - **Listar Buckets S3**:
   ```bash
@@ -61,6 +284,57 @@ Este apunte está diseñado para pentesters y red teamers que buscan identificar
   aws ec2 describe-instances --profile pentester
   ```
 - **Valor**: Mapea la infraestructura interna rápidamente.
+
+## Obtención de IDs de Cuentas desde Buckets S3 Públicos
+
+Para realizar esta técnica, se necesita una cuenta de AWS para interactuar con la API de AWS. Se utilizará un perfil configurado en AWS CLI para simular este escenario. Además, la cuenta objetivo debe tener un bucket S3 público que permita acceso de lectura.
+
+Primero, se debe crear un usuario IAM que, por defecto, no tendrá permisos para ejecutar acciones. Luego, se añadirá una política que otorgue acceso de lectura al bucket, con la condición de que el permiso solo se aplique si el ID de la cuenta propietaria del bucket comienza con un dígito específico. Si no se puede leer el bucket, se probarán otros números hasta que se logre acceder, lo que permitirá identificar el primer dígito del ID de la cuenta propietaria. Este proceso se puede repetir para obtener todos los dígitos del ID de la cuenta.
+
+El primer paso es seleccionar un bucket o un objeto público dentro de la cuenta objetivo. Dado que el bucket u objeto es público, debería ser posible listar su contenido con cualquier usuario IAM de cualquier cuenta de AWS.
+
+A continuación, se crea un nuevo usuario IAM en la cuenta propia. Por defecto, los usuarios IAM no tienen permisos para ejecutar acciones, por lo que el nuevo usuario no podrá listar el contenido del recurso público incluso si es accesible públicamente.
+
+Después, se define una política que permita listar buckets y leer objetos. Sin embargo, se añade una condición para que el permiso de lectura solo se aplique si el ID de la cuenta propietaria del bucket comienza con un dígito específico.
+
+Finalmente, se prueba si el nuevo usuario puede listar el bucket utilizando sus credenciales. Se prueba con valores de dígitos del 0 al 9 hasta que se logre listar el bucket, lo que confirma el primer dígito del ID de la cuenta.
+
+![](https://static.offsec.com/offsec-courses/PEN-200/imgs/cloud_enum_1/6c8d389ae9d0506cf0c1303c50ba75b7-cldenum_s3_accountID.gif)
+
+----
+
+### Creación de un Usuario IAM para Enumeración
+
+- `kali@kali:~$ aws --profile attacker s3 ls offseclab-assets-public-kaykoour`
+
+Ahora, vamos a crear un nuevo usuario IAM con el comando `iam create-user --user-name enum`. Recordemos que este usuario reside en la cuenta de AWS controlada por el atacante.
+
+A continuación, también crearemos claves de acceso para el usuario IAM, de modo que podamos interactuar con la API de AWS a través de la herramienta AWS CLI. Ejecutaremos el comando `iam create-access-key --user-name enum` y tomaremos nota de los valores de `AccessKeyId` y `SecretAccessKey` en la salida.
+
+```bash
+kali@kali:~$ aws --profile attacker iam create-user --user-name enum
+{
+    "User": {
+        "Path": "/",
+        "UserName": "enum",
+        "UserId": "AIDAQOMAIGYU4HTPEJ32K",
+        "Arn": "arn:aws:iam::123456789012:user/enum",
+    }
+}
+
+kali@kali:~$ aws --profile attacker iam create-access-key --user-name enum
+{
+    "AccessKey": {
+        "UserName": "enum",
+        "AccessKeyId": "AKIAQOMAIGYURE7QCUXU",
+        "Status": "Active",
+        "SecretAccessKey": "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",
+    }
+}
+``` 
+
+----
+
 
 ### 2.2. Enumeración de Usuarios y Roles IAM
 - **Listar Usuarios**:
