@@ -288,15 +288,10 @@ kali@kali:~$ aws --profile attacker sts get-caller-identity
 ## Obtención de IDs de Cuentas desde Buckets S3 Públicos
 
 Para realizar esta técnica, se necesita una cuenta de AWS para interactuar con la API de AWS. Se utilizará un perfil configurado en AWS CLI para simular este escenario. Además, la cuenta objetivo debe tener un bucket S3 público que permita acceso de lectura.
-
 Primero, se debe crear un usuario IAM que, por defecto, no tendrá permisos para ejecutar acciones. Luego, se añadirá una política que otorgue acceso de lectura al bucket, con la condición de que el permiso solo se aplique si el ID de la cuenta propietaria del bucket comienza con un dígito específico. Si no se puede leer el bucket, se probarán otros números hasta que se logre acceder, lo que permitirá identificar el primer dígito del ID de la cuenta propietaria. Este proceso se puede repetir para obtener todos los dígitos del ID de la cuenta.
-
 El primer paso es seleccionar un bucket o un objeto público dentro de la cuenta objetivo. Dado que el bucket u objeto es público, debería ser posible listar su contenido con cualquier usuario IAM de cualquier cuenta de AWS.
-
 A continuación, se crea un nuevo usuario IAM en la cuenta propia. Por defecto, los usuarios IAM no tienen permisos para ejecutar acciones, por lo que el nuevo usuario no podrá listar el contenido del recurso público incluso si es accesible públicamente.
-
 Después, se define una política que permita listar buckets y leer objetos. Sin embargo, se añade una condición para que el permiso de lectura solo se aplique si el ID de la cuenta propietaria del bucket comienza con un dígito específico.
-
 Finalmente, se prueba si el nuevo usuario puede listar el bucket utilizando sus credenciales. Se prueba con valores de dígitos del 0 al 9 hasta que se logre listar el bucket, lo que confirma el primer dígito del ID de la cuenta.
 
 ![](https://static.offsec.com/offsec-courses/PEN-200/imgs/cloud_enum_1/6c8d389ae9d0506cf0c1303c50ba75b7-cldenum_s3_accountID.gif)
