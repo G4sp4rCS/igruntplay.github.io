@@ -517,6 +517,20 @@ Esta técnica abusa de la validación de políticas IAM para identificar usuario
      run iam__enum_roles --word-list /ruta/a/lista.txt --account-id <ID_de_cuenta>
      ```
 
+### AWSBucketDump
+- **Descripción:** AWSBucketDump es una herramienta diseñada para enumerar y descargar datos de buckets S3 públicos en AWS.
+- https://github.com/jordanpotti/AWSBucketDump.git
+- **Uso Básico:**
+  1. Ejecuta el script para buscar buckets públicos:
+     ```bash
+     python AWSBucketDump.py -l lista_de_buckets.txt
+     ```
+  2. Descarga los datos de los buckets encontrados:
+     ```bash
+     python AWSBucketDump.py -d -l lista_de_buckets.txt
+     ```
+- **Valor:** Automatiza la identificación y extracción de datos sensibles de buckets S3 públicos, facilitando la enumeración en entornos AWS.
+
 ### Ejemplo con Lista de Roles
 - Crea una lista en `/tmp/role-names.txt`:
   ```
