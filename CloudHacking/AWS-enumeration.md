@@ -342,6 +342,97 @@ kali@kali:~$ aws --profile attacker iam create-access-key --user-name enum
   ```
 - **Valor**: Identifica privilegios excesivos o roles asumibles.
 
+
+
+## Enumeración de Recursos IAM
+
+- **Contexto**: Se inicia con credenciales comprometidas de un usuario IAM (`clouddesk-plove`), miembro del grupo `support` con la política `SupportUser`, que otorga acceso de solo lectura a varios servicios.
+- **Comandos clave**:
+  - `aws iam list-users`: Lista todos los usuarios IAM.
+  - `aws iam list-groups`: Lista los grupos.
+  - `aws iam list-roles`: Lista los roles.
+  - `aws iam get-account-summary`: Proporciona un resumen de recursos IAM (ej., 18 usuarios, 20 roles, 8 grupos) y revela configuraciones débiles como la ausencia de MFA (`"MFADevices": 0`).
+- **Datos obtenidos**: Nombre, ARN y ruta de usuarios, grupos y roles, guardados en archivos JSON (ej., `users.json`, `roles.json`) para análisis posterior.
+- **Ejemplo práctico**:
+  ```bash
+  aws --profile target iam list-users | tee users.json
+  ```
+  Muestra usuarios como `admin-alice` con rutas como `/admin/`, sugiriendo privilegios elevados.
+- **Advertencia**: Políticas personalizadas como `SupportUser` pueden ser riesgosas si son demasiado permisivas.
+
+---
+
+## Procesamiento de Datos de Respuesta de la API con JMESPath
+
+- **Qué es JMESPath**: Un lenguaje de consulta para JSON que filtra y transforma salidas de AWS CLI.
+- **Uso**: Reduce solicitudes a la API al procesar datos localmente.
+- **Ejemplos**:
+  - Listar nombres de usuarios:
+    ```bash
+    aws --profile target iam get-account-authorization-details --filter User --query "UserDetailList[].UserName"
+    ```
+    Salida: `["admin-alice", "admin-cbarton", ...]`
+  - Filtrar usuarios con "admin" en el nombre:
+    ```bash
+    aws --profile target iam get-account-authorization-details --filter User --query "UserDetailList[?contains(UserName, 'admin')].{Name: UserName}"
+    ```
+    Salida: `[{"Name": "admin-alice"}, {"Name": "admin-cbarton"}, ...]`
+  - Combinar datos de usuarios y grupos:
+    ```bash
+    aws --profile target iam get-account-authorization-details --filter User Group --query "{Users: UserDetailList[?Path=='/admin/'].UserName, Groups: GroupDetailList[?Path=='/admin/'].{Name: GroupName}}"
+    ```
+- **Consejo**: Guardar salidas en archivos y usar herramientas como `jp` para consultas offline, minimizando el ruido en logs.
+
+---
+
+## Ejecución de Enumeración Automatizada con Pacu
+
+- **Pacu**: Herramienta de enumeración y explotación para AWS, instalada en Kali con:
+  ```bash
+  sudo apt install pacu
+  ```
+- **Configuración**:
+  - Iniciar sesión: `pacu` → Crear sesión (ej., `enumlab`).
+  - Importar claves: `import_keys target`.
+- **Módulo clave**: `iam__enum_users_roles_policies_groups` recopila datos de usuarios, roles, políticas y grupos.
+  - Ejecución:
+    ```bash
+    run iam__enum_users_roles_policies_groups
+    ```
+    Resultado: Enumera 18 usuarios, 20 roles, 8 políticas y 8 grupos, almacenados en la base de datos de Pacu.
+  - Ver datos:
+    ```bash
+    services  # Lista servicios con datos (ej., IAM)
+    data IAM  # Muestra detalles
+    ```
+- **Ventaja**: Automatiza tareas repetitivas, pero requiere permisos adecuados en las credenciales comprometidas.
+- **Monitoreo**: Revisar logs de CloudTrail para evaluar el impacto y ruido generado.
+
+---
+
+## Extracción de Insights de los Datos de Enumeración
+
+- **Objetivo**: Analizar datos para identificar caminos de escalada de privilegios (ej., obtener acceso de administrador).
+- **Ejemplo de análisis**:
+  - Usuario `admin-alice`:
+    ```bash
+    aws --profile target iam get-account-authorization-details --filter User Group --query "UserDetailList[?UserName=='admin-alice']"
+    ```
+    - Pertenece a los grupos `admin` (con `AdministratorAccess`) y `amethyst_admin`.
+    - Sin MFA, vulnerable a ataques como ingeniería social.
+  - Grupo `admin`:
+    - Política `AdministratorAccess` permite todo (`"Action": "*", "Resource": "*"`).
+  - Política `amethyst_admin`:
+    - Permite acciones IAM en recursos etiquetados con `"Project": "amethyst"`, incluyendo `iam:CreateAccessKey` para usuarios como `admin-alice`.
+- **Caminos de escalada**:
+  1. Obtener credenciales de `admin-alice` (ej., sin MFA facilita ataques).
+  2. Usar un usuario de `amethyst_admin` (como `admin-cbarton`) para crear claves de acceso de `admin-alice`.
+- **Herramientas visuales**: Awspx o Cloudmapper ayudan a mapear relaciones y visualizar caminos de ataque.
+- **Conclusión**: La falta de MFA y políticas permisivas (uso de `*`) son puntos débiles explotables.
+
+---
+
+
 ### 2.3. Detección de Configuraciones Erróneas
 - **Buckets S3 Públicos**:
   ```bash
