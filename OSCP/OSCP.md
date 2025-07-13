@@ -23,6 +23,23 @@
 - [**SMTP/POP/IMAP Mail Server Pentesting**](./smtp.md)
 - [**Library-MS WebDav Attack**](./webdav-phishing.md)
 
+
+## Aprobé el examen
+Bueno mis queridos lectores de mi humilde blog, les quería comentar que este Domingo 13 de Julio del 2025 me llegó el mail de Offensive Security que me decía que había aprobado el examen de OSCP.
+Mi recorrido por este examen fue bastante arduo y largo pues hice una sobrepreparación porque leí demasiada gente llorando y copeando en [/r/OSCP](https://www.reddit.com/r/oscp/) que me dió un poco de miedo reprobarlo y tener que pagar el recuperatorio que cuesta como 150 dolares.
+Lo que hice para prepararme fue:
+- Rendir [PNPT](https://certified.tcm-sec.com/76169ba5-9caf-44c0-96b4-6f76b342f0c4#acc.mv0WE3Kr)
+- Rendir [CPTS](https://www.credly.com/badges/2a9e3b5b-f684-45d9-ab2d-a74e7cf9714e/public_url)
+- Hacer tres prolabs en Hack the Box:
+    1. Dante
+    2. Zephyr
+    3. Rasta
+- Hacerme toda la [famosa lista de TJ Null](https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview) todas las maquinas de Hack The Box y de Proving Grounds practice.
+Cabe aclarar que tengo 3 años de experiencia en la industria y que también estoy siguiendo un grado en ciencias de la computación que es durisimo, así que no es que me preparé de la nada, ya tenía una base sólida de conocimientos.
+Pero si consideramos desde que empecé a estudiar para PNPT hasta que rendí el examen fueron aproximadamente 6 meses.
+Cualquier duda que tengan al respecto no tengo ningún problema en responderla por discord, reddit o el mail que está en mi [página web](https://grunt.ar/) :)
+
+
 ## Extras
 
 ### Maquina centOS una privesc rara
