@@ -39,6 +39,17 @@ Cabe aclarar que tengo 3 años de experiencia en la industria y que también est
 Pero si consideramos desde que empecé a estudiar para PNPT hasta que rendí el examen fueron aproximadamente 6 meses.
 Cualquier duda que tengan al respecto no tengo ningún problema en responderla por discord, reddit o el mail que está en mi [página web](https://grunt.ar/) :)
 
+----
+
+## ¿Y ahora que?
+
+Ahora probablemente siga estudiando topicos que me interesan que no son tanto de "pentesting" como tal.
+- MalDev => Tengo un proyecto de armar un C2 funcional con Telegram y con agentes en RUST, algo así como Pysilon pero con RUST y Telegram en vez de Python y Discord.
+    - También seguro me apoye en algunos modulos de Hack The Box Academy del "CAPE" que están buenos para aprender evasión entre otros topicos.
+- ExploitDev => Con mis conocimientos actuales de arquitectura (ANSI C, NASM x86_64, RISC-V, ABI Linux) me siento capaz de poder aprender a hacer buen reversing y aprender explotación a bajo nivel. Voy a estar estudiando en [pwn.college](https://pwn.college/) y con el curso de [ret2systems](https://wargames.ret2.systems/course).
+    - La verdad que me gustaría ir directo por el OSED pero es muy caro :/
+- BSCP => Burp Suite Certified Practitioner. O sea, aprender hacking web más avanzado, actualmente poseo la eWPTv2 y trabajé mucho sobre aplicaciones web y mobile dentro de mi labor como AppSec, pero aún así creo que puedo abordar más estudiando en los labs de port swigger que tienen muy buena pinta.
+
 
 ## Extras
 
