@@ -1,6 +1,8 @@
 ## Grunt's personal blog
 ## I upload personal stuff, maybe portolio or CTFs writeup someday
 
+[Fundamentals of software exploitation notes](./bin-exploitation/bin-exploitation.md)
+
 [OSCP Preparation](./OSCP/OSCP.md)
 
 [Havoc C2 101](./HavocC2.md)
