@@ -3,6 +3,8 @@
 
 [Fundamentals of software exploitation notes](./bin-exploitation/bin-exploitation.md)
 
+[BSCP Preparation](./BSCP/BSCP.md)
+
 [OSCP Preparation](./OSCP/OSCP.md)
 
 [Havoc C2 101](./HavocC2.md)
