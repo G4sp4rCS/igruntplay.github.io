@@ -15,3 +15,14 @@ Link: https://portswigger.net/web-security/file-upload/lab-file-upload-web-shell
 -----
 
 Se puede subir una reverse shell en la imagen de perfil con un .phar
+
+
+------
+
+![alt text](image-1.png)
+
+
+-----
+
+
+![alt text](image-2.png)
