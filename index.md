@@ -5,6 +5,8 @@
 
 [BSCP Preparation](./BSCP/BSCP.md)
 
+[Rust Programming](./Rust/rust.md)
+
 [OSCP Preparation](./OSCP/OSCP.md)
 
 [Havoc C2 101](./HavocC2.md)
