@@ -4,3 +4,4 @@
  - [x] [GTFO bins for windows](https://lolbas-project.github.io/)
  - [ ] [Anti Virus Evasion](./AVbypass.md)
     - [Powershell ofuscation](./psofuscation.md)
+   - [ ] [Payloads cyphers techniques](./payloads.md)
