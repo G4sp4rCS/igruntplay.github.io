@@ -322,3 +322,8 @@ fn main() {
 }
 
 ``` 
+
+### Okay pero por qué este patrón es útil en malware development?
+- Polmorfismo para la evasión: Se puede tener 10 maneras diferentes de cifrar un payload. El código principal que lo ejecuta `execute_decoded_payload` no cambia, solo la función de decodificación. Dandonos una flexibilidad enorme para cambiar el algoritmo de evasión sin reescribir la lógica de ejecución.
+- Evasión del analisis estatico de los AV: cuando un AV mira los bytes de tu ejecutable no va a ver el string "powershell -c ...". Va a ver una secuencia de bytes ofuscados. Esto dificulta que los AV detecten el payload malicioso.
+- Modularidad y reutilización: Puedes reutilizar `execute_decoded_payload` con diferentes algoritmos de decodificación sin duplicar código. Si necesitas cambiar la lógica de ejecución, solo modificas una parte.
