@@ -5,3 +5,4 @@
  - [ ] [Anti Virus Evasion](./AVbypass.md)
     - [Powershell ofuscation](./psofuscation.md)
    - [ ] [Payloads cyphers techniques](./payloads.md)
+- [Local Payloada Execution - DLL](./localPayloadsDLL.md)
