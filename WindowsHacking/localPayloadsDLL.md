@@ -85,3 +85,33 @@ int main(int argc, char* argv[]) {
 
 ----
 
+# Local Payload Execution - Shellcode
+
+## Windows API necesarios
+- **[VirtualAlloc](https://docs.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtualalloc)**: Asigna memoria en el proceso actual que será utilizada para almacenar el payload/shellcode.
+- **[VirtualProtect](https://docs.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtualprotect)**: Modifica los permisos de protección de la memoria asignada para hacerla ejecutable y poder ejecutar el payload.
+- **[CreateThread](https://docs.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-createthread)**: Crea un nuevo hilo de ejecución que ejecutará el payload almacenado en la memoria asignada.
+
+### Allocating memory
+
+```c
+LPVOID VirtualAlloc(
+  [in, optional] LPVOID lpAddress,          // The starting address of the region to allocate (set to NULL)
+  [in]           SIZE_T dwSize,             // The size of the region to allocate, in bytes
+  [in]           DWORD  flAllocationType,   // The type of memory allocation
+  [in]           DWORD  flProtect           // The memory protection for the region of pages to be allocated
+);
+```
+
+El tipo de asignación de memoria se especifica como `MEM_RESERVE | MEM_COMMIT`, que reserva un rango de páginas en el espacio de direcciones virtuales del proceso que realiza la llamada y confirma la memoria física para esas páginas reservadas. Las flags combinadas se discuten por separado a continuación:
+
+- **`MEM_RESERVE`**: Se utiliza para reservar un rango de páginas sin confirmar realmente la memoria física.
+- **`MEM_COMMIT`**: Se utiliza para confirmar un rango de páginas en el espacio de direcciones virtuales del proceso.
+
+El último parámetro de `VirtualAlloc` establece los permisos en la región de memoria. La forma más fácil sería establecer la protección de memoria a `PAGE_EXECUTE_READWRITE`, pero esto generalmente es un indicador de actividad maliciosa para muchas soluciones de seguridad. Por lo tanto, la protección de memoria se establece a `PAGE_READWRITE` ya que en este punto solo se requiere escribir el payload, pero no ejecutarlo. Finalmente, `VirtualAlloc` retornará la dirección base de la memoria asignada.
+
+
+
+### Writing Payload to memory
+
+A continuación, los bytes del payload desobfuscado se copian en la región de memoria recién asignada en `pShellcodeAddress` y luego se limpia `pDeobfuscatedPayload` sobrescribiéndolo con 0s. `pDeobfuscatedPayload` es la dirección base de un heap asignado por la función `UuidDeobfuscation` que retorna los bytes del shellcode en bruto. Ha sido sobrescrito con ceros ya que ya no se requiere y por lo tanto esto reducirá la posibilidad de que las soluciones de seguridad encuentren el payload en memoria.
