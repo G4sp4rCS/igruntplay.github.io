@@ -2,6 +2,8 @@
 
 Esto es lo mismo que la inyección de DLL, pero en vez de una inyección local se hace en un proceso remoto.
 
+[REPO](https://github.com/G4sp4rCS/Remote-DLL-Injector-with-extra-function)
+
 ## Enumerando procesos
 Antes de poder inyectar una DLL en un proceso, se debe **elegir un proceso objetivo**. Por lo tanto, el primer paso para la inyección de procesos remotos es generalmente enumerar los procesos en ejecución en la máquina para conocer los procesos objetivo potenciales que pueden ser inyectados. Se requiere el ID del proceso (o PID) para abrir un handle al proceso objetivo y permitir que se realice el trabajo necesario en el proceso objetivo.
 
@@ -268,3 +270,13 @@ _EndOfFunction:
 }
 
 ``` 
+
+
+----
+
+
+![alt text](image.png)
+
+
+----
+
