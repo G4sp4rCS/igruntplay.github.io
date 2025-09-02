@@ -6,3 +6,4 @@
     - [Powershell ofuscation](./psofuscation.md)
    - [ ] [Payloads cyphers techniques](./payloads.md)
 - [Local Payloada Execution - DLL](./localPayloadsDLL.md)
+- [Process Injection](./processInjection.md)
