@@ -58,3 +58,5 @@ El siguiente paso es suspender el hilo recién creado para que `GetThreadContext
 - Creando un hilo normal, pero suspendiéndolo posteriormente utilizando la WinAPI `SuspendThread`.
 
 Se utilizará el primer método, ya que requiere menos llamadas a la WinAPI. Sin embargo, ambos métodos necesitarán que el hilo sea reanudado después de ejecutar `RunViaClassicThreadHijacking`. Esto se logrará utilizando la WinAPI `ResumeThread`, que solo requiere el handle del hilo suspendido.
+
+## [Código](https://github.com/G4sp4rCS/Local-Thread-Hijacking-Rust)
