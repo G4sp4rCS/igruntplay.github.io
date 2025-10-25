@@ -1,0 +1,104 @@
+site_name: Grunt's Personal Wiki
+site_description: Apuntes y guías para hacking, cloud, programación y más.
+site_url: https://igruntplay.github.io/
+repo_url: https://github.com/G4sp4rCS/igruntplay.github.io
+repo_name: G4sp4rCS/igruntplay.github.io
+theme:
+  name: material
+  language: es
+  features:
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.sections
+    - navigation.top
+    - navigation.tracking
+    - navigation.indexes
+    - toc.integrate
+    - content.code.copy
+    - content.action.edit
+    - content.tabs.link
+  palette:
+    - scheme: slate
+      primary: lime
+      accent: teal
+      toggle:
+        icon: material/weather-sunny
+        name: Cambiar a modo claro
+    - scheme: default
+      primary: teal
+      accent: lime
+      toggle:
+        icon: material/weather-night
+        name: Cambiar a modo oscuro
+  font:
+    text: "Inter"
+    code: "Fira Mono"
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - footnotes
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+  - pymdownx.tilde
+plugins:
+  - search
+  - tags
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/G4sp4rCS
+      name: GitHub
+nav:
+  - Inicio: index.md
+  - Ofensiva:
+      - Fundamentos de explotación: bin-exploitation/bin-exploitation.md
+      - OSCP Preparation: OSCP/OSCP.md
+      - Windows Hacking: WindowsHacking/windowsHackingIndex.md
+      - PrivEsc Cheatsheet: privilege-escalation-linux-assistance.md
+      - Havoc C2 101: HavocC2.md
+      - Scripts & Exploits: scripts/scripts.md
+      - DNS Spoofing: dnsSpoofing.md
+      - Subdomain Enumeration: subdomain-enumeration.md
+  - Cloud & AppSec:
+      - Cloud Hacking: CloudHacking/cloudHacking.md
+      - AWS Enumeration: CloudHacking/AWS-enumeration.md
+      - AWS Attacking: CloudHacking/AWS-Attacking.md
+      - AppSec KPI & Metrics: AppSecKPI/AppSecKPI.md
+      - Bug Bounty Resources: bug-bounty-resources.md
+      - CORS PoC: corsPOC.md
+  - Certificaciones:
+      - BSCP Preparation: BSCP/BSCP.md
+      - BSCP Practitioner Labs: BSCP/practicioner-labs-notes.md
+      - OAuth Hijacking Notes: BSCP/OAuth-account-hijacking-via-redirect_uri.md
+      - eJPT Notes: ejpt.md
+  - Programación & AI:
+      - Rust Programming: Rust/rust.md
+      - "Rust: Closures": Rust/closures-rust.md
+      - "Rust: Smart Pointers": Rust/smart-pointers-rust.md
+      - AI for Red Teaming: AI/AI.md
+      - AI Fundamentals: AI/fundamentals.md
+      - Decision Trees: AI/DecisionTrees.md
+      - Naive Bayes: AI/NaiveBayes.md
+      - Apuntes universitarios: university/university.md
+  - Miscelánea:
+      - Android Pentesting Setup: android-pentesting.md
+      - BurpSuite Regex Cheatsheet: BurpSuite-regex.md
+      - Jobs Interview Tips: jobs/jobs.md
+      - Gaming Settings: gaming/gaming.md
+      - XSS Payloads: xss.md
