@@ -1,0 +1,2366 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Grunt's Blog">
+      
+      
+      
+        <link rel="canonical" href="https://igruntplay.github.io/CloudHacking/AWS-enumeration/">
+      
+      
+        <link rel="prev" href="../cloudHacking/">
+      
+      
+        <link rel="next" href="../AWS-Attacking/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.22">
+    
+    
+      
+        <title>AWS Enumeration - Grunt's Personal Wiki</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CFira+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"Fira Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="lime" data-md-color-accent="teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#tecnicas-practicas-de-enumeracion-en-aws" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Grunt&#39;s Personal Wiki" class="md-header__button md-logo" aria-label="Grunt's Personal Wiki" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Grunt's Personal Wiki
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              AWS Enumeration
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="lime" data-md-color-accent="teal"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="lime"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/G4sp4rCS/igruntplay.github.io" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    G4sp4rCS/igruntplay.github.io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Grunt&#39;s Personal Wiki" class="md-nav__button md-logo" aria-label="Grunt's Personal Wiki" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Grunt's Personal Wiki
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/G4sp4rCS/igruntplay.github.io" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    G4sp4rCS/igruntplay.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inicio
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Ofensiva
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Ofensiva
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bin-exploitation/bin-exploitation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Fundamentos de explotación
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../OSCP/OSCP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OSCP Preparation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../WindowsHacking/windowsHackingIndex/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Windows Hacking
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../privilege-escalation-linux-assistance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PrivEsc Cheatsheet
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HavocC2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Havoc C2 101
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scripts/scripts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Scripts & Exploits
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dnsSpoofing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DNS Spoofing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../subdomain-enumeration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Subdomain Enumeration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Cloud & AppSec
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Cloud & AppSec
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cloudHacking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cloud Hacking
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    AWS Enumeration
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    AWS Enumeration
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-enumeracion-externa-sin-credenciales" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Enumeración Externa: Sin Credenciales
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Enumeración Externa: Sin Credenciales">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-descubrimiento-de-subdominios" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1. Descubrimiento de Subdominios
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1. Descubrimiento de Subdominios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-de-offsec" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejemplo de offsec:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-identificacion-de-buckets-s3-publicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2. Identificación de Buckets S3 Públicos
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2. Identificación de Buckets S3 Públicos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-de-offsec_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejemplo de offsec
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-analisis-dns-y-whois" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3. Análisis DNS y WHOIS
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-enumeracion-interna-con-credenciales" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Enumeración Interna: Con Credenciales
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Enumeración Interna: Con Credenciales">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-listado-de-recursos-con-awscli" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1. Listado de Recursos con awscli
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1. Listado de Recursos con awscli">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comandos-utiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comandos Útiles
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#obtencion-de-ids-de-cuentas-desde-buckets-s3-publicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Obtención de IDs de Cuentas desde Buckets S3 Públicos
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Obtención de IDs de Cuentas desde Buckets S3 Públicos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creacion-de-un-usuario-iam-para-enumeracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creación de un Usuario IAM para Enumeración
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-enumeracion-de-usuarios-y-roles-iam" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2. Enumeración de Usuarios y Roles IAM
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enumeracion-de-recursos-iam" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enumeración de Recursos IAM
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#procesamiento-de-datos-de-respuesta-de-la-api-con-jmespath" class="md-nav__link">
+    <span class="md-ellipsis">
+      Procesamiento de Datos de Respuesta de la API con JMESPath
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejecucion-de-enumeracion-automatizada-con-pacu" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejecución de Enumeración Automatizada con Pacu
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extraccion-de-insights-de-los-datos-de-enumeracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Extracción de Insights de los Datos de Enumeración
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Extracción de Insights de los Datos de Enumeración">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#23-deteccion-de-configuraciones-erroneas" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3. Detección de Configuraciones Erróneas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-ejemplo-practico" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Ejemplo Práctico
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-herramientas-recomendadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Herramientas Recomendadas
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#obtencion-de-ids-de-cuentas-desde-buckets-s3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Obtención de IDs de Cuentas desde Buckets S3
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Obtención de IDs de Cuentas desde Buckets S3">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#descripcion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Descripción
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pasos-clave" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pasos Clave
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-practico" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejemplo Práctico
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enumeracion-de-usuarios-iam-en-otras-cuentas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enumeración de Usuarios IAM en Otras Cuentas
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Enumeración de Usuarios IAM en Otras Cuentas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#descripcion_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Descripción
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pasos-clave_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pasos Clave
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-practico_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejemplo Práctico
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#herramientas-utiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Herramientas Útiles
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Herramientas Útiles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pacu" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pacu
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#awsbucketdump" class="md-nav__link">
+    <span class="md-ellipsis">
+      AWSBucketDump
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-con-lista-de-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejemplo con Lista de Roles
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AWS-Attacking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AWS Attacking
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AppSecKPI/AppSecKPI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AppSec KPI & Metrics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bug-bounty-resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bug Bounty Resources
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../corsPOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CORS PoC
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Certificaciones
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Certificaciones
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BSCP/BSCP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    BSCP Preparation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BSCP/practicioner-labs-notes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    BSCP Practitioner Labs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BSCP/OAuth-account-hijacking-via-redirect_uri/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OAuth Hijacking Notes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ejpt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    eJPT Notes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Programación & AI
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Programación & AI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Rust/rust/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Rust Programming
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Rust/closures-rust/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Rust: Closures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Rust/smart-pointers-rust/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Rust: Smart Pointers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AI/AI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AI for Red Teaming
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AI/fundamentals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AI Fundamentals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AI/DecisionTrees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Decision Trees
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AI/NaiveBayes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Naive Bayes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../university/university/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Apuntes universitarios
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Miscelánea
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Miscelánea
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../android-pentesting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Android Pentesting Setup
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BurpSuite-regex/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    BurpSuite Regex Cheatsheet
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs/jobs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Jobs Interview Tips
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gaming/gaming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Gaming Settings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xss/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    XSS Payloads
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/G4sp4rCS/igruntplay.github.io/edit/master/docs/CloudHacking/AWS-enumeration.md" title="Editar esta página" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="tecnicas-practicas-de-enumeracion-en-aws">Técnicas Prácticas de Enumeración en AWS<a class="headerlink" href="#tecnicas-practicas-de-enumeracion-en-aws" title="Permanent link">&para;</a></h1>
+<p>Este apunte está diseñado para pentesters y red teamers que buscan identificar recursos en AWS de manera efectiva y ética. Incluye técnicas externas e internas, ejemplos prácticos y comandos específicos para maximizar su utilidad.</p>
+<hr />
+<h2 id="1-enumeracion-externa-sin-credenciales">1. Enumeración Externa: Sin Credenciales<a class="headerlink" href="#1-enumeracion-externa-sin-credenciales" title="Permanent link">&para;</a></h2>
+<h3 id="11-descubrimiento-de-subdominios">1.1. Descubrimiento de Subdominios<a class="headerlink" href="#11-descubrimiento-de-subdominios" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Objetivo</strong>: Encontrar subdominios asociados al dominio objetivo (ej., <code>example.com</code>).</li>
+<li><strong>Comando</strong>:
+  <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>dnsenum<span class="w"> </span>example.com<span class="w"> </span>--threads<span class="w"> </span><span class="m">50</span>
+</span></code></pre></div></li>
+<li><strong>Resultado Esperado</strong>: Lista de subdominios como <code>app.example.com</code> o <code>dev.example.com</code>.</li>
+<li><strong>Valor</strong>: Revela servicios expuestos (EC2, S3, etc.) vinculados a subdominios.</li>
+</ul>
+<h4 id="ejemplo-de-offsec">Ejemplo de offsec:<a class="headerlink" href="#ejemplo-de-offsec" title="Permanent link">&para;</a></h4>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>❯<span class="w"> </span>sudo<span class="w"> </span>nano<span class="w"> </span>/etc/resolv.conf
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>❯<span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>NetworkManager
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>❯<span class="w"> </span>host<span class="w"> </span>www.offseclab.io<span class="w"> </span><span class="m">3</span>.208.18.82
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>Using<span class="w"> </span>domain<span class="w"> </span>server:
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>Name:<span class="w"> </span><span class="m">3</span>.208.18.82
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>Address:<span class="w"> </span><span class="m">3</span>.208.18.82#53
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>Aliases:<span class="w"> </span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>www.offseclab.io<span class="w"> </span>has<span class="w"> </span>address<span class="w"> </span><span class="m">54</span>.90.147.109
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>❯<span class="w"> </span>host<span class="w"> </span>-t<span class="w"> </span>ns<span class="w"> </span>offseclab.io
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>offseclab.io<span class="w"> </span>name<span class="w"> </span>server<span class="w"> </span>ns-1536.awsdns-00.co.uk.
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>offseclab.io<span class="w"> </span>name<span class="w"> </span>server<span class="w"> </span>ns-1024.awsdns-00.org.
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>offseclab.io<span class="w"> </span>name<span class="w"> </span>server<span class="w"> </span>ns-512.awsdns-00.net.
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>offseclab.io<span class="w"> </span>name<span class="w"> </span>server<span class="w"> </span>ns-0.awsdns-00.com.
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>❯<span class="w"> </span>dnsenum<span class="w"> </span>offseclab.io<span class="w"> </span>--threads<span class="w"> </span><span class="m">100</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>dnsenum<span class="w"> </span>VERSION:1.3.1
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>-----<span class="w">   </span>offseclab.io<span class="w">   </span>-----
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>Host<span class="err">&#39;</span>s<span class="w"> </span>addresses:
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>__________________
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>
+</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>offseclab.io.<span class="w">                            </span><span class="m">60</span><span class="w">       </span>IN<span class="w">    </span>A<span class="w">        </span><span class="m">54</span>.90.147.109
+</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>
+</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>
+</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>Name<span class="w"> </span>Servers:
+</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>______________
+</span><span id="__span-1-31"><a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>
+</span><span id="__span-1-32"><a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>
+</span><span id="__span-1-33"><a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>
+</span><span id="__span-1-34"><a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>Mail<span class="w"> </span><span class="o">(</span>MX<span class="o">)</span><span class="w"> </span>Servers:
+</span><span id="__span-1-35"><a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>___________________
+</span><span id="__span-1-36"><a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>
+</span><span id="__span-1-37"><a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>
+</span><span id="__span-1-38"><a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a>
+</span><span id="__span-1-39"><a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a>Trying<span class="w"> </span>Zone<span class="w"> </span>Transfers<span class="w"> </span>and<span class="w"> </span>getting<span class="w"> </span>Bind<span class="w"> </span>Versions:
+</span><span id="__span-1-40"><a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a>_________________________________________________
+</span><span id="__span-1-41"><a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a>
+</span><span id="__span-1-42"><a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a>unresolvable<span class="w"> </span>name:<span class="w"> </span>ns-0.awsdns-00.com<span class="w"> </span>at<span class="w"> </span>/usr/bin/dnsenum<span class="w"> </span>line<span class="w"> </span><span class="m">892</span><span class="w"> </span>thread<span class="w"> </span><span class="m">5</span>.
+</span><span id="__span-1-43"><a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a>
+</span><span id="__span-1-44"><a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a>Trying<span class="w"> </span>Zone<span class="w"> </span>Transfer<span class="w"> </span><span class="k">for</span><span class="w"> </span>offseclab.io<span class="w"> </span>on<span class="w"> </span>ns-0.awsdns-00.com<span class="w"> </span>...<span class="w"> </span>
+</span><span id="__span-1-45"><a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a>AXFR<span class="w"> </span>record<span class="w"> </span>query<span class="w"> </span>failed:<span class="w"> </span>no<span class="w"> </span>nameservers
+</span><span id="__span-1-46"><a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a>unresolvable<span class="w"> </span>name:<span class="w"> </span>ns-1024.awsdns-00.org<span class="w"> </span>at<span class="w"> </span>/usr/bin/dnsenum<span class="w"> </span>line<span class="w"> </span><span class="m">892</span><span class="w"> </span>thread<span class="w"> </span><span class="m">6</span>.
+</span><span id="__span-1-47"><a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a>
+</span><span id="__span-1-48"><a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a>Trying<span class="w"> </span>Zone<span class="w"> </span>Transfer<span class="w"> </span><span class="k">for</span><span class="w"> </span>offseclab.io<span class="w"> </span>on<span class="w"> </span>ns-1024.awsdns-00.org<span class="w"> </span>...<span class="w"> </span>
+</span><span id="__span-1-49"><a id="__codelineno-1-49" name="__codelineno-1-49" href="#__codelineno-1-49"></a>AXFR<span class="w"> </span>record<span class="w"> </span>query<span class="w"> </span>failed:<span class="w"> </span>no<span class="w"> </span>nameservers
+</span><span id="__span-1-50"><a id="__codelineno-1-50" name="__codelineno-1-50" href="#__codelineno-1-50"></a>unresolvable<span class="w"> </span>name:<span class="w"> </span>ns-1536.awsdns-00.co.uk<span class="w"> </span>at<span class="w"> </span>/usr/bin/dnsenum<span class="w"> </span>line<span class="w"> </span><span class="m">892</span><span class="w"> </span>thread<span class="w"> </span><span class="m">7</span>.
+</span><span id="__span-1-51"><a id="__codelineno-1-51" name="__codelineno-1-51" href="#__codelineno-1-51"></a>
+</span><span id="__span-1-52"><a id="__codelineno-1-52" name="__codelineno-1-52" href="#__codelineno-1-52"></a>Trying<span class="w"> </span>Zone<span class="w"> </span>Transfer<span class="w"> </span><span class="k">for</span><span class="w"> </span>offseclab.io<span class="w"> </span>on<span class="w"> </span>ns-1536.awsdns-00.co.uk<span class="w"> </span>...<span class="w"> </span>
+</span><span id="__span-1-53"><a id="__codelineno-1-53" name="__codelineno-1-53" href="#__codelineno-1-53"></a>AXFR<span class="w"> </span>record<span class="w"> </span>query<span class="w"> </span>failed:<span class="w"> </span>no<span class="w"> </span>nameservers
+</span><span id="__span-1-54"><a id="__codelineno-1-54" name="__codelineno-1-54" href="#__codelineno-1-54"></a>unresolvable<span class="w"> </span>name:<span class="w"> </span>ns-512.awsdns-00.net<span class="w"> </span>at<span class="w"> </span>/usr/bin/dnsenum<span class="w"> </span>line<span class="w"> </span><span class="m">892</span><span class="w"> </span>thread<span class="w"> </span><span class="m">8</span>.
+</span><span id="__span-1-55"><a id="__codelineno-1-55" name="__codelineno-1-55" href="#__codelineno-1-55"></a>
+</span><span id="__span-1-56"><a id="__codelineno-1-56" name="__codelineno-1-56" href="#__codelineno-1-56"></a>Trying<span class="w"> </span>Zone<span class="w"> </span>Transfer<span class="w"> </span><span class="k">for</span><span class="w"> </span>offseclab.io<span class="w"> </span>on<span class="w"> </span>ns-512.awsdns-00.net<span class="w"> </span>...<span class="w"> </span>
+</span><span id="__span-1-57"><a id="__codelineno-1-57" name="__codelineno-1-57" href="#__codelineno-1-57"></a>AXFR<span class="w"> </span>record<span class="w"> </span>query<span class="w"> </span>failed:<span class="w"> </span>no<span class="w"> </span>nameservers
+</span><span id="__span-1-58"><a id="__codelineno-1-58" name="__codelineno-1-58" href="#__codelineno-1-58"></a>
+</span><span id="__span-1-59"><a id="__codelineno-1-59" name="__codelineno-1-59" href="#__codelineno-1-59"></a>
+</span><span id="__span-1-60"><a id="__codelineno-1-60" name="__codelineno-1-60" href="#__codelineno-1-60"></a>Brute<span class="w"> </span>forcing<span class="w"> </span>with<span class="w"> </span>/usr/share/dnsenum/dns.txt:
+</span><span id="__span-1-61"><a id="__codelineno-1-61" name="__codelineno-1-61" href="#__codelineno-1-61"></a>_______________________________________________
+</span><span id="__span-1-62"><a id="__codelineno-1-62" name="__codelineno-1-62" href="#__codelineno-1-62"></a>
+</span><span id="__span-1-63"><a id="__codelineno-1-63" name="__codelineno-1-63" href="#__codelineno-1-63"></a>
+</span><span id="__span-1-64"><a id="__codelineno-1-64" name="__codelineno-1-64" href="#__codelineno-1-64"></a>mail.offseclab.io.<span class="w">                       </span><span class="m">60</span><span class="w">       </span>IN<span class="w">    </span>A<span class="w">        </span><span class="m">54</span>.90.147.109
+</span><span id="__span-1-65"><a id="__codelineno-1-65" name="__codelineno-1-65" href="#__codelineno-1-65"></a>
+</span><span id="__span-1-66"><a id="__codelineno-1-66" name="__codelineno-1-66" href="#__codelineno-1-66"></a>www.offseclab.io.<span class="w">                        </span><span class="m">60</span><span class="w">       </span>IN<span class="w">    </span>A<span class="w">        </span><span class="m">54</span>.90.147.109
+</span></code></pre></div>
+<hr />
+<h3 id="12-identificacion-de-buckets-s3-publicos">1.2. Identificación de Buckets S3 Públicos<a class="headerlink" href="#12-identificacion-de-buckets-s3-publicos" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Técnica</strong>: Buscar buckets accesibles probando nombres predecibles.</li>
+<li><strong>Comando Manual</strong>:
+  <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>curl<span class="w"> </span>http://example-lab-assets-public.s3.amazonaws.com/
+</span></code></pre></div></li>
+<li>Respuesta XML = bucket público.</li>
+<li>"Access Denied" = bucket existe pero está protegido.</li>
+<li>"NoSuchBucket" = bucket no existe.</li>
+<li><strong>Automatización con <code>cloud_enum</code></strong>:
+  <div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>cloud_enum<span class="w"> </span>-k<span class="w"> </span>example-lab<span class="w"> </span>-qs<span class="w"> </span>--disable-azure<span class="w"> </span>--disable-gcp
+</span></code></pre></div></li>
+<li><strong>Valor</strong>: Encuentra almacenamiento público con datos sensibles (ej., backups, configs).</li>
+</ul>
+<h4 id="ejemplo-de-offsec_1">Ejemplo de offsec<a class="headerlink" href="#ejemplo-de-offsec_1" title="Permanent link">&para;</a></h4>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>kali@kali:~$<span class="w"> </span>cloud_enum<span class="w"> </span>-k<span class="w"> </span>offseclab-assets-public-axevtewi<span class="w"> </span>--quickscan<span class="w"> </span>--disable-azure<span class="w"> </span>--disable-gcp
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>...
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>Keywords:<span class="w">    </span>offseclab-assets-public-axevtewi
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>Mutations:<span class="w">   </span>NONE!<span class="w"> </span><span class="o">(</span>Using<span class="w"> </span>quickscan<span class="o">)</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>Brute-list:<span class="w">  </span>/usr/lib/cloud-enum/enum_tools/fuzz.txt
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Mutated<span class="w"> </span>results:<span class="w"> </span><span class="m">1</span><span class="w"> </span>items
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>++++++++++++++++++++++++++
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">      </span>amazon<span class="w"> </span>checks
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>++++++++++++++++++++++++++
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Checking<span class="w"> </span><span class="k">for</span><span class="w"> </span>S3<span class="w"> </span>buckets
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">  </span>OPEN<span class="w"> </span>S3<span class="w"> </span>BUCKET:<span class="w"> </span>http://offseclab-assets-public-axevtewi.s3.amazonaws.com/
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">      </span>FILES:
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="w">      </span>-&gt;http://offseclab-assets-public-axevtewi.s3.amazonaws.com/offseclab-assets-public-axevtewi
+</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="w">      </span>-&gt;http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/amethyst-expanded.png
+</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="w">      </span>-&gt;http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/amethyst.png
+</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="w">      </span>-&gt;http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/logo.svg
+</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="w">      </span>-&gt;http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/pic02.jpg
+</span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="w">      </span>-&gt;http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/pic05.jpg
+</span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a><span class="w">      </span>-&gt;http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/pic13.jpg
+</span><span id="__span-4-25"><a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a><span class="w">      </span>-&gt;http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/ruby-expanded.png
+</span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a><span class="w">      </span>-&gt;http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/ruby.jpg
+</span><span id="__span-4-27"><a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a><span class="w">      </span>-&gt;http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/saphire-expanded.png
+</span><span id="__span-4-28"><a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a><span class="w">      </span>-&gt;http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/saphire.jpg
+</span><span id="__span-4-29"><a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a>
+</span><span id="__span-4-30"><a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a>
+</span><span id="__span-4-31"><a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a><span class="w"> </span>Elapsed<span class="w"> </span>time:<span class="w"> </span><span class="m">00</span>:00:00
+</span><span id="__span-4-32"><a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a>
+</span><span id="__span-4-33"><a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a><span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Checking<span class="w"> </span><span class="k">for</span><span class="w"> </span>AWS<span class="w"> </span>Apps
+</span><span id="__span-4-34"><a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a><span class="o">[</span>*<span class="o">]</span><span class="w"> </span>Brute-forcing<span class="w"> </span>a<span class="w"> </span>list<span class="w"> </span>of<span class="w"> </span><span class="m">1</span><span class="w"> </span>possible<span class="w"> </span>DNS<span class="w"> </span>names
+</span><span id="__span-4-35"><a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a>
+</span><span id="__span-4-36"><a id="__codelineno-4-36" name="__codelineno-4-36" href="#__codelineno-4-36"></a><span class="w"> </span>Elapsed<span class="w"> </span>time:<span class="w"> </span><span class="m">00</span>:00:00
+</span><span id="__span-4-37"><a id="__codelineno-4-37" name="__codelineno-4-37" href="#__codelineno-4-37"></a>
+</span><span id="__span-4-38"><a id="__codelineno-4-38" name="__codelineno-4-38" href="#__codelineno-4-38"></a>
+</span><span id="__span-4-39"><a id="__codelineno-4-39" name="__codelineno-4-39" href="#__codelineno-4-39"></a><span class="o">[</span>+<span class="o">]</span><span class="w"> </span>All<span class="w"> </span><span class="k">done</span>,<span class="w"> </span>happy<span class="w"> </span>hacking!
+</span></code></pre></div>
+<hr />
+<p>Hay muchas formas en las que podríamos lograr esto. Usaremos un script de Bash para ejecutar un bucle en una sola línea que itera sobre algunas palabras clave y muestra la palabra clave, insertando un prefijo (offseclab-assets) y un sufijo (-axevtewi) alrededor de ella. Finalmente, usaremos el comando tee para mostrar el resultado en la consola, así como en el archivo /tmp/keyfile.txt. Como resultado, tendremos el archivo clave con los nombres de los buckets para validar si existen.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>kali@kali:~$<span class="w"> </span><span class="k">for</span><span class="w"> </span>key<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;public&quot;</span><span class="w"> </span><span class="s2">&quot;private&quot;</span><span class="w"> </span><span class="s2">&quot;dev&quot;</span><span class="w"> </span><span class="s2">&quot;prod&quot;</span><span class="w"> </span><span class="s2">&quot;development&quot;</span><span class="w"> </span><span class="s2">&quot;production&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;offseclab-assets-</span><span class="nv">$key</span><span class="s2">-axevtewi&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">done</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tee<span class="w"> </span>/tmp/keyfile.txt
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>offseclab-assets-public-axevtewi
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>offseclab-assets-private-axevtewi
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>offseclab-assets-dev-axevtewi
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>offseclab-assets-prod-axevtewi
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>offseclab-assets-development-axevtewi
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>offseclab-assets-production-axevtewi
+</span></code></pre></div>
+<p>Ahora podemos volver a ejecutar <code>cloud_enum</code> con el archivo de claves que acabamos de crear:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>kali@kali:~$<span class="w"> </span>cloud_enum<span class="w"> </span>-kf<span class="w"> </span>/tmp/keyfile.txt<span class="w"> </span>-qs<span class="w"> </span>--disable-azure<span class="w"> </span>--disable-gcp
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>...
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>Keywords:<span class="w">    </span>offseclab-assets-public-axevtewi,<span class="w"> </span>offseclab-assets-private-axevtewi,<span class="w"> </span>offseclab-assets-dev-axevtewi,<span class="w"> </span>offseclab-assets-prod-axevtewi,<span class="w"> </span>offseclab-assets-development-axevtewi,<span class="w"> </span>offseclab-assets-production-axevtewi
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>Mutations:<span class="w">   </span>NONE!<span class="w"> </span><span class="o">(</span>Using<span class="w"> </span>quickscan<span class="o">)</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>Brute-list:<span class="w">  </span>/usr/lib/cloud-enum/enum_tools/fuzz.txt
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Mutated<span class="w"> </span>results:<span class="w"> </span><span class="m">6</span><span class="w"> </span>items
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>++++++++++++++++++++++++++
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">      </span>amazon<span class="w"> </span>checks
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>++++++++++++++++++++++++++
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Checking<span class="w"> </span><span class="k">for</span><span class="w"> </span>S3<span class="w"> </span>buckets
+</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">  </span>OPEN<span class="w"> </span>S3<span class="w"> </span>BUCKET:<span class="w"> </span>http://offseclab-assets-public-axevtewi.s3.amazonaws.com/
+</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="w">      </span>FILES:
+</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="w">      </span>-&gt;http://offseclab-assets-public-axevtewi.s3.amazonaws.com/offseclab-assets-public-axevtewi
+</span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="w">      </span>-&gt;http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/amethyst-expanded.png
+</span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="w">      </span>-&gt;http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/amethyst.png
+</span><span id="__span-6-21"><a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a><span class="w">      </span>-&gt;http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/logo.svg
+</span><span id="__span-6-22"><a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a><span class="w">      </span>-&gt;http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/pic02.jpg
+</span><span id="__span-6-23"><a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a><span class="w">      </span>-&gt;http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/pic05.jpg
+</span><span id="__span-6-24"><a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a><span class="w">      </span>-&gt;http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/pic13.jpg
+</span><span id="__span-6-25"><a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a><span class="w">      </span>-&gt;http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/ruby-expanded.png
+</span><span id="__span-6-26"><a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a><span class="w">      </span>-&gt;http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/ruby.jpg
+</span><span id="__span-6-27"><a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a><span class="w">      </span>-&gt;http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/saphire-expanded.png
+</span><span id="__span-6-28"><a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a><span class="w">      </span>-&gt;http://offseclab-assets-public-axevtewi.s3.amazonaws.com/sites/www/images/saphire.jpg
+</span><span id="__span-6-29"><a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a><span class="w">  </span>Protected<span class="w"> </span>S3<span class="w"> </span>Bucket:<span class="w"> </span>http://offseclab-assets-private-axevtewi.s3.amazonaws.com/
+</span><span id="__span-6-30"><a id="__codelineno-6-30" name="__codelineno-6-30" href="#__codelineno-6-30"></a>
+</span><span id="__span-6-31"><a id="__codelineno-6-31" name="__codelineno-6-31" href="#__codelineno-6-31"></a><span class="w"> </span>Elapsed<span class="w"> </span>time:<span class="w"> </span><span class="m">00</span>:00:06
+</span><span id="__span-6-32"><a id="__codelineno-6-32" name="__codelineno-6-32" href="#__codelineno-6-32"></a>
+</span><span id="__span-6-33"><a id="__codelineno-6-33" name="__codelineno-6-33" href="#__codelineno-6-33"></a><span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Checking<span class="w"> </span><span class="k">for</span><span class="w"> </span>AWS<span class="w"> </span>Apps
+</span><span id="__span-6-34"><a id="__codelineno-6-34" name="__codelineno-6-34" href="#__codelineno-6-34"></a><span class="o">[</span>*<span class="o">]</span><span class="w"> </span>Brute-forcing<span class="w"> </span>a<span class="w"> </span>list<span class="w"> </span>of<span class="w"> </span><span class="m">6</span><span class="w"> </span>possible<span class="w"> </span>DNS<span class="w"> </span>names
+</span><span id="__span-6-35"><a id="__codelineno-6-35" name="__codelineno-6-35" href="#__codelineno-6-35"></a>
+</span><span id="__span-6-36"><a id="__codelineno-6-36" name="__codelineno-6-36" href="#__codelineno-6-36"></a><span class="w"> </span>Elapsed<span class="w"> </span>time:<span class="w"> </span><span class="m">00</span>:00:00
+</span><span id="__span-6-37"><a id="__codelineno-6-37" name="__codelineno-6-37" href="#__codelineno-6-37"></a>
+</span><span id="__span-6-38"><a id="__codelineno-6-38" name="__codelineno-6-38" href="#__codelineno-6-38"></a>
+</span><span id="__span-6-39"><a id="__codelineno-6-39" name="__codelineno-6-39" href="#__codelineno-6-39"></a><span class="o">[</span>+<span class="o">]</span><span class="w"> </span>All<span class="w"> </span><span class="k">done</span>,<span class="w"> </span>happy<span class="w"> </span>hacking!
+</span></code></pre></div>
+<hr />
+<p>A partir del resultado, podemos confirmar que hay otro bucket, pero está protegido, lo que significa que no es públicamente legible.
+También podríamos intentar validar si existen otros buckets utilizando otra información que encontramos durante la fase de reconocimiento. Por ejemplo, podrían ser buckets que incluyan el nombre de los proyectos de offseclab como offseclab-assets-ruby-axevtewi o offseclab-ruby-axevtewi. Dejaremos esto como un ejercicio para el lector.</p>
+<h3 id="13-analisis-dns-y-whois">1.3. Análisis DNS y WHOIS<a class="headerlink" href="#13-analisis-dns-y-whois" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Comando DNS</strong>:
+  <div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>host<span class="w"> </span>-t<span class="w"> </span>ns<span class="w"> </span>example.com
+</span></code></pre></div></li>
+<li>Salida: <code>ns-1536.awsdns-00.co.uk</code> (indica Route53).</li>
+<li><strong>Comando WHOIS</strong>:
+  <div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>whois<span class="w"> </span>example.com<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;Registrant Organization&quot;</span>
+</span></code></pre></div></li>
+<li><strong>Valor</strong>: Confirma uso de AWS y expone infraestructura asociada.</li>
+</ul>
+<hr />
+<h2 id="2-enumeracion-interna-con-credenciales">2. Enumeración Interna: Con Credenciales<a class="headerlink" href="#2-enumeracion-interna-con-credenciales" title="Permanent link">&para;</a></h2>
+<h3 id="21-listado-de-recursos-con-awscli">2.1. Listado de Recursos con <code>awscli</code><a class="headerlink" href="#21-listado-de-recursos-con-awscli" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Configuración</strong>:
+  <div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>aws<span class="w"> </span>configure<span class="w"> </span>--profile<span class="w"> </span>pentester
+</span></code></pre></div></li>
+</ul>
+<hr />
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>kali@kali:~$<span class="w"> </span>aws<span class="w"> </span>configure<span class="w"> </span>--profile<span class="w"> </span>attacker
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>AWS<span class="w"> </span>Access<span class="w"> </span>Key<span class="w"> </span>ID<span class="w"> </span><span class="o">[]</span>:<span class="w"> </span>AKIAQO...
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>AWS<span class="w"> </span>Secret<span class="w"> </span>Access<span class="w"> </span>Key<span class="w"> </span><span class="o">[]</span>:<span class="w"> </span>cOGzm...
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>Default<span class="w"> </span>region<span class="w"> </span>name<span class="w"> </span><span class="o">[]</span>:<span class="w"> </span>us-east-1
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>Default<span class="w"> </span>output<span class="w"> </span>format<span class="w"> </span><span class="o">[]</span>:<span class="w"> </span>json
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>kali@kali:~$<span class="w"> </span>aws<span class="w"> </span>--profile<span class="w"> </span>attacker<span class="w"> </span>sts<span class="w"> </span>get-caller-identity
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="o">{</span>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">    </span><span class="s2">&quot;UserId&quot;</span>:<span class="w"> </span><span class="s2">&quot;AIDAQOMAIGYU5VFQCHOI4&quot;</span>,
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">    </span><span class="s2">&quot;Account&quot;</span>:<span class="w"> </span><span class="s2">&quot;123456789012&quot;</span>,
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="w">    </span><span class="s2">&quot;Arn&quot;</span>:<span class="w"> </span><span class="s2">&quot;arn:aws:iam::123456789012:user/attacker&quot;</span>
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="o">}</span>
+</span></code></pre></div>
+<h4 id="comandos-utiles">Comandos Útiles<a class="headerlink" href="#comandos-utiles" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>aws --profile attacker ec2 describe-images --owners amazon --executable-users all</code>: Lista imágenes de Amazon disponibles para todos los usuarios ejecutables.</li>
+<li><code>aws --profile attacker ec2 describe-images --executable-users all --filters "Name=description,Values=*&lt;keyword&gt;*"</code>: Filtra imágenes por palabras clave en la descripción.</li>
+<li>
+<p><code>aws --profile attacker ec2 describe-images --executable-users all --filters "Name=name,Values=*&lt;keyword&gt;*"</code>: Filtra imágenes por palabras clave en el nombre.</p>
+</li>
+<li>
+<p>Ingresa Access Key, Secret Key y región.</p>
+</li>
+<li><strong>Listar Buckets S3</strong>:
+  <div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>aws<span class="w"> </span>s3<span class="w"> </span>ls<span class="w"> </span>--profile<span class="w"> </span>pentester
+</span></code></pre></div></li>
+<li><strong>Listar Instancias EC2</strong>:
+  <div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>aws<span class="w"> </span>ec2<span class="w"> </span>describe-instances<span class="w"> </span>--profile<span class="w"> </span>pentester
+</span></code></pre></div></li>
+<li><strong>Valor</strong>: Mapea la infraestructura interna rápidamente.</li>
+</ul>
+<h2 id="obtencion-de-ids-de-cuentas-desde-buckets-s3-publicos">Obtención de IDs de Cuentas desde Buckets S3 Públicos<a class="headerlink" href="#obtencion-de-ids-de-cuentas-desde-buckets-s3-publicos" title="Permanent link">&para;</a></h2>
+<p>Para realizar esta técnica, se necesita una cuenta de AWS para interactuar con la API de AWS. Se utilizará un perfil configurado en AWS CLI para simular este escenario. Además, la cuenta objetivo debe tener un bucket S3 público que permita acceso de lectura.
+Primero, se debe crear un usuario IAM que, por defecto, no tendrá permisos para ejecutar acciones. Luego, se añadirá una política que otorgue acceso de lectura al bucket, con la condición de que el permiso solo se aplique si el ID de la cuenta propietaria del bucket comienza con un dígito específico. Si no se puede leer el bucket, se probarán otros números hasta que se logre acceder, lo que permitirá identificar el primer dígito del ID de la cuenta propietaria. Este proceso se puede repetir para obtener todos los dígitos del ID de la cuenta.
+El primer paso es seleccionar un bucket o un objeto público dentro de la cuenta objetivo. Dado que el bucket u objeto es público, debería ser posible listar su contenido con cualquier usuario IAM de cualquier cuenta de AWS.
+A continuación, se crea un nuevo usuario IAM en la cuenta propia. Por defecto, los usuarios IAM no tienen permisos para ejecutar acciones, por lo que el nuevo usuario no podrá listar el contenido del recurso público incluso si es accesible públicamente.
+Después, se define una política que permita listar buckets y leer objetos. Sin embargo, se añade una condición para que el permiso de lectura solo se aplique si el ID de la cuenta propietaria del bucket comienza con un dígito específico.
+Finalmente, se prueba si el nuevo usuario puede listar el bucket utilizando sus credenciales. Se prueba con valores de dígitos del 0 al 9 hasta que se logre listar el bucket, lo que confirma el primer dígito del ID de la cuenta.</p>
+<p><img alt="" src="https://static.offsec.com/offsec-courses/PEN-200/imgs/cloud_enum_1/6c8d389ae9d0506cf0c1303c50ba75b7-cldenum_s3_accountID.gif" /></p>
+<hr />
+<h3 id="creacion-de-un-usuario-iam-para-enumeracion">Creación de un Usuario IAM para Enumeración<a class="headerlink" href="#creacion-de-un-usuario-iam-para-enumeracion" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>kali@kali:~$ aws --profile attacker s3 ls offseclab-assets-public-kaykoour</code></li>
+</ul>
+<p>Ahora, vamos a crear un nuevo usuario IAM con el comando <code>iam create-user --user-name enum</code>. Recordemos que este usuario reside en la cuenta de AWS controlada por el atacante.</p>
+<p>A continuación, también crearemos claves de acceso para el usuario IAM, de modo que podamos interactuar con la API de AWS a través de la herramienta AWS CLI. Ejecutaremos el comando <code>iam create-access-key --user-name enum</code> y tomaremos nota de los valores de <code>AccessKeyId</code> y <code>SecretAccessKey</code> en la salida.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>kali@kali:~$<span class="w"> </span>aws<span class="w"> </span>--profile<span class="w"> </span>attacker<span class="w"> </span>iam<span class="w"> </span>create-user<span class="w"> </span>--user-name<span class="w"> </span>enum
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="o">{</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">    </span><span class="s2">&quot;User&quot;</span>:<span class="w"> </span><span class="o">{</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">        </span><span class="s2">&quot;Path&quot;</span>:<span class="w"> </span><span class="s2">&quot;/&quot;</span>,
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">        </span><span class="s2">&quot;UserName&quot;</span>:<span class="w"> </span><span class="s2">&quot;enum&quot;</span>,
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">        </span><span class="s2">&quot;UserId&quot;</span>:<span class="w"> </span><span class="s2">&quot;AIDAQOMAIGYU4HTPEJ32K&quot;</span>,
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">        </span><span class="s2">&quot;Arn&quot;</span>:<span class="w"> </span><span class="s2">&quot;arn:aws:iam::123456789012:user/enum&quot;</span>,
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="w">    </span><span class="o">}</span>
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="o">}</span>
+</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>
+</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>kali@kali:~$<span class="w"> </span>aws<span class="w"> </span>--profile<span class="w"> </span>attacker<span class="w"> </span>iam<span class="w"> </span>create-access-key<span class="w"> </span>--user-name<span class="w"> </span>enum
+</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="o">{</span>
+</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="w">    </span><span class="s2">&quot;AccessKey&quot;</span>:<span class="w"> </span><span class="o">{</span>
+</span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="w">        </span><span class="s2">&quot;UserName&quot;</span>:<span class="w"> </span><span class="s2">&quot;enum&quot;</span>,
+</span><span id="__span-13-15"><a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a><span class="w">        </span><span class="s2">&quot;AccessKeyId&quot;</span>:<span class="w"> </span><span class="s2">&quot;&lt;ACCESS_KEY_ID&gt;&quot;</span>,
+</span><span id="__span-13-16"><a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a><span class="w">        </span><span class="s2">&quot;Status&quot;</span>:<span class="w"> </span><span class="s2">&quot;Active&quot;</span>,
+</span><span id="__span-13-17"><a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a><span class="w">        </span><span class="s2">&quot;SecretAccessKey&quot;</span>:<span class="w"> </span><span class="s2">&quot;***REDACTED***&quot;</span>,
+</span><span id="__span-13-18"><a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a><span class="w">    </span><span class="o">}</span>
+</span><span id="__span-13-19"><a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a><span class="o">}</span>
+</span></code></pre></div>
+<hr />
+<h3 id="22-enumeracion-de-usuarios-y-roles-iam">2.2. Enumeración de Usuarios y Roles IAM<a class="headerlink" href="#22-enumeracion-de-usuarios-y-roles-iam" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Listar Usuarios</strong>:
+  <div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>aws<span class="w"> </span>iam<span class="w"> </span>list-users<span class="w"> </span>--profile<span class="w"> </span>pentester
+</span></code></pre></div></li>
+<li><strong>Listar Roles</strong>:
+  <div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>aws<span class="w"> </span>iam<span class="w"> </span>list-roles<span class="w"> </span>--profile<span class="w"> </span>pentester
+</span></code></pre></div></li>
+<li><strong>Valor</strong>: Identifica privilegios excesivos o roles asumibles.</li>
+</ul>
+<h2 id="enumeracion-de-recursos-iam">Enumeración de Recursos IAM<a class="headerlink" href="#enumeracion-de-recursos-iam" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Contexto</strong>: Se inicia con credenciales comprometidas de un usuario IAM (<code>clouddesk-plove</code>), miembro del grupo <code>support</code> con la política <code>SupportUser</code>, que otorga acceso de solo lectura a varios servicios.</li>
+<li><strong>Comandos clave</strong>:</li>
+<li><code>aws iam list-users</code>: Lista todos los usuarios IAM.</li>
+<li><code>aws iam list-groups</code>: Lista los grupos.</li>
+<li><code>aws iam list-roles</code>: Lista los roles.</li>
+<li><code>aws iam get-account-summary</code>: Proporciona un resumen de recursos IAM (ej., 18 usuarios, 20 roles, 8 grupos) y revela configuraciones débiles como la ausencia de MFA (<code>"MFADevices": 0</code>).</li>
+<li><strong>Datos obtenidos</strong>: Nombre, ARN y ruta de usuarios, grupos y roles, guardados en archivos JSON (ej., <code>users.json</code>, <code>roles.json</code>) para análisis posterior.</li>
+<li><strong>Ejemplo práctico</strong>:
+  <div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>aws<span class="w"> </span>--profile<span class="w"> </span>target<span class="w"> </span>iam<span class="w"> </span>list-users<span class="w"> </span><span class="p">|</span><span class="w"> </span>tee<span class="w"> </span>users.json
+</span></code></pre></div>
+  Muestra usuarios como <code>admin-alice</code> con rutas como <code>/admin/</code>, sugiriendo privilegios elevados.</li>
+<li><strong>Advertencia</strong>: Políticas personalizadas como <code>SupportUser</code> pueden ser riesgosas si son demasiado permisivas.</li>
+</ul>
+<hr />
+<h2 id="procesamiento-de-datos-de-respuesta-de-la-api-con-jmespath">Procesamiento de Datos de Respuesta de la API con JMESPath<a class="headerlink" href="#procesamiento-de-datos-de-respuesta-de-la-api-con-jmespath" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Qué es JMESPath</strong>: Un lenguaje de consulta para JSON que filtra y transforma salidas de AWS CLI.</li>
+<li><strong>Uso</strong>: Reduce solicitudes a la API al procesar datos localmente.</li>
+<li><strong>Ejemplos</strong>:</li>
+<li>Listar nombres de usuarios:
+    <div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>aws<span class="w"> </span>--profile<span class="w"> </span>target<span class="w"> </span>iam<span class="w"> </span>get-account-authorization-details<span class="w"> </span>--filter<span class="w"> </span>User<span class="w"> </span>--query<span class="w"> </span><span class="s2">&quot;UserDetailList[].UserName&quot;</span>
+</span></code></pre></div>
+    Salida: <code>["admin-alice", "admin-cbarton", ...]</code></li>
+<li>Filtrar usuarios con "admin" en el nombre:
+    <div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>aws<span class="w"> </span>--profile<span class="w"> </span>target<span class="w"> </span>iam<span class="w"> </span>get-account-authorization-details<span class="w"> </span>--filter<span class="w"> </span>User<span class="w"> </span>--query<span class="w"> </span><span class="s2">&quot;UserDetailList[?contains(UserName, &#39;admin&#39;)].{Name: UserName}&quot;</span>
+</span></code></pre></div>
+    Salida: <code>[{"Name": "admin-alice"}, {"Name": "admin-cbarton"}, ...]</code></li>
+<li>Combinar datos de usuarios y grupos:
+    <div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>aws<span class="w"> </span>--profile<span class="w"> </span>target<span class="w"> </span>iam<span class="w"> </span>get-account-authorization-details<span class="w"> </span>--filter<span class="w"> </span>User<span class="w"> </span>Group<span class="w"> </span>--query<span class="w"> </span><span class="s2">&quot;{Users: UserDetailList[?Path==&#39;/admin/&#39;].UserName, Groups: GroupDetailList[?Path==&#39;/admin/&#39;].{Name: GroupName}}&quot;</span>
+</span></code></pre></div></li>
+<li><strong>Consejo</strong>: Guardar salidas en archivos y usar herramientas como <code>jp</code> para consultas offline, minimizando el ruido en logs.</li>
+</ul>
+<hr />
+<h2 id="ejecucion-de-enumeracion-automatizada-con-pacu">Ejecución de Enumeración Automatizada con Pacu<a class="headerlink" href="#ejecucion-de-enumeracion-automatizada-con-pacu" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Pacu</strong>: Herramienta de enumeración y explotación para AWS, instalada en Kali con:
+  <div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>pacu
+</span></code></pre></div></li>
+<li><strong>Configuración</strong>:</li>
+<li>Iniciar sesión: <code>pacu</code> → Crear sesión (ej., <code>enumlab</code>).</li>
+<li>Importar claves: <code>import_keys target</code>.</li>
+<li><strong>Módulo clave</strong>: <code>iam__enum_users_roles_policies_groups</code> recopila datos de usuarios, roles, políticas y grupos.</li>
+<li>Ejecución:
+    <div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>run<span class="w"> </span>iam__enum_users_roles_policies_groups
+</span></code></pre></div>
+    Resultado: Enumera 18 usuarios, 20 roles, 8 políticas y 8 grupos, almacenados en la base de datos de Pacu.</li>
+<li>Ver datos:
+    <div class="language-bash highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>services<span class="w">  </span><span class="c1"># Lista servicios con datos (ej., IAM)</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>data<span class="w"> </span>IAM<span class="w">  </span><span class="c1"># Muestra detalles</span>
+</span></code></pre></div></li>
+<li><strong>Ventaja</strong>: Automatiza tareas repetitivas, pero requiere permisos adecuados en las credenciales comprometidas.</li>
+<li><strong>Monitoreo</strong>: Revisar logs de CloudTrail para evaluar el impacto y ruido generado.</li>
+</ul>
+<hr />
+<h2 id="extraccion-de-insights-de-los-datos-de-enumeracion">Extracción de Insights de los Datos de Enumeración<a class="headerlink" href="#extraccion-de-insights-de-los-datos-de-enumeracion" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Objetivo</strong>: Analizar datos para identificar caminos de escalada de privilegios (ej., obtener acceso de administrador).</li>
+<li><strong>Ejemplo de análisis</strong>:</li>
+<li>Usuario <code>admin-alice</code>:
+    <div class="language-bash highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>aws<span class="w"> </span>--profile<span class="w"> </span>target<span class="w"> </span>iam<span class="w"> </span>get-account-authorization-details<span class="w"> </span>--filter<span class="w"> </span>User<span class="w"> </span>Group<span class="w"> </span>--query<span class="w"> </span><span class="s2">&quot;UserDetailList[?UserName==&#39;admin-alice&#39;]&quot;</span>
+</span></code></pre></div><ul>
+<li>Pertenece a los grupos <code>admin</code> (con <code>AdministratorAccess</code>) y <code>amethyst_admin</code>.</li>
+<li>Sin MFA, vulnerable a ataques como ingeniería social.</li>
+</ul>
+</li>
+<li>Grupo <code>admin</code>:<ul>
+<li>Política <code>AdministratorAccess</code> permite todo (<code>"Action": "*", "Resource": "*"</code>).</li>
+</ul>
+</li>
+<li>Política <code>amethyst_admin</code>:<ul>
+<li>Permite acciones IAM en recursos etiquetados con <code>"Project": "amethyst"</code>, incluyendo <code>iam:CreateAccessKey</code> para usuarios como <code>admin-alice</code>.</li>
+</ul>
+</li>
+<li><strong>Caminos de escalada</strong>:</li>
+<li>Obtener credenciales de <code>admin-alice</code> (ej., sin MFA facilita ataques).</li>
+<li>Usar un usuario de <code>amethyst_admin</code> (como <code>admin-cbarton</code>) para crear claves de acceso de <code>admin-alice</code>.</li>
+<li><strong>Herramientas visuales</strong>: Awspx o Cloudmapper ayudan a mapear relaciones y visualizar caminos de ataque.</li>
+<li><strong>Conclusión</strong>: La falta de MFA y políticas permisivas (uso de <code>*</code>) son puntos débiles explotables.</li>
+</ul>
+<hr />
+<h3 id="23-deteccion-de-configuraciones-erroneas">2.3. Detección de Configuraciones Erróneas<a class="headerlink" href="#23-deteccion-de-configuraciones-erroneas" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Buckets S3 Públicos</strong>:
+  <div class="language-bash highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>aws<span class="w"> </span>s3api<span class="w"> </span>get-bucket-policy<span class="w"> </span>--bucket<span class="w"> </span>example-lab-assets-public<span class="w"> </span>--profile<span class="w"> </span>pentester
+</span></code></pre></div></li>
+<li><strong>Valor</strong>: Encuentra puntos de entrada para escalar privilegios.</li>
+</ul>
+<hr />
+<h2 id="3-ejemplo-practico">3. Ejemplo Práctico<a class="headerlink" href="#3-ejemplo-practico" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Escenario</strong>: Dominio <code>example.com</code>.</li>
+<li><strong>Paso 1</strong>: Enumerar subdominios:
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>dnsenum<span class="w"> </span>example.com
+</span></code></pre></div></li>
+<li>Encuentra <code>dev.example.com</code>.</li>
+<li><strong>Paso 2</strong>: Resolver IP:
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>host<span class="w"> </span>dev.example.com
+</span></code></pre></div></li>
+<li>Salida: <code>52.70.117.69</code> (EC2).</li>
+<li><strong>Paso 3</strong>: Probar buckets:
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>curl<span class="w"> </span>http://example-lab-dev.s3.amazonaws.com/
+</span></code></pre></div></li>
+<li>XML devuelto = bucket público.</li>
+</ol>
+<hr />
+<h2 id="4-herramientas-recomendadas">4. Herramientas Recomendadas<a class="headerlink" href="#4-herramientas-recomendadas" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong><code>awscli</code></strong>: Interacción directa con la API de AWS.</li>
+<li><strong><code>cloud_enum</code></strong>: Automatiza búsqueda de recursos públicos.</li>
+<li><strong><code>dnsenum</code></strong>: Enumeración DNS eficiente.</li>
+<li><strong>pacu</strong>: Herramienta de enumeración y explotación de AWS.</li>
+</ul>
+<hr />
+<h2 id="obtencion-de-ids-de-cuentas-desde-buckets-s3">Obtención de IDs de Cuentas desde Buckets S3<a class="headerlink" href="#obtencion-de-ids-de-cuentas-desde-buckets-s3" title="Permanent link">&para;</a></h2>
+<h3 id="descripcion">Descripción<a class="headerlink" href="#descripcion" title="Permanent link">&para;</a></h3>
+<p>Esta técnica aprovecha las características de la API de AWS para determinar el ID de una cuenta a partir de un bucket S3 público o un objeto accesible, incluso si no hay recursos compartidos públicamente de manera evidente.</p>
+<h3 id="pasos-clave">Pasos Clave<a class="headerlink" href="#pasos-clave" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Crear un Usuario IAM en la Cuenta del Atacante:</strong></li>
+<li>Genera un usuario IAM sin permisos iniciales en tu propia cuenta AWS.</li>
+<li>Usa el comando:<br />
+     <div class="language-bash highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>aws<span class="w"> </span>iam<span class="w"> </span>create-user<span class="w"> </span>--user-name<span class="w"> </span>enum
+</span></code></pre></div></li>
+<li>
+<p>Crea claves de acceso para este usuario:<br />
+     <div class="language-bash highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>aws<span class="w"> </span>iam<span class="w"> </span>create-access-key<span class="w"> </span>--user-name<span class="w"> </span>enum
+</span></code></pre></div></p>
+</li>
+<li>
+<p><strong>Configurar las Claves en AWS CLI:</strong></p>
+</li>
+<li>
+<p>Configura un perfil en AWS CLI con las claves generadas:<br />
+     <div class="language-bash highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>aws<span class="w"> </span>configure<span class="w"> </span>--profile<span class="w"> </span>enum
+</span></code></pre></div></p>
+</li>
+<li>
+<p><strong>Definir una Política con Condición:</strong></p>
+</li>
+<li>Crea una política que permita leer el bucket solo si el ID de la cuenta que posee el bucket comienza con un dígito específico (por ejemplo, "1"). Ejemplo de política en <code>policy-s3-read.json</code>:
+     <div class="language-json highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="p">{</span>
+</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="w">    </span><span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2012-10-17&quot;</span><span class="p">,</span>
+</span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="w">    </span><span class="nt">&quot;Statement&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-31-4"><a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a><span class="w">        </span><span class="p">{</span>
+</span><span id="__span-31-5"><a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a><span class="w">            </span><span class="nt">&quot;Sid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;AllowResourceAccount&quot;</span><span class="p">,</span>
+</span><span id="__span-31-6"><a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a><span class="w">            </span><span class="nt">&quot;Effect&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
+</span><span id="__span-31-7"><a id="__codelineno-31-7" name="__codelineno-31-7" href="#__codelineno-31-7"></a><span class="w">            </span><span class="nt">&quot;Action&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-31-8"><a id="__codelineno-31-8" name="__codelineno-31-8" href="#__codelineno-31-8"></a><span class="w">                </span><span class="s2">&quot;s3:ListBucket&quot;</span><span class="p">,</span>
+</span><span id="__span-31-9"><a id="__codelineno-31-9" name="__codelineno-31-9" href="#__codelineno-31-9"></a><span class="w">                </span><span class="s2">&quot;s3:GetObject&quot;</span>
+</span><span id="__span-31-10"><a id="__codelineno-31-10" name="__codelineno-31-10" href="#__codelineno-31-10"></a><span class="w">            </span><span class="p">],</span>
+</span><span id="__span-31-11"><a id="__codelineno-31-11" name="__codelineno-31-11" href="#__codelineno-31-11"></a><span class="w">            </span><span class="nt">&quot;Resource&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;*&quot;</span><span class="p">,</span>
+</span><span id="__span-31-12"><a id="__codelineno-31-12" name="__codelineno-31-12" href="#__codelineno-31-12"></a><span class="w">            </span><span class="nt">&quot;Condition&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-31-13"><a id="__codelineno-31-13" name="__codelineno-31-13" href="#__codelineno-31-13"></a><span class="w">                </span><span class="nt">&quot;StringLike&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;s3:ResourceAccount&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;1*&quot;</span><span class="p">]}</span>
+</span><span id="__span-31-14"><a id="__codelineno-31-14" name="__codelineno-31-14" href="#__codelineno-31-14"></a><span class="w">            </span><span class="p">}</span>
+</span><span id="__span-31-15"><a id="__codelineno-31-15" name="__codelineno-31-15" href="#__codelineno-31-15"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-31-16"><a id="__codelineno-31-16" name="__codelineno-31-16" href="#__codelineno-31-16"></a><span class="w">    </span><span class="p">]</span>
+</span><span id="__span-31-17"><a id="__codelineno-31-17" name="__codelineno-31-17" href="#__codelineno-31-17"></a><span class="p">}</span>
+</span></code></pre></div></li>
+<li>
+<p>Asocia la política al usuario:<br />
+     <div class="language-bash highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>aws<span class="w"> </span>iam<span class="w"> </span>put-user-policy<span class="w"> </span>--user-name<span class="w"> </span>enum<span class="w"> </span>--policy-name<span class="w"> </span>s3-read<span class="w"> </span>--policy-document<span class="w"> </span>file://policy-s3-read.json
+</span></code></pre></div></p>
+</li>
+<li>
+<p><strong>Probar el Acceso:</strong></p>
+</li>
+<li>Intenta listar el contenido del bucket con el perfil del usuario:<br />
+     <div class="language-bash highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>aws<span class="w"> </span>--profile<span class="w"> </span>enum<span class="w"> </span>s3<span class="w"> </span>ls<span class="w"> </span>s3://&lt;nombre-del-bucket&gt;
+</span></code></pre></div></li>
+<li>
+<p>Si falla con "AccessDenied", ajusta el dígito en la condición (de 0 a 9) y repite hasta que tengas éxito, revelando el primer dígito del ID.</p>
+</li>
+<li>
+<p><strong>Iterar para Dígitos Siguientes:</strong></p>
+</li>
+<li>Modifica la condición para incluir más dígitos (por ejemplo, <code>"12*"</code>), y continúa hasta obtener el ID completo.</li>
+</ol>
+<h3 id="ejemplo-practico">Ejemplo Práctico<a class="headerlink" href="#ejemplo-practico" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Si el bucket es <code>s3://ejemplo-bucket-publico</code>, prueba con diferentes condiciones:</li>
+<li><code>"0*"</code> → AccessDenied</li>
+<li><code>"1*"</code> → Éxito (el ID comienza con 1)</li>
+<li><code>"12*"</code> → Éxito (siguiente dígito es 2)</li>
+<li>Automatiza el proceso con un script que itere sobre los dígitos.</li>
+</ul>
+<hr />
+<h2 id="enumeracion-de-usuarios-iam-en-otras-cuentas">Enumeración de Usuarios IAM en Otras Cuentas<a class="headerlink" href="#enumeracion-de-usuarios-iam-en-otras-cuentas" title="Permanent link">&para;</a></h2>
+<h3 id="descripcion_1">Descripción<a class="headerlink" href="#descripcion_1" title="Permanent link">&para;</a></h3>
+<p>Esta técnica abusa de la validación de políticas IAM para identificar usuarios existentes en una cuenta objetivo, utilizando el ID de cuenta previamente obtenido.</p>
+<h3 id="pasos-clave_1">Pasos Clave<a class="headerlink" href="#pasos-clave_1" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Crear un Bucket S3 en la Cuenta del Atacante:</strong></li>
+<li>
+<p>Genera un bucket único:<br />
+     <div class="language-bash highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>aws<span class="w"> </span>s3<span class="w"> </span>mb<span class="w"> </span>s3://mi-bucket-<span class="nv">$RANDOM</span>-<span class="nv">$RANDOM</span>-<span class="nv">$RANDOM</span>
+</span></code></pre></div></p>
+</li>
+<li>
+<p><strong>Definir una Política de Acceso:</strong></p>
+</li>
+<li>Crea una política que otorgue acceso a un usuario específico en la cuenta objetivo. Ejemplo en <code>grant-s3-bucket-read.json</code>:
+     <div class="language-json highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="p">{</span>
+</span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="w">    </span><span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2012-10-17&quot;</span><span class="p">,</span>
+</span><span id="__span-35-3"><a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="w">    </span><span class="nt">&quot;Statement&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-35-4"><a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a><span class="w">        </span><span class="p">{</span>
+</span><span id="__span-35-5"><a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a><span class="w">            </span><span class="nt">&quot;Sid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;AllowUserToListBucket&quot;</span><span class="p">,</span>
+</span><span id="__span-35-6"><a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a><span class="w">            </span><span class="nt">&quot;Effect&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
+</span><span id="__span-35-7"><a id="__codelineno-35-7" name="__codelineno-35-7" href="#__codelineno-35-7"></a><span class="w">            </span><span class="nt">&quot;Resource&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;arn:aws:s3:::mi-bucket-12345-67890-54321&quot;</span><span class="p">,</span>
+</span><span id="__span-35-8"><a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a><span class="w">            </span><span class="nt">&quot;Principal&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-35-9"><a id="__codelineno-35-9" name="__codelineno-35-9" href="#__codelineno-35-9"></a><span class="w">                </span><span class="nt">&quot;AWS&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;arn:aws:iam::123456789012:user/cloudadmin&quot;</span><span class="p">]</span>
+</span><span id="__span-35-10"><a id="__codelineno-35-10" name="__codelineno-35-10" href="#__codelineno-35-10"></a><span class="w">            </span><span class="p">},</span>
+</span><span id="__span-35-11"><a id="__codelineno-35-11" name="__codelineno-35-11" href="#__codelineno-35-11"></a><span class="w">            </span><span class="nt">&quot;Action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;s3:ListBucket&quot;</span>
+</span><span id="__span-35-12"><a id="__codelineno-35-12" name="__codelineno-35-12" href="#__codelineno-35-12"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-35-13"><a id="__codelineno-35-13" name="__codelineno-35-13" href="#__codelineno-35-13"></a><span class="w">    </span><span class="p">]</span>
+</span><span id="__span-35-14"><a id="__codelineno-35-14" name="__codelineno-35-14" href="#__codelineno-35-14"></a><span class="p">}</span>
+</span></code></pre></div></li>
+<li>
+<p>Aplica la política al bucket:<br />
+     <div class="language-bash highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>aws<span class="w"> </span>s3api<span class="w"> </span>put-bucket-policy<span class="w"> </span>--bucket<span class="w"> </span>mi-bucket-12345-67890-54321<span class="w"> </span>--policy<span class="w"> </span>file://grant-s3-bucket-read.json
+</span></code></pre></div></p>
+</li>
+<li>
+<p><strong>Verificar Existencia:</strong></p>
+</li>
+<li>Si la política se aplica sin errores, el usuario existe.</li>
+<li>Si retorna "Invalid principal in policy", el usuario no existe.</li>
+</ol>
+<h3 id="ejemplo-practico_1">Ejemplo Práctico<a class="headerlink" href="#ejemplo-practico_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Prueba con <code>arn:aws:iam::123456789012:user/admin</code>:</li>
+<li>Éxito → El usuario "admin" existe.</li>
+<li>Error → Prueba otro nombre como "nonexistent".</li>
+<li>Automatiza con una lista de nombres de usuarios potenciales.</li>
+</ul>
+<hr />
+<h2 id="herramientas-utiles">Herramientas Útiles<a class="headerlink" href="#herramientas-utiles" title="Permanent link">&para;</a></h2>
+<h3 id="pacu">Pacu<a class="headerlink" href="#pacu" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Descripción:</strong> Herramienta para automatizar la enumeración en AWS, incluyendo roles IAM.</li>
+<li><strong>Instalación en Kali:</strong>
+  <div class="language-bash highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update
+</span><span id="__span-37-2"><a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>pacu
+</span></code></pre></div></li>
+<li><strong>Uso Básico:</strong></li>
+<li>Inicia Pacu:<br />
+     <div class="language-bash highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>pacu
+</span></code></pre></div></li>
+<li>Importa claves:<br />
+     <div class="language-text highlight"><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>import_keys &lt;perfil&gt;
+</span></code></pre></div></li>
+<li>Ejecuta la enumeración de roles:<br />
+     <div class="language-text highlight"><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>run iam__enum_roles --word-list /ruta/a/lista.txt --account-id &lt;ID_de_cuenta&gt;
+</span></code></pre></div></li>
+</ul>
+<h3 id="awsbucketdump">AWSBucketDump<a class="headerlink" href="#awsbucketdump" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Descripción:</strong> AWSBucketDump es una herramienta diseñada para enumerar y descargar datos de buckets S3 públicos en AWS.</li>
+<li>https://github.com/jordanpotti/AWSBucketDump.git</li>
+<li><strong>Uso Básico:</strong></li>
+<li>Ejecuta el script para buscar buckets públicos:
+     <div class="language-bash highlight"><pre><span></span><code><span id="__span-41-1"><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>python<span class="w"> </span>AWSBucketDump.py<span class="w"> </span>-l<span class="w"> </span>lista_de_buckets.txt
+</span></code></pre></div></li>
+<li>Descarga los datos de los buckets encontrados:
+     <div class="language-bash highlight"><pre><span></span><code><span id="__span-42-1"><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>python<span class="w"> </span>AWSBucketDump.py<span class="w"> </span>-d<span class="w"> </span>-l<span class="w"> </span>lista_de_buckets.txt
+</span></code></pre></div></li>
+<li><strong>Valor:</strong> Automatiza la identificación y extracción de datos sensibles de buckets S3 públicos, facilitando la enumeración en entornos AWS.</li>
+</ul>
+<h3 id="ejemplo-con-lista-de-roles">Ejemplo con Lista de Roles<a class="headerlink" href="#ejemplo-con-lista-de-roles" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Crea una lista en <code>/tmp/role-names.txt</code>:
+  <div class="language-text highlight"><pre><span></span><code><span id="__span-43-1"><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>lab_admin
+</span><span id="__span-43-2"><a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a>security_auditor
+</span><span id="__span-43-3"><a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a>content_creator
+</span></code></pre></div></li>
+<li>Ejecuta:<br />
+  <div class="language-text highlight"><pre><span></span><code><span id="__span-44-1"><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a>run iam__enum_roles --word-list /tmp/role-names.txt --account-id 123456789012
+</span></code></pre></div></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/G4sp4rCS" target="_blank" rel="noopener" title="GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.sections", "navigation.top", "navigation.tracking", "navigation.indexes", "toc.integrate", "content.code.copy", "content.action.edit", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

