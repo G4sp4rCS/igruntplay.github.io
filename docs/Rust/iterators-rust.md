@@ -1,6 +1,6 @@
 # 🦀 Iteradores en Rust
 
-## 📘 Introducción
+## Introducción
 
 Un **iterador** en Rust es un objeto que produce una secuencia de valores uno por uno.  
 Su comportamiento está definido por el *trait* `Iterator`, y se usa ampliamente para recorrer, transformar y procesar colecciones.
