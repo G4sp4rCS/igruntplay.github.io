@@ -5,3 +5,4 @@
 - [Smart pointers en Rust](./smart-pointers-rust.md)
 - [Lifetimes en Rust](./lifetimes-rust.md)
 - [Iteradores en Rust](./iterators-rust.md)
+- [Error Handling](./error-handling-rust.md)
