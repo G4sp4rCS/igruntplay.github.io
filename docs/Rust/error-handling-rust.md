@@ -188,10 +188,15 @@ Características:
 ## Conclusión
 
 Rust ofrece múltiples niveles de manejo de errores:
+
 - **`panic!`**: errores fatales.
+
 - **`Result<T, E>`**: control total sobre errores recuperables.
+
 - **`From` / `?`**: simplificación en la propagación.
+
 - **`thiserror`**: automatiza el manejo estructurado de errores.
+
 - **`anyhow`**: simplifica el manejo dinámico en aplicaciones.
 
 Cada enfoque tiene su lugar dependiendo del grado de control, precisión o conveniencia que se necesite.
