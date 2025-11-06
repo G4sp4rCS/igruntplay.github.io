@@ -1460,12 +1460,24 @@ Es más flexible pero menos preciso (pierde el tipo estático del error).</p>
 - Adecuado para CLI o binarios donde solo se necesita mostrar un mensaje descriptivo.</p>
 <hr />
 <h2 id="conclusion">Conclusión<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
-<p>Rust ofrece múltiples niveles de manejo de errores:
-- <strong><code>panic!</code></strong>: errores fatales.
-- <strong><code>Result&lt;T, E&gt;</code></strong>: control total sobre errores recuperables.
-- <strong><code>From</code> / <code>?</code></strong>: simplificación en la propagación.
-- <strong><code>thiserror</code></strong>: automatiza el manejo estructurado de errores.
-- <strong><code>anyhow</code></strong>: simplifica el manejo dinámico en aplicaciones.</p>
+<p>Rust ofrece múltiples niveles de manejo de errores:</p>
+<ul>
+<li>
+<p><strong><code>panic!</code></strong>: errores fatales.</p>
+</li>
+<li>
+<p><strong><code>Result&lt;T, E&gt;</code></strong>: control total sobre errores recuperables.</p>
+</li>
+<li>
+<p><strong><code>From</code> / <code>?</code></strong>: simplificación en la propagación.</p>
+</li>
+<li>
+<p><strong><code>thiserror</code></strong>: automatiza el manejo estructurado de errores.</p>
+</li>
+<li>
+<p><strong><code>anyhow</code></strong>: simplifica el manejo dinámico en aplicaciones.</p>
+</li>
+</ul>
 <p>Cada enfoque tiene su lugar dependiendo del grado de control, precisión o conveniencia que se necesite.</p>
 
 
