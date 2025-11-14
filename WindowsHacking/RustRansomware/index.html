@@ -1541,13 +1541,12 @@
 <h1 id="proof-of-concept-ransomware-in-rust">Proof-of-Concept Ransomware in Rust<a class="headerlink" href="#proof-of-concept-ransomware-in-rust" title="Permanent link">&para;</a></h1>
 <p>I made a simple ransomware demo in Rust, available here: <a href="https://github.com/G4sp4rCS/Ransomware-Rust">Ransomware-Rust</a> (accompanied by <a href="https://www.youtube.com/watch?v=NeAjZi9Mt64">this video</a>). It is intended to run in disposable virtual machines, includes a decryptor, and its purpose is pedagogical: to show how the pieces fit together.</p>
 <hr />
-<h2 id="why-this-project-matters">Why this project matters<a class="headerlink" href="#why-this-project-matters" title="Permanent link">&para;</a></h2>
+<h2 id="what-ive-learned">What I've learned<a class="headerlink" href="#what-ive-learned" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Exposes each stage of a file-encryption workflow clearly and readably in Rust.</li>
-<li>Allows defensive teams to study the logic without needing to analyze obfuscated samples.</li>
-<li>Serves as a Rust refresher: modular design, error handling with <code>Result</code>, and safe file operations.</li>
+<li>Modular design (crypto, fileops, CLI) makes reasoning, testing, and maintenance far easier.</li>
+<li>Cryptography: Don't reinvenet the wheel, prefer well-reviewed libraries, explicit IVs/nonces, and clear key handling rather than ad-hoc schemes.</li>
+<li>Simple obfuscation can affect maintainability and detection in different ways; weigh trade-offs before adding stealth.</li>
 </ul>
-<hr />
 <h2 id="key-components">Key components<a class="headerlink" href="#key-components" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
