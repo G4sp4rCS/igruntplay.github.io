@@ -3,14 +3,11 @@
 I made a simple ransomware demo in Rust, available here: [Ransomware-Rust](https://github.com/G4sp4rCS/Ransomware-Rust) (accompanied by [this video](https://www.youtube.com/watch?v=NeAjZi9Mt64)). It is intended to run in disposable virtual machines, includes a decryptor, and its purpose is pedagogical: to show how the pieces fit together.
 
 ---
+## What I've learned
 
-## Why this project matters
-
-- Exposes each stage of a file-encryption workflow clearly and readably in Rust.
-- Allows defensive teams to study the logic without needing to analyze obfuscated samples.
-- Serves as a Rust refresher: modular design, error handling with `Result`, and safe file operations.
-
----
+- Modular design (crypto, fileops, CLI) makes reasoning, testing, and maintenance far easier.
+- Cryptography: Don't reinvenet the wheel, prefer well-reviewed libraries, explicit IVs/nonces, and clear key handling rather than ad-hoc schemes.
+- Simple obfuscation can affect maintainability and detection in different ways; weigh trade-offs before adding stealth.
 
 ## Key components
 
