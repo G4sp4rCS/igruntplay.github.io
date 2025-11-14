@@ -6,7 +6,7 @@ I made a simple ransomware demo in Rust, available here: [Ransomware-Rust](https
 ## What I've learned
 
 - Modular design (crypto, fileops, CLI) makes reasoning, testing, and maintenance far easier.
-- Cryptography: Don't reinvenet the wheel, prefer well-reviewed libraries, explicit IVs/nonces, and clear key handling rather than ad-hoc schemes.
+- Cryptography: Don't reinvent the wheel, prefer well-reviewed libraries, explicit IVs/nonces, and clear key handling rather than ad-hoc schemes.
 - Simple obfuscation can affect maintainability and detection in different ways; weigh trade-offs before adding stealth.
 
 ## Key components
