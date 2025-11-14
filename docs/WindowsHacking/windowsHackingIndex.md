@@ -8,3 +8,4 @@
 - [Local Payload Execution - DLL](./localPayloadsDLL.md)
 - [Process Injection](./processInjection.md)
 - [Thread Hijacking](./threadHijacking.md)
+- [Ransomware written in Rust](./RustRansomware.md)
