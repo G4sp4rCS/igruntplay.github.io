@@ -19,3 +19,5 @@ If you're unable to complete the lab you selected, go back to the learning mater
 
 ## Labs
 - [CORS](./cors-practicioner-lab-notes.md)
+- [CSRF-1](./csrf-practicioner-lab-notes-1.md)
+- [CSRF-2](./csrf-practicioner-lab-notes-2.md)
