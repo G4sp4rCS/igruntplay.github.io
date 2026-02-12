@@ -11,3 +11,11 @@ If you're unable to complete the lab you selected, go back to the learning mater
 
 1. [WebShell via extension blacklist bypass](./lab-file-upload-web-shell-upload-via-extension-blacklist-bypass.md)
 2. [OAuth account hijacking via redirect_uri](./OAuth-account-hijacking-via-redirect_uri.md)
+
+
+
+---
+
+
+## Labs
+- [CORS](./cors-practicioner-lab-notes.md)
