@@ -1,1 +1,1 @@
-{"mappings": []}
+{"mappings": [{"item": {"url": "bin-exploitation/binary-gecko-academy/cve-2026-42980-wmi-underflow-en/", "title": "CVE-2026-42980 WMI Underflow (EN)"}, "tags": ["lpe", "ntoskrnl", "reverse-engineering", "vulnerability-research", "windows-kernel", "wmi"]}, {"item": {"url": "bin-exploitation/binary-gecko-academy/cve-2026-42980-wmi-underflow-es/", "title": "CVE-2026-42980 WMI Underflow (ES)"}, "tags": ["lpe", "ntoskrnl", "reverse-engineering", "vulnerability-research", "windows-kernel", "wmi"]}]}
