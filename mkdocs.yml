@@ -70,6 +70,8 @@ nav:
       - Fundamentos de explotación: bin-exploitation/bin-exploitation.md
       - "CVE-2026-42980 WMI Underflow (EN)": bin-exploitation/binary-gecko-academy/cve-2026-42980-wmi-underflow-en.md
       - "CVE-2026-42980 WMI Underflow (ES)": bin-exploitation/binary-gecko-academy/cve-2026-42980-wmi-underflow-es.md
+      - "CVE-2019-11707 Firefox to SYSTEM (EN)": bin-exploitation/binary-gecko-academy/cve-2019-11707-firefox-ionmonkey-to-system-en.md
+      - "CVE-2019-11707 Firefox a SYSTEM (ES)": bin-exploitation/binary-gecko-academy/cve-2019-11707-firefox-ionmonkey-to-system-es.md
       - OSCP Preparation: OSCP/OSCP.md
       - Windows Hacking: WindowsHacking/windowsHackingIndex.md
       - PrivEsc Cheatsheet: privilege-escalation-linux-assistance.md
