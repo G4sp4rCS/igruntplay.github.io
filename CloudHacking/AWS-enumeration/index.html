@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -31,7 +31,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -311,6 +311,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -427,6 +431,62 @@
     
   
     CVE-2026-42980 WMI Underflow (ES)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bin-exploitation/binary-gecko-academy/cve-2019-11707-firefox-ionmonkey-to-system-en/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CVE-2019-11707 Firefox to SYSTEM (EN)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bin-exploitation/binary-gecko-academy/cve-2019-11707-firefox-ionmonkey-to-system-es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CVE-2019-11707 Firefox a SYSTEM (ES)
   
 
     
@@ -2088,7 +2148,7 @@
 </span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>-----<span class="w">   </span>offseclab.io<span class="w">   </span>-----
 </span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>
 </span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>
-</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>Host<span class="err">&#39;</span>s<span class="w"> </span>addresses:
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>Host<span class="err">'</span>s<span class="w"> </span>addresses:
 </span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>__________________
 </span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>
 </span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>offseclab.io.<span class="w">                            </span><span class="m">60</span><span class="w">       </span>IN<span class="w">    </span>A<span class="w">        </span><span class="m">54</span>.90.147.109
@@ -2191,7 +2251,7 @@
 </span></code></pre></div>
 <hr />
 <p>Hay muchas formas en las que podríamos lograr esto. Usaremos un script de Bash para ejecutar un bucle en una sola línea que itera sobre algunas palabras clave y muestra la palabra clave, insertando un prefijo (offseclab-assets) y un sufijo (-axevtewi) alrededor de ella. Finalmente, usaremos el comando tee para mostrar el resultado en la consola, así como en el archivo /tmp/keyfile.txt. Como resultado, tendremos el archivo clave con los nombres de los buckets para validar si existen.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>kali@kali:~$<span class="w"> </span><span class="k">for</span><span class="w"> </span>key<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;public&quot;</span><span class="w"> </span><span class="s2">&quot;private&quot;</span><span class="w"> </span><span class="s2">&quot;dev&quot;</span><span class="w"> </span><span class="s2">&quot;prod&quot;</span><span class="w"> </span><span class="s2">&quot;development&quot;</span><span class="w"> </span><span class="s2">&quot;production&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;offseclab-assets-</span><span class="nv">$key</span><span class="s2">-axevtewi&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">done</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tee<span class="w"> </span>/tmp/keyfile.txt
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>kali@kali:~$<span class="w"> </span><span class="k">for</span><span class="w"> </span>key<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">"public"</span><span class="w"> </span><span class="s2">"private"</span><span class="w"> </span><span class="s2">"dev"</span><span class="w"> </span><span class="s2">"prod"</span><span class="w"> </span><span class="s2">"development"</span><span class="w"> </span><span class="s2">"production"</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"offseclab-assets-</span><span class="nv">$key</span><span class="s2">-axevtewi"</span><span class="p">;</span><span class="w"> </span><span class="k">done</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tee<span class="w"> </span>/tmp/keyfile.txt
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>offseclab-assets-public-axevtewi
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>offseclab-assets-private-axevtewi
 </span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>offseclab-assets-dev-axevtewi
@@ -2250,7 +2310,7 @@ También podríamos intentar validar si existen otros buckets utilizando otra in
 </span></code></pre></div></li>
 <li>Salida: <code>ns-1536.awsdns-00.co.uk</code> (indica Route53).</li>
 <li><strong>Comando WHOIS</strong>:
-  <div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>whois<span class="w"> </span>example.com<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;Registrant Organization&quot;</span>
+  <div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>whois<span class="w"> </span>example.com<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">"Registrant Organization"</span>
 </span></code></pre></div></li>
 <li><strong>Valor</strong>: Confirma uso de AWS y expone infraestructura asociada.</li>
 </ul>
@@ -2271,9 +2331,9 @@ También podríamos intentar validar si existen otros buckets utilizando otra in
 </span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
 </span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>kali@kali:~$<span class="w"> </span>aws<span class="w"> </span>--profile<span class="w"> </span>attacker<span class="w"> </span>sts<span class="w"> </span>get-caller-identity
 </span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="o">{</span>
-</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">    </span><span class="s2">&quot;UserId&quot;</span>:<span class="w"> </span><span class="s2">&quot;AIDAQOMAIGYU5VFQCHOI4&quot;</span>,
-</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">    </span><span class="s2">&quot;Account&quot;</span>:<span class="w"> </span><span class="s2">&quot;123456789012&quot;</span>,
-</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="w">    </span><span class="s2">&quot;Arn&quot;</span>:<span class="w"> </span><span class="s2">&quot;arn:aws:iam::123456789012:user/attacker&quot;</span>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">    </span><span class="s2">"UserId"</span>:<span class="w"> </span><span class="s2">"AIDAQOMAIGYU5VFQCHOI4"</span>,
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">    </span><span class="s2">"Account"</span>:<span class="w"> </span><span class="s2">"123456789012"</span>,
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="w">    </span><span class="s2">"Arn"</span>:<span class="w"> </span><span class="s2">"arn:aws:iam::123456789012:user/attacker"</span>
 </span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="o">}</span>
 </span></code></pre></div>
 <h4 id="comandos-utiles">Comandos Útiles<a class="headerlink" href="#comandos-utiles" title="Permanent link">&para;</a></h4>
@@ -2311,21 +2371,21 @@ Finalmente, se prueba si el nuevo usuario puede listar el bucket utilizando sus 
 <p>A continuación, también crearemos claves de acceso para el usuario IAM, de modo que podamos interactuar con la API de AWS a través de la herramienta AWS CLI. Ejecutaremos el comando <code>iam create-access-key --user-name enum</code> y tomaremos nota de los valores de <code>AccessKeyId</code> y <code>SecretAccessKey</code> en la salida.</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>kali@kali:~$<span class="w"> </span>aws<span class="w"> </span>--profile<span class="w"> </span>attacker<span class="w"> </span>iam<span class="w"> </span>create-user<span class="w"> </span>--user-name<span class="w"> </span>enum
 </span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="o">{</span>
-</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">    </span><span class="s2">&quot;User&quot;</span>:<span class="w"> </span><span class="o">{</span>
-</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">        </span><span class="s2">&quot;Path&quot;</span>:<span class="w"> </span><span class="s2">&quot;/&quot;</span>,
-</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">        </span><span class="s2">&quot;UserName&quot;</span>:<span class="w"> </span><span class="s2">&quot;enum&quot;</span>,
-</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">        </span><span class="s2">&quot;UserId&quot;</span>:<span class="w"> </span><span class="s2">&quot;AIDAQOMAIGYU4HTPEJ32K&quot;</span>,
-</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">        </span><span class="s2">&quot;Arn&quot;</span>:<span class="w"> </span><span class="s2">&quot;arn:aws:iam::123456789012:user/enum&quot;</span>,
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">    </span><span class="s2">"User"</span>:<span class="w"> </span><span class="o">{</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">        </span><span class="s2">"Path"</span>:<span class="w"> </span><span class="s2">"/"</span>,
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">        </span><span class="s2">"UserName"</span>:<span class="w"> </span><span class="s2">"enum"</span>,
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">        </span><span class="s2">"UserId"</span>:<span class="w"> </span><span class="s2">"AIDAQOMAIGYU4HTPEJ32K"</span>,
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">        </span><span class="s2">"Arn"</span>:<span class="w"> </span><span class="s2">"arn:aws:iam::123456789012:user/enum"</span>,
 </span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="w">    </span><span class="o">}</span>
 </span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="o">}</span>
 </span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>
 </span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>kali@kali:~$<span class="w"> </span>aws<span class="w"> </span>--profile<span class="w"> </span>attacker<span class="w"> </span>iam<span class="w"> </span>create-access-key<span class="w"> </span>--user-name<span class="w"> </span>enum
 </span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="o">{</span>
-</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="w">    </span><span class="s2">&quot;AccessKey&quot;</span>:<span class="w"> </span><span class="o">{</span>
-</span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="w">        </span><span class="s2">&quot;UserName&quot;</span>:<span class="w"> </span><span class="s2">&quot;enum&quot;</span>,
-</span><span id="__span-13-15"><a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a><span class="w">        </span><span class="s2">&quot;AccessKeyId&quot;</span>:<span class="w"> </span><span class="s2">&quot;&lt;ACCESS_KEY_ID&gt;&quot;</span>,
-</span><span id="__span-13-16"><a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a><span class="w">        </span><span class="s2">&quot;Status&quot;</span>:<span class="w"> </span><span class="s2">&quot;Active&quot;</span>,
-</span><span id="__span-13-17"><a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a><span class="w">        </span><span class="s2">&quot;SecretAccessKey&quot;</span>:<span class="w"> </span><span class="s2">&quot;***REDACTED***&quot;</span>,
+</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="w">    </span><span class="s2">"AccessKey"</span>:<span class="w"> </span><span class="o">{</span>
+</span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="w">        </span><span class="s2">"UserName"</span>:<span class="w"> </span><span class="s2">"enum"</span>,
+</span><span id="__span-13-15"><a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a><span class="w">        </span><span class="s2">"AccessKeyId"</span>:<span class="w"> </span><span class="s2">"&lt;ACCESS_KEY_ID&gt;"</span>,
+</span><span id="__span-13-16"><a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a><span class="w">        </span><span class="s2">"Status"</span>:<span class="w"> </span><span class="s2">"Active"</span>,
+</span><span id="__span-13-17"><a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a><span class="w">        </span><span class="s2">"SecretAccessKey"</span>:<span class="w"> </span><span class="s2">"***REDACTED***"</span>,
 </span><span id="__span-13-18"><a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a><span class="w">    </span><span class="o">}</span>
 </span><span id="__span-13-19"><a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a><span class="o">}</span>
 </span></code></pre></div>
@@ -2362,15 +2422,15 @@ Finalmente, se prueba si el nuevo usuario puede listar el bucket utilizando sus 
 <li><strong>Uso</strong>: Reduce solicitudes a la API al procesar datos localmente.</li>
 <li><strong>Ejemplos</strong>:</li>
 <li>Listar nombres de usuarios:
-    <div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>aws<span class="w"> </span>--profile<span class="w"> </span>target<span class="w"> </span>iam<span class="w"> </span>get-account-authorization-details<span class="w"> </span>--filter<span class="w"> </span>User<span class="w"> </span>--query<span class="w"> </span><span class="s2">&quot;UserDetailList[].UserName&quot;</span>
+    <div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>aws<span class="w"> </span>--profile<span class="w"> </span>target<span class="w"> </span>iam<span class="w"> </span>get-account-authorization-details<span class="w"> </span>--filter<span class="w"> </span>User<span class="w"> </span>--query<span class="w"> </span><span class="s2">"UserDetailList[].UserName"</span>
 </span></code></pre></div>
     Salida: <code>["admin-alice", "admin-cbarton", ...]</code></li>
 <li>Filtrar usuarios con "admin" en el nombre:
-    <div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>aws<span class="w"> </span>--profile<span class="w"> </span>target<span class="w"> </span>iam<span class="w"> </span>get-account-authorization-details<span class="w"> </span>--filter<span class="w"> </span>User<span class="w"> </span>--query<span class="w"> </span><span class="s2">&quot;UserDetailList[?contains(UserName, &#39;admin&#39;)].{Name: UserName}&quot;</span>
+    <div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>aws<span class="w"> </span>--profile<span class="w"> </span>target<span class="w"> </span>iam<span class="w"> </span>get-account-authorization-details<span class="w"> </span>--filter<span class="w"> </span>User<span class="w"> </span>--query<span class="w"> </span><span class="s2">"UserDetailList[?contains(UserName, 'admin')].{Name: UserName}"</span>
 </span></code></pre></div>
     Salida: <code>[{"Name": "admin-alice"}, {"Name": "admin-cbarton"}, ...]</code></li>
 <li>Combinar datos de usuarios y grupos:
-    <div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>aws<span class="w"> </span>--profile<span class="w"> </span>target<span class="w"> </span>iam<span class="w"> </span>get-account-authorization-details<span class="w"> </span>--filter<span class="w"> </span>User<span class="w"> </span>Group<span class="w"> </span>--query<span class="w"> </span><span class="s2">&quot;{Users: UserDetailList[?Path==&#39;/admin/&#39;].UserName, Groups: GroupDetailList[?Path==&#39;/admin/&#39;].{Name: GroupName}}&quot;</span>
+    <div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>aws<span class="w"> </span>--profile<span class="w"> </span>target<span class="w"> </span>iam<span class="w"> </span>get-account-authorization-details<span class="w"> </span>--filter<span class="w"> </span>User<span class="w"> </span>Group<span class="w"> </span>--query<span class="w"> </span><span class="s2">"{Users: UserDetailList[?Path=='/admin/'].UserName, Groups: GroupDetailList[?Path=='/admin/'].{Name: GroupName}}"</span>
 </span></code></pre></div></li>
 <li><strong>Consejo</strong>: Guardar salidas en archivos y usar herramientas como <code>jp</code> para consultas offline, minimizando el ruido en logs.</li>
 </ul>
@@ -2401,7 +2461,7 @@ Finalmente, se prueba si el nuevo usuario puede listar el bucket utilizando sus 
 <li><strong>Objetivo</strong>: Analizar datos para identificar caminos de escalada de privilegios (ej., obtener acceso de administrador).</li>
 <li><strong>Ejemplo de análisis</strong>:</li>
 <li>Usuario <code>admin-alice</code>:
-    <div class="language-bash highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>aws<span class="w"> </span>--profile<span class="w"> </span>target<span class="w"> </span>iam<span class="w"> </span>get-account-authorization-details<span class="w"> </span>--filter<span class="w"> </span>User<span class="w"> </span>Group<span class="w"> </span>--query<span class="w"> </span><span class="s2">&quot;UserDetailList[?UserName==&#39;admin-alice&#39;]&quot;</span>
+    <div class="language-bash highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>aws<span class="w"> </span>--profile<span class="w"> </span>target<span class="w"> </span>iam<span class="w"> </span>get-account-authorization-details<span class="w"> </span>--filter<span class="w"> </span>User<span class="w"> </span>Group<span class="w"> </span>--query<span class="w"> </span><span class="s2">"UserDetailList[?UserName=='admin-alice']"</span>
 </span></code></pre></div><ul>
 <li>Pertenece a los grupos <code>admin</code> (con <code>AdministratorAccess</code>) y <code>amethyst_admin</code>.</li>
 <li>Sin MFA, vulnerable a ataques como ingeniería social.</li>
@@ -2483,18 +2543,18 @@ Finalmente, se prueba si el nuevo usuario puede listar el bucket utilizando sus 
 </li>
 <li>Crea una política que permita leer el bucket solo si el ID de la cuenta que posee el bucket comienza con un dígito específico (por ejemplo, "1"). Ejemplo de política en <code>policy-s3-read.json</code>:
      <div class="language-json highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="p">{</span>
-</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="w">    </span><span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2012-10-17&quot;</span><span class="p">,</span>
-</span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="w">    </span><span class="nt">&quot;Statement&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="w">    </span><span class="nt">"Version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-10-17"</span><span class="p">,</span>
+</span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="w">    </span><span class="nt">"Statement"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 </span><span id="__span-31-4"><a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a><span class="w">        </span><span class="p">{</span>
-</span><span id="__span-31-5"><a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a><span class="w">            </span><span class="nt">&quot;Sid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;AllowResourceAccount&quot;</span><span class="p">,</span>
-</span><span id="__span-31-6"><a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a><span class="w">            </span><span class="nt">&quot;Effect&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
-</span><span id="__span-31-7"><a id="__codelineno-31-7" name="__codelineno-31-7" href="#__codelineno-31-7"></a><span class="w">            </span><span class="nt">&quot;Action&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-31-8"><a id="__codelineno-31-8" name="__codelineno-31-8" href="#__codelineno-31-8"></a><span class="w">                </span><span class="s2">&quot;s3:ListBucket&quot;</span><span class="p">,</span>
-</span><span id="__span-31-9"><a id="__codelineno-31-9" name="__codelineno-31-9" href="#__codelineno-31-9"></a><span class="w">                </span><span class="s2">&quot;s3:GetObject&quot;</span>
+</span><span id="__span-31-5"><a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a><span class="w">            </span><span class="nt">"Sid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AllowResourceAccount"</span><span class="p">,</span>
+</span><span id="__span-31-6"><a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a><span class="w">            </span><span class="nt">"Effect"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Allow"</span><span class="p">,</span>
+</span><span id="__span-31-7"><a id="__codelineno-31-7" name="__codelineno-31-7" href="#__codelineno-31-7"></a><span class="w">            </span><span class="nt">"Action"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-31-8"><a id="__codelineno-31-8" name="__codelineno-31-8" href="#__codelineno-31-8"></a><span class="w">                </span><span class="s2">"s3:ListBucket"</span><span class="p">,</span>
+</span><span id="__span-31-9"><a id="__codelineno-31-9" name="__codelineno-31-9" href="#__codelineno-31-9"></a><span class="w">                </span><span class="s2">"s3:GetObject"</span>
 </span><span id="__span-31-10"><a id="__codelineno-31-10" name="__codelineno-31-10" href="#__codelineno-31-10"></a><span class="w">            </span><span class="p">],</span>
-</span><span id="__span-31-11"><a id="__codelineno-31-11" name="__codelineno-31-11" href="#__codelineno-31-11"></a><span class="w">            </span><span class="nt">&quot;Resource&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;*&quot;</span><span class="p">,</span>
-</span><span id="__span-31-12"><a id="__codelineno-31-12" name="__codelineno-31-12" href="#__codelineno-31-12"></a><span class="w">            </span><span class="nt">&quot;Condition&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-31-13"><a id="__codelineno-31-13" name="__codelineno-31-13" href="#__codelineno-31-13"></a><span class="w">                </span><span class="nt">&quot;StringLike&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;s3:ResourceAccount&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;1*&quot;</span><span class="p">]}</span>
+</span><span id="__span-31-11"><a id="__codelineno-31-11" name="__codelineno-31-11" href="#__codelineno-31-11"></a><span class="w">            </span><span class="nt">"Resource"</span><span class="p">:</span><span class="w"> </span><span class="s2">"*"</span><span class="p">,</span>
+</span><span id="__span-31-12"><a id="__codelineno-31-12" name="__codelineno-31-12" href="#__codelineno-31-12"></a><span class="w">            </span><span class="nt">"Condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-31-13"><a id="__codelineno-31-13" name="__codelineno-31-13" href="#__codelineno-31-13"></a><span class="w">                </span><span class="nt">"StringLike"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"s3:ResourceAccount"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"1*"</span><span class="p">]}</span>
 </span><span id="__span-31-14"><a id="__codelineno-31-14" name="__codelineno-31-14" href="#__codelineno-31-14"></a><span class="w">            </span><span class="p">}</span>
 </span><span id="__span-31-15"><a id="__codelineno-31-15" name="__codelineno-31-15" href="#__codelineno-31-15"></a><span class="w">        </span><span class="p">}</span>
 </span><span id="__span-31-16"><a id="__codelineno-31-16" name="__codelineno-31-16" href="#__codelineno-31-16"></a><span class="w">    </span><span class="p">]</span>
@@ -2544,16 +2604,16 @@ Finalmente, se prueba si el nuevo usuario puede listar el bucket utilizando sus 
 </li>
 <li>Crea una política que otorgue acceso a un usuario específico en la cuenta objetivo. Ejemplo en <code>grant-s3-bucket-read.json</code>:
      <div class="language-json highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="p">{</span>
-</span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="w">    </span><span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2012-10-17&quot;</span><span class="p">,</span>
-</span><span id="__span-35-3"><a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="w">    </span><span class="nt">&quot;Statement&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="w">    </span><span class="nt">"Version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-10-17"</span><span class="p">,</span>
+</span><span id="__span-35-3"><a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="w">    </span><span class="nt">"Statement"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 </span><span id="__span-35-4"><a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a><span class="w">        </span><span class="p">{</span>
-</span><span id="__span-35-5"><a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a><span class="w">            </span><span class="nt">&quot;Sid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;AllowUserToListBucket&quot;</span><span class="p">,</span>
-</span><span id="__span-35-6"><a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a><span class="w">            </span><span class="nt">&quot;Effect&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
-</span><span id="__span-35-7"><a id="__codelineno-35-7" name="__codelineno-35-7" href="#__codelineno-35-7"></a><span class="w">            </span><span class="nt">&quot;Resource&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;arn:aws:s3:::mi-bucket-12345-67890-54321&quot;</span><span class="p">,</span>
-</span><span id="__span-35-8"><a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a><span class="w">            </span><span class="nt">&quot;Principal&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-35-9"><a id="__codelineno-35-9" name="__codelineno-35-9" href="#__codelineno-35-9"></a><span class="w">                </span><span class="nt">&quot;AWS&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;arn:aws:iam::123456789012:user/cloudadmin&quot;</span><span class="p">]</span>
+</span><span id="__span-35-5"><a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a><span class="w">            </span><span class="nt">"Sid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AllowUserToListBucket"</span><span class="p">,</span>
+</span><span id="__span-35-6"><a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a><span class="w">            </span><span class="nt">"Effect"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Allow"</span><span class="p">,</span>
+</span><span id="__span-35-7"><a id="__codelineno-35-7" name="__codelineno-35-7" href="#__codelineno-35-7"></a><span class="w">            </span><span class="nt">"Resource"</span><span class="p">:</span><span class="w"> </span><span class="s2">"arn:aws:s3:::mi-bucket-12345-67890-54321"</span><span class="p">,</span>
+</span><span id="__span-35-8"><a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a><span class="w">            </span><span class="nt">"Principal"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-35-9"><a id="__codelineno-35-9" name="__codelineno-35-9" href="#__codelineno-35-9"></a><span class="w">                </span><span class="nt">"AWS"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"arn:aws:iam::123456789012:user/cloudadmin"</span><span class="p">]</span>
 </span><span id="__span-35-10"><a id="__codelineno-35-10" name="__codelineno-35-10" href="#__codelineno-35-10"></a><span class="w">            </span><span class="p">},</span>
-</span><span id="__span-35-11"><a id="__codelineno-35-11" name="__codelineno-35-11" href="#__codelineno-35-11"></a><span class="w">            </span><span class="nt">&quot;Action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;s3:ListBucket&quot;</span>
+</span><span id="__span-35-11"><a id="__codelineno-35-11" name="__codelineno-35-11" href="#__codelineno-35-11"></a><span class="w">            </span><span class="nt">"Action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"s3:ListBucket"</span>
 </span><span id="__span-35-12"><a id="__codelineno-35-12" name="__codelineno-35-12" href="#__codelineno-35-12"></a><span class="w">        </span><span class="p">}</span>
 </span><span id="__span-35-13"><a id="__codelineno-35-13" name="__codelineno-35-13" href="#__codelineno-35-13"></a><span class="w">    </span><span class="p">]</span>
 </span><span id="__span-35-14"><a id="__codelineno-35-14" name="__codelineno-35-14" href="#__codelineno-35-14"></a><span class="p">}</span>
@@ -2695,7 +2755,7 @@ Finalmente, se prueba si el nuevo usuario puede listar el bucket utilizando sus 
       <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.sections", "navigation.top", "navigation.tracking", "navigation.indexes", "toc.integrate", "content.code.copy", "content.action.edit", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>

